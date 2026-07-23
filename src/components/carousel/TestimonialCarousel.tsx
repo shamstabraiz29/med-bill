@@ -3,10 +3,14 @@
 import { useState, useEffect, useRef } from "react";
 import TestimonialCard from "./TestimonialCard";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import MotionWrapper from "@/components/ui/MotionWrapper";
 import SectionHeader from "@/components/ui/SectionHeader";
+import type { HomepageTestimonials } from "@/payload/types/homepage";
 
-export default function TestimonialCarousel() {
+interface TestimonialCarouselProps {
+  data: HomepageTestimonials;
+}
+
+export default function TestimonialCarousel({ data }: TestimonialCarouselProps) {
   const [visibleCount, setVisibleCount] = useState(3);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
@@ -18,43 +22,7 @@ export default function TestimonialCarousel() {
   const isDragging = useRef(false);
   const [dragOffset, setDragOffset] = useState(0);
 
-  const testimonials = [
-    {
-      avatar: "/julia-will.png",
-      name: "Dr. Julia Will",
-      specialty: "Licensed Professional Counselor",
-      clinicName: "Health Counselling Clinic",
-      text: "I would like to send out a heartfelt appreciation for all of your hard work in helping my Health Counselling clinic take care of our billing and credentialing needs. You have made my job as a practice owner much easier."
-    },
-    {
-      avatar: "/gennaya-matt.png",
-      name: "Dr. Gennaya Matt",
-      specialty: "Plastic Surgeon",
-      clinicName: "Matt Aesthetics Center",
-      text: "We are more than satisfied with BellMedEx and would highly recommend them to anyone searching for an efficient billing company. Working with BellMedEx has felt effortless and we are vastly thankful for their services."
-    },
-    {
-      avatar: "/mike-lan.png",
-      name: "Dr. Mike Lan",
-      specialty: "Internal Specialist Medicine",
-      clinicName: "Lan Internal Medicine",
-      text: "BellMedEx has been a phenomenal asset to our company. Assisting with billing, credentialing and enrollment, BellMedex has been consistently reliable from the first day of our relationship."
-    },
-    {
-      avatar: "/dr-nicole.png",
-      name: "Dr. Sarah Jenkins",
-      specialty: "Pediatrician",
-      clinicName: "Jenkins Pediatrics",
-      text: "We love their 1:1 technical support and dedicated accounts management. Whenever we have a question about a claim submission, they respond instantly. A highly reliable company."
-    },
-    {
-      avatar: "/doctor-hero.png",
-      name: "Dr. Arthur Pendelton",
-      specialty: "Orthopedic Specialist",
-      clinicName: "Pendelton Bone Joint Clinic",
-      text: "The billing transition was completely seamless. Their team handled our old aging accounts receivable and improved our collections within the first month. Excellent reporting features."
-    }
-  ];
+  const testimonials = data.items;
 
   useEffect(() => {
     setIsMounted(true);
@@ -161,27 +129,29 @@ export default function TestimonialCarousel() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Pre-header trust message */}
-        <div className="text-center mb-3">
-          <span className="text-[11px] font-bold text-[#1D4ED8] uppercase tracking-widest leading-none">
-            Trusted by Leading Clinics Nationwide
-          </span>
-        </div>
+        {data.preHeader && (
+          <div className="text-center mb-3">
+            <span className="text-[11px] font-bold text-[#1D4ED8] uppercase tracking-widest leading-none">
+              {data.preHeader}
+            </span>
+          </div>
+        )}
 
         {/* Section Header */}
         <SectionHeader
-          badge="Client Reviews"
+          badge={data.badge}
           badgeVariant="indigo"
           align="center"
           title={
             <>
-              Trusted by{" "}
+              {data.titlePlain}{" "}
               <span className="text-blue-600 font-bold">
-                300+ Verified
+                {data.titleHighlight}
               </span>{" "}
-              Practices
+              {data.titleSuffix}
             </>
           }
-          description="Hear directly from physicians, clinical directors, and practice administrators across the country about how BellMedEx transformed their billing outcomes."
+          description={data.description}
           className="mb-14 sm:mb-16"
         />
 
@@ -211,11 +181,18 @@ export default function TestimonialCarousel() {
             >
               {testimonials.map((test, idx) => (
                 <div 
-                  key={idx} 
+                  key={test.id || idx} 
                   className="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 px-3 flex flex-col"
                   style={{ width: `${100 / (isMounted ? visibleCount : 3)}%` }}
                 >
-                  <TestimonialCard {...test} />
+                  <TestimonialCard
+                    avatar={test.avatarPath || "/doctor-hero.png"}
+                    name={test.name}
+                    specialty={test.specialty}
+                    clinicName={test.clinicName}
+                    text={test.text}
+                    rating={test.rating}
+                  />
                 </div>
               ))}
             </div>

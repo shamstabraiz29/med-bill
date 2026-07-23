@@ -1,16 +1,10 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { Users, Stethoscope, Trophy, LucideIcon } from "lucide-react";
 import MotionWrapper from "@/components/ui/MotionWrapper";
+import { getIcon } from "@/lib/icons";
+import type { HomepageStatsCards } from "@/payload/types/homepage";
 
-
-interface StatItem {
-  value: string;
-  label: string;
-  subLabel: string;
-  icon: LucideIcon;
-}
 
 // Client-side count up animation that plays when scrolled into view
 function AnimatedCounter({ value }: { value: string }) {
@@ -76,28 +70,11 @@ function AnimatedCounter({ value }: { value: string }) {
   return <span ref={ref}>{displayValue}</span>;
 }
 
-export default function StatsCards() {
-  const stats: StatItem[] = [
-    {
-      value: "1,500+",
-      label: "Satisfied Providers",
-      subLabel: "Trusted by top clinics across 50 states",
-      icon: Users,
-    },
-    {
-      value: "75+",
-      label: "Specialties Served",
-      subLabel: "Certified medical coders & billers",
-      icon: Stethoscope,
-    },
-    {
-      value: "1,200+",
-      label: "Billing & Coding Experts",
-      subLabel: "98%+ Average Clean Claim rate",
-      icon: Trophy,
-    },
-  ];
+interface StatsCardsProps {
+  data: HomepageStatsCards;
+}
 
+export default function StatsCards({ data }: StatsCardsProps) {
   return (
     <section className="relative w-full py-12 md:py-16 bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -106,12 +83,12 @@ export default function StatsCards() {
           staggerDelay={0.08}
           className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 divide-y md:divide-y-0 md:divide-x divide-[#E2E6EC]"
         >
-          {stats.map((stat, idx) => {
-            const Icon = stat.icon;
+          {data.items.map((stat, idx) => {
+            const Icon = getIcon(stat.iconName);
 
             return (
               <MotionWrapper
-                key={idx}
+                key={stat.id || idx}
                 variant="staggerItem"
                 className="group flex flex-col items-center md:items-start text-center md:text-left py-6 md:py-2 md:px-10 lg:px-16 first:pt-0 md:first:pl-0 last:pb-0 md:last:pr-0"
               >

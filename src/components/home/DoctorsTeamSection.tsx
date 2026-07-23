@@ -5,8 +5,13 @@ import { X, Check, Star, Activity } from "lucide-react";
 import AppButton from "@/components/ui/AppButton";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import SectionHeader from "@/components/ui/SectionHeader";
+import type { HomepageDoctorsTeam } from "@/payload/types/homepage";
 
-export default function DoctorsTeamSection() {
+interface DoctorsTeamSectionProps {
+  data: HomepageDoctorsTeam;
+}
+
+export default function DoctorsTeamSection({ data }: DoctorsTeamSectionProps) {
   return (
     <section className="relative w-full py-16 sm:py-20 lg:py-24 bg-slate-50/30 dark:bg-slate-900/15 border-y border-slate-200/40 dark:border-slate-800/30 overflow-hidden">
       {/* Custom spinning animation style */}
@@ -70,7 +75,7 @@ export default function DoctorsTeamSection() {
                 <Star className="w-3.5 h-3.5 fill-amber-500" />
               </div>
               <span className="text-[#0F172A] text-xs font-semibold tracking-tight">
-                CMRS &amp; CPB Certified
+                {data.floatingWidget1}
               </span>
             </div>
 
@@ -80,7 +85,7 @@ export default function DoctorsTeamSection() {
                 <Activity className="w-3.5 h-3.5" />
               </div>
               <span className="text-[#0F172A] text-xs font-semibold tracking-tight">
-                97% First-Pass Claims
+                {data.floatingWidget2}
               </span>
             </div>
 
@@ -89,17 +94,17 @@ export default function DoctorsTeamSection() {
           {/* Right Column: Copy & Comparison Cards */}
           <MotionWrapper variant="slideRight" className="lg:col-span-7 flex flex-col items-start text-left space-y-6 lg:pl-4">
             <SectionHeader
-              badge="Expert Assistance"
+              badge={data.badge}
               badgeVariant="indigo"
               title={
                 <>
-                  Dedicated Accounts Managers &amp;{" "}
+                  {data.titlePlain}{" "}
                   <span className="text-blue-600 block sm:inline">
-                    Expert Medical Billers for Health Centers
+                    {data.titleHighlight}
                   </span>
                 </>
               }
-              description="Healthcare organizations are at the heart of our medical billing and collections team. From primary care physicians to specialty clinics, our dedicated clinical coding officers and claims examiners implement a precision-driven approach so that revenue flows smoothly and claim denials fade away."
+              description={data.description}
             />
 
             {/* Comparative Cards - Refined */}
@@ -110,9 +115,7 @@ export default function DoctorsTeamSection() {
                 <div className="flex-shrink-0 w-8 h-8 rounded-full bg-red-500/10 text-red-500 flex items-center justify-center">
                   <X className="w-4 h-4 stroke-[3]" />
                 </div>
-                <p className="text-slate-600 text-xs sm:text-[13px] leading-relaxed">
-                  Traditional agencies have a <span className="text-red-500 font-semibold">50% failure rate</span> with provider credentialing and patient billing.
-                </p>
+                <p className="text-slate-600 text-xs sm:text-[13px] leading-relaxed" dangerouslySetInnerHTML={{ __html: data.traditionalAgencyText || '' }} />
               </div>
 
               {/* Green Card: BellMedEx */}
@@ -120,9 +123,7 @@ export default function DoctorsTeamSection() {
                 <div className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-500/10 text-emerald-600 flex items-center justify-center">
                   <Check className="w-4 h-4 stroke-[3]" />
                 </div>
-                <p className="text-slate-800 text-xs sm:text-[13px] font-medium leading-relaxed">
-                  BellMedEx medical billing organization has a <span className="text-emerald-600 font-semibold">97% pass rate</span> with support for denied claims as well.
-                </p>
+                <p className="text-slate-800 text-xs sm:text-[13px] font-medium leading-relaxed" dangerouslySetInnerHTML={{ __html: data.bellmedexText || '' }} />
               </div>
               
             </div>
@@ -130,12 +131,12 @@ export default function DoctorsTeamSection() {
             {/* CTA Button */}
             <div className="pt-2">
               <AppButton
-                href="/medical-billing-audit"
+                href={data.ctaHref}
                 variant="primary"
                 size="lg"
                 showArrow
               >
-                Claim Free Practice Audit
+                {data.ctaLabel}
               </AppButton>
             </div>
 

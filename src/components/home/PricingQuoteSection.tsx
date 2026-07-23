@@ -6,12 +6,6 @@ import {
   User,
   Mail,
   Phone,
-  DollarSign,
-  ShieldCheck,
-  Clock,
-  UserCheck,
-  Lock,
-  Globe,
   ChevronRight,
   ChevronLeft,
   Check
@@ -19,8 +13,14 @@ import {
 import AppButton from "@/components/ui/AppButton";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import SectionHeader from "@/components/ui/SectionHeader";
+import { getIcon } from "@/lib/icons";
+import type { HomepagePricingQuote } from "@/payload/types/homepage";
 
-export default function PricingQuoteSection() {
+interface PricingQuoteSectionProps {
+  data: HomepagePricingQuote;
+}
+
+export default function PricingQuoteSection({ data }: PricingQuoteSectionProps) {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     practiceName: "",
@@ -33,19 +33,10 @@ export default function PricingQuoteSection() {
     serviceRequired: "",
   });
 
-  const specialties = [
-    "Laboratory", "Urology", "Cardiology", "Behavioral Health", 
-    "Urgent Care", "Orthopedics", "General Practice", "Other"
-  ];
-
-  const providerCounts = ["1 Provider", "2-5 Providers", "6-10 Providers", "11+ Providers"];
-  
-  const claimVolumes = ["Under $50k", "$50k - $100k", "$100k - $500k", "Over $500k"];
-  
-  const services = [
-    "Full-Service Billing", "EMR/EHR Solutions", "Credentialing", 
-    "Prior Authorization", "Patient Billing", "Audit & Compliance"
-  ];
+  const specialties = data.specialties.map((s) => s.label);
+  const providerCounts = data.providerCounts.map((p) => p.label);
+  const claimVolumes = data.claimVolumes.map((c) => c.label);
+  const services = data.services.map((s) => s.label);
 
   const handleSelect = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -69,47 +60,6 @@ export default function PricingQuoteSection() {
     alert(`Thank you! Your quote request has been submitted.\n\nSummary:\nSpecialty: ${formData.specialty}\nProviders: ${formData.providersCount}\nVolume: ${formData.claimVolume}\nService: ${formData.serviceRequired}\nPractice: ${formData.practiceName}\nContact: ${formData.contactPerson}`);
   };
 
-  const highlights = [
-    {
-      title: "Personalized Pricing",
-      description: "Custom quotes designed to fit your unique medical specialty and volume.",
-      icon: DollarSign,
-    },
-    {
-      title: "No Long-Term Contracts",
-      description: "Month-to-month contracts so we continuously earn your business.",
-      icon: ShieldCheck,
-    },
-    {
-      title: "Fast Response Time",
-      description: "Get a dedicated proposal back in less than 24 business hours.",
-      icon: Clock,
-    },
-    {
-      title: "Dedicated Billing Experts",
-      description: "Work directly with billers specialized in your clinical domain.",
-      icon: UserCheck,
-    },
-    {
-      title: "HIPAA-Compliant Processes",
-      description: "100% secure, encrypted medical billing matching industry standards.",
-      icon: Lock,
-    },
-    {
-      title: "Nationwide Support",
-      description: "Coverage across all 50 states with regional payor expertise.",
-      icon: Globe,
-    },
-  ];
-
-  const trustBadges = [
-    "Free Consultation",
-    "No Hidden Fees",
-    "Customized Solutions",
-    "Secure & Confidential",
-    "Trusted by Providers",
-  ];
-
   return (
     <section className="relative w-full py-20 sm:py-24 bg-transparent overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -117,16 +67,16 @@ export default function PricingQuoteSection() {
         {/* Header Block - Centered */}
         <div className="max-w-3xl mx-auto text-center mb-16 sm:mb-20">
           <SectionHeader
-            badge="Request a Proposal"
+            badge={data.badge}
             badgeVariant="indigo"
             align="center"
             title={
               <>
-                Get Your Customized{" "}
-                <span className="text-blue-600">Billing Quote</span>
+                {data.titlePlain}{" "}
+                <span className="text-blue-600">{data.titleHighlight}</span>
               </>
             }
-            description="Empower your medical practice with custom pricing built around your operational volume and EHR integration needs. Complete our interactive flow, and our regional specialists will construct your proposal."
+            description={data.description}
             className="space-y-4"
           />
         </div>
@@ -390,10 +340,10 @@ export default function PricingQuoteSection() {
         {/* Highlights Row at the Bottom */}
         <div className="mt-20 pt-16 border-t border-slate-100">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {highlights.slice(0, 3).map((item, idx) => {
-              const Icon = item.icon;
+            {data.highlights.slice(0, 3).map((item, idx) => {
+              const Icon = getIcon(item.iconName);
               return (
-                <div key={idx} className="flex items-start gap-4">
+                <div key={item.id || idx} className="flex items-start gap-4">
                   <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-blue-50 text-blue-600 shrink-0">
                     <Icon className="w-5 h-5 stroke-[2]" />
                   </div>
@@ -412,14 +362,14 @@ export default function PricingQuoteSection() {
           
           {/* Trust badges footer */}
           <div className="mt-12 flex flex-wrap justify-center gap-3 pt-8 border-t border-slate-100/60">
-            {trustBadges.map((badge, idx) => (
+            {data.trustBadges.map((badge, idx) => (
               <div
-                key={idx}
+                key={badge.id || idx}
                 className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-slate-50 border border-slate-100 text-xs font-semibold text-slate-500"
               >
-                <Check className="w-3.5 h-3.5 text-blue-600" />
-                <span>{badge}</span>
-              </div>
+              <Check className="w-3.5 h-3.5 text-blue-600" />
+              <span>{badge.label}</span>
+            </div>
             ))}
           </div>
         </div>

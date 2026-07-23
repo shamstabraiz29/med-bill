@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import path from "path";
+import { withPayload } from "@payloadcms/next/withPayload";
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -8,5 +9,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
-
+export default withPayload(nextConfig);

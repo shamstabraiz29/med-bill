@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "@/app/globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GlobalBackground from "@/components/GlobalBackground";
@@ -17,7 +17,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "BellMedEx - Premium Medical Billing & Coding Services",
+  title: {
+    default: "BellMedEx - Premium Medical Billing & Coding Services",
+    template: "%s | BellMedEx",
+  },
   description: "Official BellMedEx platform for professional revenue cycle management, healthcare SEO, provider credentialing, and medical billing solutions.",
 };
 

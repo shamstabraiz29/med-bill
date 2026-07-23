@@ -1,35 +1,16 @@
 "use client";
 
-import Link from "next/link";
-import { UserCheck, ShieldCheck, Clock, TrendingUp, ArrowRight } from "lucide-react";
 import AppButton from "@/components/ui/AppButton";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import SectionBadge from "@/components/ui/SectionBadge";
+import { getIcon } from "@/lib/icons";
+import type { HomepageBillingCta } from "@/payload/types/homepage";
 
-export default function BillingCTASection() {
-  const features = [
-    {
-      title: "Instant Verification",
-      desc: "Patient's insurance coverage verification on the spot.",
-      icon: UserCheck,
-    },
-    {
-      title: "HIPAA-Compliant Safety",
-      desc: "HIPAA-compliant medical billing services for data safety.",
-      icon: ShieldCheck,
-    },
-    {
-      title: "24/7 Claim Submission",
-      desc: "24/7 medical billing services to handle every claim submission.",
-      icon: Clock,
-    },
-    {
-      title: "98% Success Rate",
-      desc: "98% claim reimbursement rate for healthy cash flow.",
-      icon: TrendingUp,
-    },
-  ];
+interface BillingCTASectionProps {
+  data: HomepageBillingCta;
+}
 
+export default function BillingCTASection({ data }: BillingCTASectionProps) {
   return (
     <section className="w-full bg-transparent py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 flex justify-center items-center">
       <div className="w-full max-w-7xl">
@@ -42,27 +23,25 @@ export default function BillingCTASection() {
               <div className="max-w-3xl text-left space-y-3.5">
                 {/* Badge */}
                 <SectionBadge variant="dark">
-                  Billing Special Offer
+                  {data.badge}
                 </SectionBadge>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight leading-tight sm:leading-snug">
-                  Let&apos;s experience our medical billing services for{" "}
+                  {data.titlePlain}{" "}
                   <span className="text-amber-300 font-bold">
-                    as low as 2.49%
+                    {data.titleHighlight}
                   </span>
                 </h2>
-                <p className="text-blue-200 text-sm sm:text-base">
-                  Over <span className="text-white font-semibold">1,500+ practices</span> trust Bellmedex medical billing services company, so let&apos;s have a chat.
-                </p>
+                <p className="text-blue-200 text-sm sm:text-base" dangerouslySetInnerHTML={{ __html: data.description }} />
               </div>
 
               <div className="flex-shrink-0 flex items-start lg:items-center justify-start lg:justify-end">
                 <AppButton
-                  href="/schedule-a-demo"
+                  href={data.ctaHref}
                   variant="secondary-dark"
                   size="lg"
                   showArrow
                 >
-                  Book a demo
+                  {data.ctaLabel}
                 </AppButton>
               </div>
             </div>
@@ -72,11 +51,11 @@ export default function BillingCTASection() {
 
             {/* Bottom Grid: Feature Tiles */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 text-left">
-              {features.map((feature, idx) => {
-                const Icon = feature.icon;
+              {data.features.map((feature, idx) => {
+                const Icon = getIcon(feature.iconName);
                 return (
                   <div
-                    key={idx}
+                    key={feature.id || idx}
                     className="rounded-xl bg-white/[0.04] border border-white/[0.08] p-5 flex flex-col gap-3 transition-colors duration-200 hover:bg-white/[0.08]"
                   >
                     {/* Icon */}
@@ -91,7 +70,7 @@ export default function BillingCTASection() {
 
                     {/* Description */}
                     <p className="text-white/80 text-xs sm:text-[13px] leading-relaxed">
-                      {feature.desc}
+                      {feature.description}
                     </p>
                   </div>
                 );

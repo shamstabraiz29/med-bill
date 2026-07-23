@@ -1,80 +1,36 @@
 "use client";
 
 import Link from "next/link";
-import { FlaskConical, Activity, Heart, Brain, ShieldAlert, Bone, ArrowRight, LucideIcon } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import AppButton from "@/components/ui/AppButton";
 import MotionWrapper from "@/components/ui/MotionWrapper";
-import SectionBadge from "@/components/ui/SectionBadge";
 import SectionHeader from "@/components/ui/SectionHeader";
+import { getIcon } from "@/lib/icons";
+import type { HomepageSpecialtyBilling } from "@/payload/types/homepage";
 
-interface SpecialtyItem {
-  title: string;
-  description: string;
-  icon: LucideIcon;
-  link: string;
-  popular?: boolean;
+interface SpecialtyBillingSectionProps {
+  data: HomepageSpecialtyBilling;
 }
 
-export default function SpecialtyBillingSection() {
-  const specialties: SpecialtyItem[] = [
-    {
-      title: "Laboratory Billing",
-      description: "Optimizing toxicology, pathology, and molecular lab claims with strict regulatory oversight.",
-      icon: FlaskConical,
-      link: "/laboratory-billing",
-    },
-    {
-      title: "Urology Billing",
-      description: "Expert billing for specialized clinical procedures, surgeries, and urological diagnostics.",
-      icon: Activity,
-      link: "/specialties/urology-billing",
-    },
-    {
-      title: "Cardiology Billing",
-      description: "Accurate coding for complex cardiovascular procedures, diagnostic imaging, and therapy.",
-      icon: Heart,
-      link: "/specialties/cardiology-billing",
-    },
-    {
-      title: "Behavioral Health",
-      description: "Managing complex billing regulations for therapy, mental health, and psychiatric clinics.",
-      icon: Brain,
-      link: "/specialties/mental-behavioral-health-billing",
-      popular: true,
-    },
-    {
-      title: "Urgent Care Billing",
-      description: "High-volume coding and rapid claim submissions tailored to outpatient medical settings.",
-      icon: ShieldAlert,
-      link: "/specialties/urgent-care-billing",
-      popular: true,
-    },
-    {
-      title: "Orthopedics Billing",
-      description: "Accurate musculoskeletal, physical therapy, and surgical coding to prevent payor denials.",
-      icon: Bone,
-      link: "/specialties/orthopedics-billing",
-    },
-  ];
-
+export default function SpecialtyBillingSection({ data }: SpecialtyBillingSectionProps) {
   return (
     <section className="relative w-full py-16 sm:py-20 lg:py-24 bg-transparent overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Centered Section Header */}
         <SectionHeader
-          badge="Comprehensive Specialties"
+          badge={data.badge}
           badgeVariant="indigo"
           align="center"
           title={
             <>
-              Specialty{" "}
+              {data.titlePlain}{" "}
               <span className="text-blue-600">
-                Medical Billing
+                {data.titleHighlight}
               </span>
             </>
           }
-          description="Our tailored medical billing services boost reimbursements through specialty-focused billing teams adept at ICD-10 coding rules and protocols unique to your medical niche. We align your billing and EHR workflows to maximize efficiency."
+          description={data.description}
           className="mb-16 sm:mb-20 max-w-4xl"
         />
 
@@ -85,11 +41,11 @@ export default function SpecialtyBillingSection() {
             staggerDelay={0.08}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-12 sm:gap-y-16 w-full"
           >
-            {specialties.map((specialty, idx) => {
-              const Icon = specialty.icon;
+            {data.specialties.map((specialty, idx) => {
+              const Icon = getIcon(specialty.iconName);
 
               return (
-                <MotionWrapper key={idx} variant="staggerItem" className="h-full">
+                <MotionWrapper key={specialty.id || idx} variant="staggerItem" className="h-full">
                   <div className="group relative flex flex-col justify-between items-start text-left h-full">
                     
                     <div className="w-full">
@@ -137,12 +93,12 @@ export default function SpecialtyBillingSection() {
         {/* Centered Bottom CTA */}
         <div className="mt-16 sm:mt-20 text-center">
           <AppButton
-            href="/medical-billing-pricing-bellmedex"
+            href={data.ctaHref}
             variant="primary"
             size="lg"
             showArrow
           >
-            View All Specialties
+            {data.ctaLabel}
           </AppButton>
         </div>
 

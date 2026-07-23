@@ -6,17 +6,14 @@ import { Input } from "@/components/ui/input";
 import AppButton from "@/components/ui/AppButton";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import SectionHeader from "@/components/ui/SectionHeader";
+import type { HomepageProviderChallenges } from "@/payload/types/homepage";
 
-export default function ProviderChallengesSection() {
-  const challengesList = [
-    "Inadequate follow-up on claims and payments.",
-    "Accounts receivable aging past 90/120+ days.",
-    "Rising patient balances causing financial strain.",
-    "Frustration due to lack of transparency and reporting.",
-    "Overall decline in collections impacting practice revenue."
-  ];
+interface ProviderChallengesSectionProps {
+  data: HomepageProviderChallenges;
+}
 
-  const [selected, setSelected] = useState<boolean[]>(new Array(challengesList.length).fill(false));
+export default function ProviderChallengesSection({ data }: ProviderChallengesSectionProps) {
+  const [selected, setSelected] = useState<boolean[]>(new Array(data.challenges.length).fill(false));
 
   const handleToggle = (index: number) => {
     setSelected(prev => {
@@ -35,25 +32,25 @@ export default function ProviderChallengesSection() {
           <MotionWrapper variant="slideLeft" className="lg:col-span-7 flex flex-col items-start text-left space-y-6">
             <SectionHeader
               theme="dark"
-              badge="Provider Assessment"
+              badge={data.badge}
               badgeVariant="dark"
               title={
                 <>
-                  Which of these challenges are you facing as a{" "}
+                  {data.titlePlain}{" "}
                   <span className="text-sky-300 font-bold">
-                    provider?
+                    {data.titleHighlight}
                   </span>
                 </>
               }
-              description="Select the administrative bottlenecks affecting your practice to receive a customized revenue recovery assessment and actionable solution."
+              description={data.description}
               className="max-w-xl"
             />
 
             {/* Checklist items with refined spacing and separators */}
             <div className="flex flex-col gap-4 w-full pt-4 divide-y divide-white/[0.04]">
-              {challengesList.map((challenge, idx) => (
+              {data.challenges.map((challenge, idx) => (
                 <div
-                  key={idx}
+                  key={challenge.id || idx}
                   onClick={() => handleToggle(idx)}
                   className={`flex items-center gap-4 group/check cursor-pointer select-none py-3.5 first:pt-0 ${
                     selected[idx] ? "text-white" : "text-slate-300 hover:text-white"
@@ -69,7 +66,7 @@ export default function ProviderChallengesSection() {
                   </div>
                   
                   <span className="text-xs sm:text-[14px] leading-relaxed font-medium">
-                    {challenge}
+                    {challenge.label}
                   </span>
                 </div>
               ))}
@@ -81,10 +78,10 @@ export default function ProviderChallengesSection() {
             <div className="relative overflow-hidden rounded-3xl bg-white/[0.02] border border-white/5 p-6 sm:p-8 md:p-10 shadow-lg flex flex-col gap-6 w-full">
               <div className="text-left space-y-1.5">
                 <h3 className="text-lg font-bold text-white tracking-tight">
-                  Request Consultation
+                  {data.formTitle}
                 </h3>
                 <p className="text-indigo-200/60 text-xs sm:text-[13px] leading-relaxed">
-                  Submit your challenges to receive tailored advice.
+                  {data.formDescription}
                 </p>
               </div>
 
@@ -118,7 +115,7 @@ export default function ProviderChallengesSection() {
                   showArrow
                   className="w-full mt-2"
                 >
-                  Request Consultation
+                  {data.formCtaLabel}
                 </AppButton>
               </form>
             </div>

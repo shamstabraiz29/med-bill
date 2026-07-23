@@ -3,24 +3,13 @@
 import HeroHeader from "./home/HeroHeader";
 import CommandCapsuleForm from "./home/CommandCapsuleForm";
 import DoctorVisuals from "./home/DoctorVisuals";
+import type { HomepageHero } from "@/payload/types/homepage";
 
 interface HeroProps {
-  eyebrow?: string;
-  titlePrefix?: string;
-  titleHighlight?: string;
-  titleSuffix?: string;
-  description1?: string;
-  description2?: string;
+  data: HomepageHero;
 }
 
-export default function Hero({
-  eyebrow = "MEDICAL BILLING SERVICES",
-  titlePrefix = "The Medical Billing Service Provider for",
-  titleHighlight = "USA Healthcare",
-  titleSuffix = "",
-  description1 = "BellMedEx is the USA's top medical billing firm – deploying the best practices in medical billing and coding for physicians looking to outsource billing and coding to an expert 3rd party billing agency.",
-  description2 = "Our certified medical coders and billers help healthcare organizations recover Aged Receivables and resolve insurance Claim Denials, as well.",
-}: HeroProps) {
+export default function Hero({ data }: HeroProps) {
   return (
     <section className="relative w-full bg-transparent pt-12 pb-16 lg:pt-16 lg:pb-20 overflow-hidden">
       {/* Custom float animations */}
@@ -54,15 +43,20 @@ export default function Hero({
           {/* LEFT COLUMN: Content & Form */}
           <div className="lg:col-span-7 flex flex-col space-y-6 text-left">
             <HeroHeader
-               eyebrow={eyebrow}
-               titlePrefix={titlePrefix}
-               titleHighlight={titleHighlight}
-               titleSuffix={titleSuffix}
-               description1={description1}
-               description2={description2}
+               eyebrow={data.eyebrow}
+               titlePrefix={data.titlePrefix}
+               titleHighlight={data.titleHighlight}
+               titleSuffix={data.titleSuffix}
+               description1={data.description1}
+               description2={data.description2}
             />
             
-            <CommandCapsuleForm />
+            <CommandCapsuleForm
+              buttonLabel={data.formButtonLabel}
+              successTitle={data.successTitle}
+              successDescription={data.successDescription}
+              trustBadges={data.trustBadges?.map((b) => b.label)}
+            />
           </div>
 
           {/* RIGHT COLUMN: Interactive Doctor Visuals */}

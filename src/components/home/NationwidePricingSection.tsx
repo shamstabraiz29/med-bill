@@ -1,58 +1,16 @@
 "use client";
 
-import {
-  DollarSign,
-  ShieldCheck,
-  Eye,
-  TrendingUp,
-  UserCheck,
-  Calendar,
-  LucideIcon
-} from "lucide-react";
 import AppButton from "@/components/ui/AppButton";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import SectionHeader from "@/components/ui/SectionHeader";
+import { getIcon } from "@/lib/icons";
+import type { HomepageNationwidePricing } from "@/payload/types/homepage";
 
-interface PricingBenefit {
-  title: string;
-  description: string;
-  icon: LucideIcon;
+interface NationwidePricingSectionProps {
+  data: HomepageNationwidePricing;
 }
 
-export default function NationwidePricingSection() {
-  const benefits: PricingBenefit[] = [
-    {
-      title: "Custom Pricing",
-      description: "Tailored rates based on your medical specialty, active provider volume, and monthly claim numbers.",
-      icon: DollarSign,
-    },
-    {
-      title: "No Long-Term Contracts",
-      description: "We earn your business month-to-month. Cancel anytime if you are not fully satisfied.",
-      icon: ShieldCheck,
-    },
-    {
-      title: "Transparent Billing",
-      description: "Clear monthly statements with no hidden fees, set-up costs, or administrative surcharges.",
-      icon: Eye,
-    },
-    {
-      title: "Scalable for Any Practice Size",
-      description: "Seamlessly scales from solo practitioners to large multi-specialty healthcare networks.",
-      icon: TrendingUp,
-    },
-    {
-      title: "Dedicated Account Manager",
-      description: "A single point of contact who understands your practice's specific billing workflows.",
-      icon: UserCheck,
-    },
-    {
-      title: "Free Initial Consultation",
-      description: "Get a comprehensive audit of your current EHR setup and billing efficiency at zero cost.",
-      icon: Calendar,
-    },
-  ];
-
+export default function NationwidePricingSection({ data }: NationwidePricingSectionProps) {
   return (
     <section className="relative w-full py-20 sm:py-24 bg-[#F5F7FA] border-y border-[#E2E6EC] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -60,16 +18,16 @@ export default function NationwidePricingSection() {
         {/* Header Block */}
         <div className="max-w-3xl mx-auto text-center mb-16 sm:mb-20">
           <SectionHeader
-            badge="Simple, Transparent Fees"
+            badge={data.badge}
             badgeVariant="indigo"
             align="center"
             title={
               <>
-                Customized Pricing for{" "}
-                <span className="text-blue-600">Your Practice</span>
+                {data.titlePlain}{" "}
+                <span className="text-blue-600">{data.titleHighlight}</span>
               </>
             }
-            description="We don't believe in rigid, one-size-fits-all packages. Our flexible pricing models are structured around your specific practice needs, helping you reduce overhead and maximize net collections."
+            description={data.description}
             className="space-y-4"
           />
         </div>
@@ -81,11 +39,11 @@ export default function NationwidePricingSection() {
             staggerDelay={0.04}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px"
           >
-            {benefits.map((benefit, idx) => {
-              const Icon = benefit.icon;
+            {data.benefits.map((benefit, idx) => {
+              const Icon = getIcon(benefit.iconName);
               return (
                 <MotionWrapper
-                  key={idx}
+                  key={benefit.id || idx}
                   variant="staggerItem"
                   className="group bg-white p-8 sm:p-10 flex flex-col justify-between transition-colors duration-300 hover:bg-[#F5F7FA]"
                 >
@@ -114,24 +72,26 @@ export default function NationwidePricingSection() {
             <AppButton
               variant="primary"
               size="lg"
-              href="/contact-us"
+              href={data.primaryCta.primaryHref}
               showArrow
               className="w-full sm:w-auto"
             >
-              Request a Personalized Quote
+              {data.primaryCta.primaryLabel}
             </AppButton>
             <AppButton
               variant="secondary"
               size="lg"
-              href="/contact-us"
+              href={data.secondaryCta.secondaryHref}
               className="w-full sm:w-auto"
             >
-              Speak to an Expert
+              {data.secondaryCta.secondaryLabel}
             </AppButton>
           </div>
-          <p className="text-xs sm:text-sm text-slate-400 font-medium tracking-wide">
-            Free consultation • No obligation • Customized pricing for every healthcare practice
-          </p>
+          {data.footerNote && (
+            <p className="text-xs sm:text-sm text-slate-400 font-medium tracking-wide">
+              {data.footerNote}
+            </p>
+          )}
         </div>
 
       </div>

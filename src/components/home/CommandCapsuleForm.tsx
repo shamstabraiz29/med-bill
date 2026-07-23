@@ -6,7 +6,19 @@ import { User, Mail, Phone, Loader2, ArrowRight, Check, Star } from "lucide-reac
 import AppButton from "@/components/ui/AppButton";
 import { easeOutExpo } from "@/lib/motion";
 
-export default function CommandCapsuleForm() {
+interface CommandCapsuleFormProps {
+  buttonLabel?: string;
+  successTitle?: string;
+  successDescription?: string;
+  trustBadges?: string[];
+}
+
+export default function CommandCapsuleForm({
+  buttonLabel = "Free Audit",
+  successTitle = "Consultation Request Booked!",
+  successDescription = "We will reach out to you within the next 15 minutes.",
+  trustBadges = ["HIPAA Compliant", "SOC2 Secure", "No Obligation"],
+}: CommandCapsuleFormProps) {
   const [formData, setFormData] = useState({ name: "", email: "", phone: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [activeInput, setActiveInput] = useState<string | null>(null);
@@ -101,8 +113,8 @@ export default function CommandCapsuleForm() {
               <Check className="w-6 h-6 stroke-[3]" />
             </div>
             <div className="flex-1 text-left">
-              <h3 className="text-base font-bold text-[#0F172A]">Consultation Request Booked!</h3>
-              <p className="text-xs text-[#475569] mt-0.5">We will reach out to you within the next 15 minutes.</p>
+              <h3 className="text-base font-bold text-[#0F172A]">{successTitle}</h3>
+              <p className="text-xs text-[#475569] mt-0.5">{successDescription}</p>
             </div>
             <button
               onClick={() => setIsSuccess(false)}
@@ -233,7 +245,7 @@ export default function CommandCapsuleForm() {
                         exit={{ opacity: 0, scale: 0.8 }}
                         transition={{ duration: 0.2 }}
                       >
-                        Free Audit
+                        {buttonLabel}
                       </motion.span>
                     )}
                   </AnimatePresence>
@@ -266,15 +278,11 @@ export default function CommandCapsuleForm() {
               className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-2 pt-1"
             >
               <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[10px] font-bold text-[#475569]">
-                <span className="flex items-center gap-1 hover:text-[#0F172A] transition-colors">
-                  <Check className="w-3 h-3 text-[#22C55E] stroke-[3.5]" /> HIPAA Compliant
-                </span>
-                <span className="flex items-center gap-1 hover:text-[#0F172A] transition-colors">
-                  <Check className="w-3 h-3 text-[#22C55E] stroke-[3.5]" /> SOC2 Secure
-                </span>
-                <span className="flex items-center gap-1 hover:text-[#0F172A] transition-colors">
-                  <Check className="w-3 h-3 text-[#22C55E] stroke-[3.5]" /> No Obligation
-                </span>
+                {trustBadges.map((badge, i) => (
+                  <span key={i} className="flex items-center gap-1 hover:text-[#0F172A] transition-colors">
+                    <Check className="w-3 h-3 text-[#22C55E] stroke-[3.5]" /> {badge}
+                  </span>
+                ))}
               </div>
 
               {/* Google rating trust badge */}
