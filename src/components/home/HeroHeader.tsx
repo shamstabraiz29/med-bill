@@ -38,10 +38,10 @@ export default function HeroHeader({
       {/* Headline */}
       <motion.h1
         variants={blurRevealVariants}
-        className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1c1a45] tracking-tight leading-[1.15] lg:max-w-2xl"
+        className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F172A] tracking-[-0.02em] leading-[1.18] lg:max-w-2xl"
       >
         {titlePrefix}{" "}
-        <span className="text-blue-600">
+        <span className="text-[#1D4ED8]">
           {titleHighlight}
         </span>
         {titleSuffix && ` ${titleSuffix}`}
@@ -50,7 +50,7 @@ export default function HeroHeader({
       {/* Copy paragraphs */}
       <motion.div
         variants={blurRevealVariants}
-        className="space-y-4 text-slate-500 text-sm sm:text-base leading-relaxed max-w-2xl"
+        className="space-y-4 text-[#475569] text-sm sm:text-base leading-[1.6] max-w-2xl"
       >
         <p>{description1}</p>
         <p>{description2}</p>

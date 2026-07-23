@@ -48,8 +48,8 @@ export default function SectionHeader({
       )}
 
       <h2
-        className={`text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight leading-snug ${
-          isDark ? "text-white" : "text-[#1c1a45]"
+        className={`text-3xl sm:text-4xl lg:text-[2.6rem] font-bold tracking-[-0.02em] leading-[1.18] ${
+          isDark ? "text-white" : "text-[#0F172A]"
         } ${titleClassName}`}
       >
         {title}
@@ -57,12 +57,12 @@ export default function SectionHeader({
 
       {description && (
         <div
-          className={`text-sm sm:text-base leading-relaxed ${
+          className={`text-sm sm:text-base leading-[1.6] ${
             isCenter ? "max-w-2xl" : "max-w-3xl"
           } ${
             isDark
-              ? "text-indigo-200"
-              : "text-slate-500"
+              ? "text-blue-200"
+              : "text-[#475569]"
           } ${descriptionClassName}`}
         >
           {typeof description === "string" ? <p>{description}</p> : description}

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion, useReducedMotion, Variants } from "motion/react";
 import {
   fadeUpVariants,
@@ -29,7 +29,8 @@ export interface MotionWrapperProps {
   delay?: number;
   staggerDelay?: number;
   className?: string;
-  viewportAmount?: number;
+  viewportAmount?: number | "some" | "all";
+  viewportMargin?: string;
   once?: boolean;
 }
 
@@ -37,18 +38,24 @@ export default function MotionWrapper({
   children,
   variant = "fadeUp",
   delay = 0,
-  staggerDelay = 0.1,
+  staggerDelay = 0.08,
   className = "",
-  viewportAmount = 0.15,
+  viewportAmount = 0.35,
+  viewportMargin = "-10% 0px -10% 0px",
   once = true,
 }: MotionWrapperProps) {
+  const [isMounted, setIsMounted] = useState(false);
   const shouldReduceMotion = useReducedMotion();
 
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const getVariants = (): Variants => {
-    if (shouldReduceMotion) {
+    if (isMounted && shouldReduceMotion) {
       return {
         hidden: { opacity: 0 },
-        visible: { opacity: 1, transition: { duration: 0.3 } },
+        visible: { opacity: 1, transition: { duration: 0.2 } },
       };
     }
 
@@ -81,10 +88,11 @@ export default function MotionWrapper({
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once, amount: viewportAmount }}
+      viewport={{ once, amount: viewportAmount, margin: viewportMargin }}
       variants={selectedVariants}
       transition={delay > 0 ? { delay } : undefined}
       className={className}
+      style={{ willChange: "transform, opacity" }}
     >
       {children}
     </motion.div>

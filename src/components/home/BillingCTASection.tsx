@@ -35,7 +35,7 @@ export default function BillingCTASection() {
       <div className="w-full max-w-7xl">
         {/* Main card */}
         <MotionWrapper variant="scaleUp">
-          <div className="relative overflow-hidden rounded-2xl bg-[#1c1a45] border border-white/10 text-white p-8 sm:p-12 shadow-lg">
+          <div className="relative overflow-hidden rounded-2xl bg-[#0F172A] border border-white/10 text-white p-8 sm:p-12 shadow-lg">
 
             {/* Top Row: Copy & CTA Button */}
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 md:gap-8">
@@ -50,11 +50,11 @@ export default function BillingCTASection() {
                     as low as 2.49%
                   </span>
                 </h2>
-                <p className="text-indigo-200 text-sm sm:text-base">
+                <p className="text-blue-200 text-sm sm:text-base">
                   Over <span className="text-white font-semibold">1,500+ practices</span> trust Bellmedex medical billing services company, so let&apos;s have a chat.
                 </p>
               </div>
-              
+
               <div className="flex-shrink-0 flex items-start lg:items-center justify-start lg:justify-end">
                 <AppButton
                   href="/schedule-a-demo"

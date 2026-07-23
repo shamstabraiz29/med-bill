@@ -19,18 +19,18 @@ export default function SectionBadge({
   const variantConfig = {
     indigo: {
       wrapper:
-        "bg-indigo-50 border-indigo-200 text-indigo-700",
-      dot: "bg-indigo-500",
+        "bg-blue-50 border-blue-200 text-blue-700",
+      dot: "bg-[#1D4ED8]",
     },
     blue: {
       wrapper:
         "bg-blue-50 border-blue-200 text-blue-700",
-      dot: "bg-blue-500",
+      dot: "bg-[#1D4ED8]",
     },
     dark: {
       wrapper:
-        "bg-white/10 border-white/20 text-indigo-100",
-      dot: "bg-sky-400",
+        "bg-white/10 border-white/20 text-blue-100",
+      dot: "bg-[#60A5FA]",
     },
     emerald: {
       wrapper:

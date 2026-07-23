@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import StatsCards from "@/components/home/StatsCards";
 import ServicesOverview from "@/components/home/ServicesOverview";
 import MedicalClaimsService from "@/components/home/MedicalClaimsService";
 import SpecialtyBillingSection from "@/components/home/SpecialtyBillingSection";
@@ -15,6 +16,7 @@ export default function Home() {
   return (
     <div className="relative min-h-screen">
       <Hero />
+      <StatsCards />
       <ServicesOverview />
       <MedicalClaimsService />
       <TrustStatsSection />

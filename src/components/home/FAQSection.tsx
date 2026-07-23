@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Plus, HelpCircle } from "lucide-react";
-
+import { ChevronDown, MessageSquare } from "lucide-react";
+import AppButton from "@/components/ui/AppButton";
 import SectionHeader from "@/components/ui/SectionHeader";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 
@@ -42,87 +42,124 @@ export default function FAQSection() {
   };
 
   return (
-    <section className="relative w-full py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-transparent overflow-hidden flex justify-center items-center">
-      <div className="w-full max-w-7xl mx-auto">
+    <section className="relative w-full py-20 sm:py-24 bg-transparent overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
-        <SectionHeader
-          badge="Objection Handling"
-          badgeVariant="indigo"
-          title={
-            <>
-              Frequently Asked{" "}
-              <span className="text-blue-600">
-                Questions
-              </span>
-            </>
-          }
-          description="Find clear answers to common questions regarding our medical billing process, software integration, fee structure, and onboarding schedule."
-          className="mb-10 sm:mb-12 max-w-4xl"
-        />
+        {/* Header Block - Centered */}
+        <div className="max-w-3xl mx-auto text-center mb-16 sm:mb-20">
+          <SectionHeader
+            badge="Objection Handling"
+            badgeVariant="indigo"
+            align="center"
+            title={
+              <>
+                Frequently Asked{" "}
+                <span className="text-blue-600">Questions</span>
+              </>
+            }
+            description="Find clear answers to common questions regarding our medical billing process, software integration, fee structure, and onboarding schedule."
+            className="space-y-4"
+          />
+        </div>
 
-        {/* FAQ Accordion List */}
-        <div className="flex flex-col gap-3 w-full">
-          {faqs.map((faq, idx) => {
-            const isOpen = openIndex === idx;
+        {/* Full-Width FAQ Accordion List */}
+        <div className="w-full">
+          <MotionWrapper
+            variant="stagger"
+            staggerDelay={0.05}
+            className="divide-y divide-[#E2E6EC]"
+          >
+            {faqs.map((faq, idx) => {
+              const isOpen = openIndex === idx;
+              const controlsId = `faq-content-${idx}`;
+              const headerId = `faq-header-${idx}`;
 
-            return (
-              <MotionWrapper key={idx} variant="staggerItem">
-                <div
-                  className={`w-full rounded-xl border transition-all duration-200 overflow-hidden ${
-                    isOpen
-                      ? "bg-white border-slate-300 shadow-sm"
-                      : "bg-white border-slate-200 hover:border-slate-300"
-                  }`}
+              return (
+                <MotionWrapper
+                  key={idx}
+                  variant="staggerItem"
+                  className="py-5 sm:py-6 first:pt-0 last:pb-0"
                 >
-                  {/* Question Header Button */}
-                  <button
-                    onClick={() => toggleFAQ(idx)}
-                    className="w-full p-5 sm:p-6 flex items-center justify-between gap-4 text-left font-medium text-sm sm:text-base text-[#1c1a45] hover:text-blue-600 transition-colors select-none cursor-pointer"
-                    aria-expanded={isOpen}
-                  >
-                    <span className="leading-snug flex items-center gap-3">
-                      <HelpCircle
-                        className={`w-4.5 h-4.5 sm:w-5 sm:h-5 shrink-0 transition-colors ${
-                          isOpen ? "text-blue-600" : "text-slate-400"
+                  {/* Accordion Container with Hover Highlight */}
+                  <div className="hover:bg-[#F5F7FA] rounded-2xl px-4 -mx-4 transition-colors duration-300">
+                    {/* Accordion Trigger */}
+                    <button
+                      id={headerId}
+                      onClick={() => toggleFAQ(idx)}
+                      aria-expanded={isOpen}
+                      aria-controls={controlsId}
+                      className="w-full flex items-center justify-between text-left py-4 group select-none cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-100 rounded-lg"
+                    >
+                      <span className="text-base sm:text-lg font-bold text-[#0F172A] group-hover:text-[#1D4ED8] transition-colors duration-200 pr-4 leading-[1.18]">
+                        {faq.q}
+                      </span>
+                      <ChevronDown
+                        className={`w-5 h-5 text-[#475569] shrink-0 group-hover:text-[#1D4ED8] transition-transform duration-300 ${
+                          isOpen ? "rotate-180 text-[#1D4ED8]" : ""
                         }`}
                       />
-                      {faq.q}
-                    </span>
-                    <motion.div
-                      animate={{ rotate: isOpen ? 45 : 0 }}
-                      transition={{ duration: 0.25, ease: [0.21, 0.47, 0.32, 0.98] }}
-                      className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shrink-0 border transition-colors ${
-                        isOpen
-                          ? "bg-[#2A2374] text-white border-[#2A2374]"
-                          : "bg-slate-100 border-slate-200 text-slate-500"
-                      }`}
-                    >
-                      <Plus className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
-                    </motion.div>
-                  </button>
+                    </button>
 
-                  {/* Expandable Answer */}
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.div
-                        key="content"
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: [0.21, 0.47, 0.32, 0.98] }}
-                        className="overflow-hidden"
-                      >
-                        <div className="px-5 pb-6 pt-1 sm:px-6 sm:pb-6 text-slate-500 text-xs sm:text-sm leading-relaxed border-t border-slate-100">
-                          <p className="pt-3.5">{faq.a}</p>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              </MotionWrapper>
-            );
-          })}
+                    {/* Accordion Content with Custom easeOutExpo Curve */}
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div
+                          id={controlsId}
+                          role="region"
+                          aria-labelledby={headerId}
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                          className="overflow-hidden"
+                        >
+                          <div className="text-[#475569] text-sm sm:text-base leading-[1.6] pb-5 pr-4 pl-0.5 text-left">
+                            {faq.a}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </MotionWrapper>
+              );
+            })}
+          </MotionWrapper>
+        </div>
+
+        {/* Centered Help Panel at the Bottom */}
+        <div className="mt-16 sm:mt-24 text-center border-t border-[#E2E6EC] pt-16 max-w-xl mx-auto flex flex-col items-center justify-center space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-blue-50 text-[#1D4ED8]">
+              <MessageSquare className="w-5 h-5" />
+            </div>
+            <h4 className="text-lg font-bold text-[#0F172A] tracking-[-0.02em]">
+              Still have questions?
+            </h4>
+          </div>
+          <p className="text-[#475569] text-sm sm:text-base leading-[1.6]">
+            Contact our medical billing specialists for a customized walkthrough and a free EHR integration check.
+          </p>
+          <div className="pt-2 flex flex-col sm:flex-row gap-4 w-full justify-center">
+            <AppButton
+              variant="primary"
+              size="lg"
+              href="/contact-us"
+              className="w-full sm:w-auto text-center"
+            >
+              Contact Our Team
+            </AppButton>
+            <AppButton
+              variant="secondary"
+              size="lg"
+              href="/contact-us"
+              className="w-full sm:w-auto text-center"
+            >
+              Schedule a Free Consultation
+            </AppButton>
+          </div>
+          <p className="text-[10px] text-slate-400 font-semibold tracking-wider uppercase">
+            Free Consultation • No Obligation
+          </p>
         </div>
 
       </div>
