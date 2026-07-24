@@ -4,6 +4,8 @@ import type { HomepageData } from '@/payload/types/homepage'
 import { defaultHomepageData } from '@/lib/defaults/homepage'
 import type { ClearinghouseData } from '@/payload/types/clearinghouse'
 import { defaultClearinghouseData } from '@/lib/defaults/clearinghouse'
+import type { ProviderCredentialingData } from '@/payload/types/providerCredentialing'
+import { defaultProviderCredentialingData } from '@/lib/defaults/providerCredentialing'
 
 /**
  * Fetches the Homepage global data from Payload CMS using the Local API.
@@ -44,6 +46,27 @@ export async function getClearinghouseData(): Promise<ClearinghouseData> {
   } catch (error) {
     console.error('[Payload] Failed to fetch clearinghouse data, using defaults:', error)
     return defaultClearinghouseData
+  }
+}
+
+/**
+ * Fetches the Provider Credentialing global data from Payload CMS using the Local API.
+ * Uses the Payload Local API (no HTTP overhead) for maximum performance.
+ * Falls back to default hardcoded content on any error.
+ */
+export async function getProviderCredentialingData(): Promise<ProviderCredentialingData> {
+  try {
+    const payload = await getPayload({ config })
+
+    const data = await payload.findGlobal({
+      slug: 'provider-credentialing',
+    })
+
+    // Merge with defaults: CMS data takes priority, defaults fill gaps
+    return deepMerge(defaultProviderCredentialingData, data as unknown as Partial<ProviderCredentialingData>)
+  } catch (error) {
+    console.error('[Payload] Failed to fetch provider credentialing data, using defaults:', error)
+    return defaultProviderCredentialingData
   }
 }
 

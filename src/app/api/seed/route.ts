@@ -2,6 +2,7 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { defaultHomepageData } from '@/lib/defaults/homepage'
 import { defaultClearinghouseData } from '@/lib/defaults/clearinghouse'
+import { defaultProviderCredentialingData } from '@/lib/defaults/providerCredentialing'
 import { NextResponse } from 'next/server'
 
 export async function GET() {
@@ -18,9 +19,14 @@ export async function GET() {
       data: defaultClearinghouseData as any,
     })
 
+    await payload.updateGlobal({
+      slug: 'provider-credentialing',
+      data: defaultProviderCredentialingData as any,
+    })
+
     return NextResponse.json({
       success: true,
-      message: 'Homepage and Clearinghouse globals seeded successfully!',
+      message: 'Homepage, Clearinghouse, and Provider Credentialing globals seeded successfully!',
     })
   } catch (error: any) {
     console.error('[Seed Route Error]:', error)

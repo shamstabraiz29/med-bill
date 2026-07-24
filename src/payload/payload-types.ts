@@ -88,10 +88,12 @@ export interface Config {
   globals: {
     homepage: Homepage;
     clearinghouse: Clearinghouse;
+    'provider-credentialing': ProviderCredentialing;
   };
   globalsSelect: {
     homepage: HomepageSelect<false> | HomepageSelect<true>;
     clearinghouse: any;
+    'provider-credentialing': any;
   };
   locale: null;
   widgets: {
@@ -981,6 +983,11 @@ export interface Auth {
 
 
 export interface Clearinghouse {
+  id: number;
+  [key: string]: any;
+}
+
+export interface ProviderCredentialing {
   id: number;
   [key: string]: any;
 }

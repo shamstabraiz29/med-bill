@@ -44,6 +44,21 @@ import {
   CheckCircle2,
   TrendingDown,
   Cpu,
+  Award,
+  Handshake,
+  Dumbbell,
+  User,
+  Building2,
+  HeartPulse,
+  Building,
+  Cross,
+  FileBarChart,
+  Landmark,
+  XCircle,
+  FileAudio,
+  Code2,
+  ClipboardCheck,
+  Search,
 } from 'lucide-react'
 
 /**
@@ -96,6 +111,21 @@ const iconMap: Record<string, LucideIcon> = {
   CheckCircle2,
   TrendingDown,
   Cpu,
+  Award,
+  Handshake,
+  Dumbbell,
+  User,
+  Building2,
+  HeartPulse,
+  Building,
+  Cross,
+  FileBarChart,
+  Landmark,
+  XCircle,
+  FileAudio,
+  Code2,
+  ClipboardCheck,
+  Search,
 }
 
 /**
