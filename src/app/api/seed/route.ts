@@ -3,6 +3,7 @@ import config from '@payload-config'
 import { defaultHomepageData } from '@/lib/defaults/homepage'
 import { defaultClearinghouseData } from '@/lib/defaults/clearinghouse'
 import { defaultProviderCredentialingData } from '@/lib/defaults/providerCredentialing'
+import { defaultHealthcareSeoData } from '@/lib/defaults/healthcareSeo'
 import { NextResponse } from 'next/server'
 
 export async function GET() {
@@ -24,9 +25,14 @@ export async function GET() {
       data: defaultProviderCredentialingData as any,
     })
 
+    await payload.updateGlobal({
+      slug: 'healthcare-seo',
+      data: defaultHealthcareSeoData as any,
+    })
+
     return NextResponse.json({
       success: true,
-      message: 'Homepage, Clearinghouse, and Provider Credentialing globals seeded successfully!',
+      message: 'Homepage, Clearinghouse, Provider Credentialing, and Healthcare SEO globals seeded successfully!',
     })
   } catch (error: any) {
     console.error('[Seed Route Error]:', error)

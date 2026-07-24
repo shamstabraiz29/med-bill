@@ -59,6 +59,14 @@ import {
   Code2,
   ClipboardCheck,
   Search,
+  Megaphone,
+  MapPin,
+  Wallet,
+  Plus,
+  Minus,
+  ArrowRight,
+  Mail,
+  Phone,
 } from 'lucide-react'
 
 /**
@@ -126,6 +134,14 @@ const iconMap: Record<string, LucideIcon> = {
   Code2,
   ClipboardCheck,
   Search,
+  Megaphone,
+  MapPin,
+  Wallet,
+  Plus,
+  Minus,
+  ArrowRight,
+  Mail,
+  Phone,
 }
 
 /**

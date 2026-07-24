@@ -6,6 +6,8 @@ import type { ClearinghouseData } from '@/payload/types/clearinghouse'
 import { defaultClearinghouseData } from '@/lib/defaults/clearinghouse'
 import type { ProviderCredentialingData } from '@/payload/types/providerCredentialing'
 import { defaultProviderCredentialingData } from '@/lib/defaults/providerCredentialing'
+import type { HealthcareSeoData } from '@/payload/types/healthcareSeo'
+import { defaultHealthcareSeoData } from '@/lib/defaults/healthcareSeo'
 
 /**
  * Fetches the Homepage global data from Payload CMS using the Local API.
@@ -67,6 +69,27 @@ export async function getProviderCredentialingData(): Promise<ProviderCredential
   } catch (error) {
     console.error('[Payload] Failed to fetch provider credentialing data, using defaults:', error)
     return defaultProviderCredentialingData
+  }
+}
+
+/**
+ * Fetches the Healthcare SEO global data from Payload CMS using the Local API.
+ * Uses the Payload Local API (no HTTP overhead) for maximum performance.
+ * Falls back to default hardcoded content on any error.
+ */
+export async function getHealthcareSeoData(): Promise<HealthcareSeoData> {
+  try {
+    const payload = await getPayload({ config })
+
+    const data = await payload.findGlobal({
+      slug: 'healthcare-seo',
+    })
+
+    // Merge with defaults: CMS data takes priority, defaults fill gaps
+    return deepMerge(defaultHealthcareSeoData, data as unknown as Partial<HealthcareSeoData>)
+  } catch (error) {
+    console.error('[Payload] Failed to fetch healthcare seo data, using defaults:', error)
+    return defaultHealthcareSeoData
   }
 }
 

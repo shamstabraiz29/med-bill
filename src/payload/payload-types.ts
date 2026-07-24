@@ -89,11 +89,13 @@ export interface Config {
     homepage: Homepage;
     clearinghouse: Clearinghouse;
     'provider-credentialing': ProviderCredentialing;
+    'healthcare-seo': HealthcareSeo;
   };
   globalsSelect: {
     homepage: HomepageSelect<false> | HomepageSelect<true>;
     clearinghouse: any;
     'provider-credentialing': any;
+    'healthcare-seo': any;
   };
   locale: null;
   widgets: {
@@ -988,6 +990,11 @@ export interface Clearinghouse {
 }
 
 export interface ProviderCredentialing {
+  id: number;
+  [key: string]: any;
+}
+
+export interface HealthcareSeo {
   id: number;
   [key: string]: any;
 }
