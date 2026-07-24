@@ -10,6 +10,7 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { defaultHomepageData } from '@/lib/defaults/homepage'
+import { defaultClearinghouseData } from '@/lib/defaults/clearinghouse'
 
 async function seed() {
   console.log('🌱 Seeding Payload CMS...')
@@ -46,6 +47,17 @@ async function seed() {
     console.log('✅ Homepage global seeded successfully!')
   } catch (error) {
     console.error('❌ Failed to seed homepage:', error)
+  }
+
+  // Seed Clearinghouse Global
+  try {
+    await payload.updateGlobal({
+      slug: 'clearinghouse',
+      data: defaultClearinghouseData as any,
+    })
+    console.log('✅ Clearinghouse global seeded successfully!')
+  } catch (error) {
+    console.error('❌ Failed to seed clearinghouse:', error)
   }
 
   console.log('🎉 Seeding complete!')

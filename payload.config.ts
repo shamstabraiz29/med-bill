@@ -6,6 +6,9 @@ import { fileURLToPath } from 'url'
 
 import { Users } from '@/payload/collections/Users'
 import { Homepage } from '@/payload/globals/Homepage'
+import { Clearinghouse } from '@/payload/globals/Clearinghouse'
+import { ProviderCredentialing } from '@/payload/globals/ProviderCredentialing'
+import { HealthcareSeo } from '@/payload/globals/HealthcareSeo'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -20,7 +23,7 @@ export default buildConfig({
 
   collections: [Users],
 
-  globals: [Homepage],
+  globals: [Homepage, Clearinghouse, ProviderCredentialing, HealthcareSeo],
 
   db: postgresAdapter({
     pool: {

@@ -87,9 +87,15 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     homepage: Homepage;
+    clearinghouse: Clearinghouse;
+    'provider-credentialing': ProviderCredentialing;
+    'healthcare-seo': HealthcareSeo;
   };
   globalsSelect: {
     homepage: HomepageSelect<false> | HomepageSelect<true>;
+    clearinghouse: any;
+    'provider-credentialing': any;
+    'healthcare-seo': any;
   };
   locale: null;
   widgets: {
@@ -977,6 +983,21 @@ export interface Auth {
   [k: string]: unknown;
 }
 
+
+export interface Clearinghouse {
+  id: number;
+  [key: string]: any;
+}
+
+export interface ProviderCredentialing {
+  id: number;
+  [key: string]: any;
+}
+
+export interface HealthcareSeo {
+  id: number;
+  [key: string]: any;
+}
 
 declare module 'payload' {
   export interface GeneratedTypes extends Config {}

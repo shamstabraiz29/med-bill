@@ -42,7 +42,7 @@ export default function AppButton({
       "bg-white/15 hover:bg-white/25 text-white font-semibold border border-white/30 hover:border-white/50 shadow-sm tracking-wide transition-all duration-300 ease-out",
   };
 
-  const baseClasses = `group/btn inline-flex items-center justify-center gap-2 select-none overflow-hidden active:scale-[0.98] disabled:opacity-60 disabled:pointer-events-none cursor-pointer outline-none ${sizeStyles[size]} ${variantStyles[variant]} ${className}`;
+  const baseClasses = `group/btn inline-flex items-center justify-center gap-2 whitespace-nowrap select-none overflow-hidden active:scale-[0.98] disabled:opacity-60 disabled:pointer-events-none cursor-pointer outline-none ${sizeStyles[size]} ${variantStyles[variant]} ${className}`;
 
   const content = (
     <>
