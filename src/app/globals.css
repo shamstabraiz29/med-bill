@@ -39,6 +39,11 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-step-tint-1: var(--step-tint-1);
+  --color-step-tint-2: var(--step-tint-2);
+  --color-step-tint-3: var(--step-tint-3);
+  --color-step-tint-4: var(--step-tint-4);
+  --color-step-tint-5: var(--step-tint-5);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -142,6 +147,13 @@ body {
   --glow-blob3: #F0FDF4;
   --pattern-line: rgba(29, 78, 216, 0.08);
   --pattern-dot: rgba(29, 78, 216, 0.06);
+
+  /* Workflow step card tints */
+  --step-tint-1: oklch(0.96 0.025 263);
+  --step-tint-2: oklch(0.96 0.03 190);
+  --step-tint-3: oklch(0.96 0.03 300);
+  --step-tint-4: oklch(0.96 0.035 35);
+  --step-tint-5: oklch(0.96 0.03 145);
 }
 
 .dark {

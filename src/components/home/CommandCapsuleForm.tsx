@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { User, Mail, Phone, Loader2, ArrowRight, Check, Star } from "lucide-react";
+import { User, Mail, Phone, Loader2, Check, Star } from "lucide-react";
 import AppButton from "@/components/ui/AppButton";
 import { easeOutExpo } from "@/lib/motion";
 
@@ -11,6 +11,11 @@ interface CommandCapsuleFormProps {
   successTitle?: string;
   successDescription?: string;
   trustBadges?: string[];
+  formTitle?: string;
+  namePlaceholder?: string;
+  emailPlaceholder?: string;
+  phonePlaceholder?: string;
+  showFooter?: boolean;
 }
 
 export default function CommandCapsuleForm({
@@ -18,6 +23,11 @@ export default function CommandCapsuleForm({
   successTitle = "Consultation Request Booked!",
   successDescription = "We will reach out to you within the next 15 minutes.",
   trustBadges = ["HIPAA Compliant", "SOC2 Secure", "No Obligation"],
+  formTitle,
+  namePlaceholder = "Full Name",
+  emailPlaceholder = "Email Address",
+  phonePlaceholder = "Phone Number",
+  showFooter = true,
 }: CommandCapsuleFormProps) {
   const [formData, setFormData] = useState({ name: "", email: "", phone: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -125,6 +135,12 @@ export default function CommandCapsuleForm({
           </motion.div>
         ) : (
           <motion.div key="form-container" className="space-y-4">
+            {formTitle && (
+              <p className="px-2 text-sm font-bold text-[#0F172A] sm:text-base">
+                {formTitle}
+              </p>
+            )}
+
             <motion.form
               onSubmit={handleSubmit}
               className={`relative flex flex-col md:flex-row items-center gap-2 p-1.5 bg-white border rounded-2xl md:rounded-full transition-all duration-300 ${
@@ -153,7 +169,7 @@ export default function CommandCapsuleForm({
                   onFocus={() => setActiveInput("name")}
                   onBlur={() => setActiveInput(null)}
                   onChange={handleChange}
-                  placeholder="Full Name"
+                  placeholder={namePlaceholder}
                   className={`w-full pl-9 pr-3 py-3 text-xs bg-transparent border-0 focus:ring-0 outline-none text-[#0F172A] font-medium transition-colors placeholder:text-[#475569]/60 ${
                     errors.name ? "placeholder:text-[#EF4444]/80 text-[#EF4444]" : ""
                   }`}
@@ -180,7 +196,7 @@ export default function CommandCapsuleForm({
                   onFocus={() => setActiveInput("email")}
                   onBlur={() => setActiveInput(null)}
                   onChange={handleChange}
-                  placeholder="Email Address"
+                  placeholder={emailPlaceholder}
                   className={`w-full pl-9 pr-3 py-3 text-xs bg-transparent border-0 focus:ring-0 outline-none text-[#0F172A] font-medium transition-colors placeholder:text-[#475569]/60 ${
                     errors.email ? "placeholder:text-[#EF4444]/80 text-[#EF4444]" : ""
                   }`}
@@ -207,7 +223,7 @@ export default function CommandCapsuleForm({
                   onFocus={() => setActiveInput("phone")}
                   onBlur={() => setActiveInput(null)}
                   onChange={handleChange}
-                  placeholder="Phone Number"
+                  placeholder={phonePlaceholder}
                   className={`w-full pl-9 pr-3 py-3 text-xs bg-transparent border-0 focus:ring-0 outline-none text-[#0F172A] font-medium transition-colors placeholder:text-[#475569]/60 ${
                     errors.phone ? "placeholder:text-[#EF4444]/80 text-[#EF4444]" : ""
                   }`}
@@ -272,32 +288,32 @@ export default function CommandCapsuleForm({
               )}
             </AnimatePresence>
 
-            {/* Trust markers & rating inline */}
-            <motion.div
-              variants={inputItemVariants}
-              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-2 pt-1"
-            >
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[10px] font-bold text-[#475569]">
-                {trustBadges.map((badge, i) => (
-                  <span key={i} className="flex items-center gap-1 hover:text-[#0F172A] transition-colors">
-                    <Check className="w-3 h-3 text-[#22C55E] stroke-[3.5]" /> {badge}
-                  </span>
-                ))}
-              </div>
-
-              {/* Google rating trust badge */}
-              <div className="flex items-center gap-2 self-start sm:self-auto bg-white border border-[#E2E6EC] rounded-full px-3 py-1 shadow-sm hover:border-[#1D4ED8]/30 transition-colors">
-                <div className="flex items-center gap-1">
-                  <span className="text-[10px] font-extrabold text-[#0F172A]">Google Rating</span>
-                  <span className="text-[10px] font-black text-[#1D4ED8] bg-blue-50 px-1 py-0.2 rounded">4.8</span>
-                </div>
-                <div className="flex items-center gap-0.5">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-2.5 h-2.5 fill-[#EAB308] text-[#EAB308]" />
+            {showFooter && (
+              <motion.div
+                variants={inputItemVariants}
+                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-2 pt-1"
+              >
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[10px] font-bold text-[#475569]">
+                  {trustBadges.map((badge, i) => (
+                    <span key={i} className="flex items-center gap-1 hover:text-[#0F172A] transition-colors">
+                      <Check className="w-3 h-3 text-[#22C55E] stroke-[3.5]" /> {badge}
+                    </span>
                   ))}
                 </div>
-              </div>
-            </motion.div>
+
+                <div className="flex items-center gap-2 self-start sm:self-auto bg-white border border-[#E2E6EC] rounded-full px-3 py-1 shadow-sm hover:border-[#1D4ED8]/30 transition-colors">
+                  <div className="flex items-center gap-1">
+                    <span className="text-[10px] font-extrabold text-[#0F172A]">Google Rating</span>
+                    <span className="text-[10px] font-black text-[#1D4ED8] bg-blue-50 px-1 py-0.2 rounded">4.8</span>
+                  </div>
+                  <div className="flex items-center gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-2.5 h-2.5 fill-[#EAB308] text-[#EAB308]" />
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

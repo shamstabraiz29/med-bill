@@ -1,5 +1,14 @@
 export { default as ConsultationSection } from "./ConsultationSection";
 export { default as MedicalBillingWhyChooseUs } from "./MedicalBillingWhyChooseUs";
+export { default as MedicalBillingWorkflow } from "./MedicalBillingWorkflow";
+export { default as MedicalBillingWhatWeOffer } from "./MedicalBillingWhatWeOffer";
+export { default as MedicalBillingConsultingServices } from "./MedicalBillingConsultingServices";
+export { default as MedicalBillingConsultancyBenefits } from "./MedicalBillingConsultancyBenefits";
+export { default as MedicalBillingConsultancyFeatures } from "./MedicalBillingConsultancyFeatures";
+export { default as MedicalBillingCodingConsultants } from "./MedicalBillingCodingConsultants";
+export { default as MedicalBillingSpecialtySolutions } from "./MedicalBillingSpecialtySolutions";
+export { default as MedicalBillingPartnersSuccess } from "./MedicalBillingPartnersSuccess";
+export { default as MedicalBillingRevenueCta } from "./MedicalBillingRevenueCta";
 export { default as MedicalBillingHero } from "./MedicalBillingHero";
 export { default as MedicalBillingServices } from "./MedicalBillingServices";
 export { default as MedicalBillingProcess } from "./MedicalBillingProcess";
