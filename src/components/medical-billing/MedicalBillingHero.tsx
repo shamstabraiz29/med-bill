@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ShieldCheck, ArrowRight, TrendingUp, CheckCircle, Award } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import AppButton from "@/components/ui/AppButton";
 import SectionBadge from "@/components/ui/SectionBadge";
 import MotionWrapper from "@/components/ui/MotionWrapper";
@@ -20,7 +20,7 @@ export default function MedicalBillingHero() {
         <div className="text-center max-w-4xl mx-auto space-y-6">
           {/* Badge */}
           <MotionWrapper variant="fadeUp">
-            <SectionBadge variant="indigo" icon={Award} pulse>
+            <SectionBadge variant="indigo" pulse>
               End-to-End Medical Billing Solutions
             </SectionBadge>
           </MotionWrapper>

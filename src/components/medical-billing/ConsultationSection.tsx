@@ -9,13 +9,13 @@ import {
   Send, 
   ShieldCheck, 
   TrendingUp, 
-  Clock, 
-  Sparkles 
+  Clock,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import AppButton from "@/components/ui/AppButton";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import SectionHeader from "@/components/ui/SectionHeader";
+import IconWrapper from "@/components/common/IconWrapper";
 
 export default function ConsultationSection() {
   const [formData, setFormData] = useState({
@@ -41,19 +41,16 @@ export default function ConsultationSection() {
       title: "98% Clean Claim Rate",
       desc: "Fast first-pass reimbursements",
       icon: TrendingUp,
-      iconBg: "bg-blue-50 text-[#1D4ED8]",
     },
     {
       title: "Certified Consultants",
       desc: "Dedicated CMRS & CPB billers",
       icon: ShieldCheck,
-      iconBg: "bg-emerald-50 text-emerald-600",
     },
     {
       title: "24/7 Denial Oversight",
       desc: "Rapid appeals & aging AR recovery",
       icon: Clock,
-      iconBg: "bg-indigo-50 text-indigo-600",
     },
   ];
 
@@ -69,12 +66,11 @@ export default function ConsultationSection() {
             <SectionHeader
               badge="Schedule Free Consultation"
               badgeVariant="indigo"
-              badgePulse={true}
-              badgeIcon={Sparkles}
+              badgePulse
               title={
                 <>
                   Medical Billing{" "}
-                  <span className="text-[#1D4ED8] font-bold">
+                  <span className="font-bold text-blue-600">
                     Consulting Service
                   </span>
                 </>
@@ -101,9 +97,12 @@ export default function ConsultationSection() {
                     key={idx}
                     className="group p-4 rounded-2xl bg-white border border-[#E2E6EC] shadow-[0_4px_20px_rgba(29,78,216,0.04)] hover:-translate-y-1 hover:border-[#1D4ED8]/30 hover:shadow-md transition-all duration-300"
                   >
-                    <div className={`w-9 h-9 rounded-xl ${item.iconBg} flex items-center justify-center mb-3 transition-transform duration-300 group-hover:scale-105`}>
-                      <IconComponent className="w-4 h-4 stroke-[2]" />
-                    </div>
+                    <IconWrapper
+                      icon={IconComponent}
+                      size="sm"
+                      variant="surface"
+                      className="mb-3 group-hover:scale-105"
+                    />
                     <h4 className="text-xs font-bold text-[#0F172A] tracking-tight mb-1">
                       {item.title}
                     </h4>
@@ -153,7 +152,11 @@ export default function ConsultationSection() {
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                <form
+                  id="consultation-form"
+                  onSubmit={handleSubmit}
+                  className="flex flex-col gap-4"
+                >
                   
                   {/* Name Input */}
                   <div className="space-y-1.5 text-left">

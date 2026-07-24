@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/card";
 import SectionHeader from "@/components/ui/SectionHeader";
 import MotionWrapper from "@/components/ui/MotionWrapper";
+import IconWrapper from "@/components/common/IconWrapper";
 
 export default function MedicalBillingServices() {
   const services = [
@@ -59,19 +60,18 @@ export default function MedicalBillingServices() {
         
         {/* Section Header */}
         <SectionHeader
-          badge="OUR CORE SERVICES"
+          badge="Our Core Services"
           badgeVariant="indigo"
+          badgePulse
           align="center"
           title={
             <>
               Comprehensive Solutions for{" "}
-              <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                Medical Billing
-              </span>
+              <span className="font-bold text-blue-600">Medical Billing</span>
             </>
           }
           description="Everything your healthcare practice needs to streamline revenue collection and minimize administrative burden."
-          className="mb-12 sm:mb-16"
+          className="mb-12 mx-auto max-w-4xl sm:mb-16"
         />
 
         {/* Services Grid */}
@@ -81,20 +81,23 @@ export default function MedicalBillingServices() {
             return (
               <MotionWrapper key={index} variant="staggerItem">
                 <Card 
-                  glass={true} 
+                  glass={false}
                   hoverEffect="both" 
-                  className="h-full border-slate-200/80 dark:border-slate-800 p-2 group transition-all duration-300"
+                  className="group h-full rounded-2xl border border-[#E2E6EC] bg-white p-2 transition-all duration-300 hover:border-[#1D4ED8]/30"
                 >
                   <CardHeader className="p-6 pb-2">
-                    <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-900/30 text-[#1D4ED8] dark:text-blue-400 flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110">
-                      <Icon className="w-6 h-6 stroke-[2]" />
-                    </div>
-                    <CardTitle className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-[#1D4ED8] transition-colors">
+                    <IconWrapper
+                      icon={Icon}
+                      size="md"
+                      variant="surface"
+                      className="mb-4 transition-transform duration-300 group-hover:scale-110"
+                    />
+                    <CardTitle className="text-lg font-bold text-[#0F172A] transition-colors group-hover:text-[#1D4ED8]">
                       {service.title}
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="p-6 pt-2">
-                    <CardDescription className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                    <CardDescription className="text-xs leading-[1.65] text-[#475569] sm:text-[13px]">
                       {service.desc}
                     </CardDescription>
                   </CardContent>

@@ -28,6 +28,12 @@ import {
   ShieldAlert,
   Bone,
   HelpCircle,
+  FileAudio,
+  Code2,
+  ClipboardCheck,
+  CreditCard,
+  Search,
+  FileCheck,
 } from 'lucide-react'
 
 /**
@@ -64,6 +70,12 @@ const iconMap: Record<string, LucideIcon> = {
   ShieldAlert,
   Bone,
   HelpCircle,
+  FileAudio,
+  Code2,
+  ClipboardCheck,
+  CreditCard,
+  Search,
+  FileCheck,
 }
 
 /**

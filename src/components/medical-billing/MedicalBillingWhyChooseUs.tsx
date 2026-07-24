@@ -7,13 +7,12 @@ import {
   TrendingUp, 
   Clock, 
   ChevronRight, 
-  ShieldCheck, 
-  Award,
-  Sparkles
+  ShieldCheck,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import SectionBadge from "@/components/ui/SectionBadge";
+import SectionHeader from "@/components/ui/SectionHeader";
 import MotionWrapper from "@/components/ui/MotionWrapper";
+import IconWrapper from "@/components/common/IconWrapper";
 
 export default function MedicalBillingWhyChooseUs() {
   const topCards = [
@@ -63,9 +62,12 @@ export default function MedicalBillingWhyChooseUs() {
                 >
                   <CardContent className="p-0 flex flex-col items-center text-center">
                     {/* Icon Container */}
-                    <div className="w-14 h-14 rounded-2xl bg-blue-50 dark:bg-blue-900/30 text-[#1D4ED8] flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110">
-                      <Icon className="w-7 h-7 stroke-[1.75]" />
-                    </div>
+                    <IconWrapper
+                      icon={Icon}
+                      size="lg"
+                      variant="surface"
+                      className="mb-5 group-hover:scale-110"
+                    />
 
                     {/* Card Title */}
                     <h3 className="text-xl font-bold text-[#0F172A] mb-3 tracking-[-0.02em]">
@@ -93,6 +95,7 @@ export default function MedicalBillingWhyChooseUs() {
                 src="/consultants-laptop.png"
                 alt="BellMedEx medical billing consultants reviewing practice analytics on laptop"
                 fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
                 priority
               />
@@ -100,9 +103,7 @@ export default function MedicalBillingWhyChooseUs() {
 
               {/* Floating Certification Badge */}
               <div className="absolute bottom-5 left-5 right-5 sm:right-auto bg-white/95 backdrop-blur-md border border-slate-200/80 px-4 py-3 rounded-2xl shadow-lg flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-blue-50 text-[#1D4ED8] flex items-center justify-center shrink-0">
-                  <ShieldCheck className="w-5 h-5" />
-                </div>
+                <IconWrapper icon={ShieldCheck} size="sm" variant="surface" />
                 <div>
                   <h4 className="text-xs font-bold text-[#0F172A]">
                     Certified Medical Billing Experts
@@ -117,28 +118,29 @@ export default function MedicalBillingWhyChooseUs() {
 
           {/* Right Column: Why Choose Us Content & Checklist */}
           <MotionWrapper variant="slideRight" className="lg:col-span-6 space-y-6 text-left">
-            
-            {/* Section Badge */}
-            <div>
-              <SectionBadge variant="indigo" icon={Sparkles} pulse>
-                WHY CHOOSE US
-              </SectionBadge>
-            </div>
-
-            {/* Main Section Heading */}
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0F172A] tracking-[-0.02em] leading-[1.2]">
-              BellMedEx&apos;s Medical Billing Consulting Service Gets Doctors Paid On Time
-            </h2>
-
-            {/* Paragraph Copies */}
-            <div className="space-y-4 text-xs sm:text-[14px] text-[#475569] leading-[1.6]">
-              <p>
-                BellMedEx medical billing consulting company has subject-matter experts for every specialty&apos;s billing and coding workflows. By leveraging efficient claim filing, precise coding, vigilant A/R follow-up, mastery of ICD-10 billing, and proper auditing &ndash; BellMedEx&apos;s medical billing audit consultants help healthcare providers receive every dollar they&apos;ve earned when they&apos;ve earned it.
-              </p>
-              <p>
-                We assist practices large and small in overcoming lost, delayed, or underpaid claims. Engage our 24/7 medical billing and coding consultancy for the medical billing help your practice needs.
-              </p>
-            </div>
+            <SectionHeader
+              badge="WHY CHOOSE US"
+              badgeVariant="indigo"
+              badgePulse
+              align="left"
+              title={
+                <>
+                  BellMedEx&apos;s Medical Billing{" "}
+                  <span className="font-bold text-blue-600">Consulting Service</span>{" "}
+                  Gets Doctors Paid On Time
+                </>
+              }
+              description={
+                <div className="space-y-4">
+                  <p>
+                    BellMedEx medical billing consulting company has subject-matter experts for every specialty&apos;s billing and coding workflows. By leveraging efficient claim filing, precise coding, vigilant A/R follow-up, mastery of ICD-10 billing, and proper auditing &ndash; BellMedEx&apos;s medical billing audit consultants help healthcare providers receive every dollar they&apos;ve earned when they&apos;ve earned it.
+                  </p>
+                  <p>
+                    We assist practices large and small in overcoming lost, delayed, or underpaid claims. Engage our 24/7 medical billing and coding consultancy for the medical billing help your practice needs.
+                  </p>
+                </div>
+              }
+            />
 
             {/* 9-Point Checklist */}
             <div className="pt-2 flex flex-col gap-2.5">

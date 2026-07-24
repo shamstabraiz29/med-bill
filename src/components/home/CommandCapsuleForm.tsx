@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { User, Mail, Phone, Loader2, ArrowRight, Check, Star } from "lucide-react";
+import { User, Mail, Phone, Loader2, Check, Star } from "lucide-react";
 import AppButton from "@/components/ui/AppButton";
 import { easeOutExpo } from "@/lib/motion";
 
