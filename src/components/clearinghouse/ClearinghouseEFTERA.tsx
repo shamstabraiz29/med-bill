@@ -5,35 +5,15 @@ import Image from "next/image";
 import { CheckCircle2, CreditCard } from "lucide-react";
 import SectionHeader from "@/components/ui/SectionHeader";
 import MotionWrapper from "@/components/ui/MotionWrapper";
+import type { ClearinghouseEFTERAData } from "@/payload/types/clearinghouse";
+import { defaultClearinghouseData } from "@/lib/defaults/clearinghouse";
 
-export interface EftEraFeature {
-  title: string;
-  description: string;
+interface ClearinghouseEFTERAProps {
+  data?: ClearinghouseEFTERAData;
 }
 
-export default function ClearinghouseEFTERA() {
-  const points: EftEraFeature[] = [
-    {
-      title: "Multi-Payer Enrollment",
-      description: "Providers can easily enroll with various commercial and government payers through our software.",
-    },
-    {
-      title: "Electronic Remittances",
-      description: "Receive direct ACH payments and electronic remittance advices automatically into your bank account.",
-    },
-    {
-      title: "Multi-Format ERA Export",
-      description: "View, print, download, and export ERAs in multiple standard formats for seamless accounting.",
-    },
-    {
-      title: "CARC & RARC Breakdown",
-      description: "Access operating rules, Claim Adjustment Reason Codes (CARCs), and Remittance Advice Remark Codes (RARCs) explaining payment decisions.",
-    },
-    {
-      title: "Real-Time Payment Tracking",
-      description: "Track the status of payments in real-time and generate actionable financial performance analytics.",
-    },
-  ];
+export default function ClearinghouseEFTERA({ data }: ClearinghouseEFTERAProps) {
+  const content = data || defaultClearinghouseData.eftEra;
 
   return (
     <section className="relative w-full py-16 sm:py-20 lg:py-24 bg-white border-t border-[#E2E6EC] overflow-hidden">
@@ -44,15 +24,16 @@ export default function ClearinghouseEFTERA() {
         
         {/* Centered Section Header matching Home page typography */}
         <SectionHeader
-          badge="EFT & ERA Support"
+          badge={content.badge}
           badgeVariant="indigo"
           align="center"
           title={
             <>
-              Billing and Payments Made Easy with <span className="text-[#1D4ED8]">EFT + ERA Excellence</span>
+              {content.titlePlain}{" "}
+              <span className="text-[#1D4ED8]">{content.titleHighlight}</span>
             </>
           }
-          description="Electronic Funds Transfer (EFT) sends direct ACH bank deposits while Electronic Remittance Advice (ERA) provides digital payment breakdowns. Our clearinghouse software simplifies compliance with HIPAA and PPACA Administrative Simplification rules:"
+          description={content.description}
           className="mb-12 sm:mb-16 max-w-4xl"
         />
 
@@ -84,10 +65,10 @@ export default function ClearinghouseEFTERA() {
                     </div>
                     <div>
                       <span className="block text-xs font-bold text-white tracking-tight leading-snug">
-                        Direct ACH & Automated ERA
+                        {content.metricValue}
                       </span>
                       <span className="text-[10px] text-blue-200 font-medium">
-                        HIPAA & PPACA Compliant Transfers
+                        {content.metricLabel}
                       </span>
                     </div>
                   </div>
@@ -99,7 +80,7 @@ export default function ClearinghouseEFTERA() {
 
           {/* RIGHT COLUMN: Clean Cardless Feature Checklist */}
           <div className="lg:col-span-7 flex flex-col space-y-4 sm:space-y-4.5 text-left w-full">
-            {points.map((item, idx) => (
+            {content.points.map((item, idx) => (
               <MotionWrapper key={idx} variant="staggerItem">
                 <div className="flex items-start gap-3 text-left group">
                   {/* Clean Indigo Checkmark Badge */}

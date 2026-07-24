@@ -2,18 +2,19 @@
 
 import React from "react";
 import Image from "next/image";
-import { ShieldCheck, CheckCircle2, Zap } from "lucide-react";
+import { ShieldCheck, Zap } from "lucide-react";
 import SectionBadge from "@/components/ui/SectionBadge";
 import AppButton from "@/components/ui/AppButton";
 import MotionWrapper from "@/components/ui/MotionWrapper";
+import type { ClearinghouseHeroData } from "@/payload/types/clearinghouse";
+import { defaultClearinghouseData } from "@/lib/defaults/clearinghouse";
 
-export default function ClearinghouseHero() {
-  const trustHighlights = [
-    "99%+ Clean Claim Rate",
-    "Real-Time Eligibility",
-    "Payer Enrollment",
-    "HIPAA Compliant",
-  ];
+interface ClearinghouseHeroProps {
+  data?: ClearinghouseHeroData;
+}
+
+export default function ClearinghouseHero({ data }: ClearinghouseHeroProps) {
+  const content = data || defaultClearinghouseData.hero;
 
   return (
     <section className="relative w-full pt-12 pb-16 lg:pt-16 lg:pb-24 overflow-hidden">
@@ -32,31 +33,24 @@ export default function ClearinghouseHero() {
               {/* Eyebrow Badge */}
               <MotionWrapper variant="springPop">
                 <SectionBadge variant="blue" pulse>
-                  Medical Billing Clearinghouse Solution
+                  {content.badge}
                 </SectionBadge>
               </MotionWrapper>
 
-              {/* Main Headline - Exact Home Hero typography (text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F172A] tracking-[-0.02em] leading-[1.18] lg:max-w-2xl) */}
+              {/* Main Headline */}
               <MotionWrapper variant="blurReveal">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F172A] tracking-[-0.02em] leading-[1.18] lg:max-w-2xl">
-                  Clearinghouse Service that{" "}
+                  {content.titlePrefix}{" "}
                   <span className="text-[#1D4ED8]">
-                    Clears Healthcare Billing Hurdles
+                    {content.titleHighlight}
                   </span>
                 </h1>
               </MotionWrapper>
 
-              {/* Descriptive Body Text - Exact Home Hero typography (text-[#475569] text-sm sm:text-base leading-[1.6] max-w-2xl) */}
+              {/* Descriptive Body Text */}
               <MotionWrapper variant="blurReveal">
                 <div className="space-y-4 text-[#475569] text-sm sm:text-base leading-[1.6] max-w-2xl">
-                  <p>
-                    Our clearinghouse service is a whole shebang for every provider’s
-                    healthcare billing needs. We connect providers with hundreds of
-                    payers, verify eligibility, check claims status, and submit claims
-                    electronically. We also handle credentialing, enrollment, and
-                    compliance, so quality patient care takes center stage at every
-                    clinic.
-                  </p>
+                  <p>{content.description}</p>
                 </div>
               </MotionWrapper>
             </MotionWrapper>
@@ -65,40 +59,38 @@ export default function ClearinghouseHero() {
             <MotionWrapper variant="fadeUp" delay={0.3}>
               <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
                 <AppButton
-                  href="/schedule-a-demo"
+                  href={content.primaryCtaHref}
                   variant="primary"
                   size="lg"
                   showArrow
                   className="w-full sm:w-auto shadow-md shadow-blue-900/10"
                 >
-                  Claim Free Clearinghouse
+                  {content.primaryCtaLabel}
                 </AppButton>
 
                 <AppButton
-                  href="/contact-us"
+                  href={content.secondaryCtaHref}
                   variant="secondary"
                   size="lg"
                   className="w-full sm:w-auto"
                 >
-                  Speak with an Expert
+                  {content.secondaryCtaLabel}
                 </AppButton>
               </div>
             </MotionWrapper>
           </div>
 
-          {/* RIGHT COLUMN: Static Clean Doctor Visual Image (No keyframe animations) */}
+          {/* RIGHT COLUMN: Static Clean Doctor Visual Image */}
           <div className="lg:col-span-5 relative flex justify-center items-center">
             <MotionWrapper variant="scaleUp" delay={0.2} className="w-full">
               <div className="relative w-full max-w-[480px] aspect-square mx-auto flex items-center justify-center">
 
                 {/* Main Static Outer Frame */}
                 <div className="relative w-[90%] h-[90%] rounded-3xl bg-gradient-to-tr from-blue-50/80 via-slate-50 to-indigo-50/80 border border-[#E2E6EC] shadow-xl shadow-blue-900/5 overflow-hidden flex items-end justify-center">
-                  {/* Subtle Static Background Grid Pattern */}
                   <div className="absolute inset-0 bg-[radial-gradient(#1D4ED8_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.06]" />
 
-                  {/* Doctor / Nurse Static Image */}
                   <Image
-                    src="/clearinghouse-nurse-hero.png"
+                    src={content.imageSrc || "/clearinghouse-nurse-hero.png"}
                     alt="Healthcare Professional using Medical Billing Clearinghouse Solution"
                     width={480}
                     height={520}
@@ -107,27 +99,27 @@ export default function ClearinghouseHero() {
                   />
                 </div>
 
-                {/* Static Badges / Icons (No Keyframe Animation) */}
+                {/* Static Badges / Icons */}
                 <div className="absolute inset-0 pointer-events-none">
-                  {/* Static Badge 1: 99%+ Clean Claims */}
+                  {/* Badge 1 */}
                   <div className="absolute top-[6%] right-[2%] pointer-events-auto bg-white/95 backdrop-blur-md border border-[#E2E6EC] p-3 rounded-2xl shadow-md flex items-center gap-2.5">
                     <div className="w-9 h-9 rounded-xl bg-[#1D4ED8] text-white flex items-center justify-center shrink-0">
                       <Zap className="w-4 h-4 fill-white" />
                     </div>
                     <div className="text-left pr-1">
-                      <p className="text-[11px] font-bold text-[#0F172A] leading-none">99.2% Clean Claims</p>
-                      <p className="text-[10px] text-[#475569] mt-0.5">First-Pass Approval</p>
+                      <p className="text-[11px] font-bold text-[#0F172A] leading-none">{content.badge1Value}</p>
+                      <p className="text-[10px] text-[#475569] mt-0.5">{content.badge1Label}</p>
                     </div>
                   </div>
 
-                  {/* Static Badge 2: Real-time Eligibility */}
+                  {/* Badge 2 */}
                   <div className="absolute bottom-[8%] left-[0%] pointer-events-auto bg-white/95 backdrop-blur-md border border-[#E2E6EC] p-3 rounded-2xl shadow-md flex items-center gap-2.5">
                     <div className="w-9 h-9 rounded-xl bg-blue-50 text-[#1D4ED8] flex items-center justify-center shrink-0 border border-blue-100">
                       <ShieldCheck className="w-4 h-4" />
                     </div>
                     <div className="text-left pr-1">
-                      <p className="text-[11px] font-bold text-[#0F172A] leading-none">HIPAA Compliant</p>
-                      <p className="text-[10px] text-[#475569] mt-0.5">100% Secured EDI</p>
+                      <p className="text-[11px] font-bold text-[#0F172A] leading-none">{content.badge2Value}</p>
+                      <p className="text-[10px] text-[#475569] mt-0.5">{content.badge2Label}</p>
                     </div>
                   </div>
                 </div>

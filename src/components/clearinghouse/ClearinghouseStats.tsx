@@ -3,6 +3,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import SectionHeader from "@/components/ui/SectionHeader";
 import MotionWrapper from "@/components/ui/MotionWrapper";
+import type { ClearinghouseStatsData } from "@/payload/types/clearinghouse";
+import { defaultClearinghouseData } from "@/lib/defaults/clearinghouse";
 
 // Animated counter component matching Home page TrustStatsSection
 function AnimatedCounter({ value }: { value: string }) {
@@ -71,30 +73,12 @@ function AnimatedCounter({ value }: { value: string }) {
   return <span ref={ref}>{displayValue}</span>;
 }
 
-export interface StatItem {
-  value: string;
-  label: string;
+interface ClearinghouseStatsProps {
+  data?: ClearinghouseStatsData;
 }
 
-export default function ClearinghouseStats() {
-  const stats: StatItem[] = [
-    {
-      value: "97.42%",
-      label: "Clean Claim Rate",
-    },
-    {
-      value: "99.21%",
-      label: "Real-time Claim Processing",
-    },
-    {
-      value: "98.76%",
-      label: "Payer Connectivity",
-    },
-    {
-      value: "99.99%",
-      label: "Data Security Compliance",
-    },
-  ];
+export default function ClearinghouseStats({ data }: ClearinghouseStatsProps) {
+  const content = data || defaultClearinghouseData.stats;
 
   return (
     <section className="relative w-full py-16 sm:py-20 lg:py-24 bg-white border-t border-[#E2E6EC] overflow-hidden">
@@ -105,15 +89,17 @@ export default function ClearinghouseStats() {
         
         {/* Centered Section Header matching Home page typography */}
         <SectionHeader
-          badge="Key Statistics"
+          badge={content.badge}
           badgeVariant="indigo"
           align="center"
           title={
             <>
-              BellMedEx <span className="text-[#1D4ED8]">Medical Clearinghouse</span> By The Numbers
+              {content.titlePlain}{" "}
+              <span className="text-[#1D4ED8]">{content.titleHighlight}</span>{" "}
+              {content.titleSuffix}
             </>
           }
-          description="BellMedEx clearinghouse technology delivers industry-leading clean claim accuracy, instant EDI payer connectivity, and 99.99% HIPAA compliance security for medical practices nationwide."
+          description={content.description}
           className="mb-12 sm:mb-16 max-w-4xl"
         />
 
@@ -123,7 +109,7 @@ export default function ClearinghouseStats() {
           staggerDelay={0.1}
           className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 w-full"
         >
-          {stats.map((stat, idx) => (
+          {content.stats.map((stat, idx) => (
             <MotionWrapper key={idx} variant="staggerItem" className="h-full">
               <div className="group relative flex flex-col justify-center items-center text-center h-full bg-white border border-[#E2E6EC] rounded-2xl p-6 sm:p-8 hover:-translate-y-1 hover:border-[#1D4ED8]/30 hover:shadow-lg hover:shadow-blue-900/5 transition-all duration-300">
                 

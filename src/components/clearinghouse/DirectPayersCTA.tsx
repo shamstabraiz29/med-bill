@@ -1,38 +1,19 @@
 "use client";
 
 import React from "react";
-import { Globe, ShieldCheck, Zap, CheckCircle2 } from "lucide-react";
 import AppButton from "@/components/ui/AppButton";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import SectionBadge from "@/components/ui/SectionBadge";
+import { getIcon } from "@/lib/icons";
+import type { DirectPayersCTAData } from "@/payload/types/clearinghouse";
+import { defaultClearinghouseData } from "@/lib/defaults/clearinghouse";
 
-export default function DirectPayersCTA() {
-  const features = [
-    {
-      icon: Globe,
-      title: "Direct Connections",
-      description:
-        "Direct EDI links to Medicare, Medicaid, and 1,000+ commercial payers nationwide.",
-    },
-    {
-      icon: ShieldCheck,
-      title: "Zero Middleman",
-      description:
-        "Eliminate third-party clearinghouse surcharges and unnecessary claim delays.",
-    },
-    {
-      icon: Zap,
-      title: "Real-Time Status",
-      description:
-        "Instant 270/271 eligibility verification and automated 276/277 claim tracking.",
-    },
-    {
-      icon: CheckCircle2,
-      title: "Clean Claim Rate",
-      description:
-        "Pre-submission scrubbing rules ensure 99.2% first-pass claim approval.",
-    },
-  ];
+interface DirectPayersCTAProps {
+  data?: DirectPayersCTAData;
+}
+
+export default function DirectPayersCTA({ data }: DirectPayersCTAProps) {
+  const content = data || defaultClearinghouseData.directPayersCta;
 
   return (
     <section className="w-full bg-transparent py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 flex justify-center items-center">
@@ -46,27 +27,27 @@ export default function DirectPayersCTA() {
               <div className="max-w-3xl text-left space-y-3.5">
                 {/* Badge */}
                 <SectionBadge variant="dark">
-                  Nationwide Payer Network
+                  {content.badge}
                 </SectionBadge>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight leading-tight sm:leading-snug">
-                  Direct to Your Favorite Payers{" "}
+                  {content.titlePlain}{" "}
                   <span className="text-amber-300 font-bold">
-                    Nationwide!
+                    {content.titleHighlight}
                   </span>
                 </h2>
                 <p className="text-blue-200 text-sm sm:text-base">
-                  Our Healthcare Clearinghouse empowers providers to submit claims directly to their preferred payers across the country—no middleman required!
+                  {content.description}
                 </p>
               </div>
 
               <div className="flex-shrink-0 flex items-start lg:items-center justify-start lg:justify-end">
                 <AppButton
-                  href="/schedule-a-demo"
+                  href={content.ctaHref}
                   variant="secondary-dark"
                   size="lg"
                   showArrow
                 >
-                  Submit Claims Now
+                  {content.ctaLabel}
                 </AppButton>
               </div>
             </div>
@@ -76,8 +57,8 @@ export default function DirectPayersCTA() {
 
             {/* Bottom Grid: Feature Tiles */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 text-left">
-              {features.map((feature, idx) => {
-                const Icon = feature.icon;
+              {content.features.map((feature, idx) => {
+                const Icon = getIcon(feature.iconName);
 
                 return (
                   <div

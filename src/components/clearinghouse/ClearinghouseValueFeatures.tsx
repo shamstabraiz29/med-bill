@@ -4,75 +4,20 @@ import React from "react";
 import Image from "next/image";
 import {
   ShieldCheck,
-  Activity,
-  AlertTriangle,
-  Cloud,
-  Printer,
-  FileText,
-  Headphones,
-  CircleDollarSign,
   CheckCircle2,
 } from "lucide-react";
 import SectionHeader from "@/components/ui/SectionHeader";
 import MotionWrapper from "@/components/ui/MotionWrapper";
+import { getIcon } from "@/lib/icons";
+import type { ClearinghouseValueFeaturesData } from "@/payload/types/clearinghouse";
+import { defaultClearinghouseData } from "@/lib/defaults/clearinghouse";
 
-export interface ValueFeature {
-  icon: React.ComponentType<{ className?: string }>;
-  title: string;
-  description: string;
+interface ClearinghouseValueFeaturesProps {
+  data?: ClearinghouseValueFeaturesData;
 }
 
-export default function ClearinghouseValueFeatures() {
-  const valueFeatures: ValueFeature[] = [
-    {
-      icon: ShieldCheck,
-      title: "Coverage Check",
-      description:
-        "Automatically checks the insurance coverage and patient benefits before the provider provides the service.",
-    },
-    {
-      icon: Activity,
-      title: "Claim Monitor",
-      description:
-        "Tracks claims in real-time & provides information on the payment, rejection, or adjustment of each claim.",
-    },
-    {
-      icon: AlertTriangle,
-      title: "Rejection Assistant",
-      description:
-        "Analyzes the reasons for claim rejections and provides suggestions on how to correct and resubmit them.",
-    },
-    {
-      icon: Cloud,
-      title: "Cloud Access",
-      description:
-        "Lets the medical facility securely access their claims billing dashboard online from any device and location.",
-    },
-    {
-      icon: Printer,
-      title: "Print Claim",
-      description:
-        "Prints claims on hard paper that a medical facility can later mail to the insurance payers if preferred.",
-    },
-    {
-      icon: FileText,
-      title: "Patient Invoice",
-      description:
-        "Lets providers send customized statements to their patients carrying details like outstanding balances.",
-    },
-    {
-      icon: Headphones,
-      title: "Live Support",
-      description:
-        "Provides reliable customer support experts who can answer any questions regarding the Clearinghouse software.",
-    },
-    {
-      icon: CircleDollarSign,
-      title: "Flat-Fee Billing",
-      description:
-        "Offers a low-cost billing solution that charges a flat fee per claim regardless of the payer or service type.",
-    },
-  ];
+export default function ClearinghouseValueFeatures({ data }: ClearinghouseValueFeaturesProps) {
+  const content = data || defaultClearinghouseData.valueFeatures;
 
   return (
     <section className="relative w-full py-16 sm:py-20 lg:py-24 bg-slate-50/50 border-t border-[#E2E6EC] overflow-hidden">
@@ -83,15 +28,17 @@ export default function ClearinghouseValueFeatures() {
         
         {/* Centered Section Header */}
         <SectionHeader
-          badge="Healthcare Insurance Claims Clearinghouse"
+          badge={content.badge}
           badgeVariant="indigo"
           align="center"
           title={
             <>
-              The <span className="text-[#1D4ED8]">Clearinghouse</span> With New Value-Added Features!
+              {content.titlePlain}{" "}
+              <span className="text-[#1D4ED8]">{content.titleHighlight}</span>{" "}
+              {content.titleSuffix}
             </>
           }
-          description="BellMedEx Clearinghouse is a smart choice for medical facilities looking to improve their communication and relationship with the payers and the patients. Our free clearinghouse for medical claims presents a bounty of beneficial features to physicians:"
+          description={content.description}
           className="mb-12 sm:mb-16 max-w-4xl"
         />
 
@@ -100,7 +47,7 @@ export default function ClearinghouseValueFeatures() {
 
           {/* LEFT COLUMN: Clean Cardless Feature Checklist */}
           <div className="lg:col-span-7 flex flex-col space-y-4 sm:space-y-4.5 text-left w-full">
-            {valueFeatures.map((feature, idx) => (
+            {content.features.map((feature, idx) => (
               <MotionWrapper key={idx} variant="staggerItem">
                 <div className="flex items-start gap-3 text-left group">
                   {/* Clean Indigo Checkmark Badge */}
@@ -147,10 +94,10 @@ export default function ClearinghouseValueFeatures() {
                     </div>
                     <div>
                       <span className="block text-xs font-bold text-white tracking-tight leading-snug">
-                        99.2% Clean Claims Rate
+                        {content.metricValue}
                       </span>
                       <span className="text-[10px] text-blue-200 font-medium">
-                        Real-Time 276/277 Status & 24/7 Cloud Support
+                        {content.metricLabel}
                       </span>
                     </div>
                   </div>

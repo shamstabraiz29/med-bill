@@ -2,23 +2,18 @@
 
 import React from "react";
 import Image from "next/image";
-import { CheckCircle2, ShieldCheck, Lock, Cpu } from "lucide-react";
+import { CheckCircle2, Lock, Cpu } from "lucide-react";
 import SectionBadge from "@/components/ui/SectionBadge";
 import MotionWrapper from "@/components/ui/MotionWrapper";
+import type { ClearinghouseEDISecurityData } from "@/payload/types/clearinghouse";
+import { defaultClearinghouseData } from "@/lib/defaults/clearinghouse";
 
-export default function ClearinghouseEDISecurity() {
-  const ediPoints = [
-    "Electronic Data Interchange (EDI) is the backbone of our clearinghouse operations, transmitting standardized data securely and swiftly.",
-    "Through EDI, we convert complex healthcare information (claims, patient records, and billing details) into a common format all parties understand.",
-    "Our EDI processes adhere strictly to X12 and HL7 industry standards, ensuring total consistency across all payer transactions.",
-  ];
+interface ClearinghouseEDISecurityProps {
+  data?: ClearinghouseEDISecurityData;
+}
 
-  const hipaaPoints = [
-    "Encrypting all sensitive data during transit and at rest with bank-level 256-bit encryption.",
-    "Implementing strict role-based access controls to restrict unauthorized data exposure.",
-    "Regularly auditing systems and running vulnerability assessments to guarantee total security.",
-    "Safeguarding patient identifiers (Social Security numbers, DOBs) to prevent identity theft.",
-  ];
+export default function ClearinghouseEDISecurity({ data }: ClearinghouseEDISecurityProps) {
+  const content = data || defaultClearinghouseData.ediSecurity;
 
   return (
     <section className="relative w-full py-16 sm:py-20 lg:py-24 bg-white border-t border-[#E2E6EC] overflow-hidden">
@@ -33,21 +28,22 @@ export default function ClearinghouseEDISecurity() {
           {/* LEFT COLUMN: EDI Content */}
           <MotionWrapper variant="slideLeft" className="lg:col-span-7 flex flex-col items-start text-left space-y-5">
             <SectionBadge variant="indigo">
-              Secure EDI Clearinghouse
+              {content.ediBadge}
             </SectionBadge>
 
             <h2 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-bold text-[#0F172A] tracking-[-0.02em] leading-[1.18]">
-              How Does <span className="text-[#1D4ED8]">EDI Fit In?</span>
+              {content.ediTitlePlain}{" "}
+              <span className="text-[#1D4ED8]">{content.ediTitleHighlight}</span>
             </h2>
 
             <div className="w-full space-y-4 pt-2">
-              {ediPoints.map((point, idx) => (
+              {content.ediPoints.map((point, idx) => (
                 <div key={idx} className="flex items-start gap-3 group">
                   <div className="w-5 h-5 rounded-full bg-blue-50 text-[#1D4ED8] flex items-center justify-center shrink-0 mt-0.5 border border-blue-100 group-hover:bg-[#1D4ED8] group-hover:text-white transition-colors duration-200">
                     <CheckCircle2 className="w-3.5 h-3.5" />
                   </div>
                   <p className="text-xs sm:text-sm text-[#475569] leading-relaxed">
-                    {point}
+                    {typeof point === 'string' ? point : (point as any).label}
                   </p>
                 </div>
               ))}
@@ -74,10 +70,10 @@ export default function ClearinghouseEDISecurity() {
                   </div>
                   <div>
                     <span className="block text-xs font-bold text-white tracking-tight">
-                      ANSI X12 & HL7 Standardized EDI
+                      {content.ediBadgeValue}
                     </span>
                     <span className="text-[10px] text-blue-200 font-medium">
-                      Fast, Secure Payer Data Transmission
+                      {content.ediBadgeLabel}
                     </span>
                   </div>
                 </div>
@@ -110,10 +106,10 @@ export default function ClearinghouseEDISecurity() {
                   </div>
                   <div>
                     <span className="block text-xs font-bold text-white tracking-tight">
-                      256-Bit Encrypted Data Safeguard
+                      {content.hipaaBadgeValue}
                     </span>
                     <span className="text-[10px] text-blue-200 font-medium">
-                      Full HIPAA & PPACA Regulatory Compliance
+                      {content.hipaaBadgeLabel}
                     </span>
                   </div>
                 </div>
@@ -124,25 +120,26 @@ export default function ClearinghouseEDISecurity() {
           {/* RIGHT COLUMN: HIPAA Content */}
           <MotionWrapper variant="slideRight" className="lg:col-span-7 flex flex-col items-start text-left space-y-5 order-1 lg:order-2">
             <SectionBadge variant="indigo">
-              HIPAA Data Security
+              {content.hipaaBadge}
             </SectionBadge>
 
             <h2 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-bold text-[#0F172A] tracking-[-0.02em] leading-[1.18]">
-              Protecting <span className="text-[#1D4ED8]">Patient Privacy</span>
+              {content.hipaaTitlePlain}{" "}
+              <span className="text-[#1D4ED8]">{content.hipaaTitleHighlight}</span>
             </h2>
 
             <p className="text-[#475569] text-sm sm:text-base leading-[1.65]">
-              The Health Insurance Portability and Accountability Act (HIPAA) mandates strict privacy and security standards for healthcare data. Our clearinghouse ensures full HIPAA compliance by:
+              {content.hipaaDescription}
             </p>
 
             <div className="w-full space-y-3.5 pt-1">
-              {hipaaPoints.map((point, idx) => (
+              {content.hipaaPoints.map((point, idx) => (
                 <div key={idx} className="flex items-start gap-3 group">
                   <div className="w-5 h-5 rounded-full bg-blue-50 text-[#1D4ED8] flex items-center justify-center shrink-0 mt-0.5 border border-blue-100 group-hover:bg-[#1D4ED8] group-hover:text-white transition-colors duration-200">
                     <CheckCircle2 className="w-3.5 h-3.5" />
                   </div>
                   <p className="text-xs sm:text-sm text-[#475569] leading-relaxed">
-                    {point}
+                    {typeof point === 'string' ? point : (point as any).label}
                   </p>
                 </div>
               ))}

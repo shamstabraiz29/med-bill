@@ -2,70 +2,20 @@
 
 import React from "react";
 import Link from "next/link";
-import { Globe, Laptop, BarChart3, ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import SectionHeader from "@/components/ui/SectionHeader";
+import { getIcon } from "@/lib/icons";
+import type { ClearinghouseCapabilitiesData } from "@/payload/types/clearinghouse";
+import { defaultClearinghouseData } from "@/lib/defaults/clearinghouse";
 
-export interface CapabilityItem {
-  id: string;
-  category: string;
-  icon: React.ComponentType<{ className?: string }>;
-  title: string;
-  description: string;
-  highlights: string[];
-  link: string;
-  linkLabel: string;
+interface ClearinghouseCapabilitiesProps {
+  data?: ClearinghouseCapabilitiesData;
 }
 
-export default function ClearinghouseCapabilities() {
-  const capabilities: CapabilityItem[] = [
-    {
-      id: "nationwide",
-      category: "Payer Connectivity",
-      icon: Globe,
-      title: "Nationwide Clearinghouse",
-      description:
-        "Our medical claims clearinghouse supports payers nationwide. A provider can submit claims to any commercial or private payer in the country.",
-      highlights: [
-        "1,000+ Commercial & Private Payers",
-        "Real-Time Eligibility Verification",
-        "Direct Nationwide EDI Network",
-      ],
-      link: "/schedule-a-demo",
-      linkLabel: "Explore Payer Network",
-    },
-    {
-      id: "software-support",
-      category: "Interoperability",
-      icon: Laptop,
-      title: "All Software Support",
-      description:
-        "Our medical billing clearinghouse solution works seamlessly with your preferred medical billing software. Plus, a dedicated support staff is available to assist you.",
-      highlights: [
-        "Seamless EHR & PMS Integration",
-        "Zero Workflow Disruption",
-        "Dedicated Technical Support Team",
-      ],
-      link: "/medical-billing-software",
-      linkLabel: "Check Software Compatibility",
-    },
-    {
-      id: "rcm-intelligence",
-      category: "Analytics & Insights",
-      icon: BarChart3,
-      title: "RCM Intelligence",
-      description:
-        "Doctors can access real-time data and reports on their claims status, denial reasons, rejection rates, and payment trends via our healthcare clearinghouse.",
-      highlights: [
-        "Real-Time Denial & Rejection Tracking",
-        "Interactive Financial Dashboards",
-        "Actionable Revenue Cycle Metrics",
-      ],
-      link: "/revenue-cycle-management-rcm",
-      linkLabel: "View RCM Intelligence",
-    },
-  ];
+export default function ClearinghouseCapabilities({ data }: ClearinghouseCapabilitiesProps) {
+  const content = data || defaultClearinghouseData.capabilities;
 
   return (
     <section className="relative w-full py-16 sm:py-20 lg:py-24 border-t border-[#E2E6EC] overflow-hidden">
@@ -76,17 +26,17 @@ export default function ClearinghouseCapabilities() {
 
         {/* Section Header */}
         <SectionHeader
-          badge="Clearinghouse Capabilities"
+          badge={content.badge}
           badgeVariant="indigo"
           badgePulse
           align="center"
           title={
             <>
-              Enterprise Clearinghouse{" "}
-              <span className="text-[#1D4ED8]">Built for Healthcare</span>
+              {content.titlePlain}{" "}
+              <span className="text-[#1D4ED8]">{content.titleHighlight}</span>
             </>
           }
-          description="Streamline claims submission, automate eligibility checks, and optimize payer workflows with our high-performance EDI engine."
+          description={content.description}
           className="mb-12 sm:mb-16 max-w-3xl"
         />
 
@@ -96,8 +46,8 @@ export default function ClearinghouseCapabilities() {
           staggerDelay={0.12}
           className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 w-full"
         >
-          {capabilities.map((item) => {
-            const Icon = item.icon;
+          {content.items.map((item) => {
+            const Icon = getIcon(item.iconName);
 
             return (
               <MotionWrapper key={item.id} variant="staggerItem" className="h-full">
@@ -131,7 +81,7 @@ export default function ClearinghouseCapabilities() {
                         <div key={idx} className="flex items-center gap-2">
                           <CheckCircle2 className="w-4 h-4 text-[#1D4ED8] shrink-0" />
                           <span className="text-xs font-medium text-[#0F172A]">
-                            {highlight}
+                            {typeof highlight === 'string' ? highlight : (highlight as any).label}
                           </span>
                         </div>
                       ))}

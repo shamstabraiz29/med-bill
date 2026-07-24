@@ -3,102 +3,27 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import {
-  Globe,
-  ShieldCheck,
-  Lock,
-  Zap,
-  BarChart3,
   CheckCircle2,
   ChevronRight,
-  TrendingUp,
-  Activity,
   Award,
 } from "lucide-react";
-import SectionBadge from "@/components/ui/SectionBadge";
 import AppButton from "@/components/ui/AppButton";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import SectionHeader from "@/components/ui/SectionHeader";
-import { Card } from "@/components/ui/card";
+import { getIcon } from "@/lib/icons";
+import type { WhyChooseClearinghouseData } from "@/payload/types/clearinghouse";
+import { defaultClearinghouseData } from "@/lib/defaults/clearinghouse";
 
-export interface WhyChooseFeature {
-  id: string;
-  badge: string;
-  icon: React.ComponentType<{ className?: string }>;
-  title: string;
-  subtitle: string;
-  description: string;
-  statValue: string;
-  statLabel: string;
-  imageSrc: string;
+interface WhyChooseClearinghouseProps {
+  data?: WhyChooseClearinghouseData;
 }
 
-export default function WhyChooseClearinghouse() {
+export default function WhyChooseClearinghouse({ data }: WhyChooseClearinghouseProps) {
   const [activeTab, setActiveTab] = useState<number>(0);
+  const content = data || defaultClearinghouseData.whyChoose;
 
-  const features: WhyChooseFeature[] = [
-    {
-      id: "payers",
-      badge: "Payer Coverage",
-      icon: Globe,
-      title: "Connect with Over 2,000 Payers Nationwide",
-      subtitle: "Commercial & Government Payers",
-      description:
-        "Access Medicare, Medicaid, and commercial health plans across the United States for maximum payment opportunities with direct EDI connections.",
-      statValue: "2,000+",
-      statLabel: "Active Nationwide Payers",
-      imageSrc: "/consultants-laptop.png",
-    },
-    {
-      id: "validation",
-      badge: "Pre-Submission Scrubbing",
-      icon: ShieldCheck,
-      title: "Validate Claims for Accuracy & Compliance",
-      subtitle: "Zero-Rejection Guarantee",
-      description:
-        "Automated claim scrubbing inspects every code, modifier, and requirement prior to submission to eliminate rejections before they occur.",
-      statValue: "99.2%",
-      statLabel: "Clean Claim Rate",
-      imageSrc: "/clearinghouse-nurse-hero.png",
-    },
-    {
-      id: "hipaa",
-      badge: "Security & EDI",
-      icon: Lock,
-      title: "Convert Claims into HIPAA-Compliant Formats",
-      subtitle: "100% Encrypted EDI 837/835",
-      description:
-        "Seamlessly translate billing records into standard ANSI 837/835 electronic formats ensuring full regulatory security and interoperability.",
-      statValue: "100%",
-      statLabel: "HIPAA Compliant",
-      imageSrc: "/dr-nicole.png",
-    },
-    {
-      id: "tracking",
-      badge: "Real-Time Visibility",
-      icon: Zap,
-      title: "Track Claims from Submission to Payment",
-      subtitle: "Instant 276/277 Status",
-      description:
-        "Real-time electronic tracking gives your billing team complete visibility into claim progress, adjudication decisions, and payment schedules.",
-      statValue: "< 14 Days",
-      statLabel: "Average Days in A/R",
-      imageSrc: "/faq-doctor.png",
-    },
-    {
-      id: "insights",
-      badge: "RCM Analytics",
-      icon: BarChart3,
-      title: "Actionable Insights & Performance Metrics",
-      subtitle: "Custom Financial Reports",
-      description:
-        "Access in-depth analytics on claim performance, denial drivers, and revenue trends to continually optimize your clinic’s financial health.",
-      statValue: "+24%",
-      statLabel: "Revenue Acceleration",
-      imageSrc: "/doctors-team.png",
-    },
-  ];
-
-  const currentFeature = features[activeTab];
+  const features = content.features;
+  const currentFeature = features[activeTab] || features[0];
 
   return (
     <section className="relative w-full py-16 sm:py-20 lg:py-24 border-t border-[#E2E6EC] overflow-hidden">
@@ -111,16 +36,18 @@ export default function WhyChooseClearinghouse() {
 
         {/* Centered Section Header */}
         <SectionHeader
-          badge="Why Choose BellMedEx"
+          badge={content.badge}
           badgeVariant="indigo"
           badgePulse
           align="center"
           title={
             <>
-              Why Our <span className="text-[#1D4ED8]">Clearinghouse</span> is the Top Choice for Medical Providers
+              {content.titlePlain}{" "}
+              <span className="text-[#1D4ED8]">{content.titleHighlight}</span>{" "}
+              {content.titleSuffix}
             </>
           }
-          description="BellMedEx delivers high-performance clearinghouse technology to eliminate claim rejection delays and maximize practice revenue."
+          description={content.description}
           className="mb-12 sm:mb-16 max-w-4xl"
         />
 
@@ -130,12 +57,12 @@ export default function WhyChooseClearinghouse() {
           {/* LEFT COLUMN: Compact Interactive Feature Selector Cards */}
           <div className="lg:col-span-6 flex flex-col justify-between space-y-2.5 h-full w-full">
             {features.map((feature, idx) => {
-              const Icon = feature.icon;
+              const Icon = getIcon(feature.iconName);
               const isActive = activeTab === idx;
 
               return (
                 <div
-                  key={feature.id}
+                  key={feature.id || idx}
                   onClick={() => setActiveTab(idx)}
                   className={`group relative p-3.5 sm:p-4 rounded-xl border text-left cursor-pointer transition-all duration-300 flex-1 flex flex-col justify-center ${isActive
                     ? "bg-blue-50/60 border-[#1D4ED8] shadow-sm ring-1 ring-[#1D4ED8]/20"
@@ -189,7 +116,7 @@ export default function WhyChooseClearinghouse() {
 
           {/* RIGHT COLUMN: Equal Height Dynamic Feature Showcase Preview */}
           <div className="lg:col-span-6 h-full w-full flex flex-col">
-            <MotionWrapper key={currentFeature.id} variant="scaleUp" className="h-full w-full flex flex-col">
+            <MotionWrapper key={currentFeature.id || activeTab} variant="scaleUp" className="h-full w-full flex flex-col">
               <div className="relative overflow-hidden rounded-2xl bg-white border border-[#E2E6EC] p-4 sm:p-5 text-[#0F172A] shadow-lg text-left h-full flex flex-col justify-between">
 
                 {/* Top Section */}
@@ -217,7 +144,7 @@ export default function WhyChooseClearinghouse() {
                   {/* Compact Image & Metric Frame */}
                   <div className="relative aspect-[16/9] min-h-[150px] w-full rounded-xl overflow-hidden bg-slate-100 border border-[#E2E6EC] mb-3 group">
                     <Image
-                      src={currentFeature.imageSrc}
+                      src={currentFeature.imageSrc || "/consultants-laptop.png"}
                       alt={currentFeature.title}
                       fill
                       className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
