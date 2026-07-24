@@ -1,12 +1,19 @@
 import type { Metadata } from "next";
 import {
   MedicalCodingAffordableCta,
+  MedicalCodingAdvancedHelp,
+  MedicalCodingAuditsConsultancy,
+  MedicalCodingAuditsDemoCta,
+  MedicalCodingErrorsRevenueCta,
   MedicalCodingExpertSections,
+  MedicalCodingFairRevenueCta,
   MedicalCodingFrustratedCta,
   MedicalCodingHero,
   MedicalCodingHowWeHelp,
   MedicalCodingIcd10Services,
+  MedicalCodingModernSolutions,
   MedicalCodingProvenProcess,
+  MedicalCodingSecurityCompliance,
   MedicalCodingWhyChooseUs,
 } from "@/components/medical-coding";
 
@@ -27,6 +34,13 @@ export default function MedicalCodingPage() {
       <MedicalCodingProvenProcess />
       <MedicalCodingIcd10Services />
       <MedicalCodingFrustratedCta />
+      <MedicalCodingAuditsConsultancy />
+      <MedicalCodingFairRevenueCta />
+      <MedicalCodingSecurityCompliance />
+      <MedicalCodingAdvancedHelp />
+      <MedicalCodingAuditsDemoCta />
+      <MedicalCodingModernSolutions />
+      <MedicalCodingErrorsRevenueCta />
     </div>
   );
 }

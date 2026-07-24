@@ -27,7 +27,7 @@ export default function BillingCodingConsultantItem({
         className="mt-0.5 shrink-0"
       />
       <div className="min-w-0 space-y-2">
-        <h3 className="text-base font-bold leading-snug tracking-[-0.02em] text-blue-600 sm:text-lg">
+        <h3 className="text-base font-bold leading-snug tracking-[-0.02em] text-[#0F172A] sm:text-lg">
           {title}
         </h3>
         <p className="text-xs leading-[1.65] text-[#475569] sm:text-[13px]">

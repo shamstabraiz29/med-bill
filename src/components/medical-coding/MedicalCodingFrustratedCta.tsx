@@ -8,27 +8,30 @@ import MotionWrapper from "@/components/ui/MotionWrapper";
 export default function MedicalCodingFrustratedCta() {
   return (
     <section
-      className="w-full bg-transparent px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20"
+      className="flex w-full items-center justify-center bg-transparent px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20"
       aria-labelledby="medical-coding-frustrated-cta-heading"
     >
-      <div className="mx-auto w-full max-w-7xl">
+      <div className="w-full max-w-7xl">
         <MotionWrapper variant="scaleUp">
-          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#0F172A] shadow-lg">
+          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0F172A] p-8 text-white shadow-lg sm:p-12">
             <div
               className="pointer-events-none absolute -left-16 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-[#1D4ED8]/15 blur-3xl"
               aria-hidden="true"
             />
 
-            <div className="relative grid grid-cols-1 items-center gap-8 p-6 sm:p-8 lg:grid-cols-2 lg:gap-10 lg:p-10 xl:p-12">
-              <MotionWrapper variant="slideRight" className="space-y-5 text-left">
+            <div className="relative grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-10">
+              <MotionWrapper variant="slideRight" className="space-y-3.5 text-left">
                 <h2
                   id="medical-coding-frustrated-cta-heading"
-                  className="text-2xl font-bold leading-[1.2] tracking-[-0.02em] text-white sm:text-3xl lg:text-4xl"
+                  className="text-2xl font-bold leading-tight tracking-tight sm:text-3xl sm:leading-snug lg:text-4xl"
                 >
-                  Are You Frustrated with Medical Coding Errors, Denials, and Delays?
+                  Are You Frustrated with{" "}
+                  <span className="font-bold text-amber-300">
+                    Medical Coding Errors, Denials, and Delays?
+                  </span>
                 </h2>
 
-                <p className="max-w-xl text-sm leading-[1.65] text-blue-200 sm:text-base">
+                <p className="max-w-xl text-sm text-blue-200 sm:text-base">
                   BellMedEx provides complete medical coding solutions and services. Our
                   certified coders handle all coding projects — in-patient, outpatient,
                   emergency, or specialty services. So don&apos;t let medical coding
