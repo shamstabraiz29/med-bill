@@ -4,6 +4,10 @@ import React from "react";
 import { ClipboardCheck, ScanSearch } from "lucide-react";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import MedicalBillingAuditSplitBlock from "./MedicalBillingAuditSplitBlock";
+import {
+  auditContainerClassName,
+  auditSectionClassName,
+} from "./auditSectionLayout";
 
 const AUDIT_OVERVIEW_BLOCKS = [
   {
@@ -44,11 +48,8 @@ const AUDIT_OVERVIEW_BLOCKS = [
 
 export default function MedicalBillingAuditOverview() {
   return (
-    <section
-      className="w-full bg-transparent px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20"
-      aria-label="Medical billing audit overview"
-    >
-      <div className="mx-auto max-w-7xl">
+    <section className={auditSectionClassName} aria-label="Medical billing audit overview">
+      <div className={auditContainerClassName}>
         <MotionWrapper
           variant="stagger"
           staggerDelay={0.1}

@@ -59,7 +59,10 @@ export default function MedicalBillingAuditHeroForm() {
   };
 
   return (
-    <div className="relative flex w-full flex-col gap-6 overflow-hidden rounded-3xl border border-[#E2E6EC] bg-white p-6 shadow-[0_8px_30px_rgba(29,78,216,0.06)] sm:p-8 md:p-9">
+    <div
+      id="claim-free-medical-audit"
+      className="relative flex w-full flex-col gap-6 overflow-hidden rounded-3xl border border-[#E2E6EC] bg-white p-6 shadow-[0_8px_30px_rgba(29,78,216,0.06)] sm:p-8 md:p-9"
+    >
       <div className="space-y-1.5 border-b border-[#E2E6EC] pb-2 text-center sm:text-left">
         <h2 className="text-xl font-bold tracking-[-0.02em] text-[#0F172A] sm:text-2xl">
           Claim Free Medical Audit

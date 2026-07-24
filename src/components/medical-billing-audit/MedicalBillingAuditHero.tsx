@@ -4,11 +4,15 @@ import React from "react";
 import SectionBadge from "@/components/ui/SectionBadge";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import MedicalBillingAuditHeroForm from "./MedicalBillingAuditHeroForm";
+import {
+  auditContainerClassName,
+  auditSectionClassName,
+} from "./auditSectionLayout";
 
 export default function MedicalBillingAuditHero() {
   return (
     <section
-      className="relative w-full overflow-hidden bg-transparent px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20"
+      className={auditSectionClassName}
       aria-labelledby="medical-billing-audit-hero-heading"
     >
       <div
@@ -19,7 +23,7 @@ export default function MedicalBillingAuditHero() {
         <div className="absolute -left-16 bottom-1/4 h-56 w-56 rounded-full bg-blue-50 blur-3xl" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl">
+      <div className={auditContainerClassName}>
         <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:gap-16">
           <MotionWrapper
             variant="slideLeft"

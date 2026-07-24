@@ -1,5 +1,16 @@
 import type { Metadata } from "next";
-import { MedicalBillingAuditHero, MedicalBillingAuditOverview } from "@/components/medical-billing-audit";
+import {
+  MedicalBillingAuditChartReviews,
+  MedicalBillingAuditClaimAccuracyCta,
+  MedicalBillingAuditHero,
+  MedicalBillingAuditOverview,
+  MedicalBillingAuditOptimizeProcesses,
+  MedicalBillingAuditPostAuditReports,
+  MedicalBillingAuditProblemsSolutions,
+  MedicalBillingAuditRecordsCta,
+  MedicalBillingAuditSolutions,
+  MedicalBillingAuditSolutionsToDate,
+} from "@/components/medical-billing-audit";
 
 export const metadata: Metadata = {
   title: "Medical Billing & Coding Audit Services | BellMedEx",
@@ -12,6 +23,14 @@ export default function MedicalBillingAuditPage() {
     <div className="flex min-h-screen flex-col py-4 sm:py-8">
       <MedicalBillingAuditHero />
       <MedicalBillingAuditOverview />
+      <MedicalBillingAuditSolutions />
+      <MedicalBillingAuditRecordsCta /> 
+      <MedicalBillingAuditProblemsSolutions />
+      <MedicalBillingAuditOptimizeProcesses />
+      <MedicalBillingAuditSolutionsToDate />
+      <MedicalBillingAuditPostAuditReports />
+      <MedicalBillingAuditChartReviews />
+      <MedicalBillingAuditClaimAccuracyCta />
     </div>
   );
 }
