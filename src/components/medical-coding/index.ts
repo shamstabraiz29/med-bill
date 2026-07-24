@@ -1,0 +1,9 @@
+export { default as MedicalCodingHero } from "./MedicalCodingHero";
+export { default as MedicalCodingHeroHeader } from "./MedicalCodingHeroHeader";
+export { default as MedicalCodingHowWeHelp } from "./MedicalCodingHowWeHelp";
+export { default as MedicalCodingWhyChooseUs } from "./MedicalCodingWhyChooseUs";
+export { default as MedicalCodingAffordableCta } from "./MedicalCodingAffordableCta";
+export { default as MedicalCodingExpertSections } from "./MedicalCodingExpertSections";
+export { default as MedicalCodingProvenProcess } from "./MedicalCodingProvenProcess";
+export { default as MedicalCodingIcd10Services } from "./MedicalCodingIcd10Services";
+export { default as MedicalCodingFrustratedCta } from "./MedicalCodingFrustratedCta";
