@@ -1,0 +1,81 @@
+"use client";
+
+import React from "react";
+import Image from "next/image";
+import { LucideIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Card, CardContent } from "@/components/ui/card";
+import IconWrapper from "@/components/common/IconWrapper";
+
+export interface MedicalBillingAuditSplitBlockProps {
+  icon: LucideIcon;
+  title: React.ReactNode;
+  paragraphs: string[];
+  imageSrc: string;
+  imageAlt: string;
+  imagePosition?: "left" | "right";
+}
+
+export default function MedicalBillingAuditSplitBlock({
+  icon,
+  title,
+  paragraphs,
+  imageSrc,
+  imageAlt,
+  imagePosition = "right",
+}: MedicalBillingAuditSplitBlockProps) {
+  const isImageLeft = imagePosition === "left";
+
+  return (
+    <Card
+      glass={false}
+      hoverEffect="none"
+      className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all duration-300 hover:border-primary/20 hover:shadow-lg hover:shadow-primary/5 sm:rounded-3xl"
+    >
+      <CardContent className="grid grid-cols-1 lg:grid-cols-2 lg:items-stretch p-0">
+        <div
+          className={cn(
+            "flex flex-col justify-center gap-4 bg-muted p-6 sm:gap-5 sm:p-8 lg:p-10",
+            isImageLeft ? "lg:order-2" : "lg:order-1"
+          )}
+        >
+          <IconWrapper icon={icon} size="lg" variant="surface" />
+
+          <h2 className="max-w-xl text-2xl font-bold leading-[1.2] tracking-[-0.02em] text-foreground sm:text-3xl">
+            {title}
+          </h2>
+
+          <div className="max-w-xl space-y-4">
+            {paragraphs.map((paragraph) => (
+              <p
+                key={paragraph}
+                className="text-xs leading-[1.65] text-muted-foreground sm:text-[13px]"
+              >
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        </div>
+
+        <div
+          className={cn(
+            "relative min-h-[260px] sm:min-h-[320px]",
+            isImageLeft ? "lg:order-1" : "lg:order-2"
+          )}
+        >
+          <Image
+            src={imageSrc}
+            alt={imageAlt}
+            fill
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            className="object-cover transition-transform duration-700 hover:scale-[1.02]"
+          />
+          <div
+            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-foreground/15 via-transparent to-transparent"
+            aria-hidden="true"
+          />
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
