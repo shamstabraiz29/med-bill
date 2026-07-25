@@ -8,6 +8,8 @@ import type { ProviderCredentialingData } from '@/payload/types/providerCredenti
 import { defaultProviderCredentialingData } from '@/lib/defaults/providerCredentialing'
 import type { HealthcareSeoData } from '@/payload/types/healthcareSeo'
 import { defaultHealthcareSeoData } from '@/lib/defaults/healthcareSeo'
+import type { RevenueCycleManagementData } from '@/payload/types/revenueCycleManagement'
+import { defaultRevenueCycleManagementData } from '@/lib/defaults/revenueCycleManagement'
 
 /**
  * Fetches the Homepage global data from Payload CMS using the Local API.
@@ -90,6 +92,27 @@ export async function getHealthcareSeoData(): Promise<HealthcareSeoData> {
   } catch (error) {
     console.error('[Payload] Failed to fetch healthcare seo data, using defaults:', error)
     return defaultHealthcareSeoData
+  }
+}
+
+/**
+ * Fetches the Revenue Cycle Management global data from Payload CMS using the Local API.
+ * Uses the Payload Local API (no HTTP overhead) for maximum performance.
+ * Falls back to default hardcoded content on any error.
+ */
+export async function getRevenueCycleManagementData(): Promise<RevenueCycleManagementData> {
+  try {
+    const payload = await getPayload({ config })
+
+    const data = await payload.findGlobal({
+      slug: 'revenue-cycle-management',
+    })
+
+    // Merge with defaults: CMS data takes priority, defaults fill gaps
+    return deepMerge(defaultRevenueCycleManagementData, data as unknown as Partial<RevenueCycleManagementData>)
+  } catch (error) {
+    console.error('[Payload] Failed to fetch revenue cycle management data, using defaults:', error)
+    return defaultRevenueCycleManagementData
   }
 }
 

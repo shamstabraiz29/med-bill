@@ -13,6 +13,8 @@ import { HealthcareSeo } from '@/payload/globals/HealthcareSeo'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+import { RevenueCycleManagement } from '@/payload/globals/RevenueCycleManagement'
+
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -23,7 +25,7 @@ export default buildConfig({
 
   collections: [Users],
 
-  globals: [Homepage, Clearinghouse, ProviderCredentialing, HealthcareSeo],
+  globals: [Homepage, Clearinghouse, ProviderCredentialing, HealthcareSeo, RevenueCycleManagement],
 
   db: postgresAdapter({
     pool: {

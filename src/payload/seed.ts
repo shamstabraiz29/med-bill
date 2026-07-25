@@ -11,6 +11,9 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { defaultHomepageData } from '@/lib/defaults/homepage'
 import { defaultClearinghouseData } from '@/lib/defaults/clearinghouse'
+import { defaultProviderCredentialingData } from '@/lib/defaults/providerCredentialing'
+import { defaultHealthcareSeoData } from '@/lib/defaults/healthcareSeo'
+import { defaultRevenueCycleManagementData } from '@/lib/defaults/revenueCycleManagement'
 
 async function seed() {
   console.log('🌱 Seeding Payload CMS...')
@@ -58,6 +61,39 @@ async function seed() {
     console.log('✅ Clearinghouse global seeded successfully!')
   } catch (error) {
     console.error('❌ Failed to seed clearinghouse:', error)
+  }
+
+  // Seed Provider Credentialing Global
+  try {
+    await payload.updateGlobal({
+      slug: 'provider-credentialing',
+      data: defaultProviderCredentialingData as any,
+    })
+    console.log('✅ Provider Credentialing global seeded successfully!')
+  } catch (error) {
+    console.error('❌ Failed to seed provider credentialing:', error)
+  }
+
+  // Seed Healthcare SEO Global
+  try {
+    await payload.updateGlobal({
+      slug: 'healthcare-seo',
+      data: defaultHealthcareSeoData as any,
+    })
+    console.log('✅ Healthcare SEO global seeded successfully!')
+  } catch (error) {
+    console.error('❌ Failed to seed healthcare seo:', error)
+  }
+
+  // Seed Revenue Cycle Management Global
+  try {
+    await payload.updateGlobal({
+      slug: 'revenue-cycle-management',
+      data: defaultRevenueCycleManagementData as any,
+    })
+    console.log('✅ Revenue Cycle Management global seeded successfully!')
+  } catch (error) {
+    console.error('❌ Failed to seed revenue cycle management:', error)
   }
 
   console.log('🎉 Seeding complete!')

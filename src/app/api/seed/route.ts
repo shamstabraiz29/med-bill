@@ -4,6 +4,7 @@ import { defaultHomepageData } from '@/lib/defaults/homepage'
 import { defaultClearinghouseData } from '@/lib/defaults/clearinghouse'
 import { defaultProviderCredentialingData } from '@/lib/defaults/providerCredentialing'
 import { defaultHealthcareSeoData } from '@/lib/defaults/healthcareSeo'
+import { defaultRevenueCycleManagementData } from '@/lib/defaults/revenueCycleManagement'
 import { NextResponse } from 'next/server'
 
 export async function GET() {
@@ -30,9 +31,14 @@ export async function GET() {
       data: defaultHealthcareSeoData as any,
     })
 
+    await payload.updateGlobal({
+      slug: 'revenue-cycle-management',
+      data: defaultRevenueCycleManagementData as any,
+    })
+
     return NextResponse.json({
       success: true,
-      message: 'Homepage, Clearinghouse, Provider Credentialing, and Healthcare SEO globals seeded successfully!',
+      message: 'Homepage, Clearinghouse, Provider Credentialing, Healthcare SEO, and Revenue Cycle Management globals seeded successfully!',
     })
   } catch (error: any) {
     console.error('[Seed Route Error]:', error)

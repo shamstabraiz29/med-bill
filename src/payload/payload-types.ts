@@ -90,12 +90,14 @@ export interface Config {
     clearinghouse: Clearinghouse;
     'provider-credentialing': ProviderCredentialing;
     'healthcare-seo': HealthcareSeo;
+    'revenue-cycle-management': RevenueCycleManagement;
   };
   globalsSelect: {
     homepage: HomepageSelect<false> | HomepageSelect<true>;
     clearinghouse: any;
     'provider-credentialing': any;
     'healthcare-seo': any;
+    'revenue-cycle-management': any;
   };
   locale: null;
   widgets: {
@@ -995,6 +997,11 @@ export interface ProviderCredentialing {
 }
 
 export interface HealthcareSeo {
+  id: number;
+  [key: string]: any;
+}
+
+export interface RevenueCycleManagement {
   id: number;
   [key: string]: any;
 }
