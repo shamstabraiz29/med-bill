@@ -1,0 +1,9 @@
+export { default as ElectronicHealthRecordsEhrGetStartedCta } from "./ElectronicHealthRecordsEhrGetStartedCta";
+export { default as ElectronicHealthRecordsEhrBenefits } from "./ElectronicHealthRecordsEhrBenefits";
+export { default as ElectronicHealthRecordsEhrFaq } from "./ElectronicHealthRecordsEhrFaq";
+export { default as ElectronicHealthRecordsEhrIcd10Cta } from "./ElectronicHealthRecordsEhrIcd10Cta";
+export { default as ElectronicHealthRecordsEhrFeatures } from "./ElectronicHealthRecordsEhrFeatures";
+export { default as ElectronicHealthRecordsEhrHero } from "./ElectronicHealthRecordsEhrHero";
+export { default as ElectronicHealthRecordsEhrSpecialties } from "./ElectronicHealthRecordsEhrSpecialties";
+export { default as ElectronicHealthRecordsEhrWhyAce } from "./ElectronicHealthRecordsEhrWhyAce";
+export { default as EhrPlatformRatings } from "./EhrPlatformRatings";

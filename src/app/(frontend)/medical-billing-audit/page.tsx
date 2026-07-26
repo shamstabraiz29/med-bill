@@ -30,7 +30,7 @@ export default function MedicalBillingAuditPage() {
       <MedicalBillingAuditSolutionsToDate />
       <MedicalBillingAuditPostAuditReports />
       <MedicalBillingAuditChartReviews />
-      <MedicalBillingAuditClaimAccuracyCta />
+      <MedicalBillingAuditClaimAccuracyCta /> 
     </div>
   );
 }

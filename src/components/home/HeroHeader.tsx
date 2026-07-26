@@ -11,6 +11,7 @@ interface HeroHeaderProps {
   titleSuffix?: string;
   description1: string;
   description2: string;
+  headingId?: string;
 }
 
 export default function HeroHeader({
@@ -20,6 +21,7 @@ export default function HeroHeader({
   titleSuffix,
   description1,
   description2,
+  headingId,
 }: HeroHeaderProps) {
   return (
     <motion.div
@@ -37,6 +39,7 @@ export default function HeroHeader({
 
       {/* Headline */}
       <motion.h1
+        id={headingId}
         variants={blurRevealVariants}
         className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F172A] tracking-[-0.02em] leading-[1.18] lg:max-w-2xl"
       >
