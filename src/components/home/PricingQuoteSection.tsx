@@ -55,9 +55,35 @@ export default function PricingQuoteSection({ data }: PricingQuoteSectionProps) 
     if (step > 1) setStep(step - 1);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`Thank you! Your quote request has been submitted.\n\nSummary:\nSpecialty: ${formData.specialty}\nProviders: ${formData.providersCount}\nVolume: ${formData.claimVolume}\nService: ${formData.serviceRequired}\nPractice: ${formData.practiceName}\nContact: ${formData.contactPerson}`);
+    setIsSubmitting(true);
+    try {
+      const res = await fetch('/api/forms/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          formName: 'Home Pricing Quote Form',
+          sourcePage: typeof window !== 'undefined' ? window.location.pathname : '/',
+          name: formData.contactPerson || formData.practiceName || 'Pricing Quote Request',
+          email: formData.email,
+          phone: formData.phone,
+          monthlyCollections: formData.claimVolume,
+          message: `Specialty: ${formData.specialty} | Providers: ${formData.providersCount} | Service: ${formData.serviceRequired} | Practice: ${formData.practiceName}`,
+        }),
+      });
+
+      if (res.ok) {
+        setIsSubmitted(true);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

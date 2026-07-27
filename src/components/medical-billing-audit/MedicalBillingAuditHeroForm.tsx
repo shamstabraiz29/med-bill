@@ -58,14 +58,34 @@ export default function MedicalBillingAuditHeroForm({
     setFormData((current) => ({ ...current, [name]: value }));
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setIsSubmitting(true);
 
-    window.setTimeout(() => {
+    try {
+      const response = await fetch('/api/forms/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          formName: 'Medical Billing Audit Form',
+          sourcePage: typeof window !== 'undefined' ? window.location.pathname : '/medical-billing-audit',
+          name: `${formData.firstName} ${formData.lastName}`.trim(),
+          email: formData.email,
+          phone: formData.phone,
+          monthlyCollections: formData.monthlyCollections,
+          message: formData.message,
+        }),
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+        setFormData(INITIAL_FORM_DATA);
+      }
+    } catch (err) {
+      console.error('[MedicalBillingAuditForm error]:', err);
+    } finally {
       setIsSubmitting(false);
-      setIsSubmitted(true);
-    }, 900);
+    }
   };
 
   return (

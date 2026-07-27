@@ -28,7 +28,7 @@ export default function MedicalBillingSpecialtySolutions({ data }: MedicalBillin
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!formData.specialty || !formData.name.trim() || !formData.email.trim()) {
@@ -37,10 +37,28 @@ export default function MedicalBillingSpecialtySolutions({ data }: MedicalBillin
 
     setIsSubmitting(true);
 
-    setTimeout(() => {
+    try {
+      const res = await fetch('/api/forms/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          formName: 'Medical Billing Specialty Solutions Form',
+          sourcePage: typeof window !== 'undefined' ? window.location.pathname : '/medical-billing',
+          name: formData.name,
+          email: formData.email,
+          phone: '',
+          message: `Requested Specialty: ${formData.specialty}`,
+        }),
+      });
+
+      if (res.ok) {
+        setIsSubmitted(true);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
       setIsSubmitting(false);
-      setIsSubmitted(true);
-    }, 900);
+    }
   };
 
   const isFormValid =

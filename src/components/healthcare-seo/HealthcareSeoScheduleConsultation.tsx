@@ -24,10 +24,34 @@ export default function HealthcareSeoScheduleConsultation({ data }: HealthcareSe
 
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.email && formData.phone) {
-      setSubmitted(true);
+      setIsSubmitting(true);
+      try {
+        const res = await fetch('/api/forms/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            formName: 'Healthcare SEO Schedule Consultation Form',
+            sourcePage: typeof window !== 'undefined' ? window.location.pathname : '/healthcare-seo',
+            name: `${formData.firstName} ${formData.lastName}`.trim() || 'Website Visitor',
+            email: formData.email,
+            phone: formData.phone,
+            message: formData.comment || '',
+          }),
+        });
+
+        if (res.ok) {
+          setSubmitted(true);
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 

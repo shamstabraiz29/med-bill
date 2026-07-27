@@ -68,6 +68,7 @@ export interface Config {
   blocks: {};
   collections: {
     users: User;
+    'form-submissions': FormSubmission;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -76,6 +77,7 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
+    'form-submissions': any;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -199,6 +201,20 @@ export interface PayloadLockedDocument {
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences".
  */
+export interface FormSubmission {
+  id: number;
+  formName: string;
+  sourcePage: string;
+  name: string;
+  email: string;
+  phone: string;
+  monthlyCollections?: string | null;
+  message?: string | null;
+  status?: 'new' | 'in_progress' | 'contacted' | 'closed' | null;
+  updatedAt: string;
+  createdAt: string;
+}
+
 export interface PayloadPreference {
   id: number;
   user: {

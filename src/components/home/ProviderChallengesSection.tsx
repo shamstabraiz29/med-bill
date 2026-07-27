@@ -14,6 +14,9 @@ interface ProviderChallengesSectionProps {
 
 export default function ProviderChallengesSection({ data }: ProviderChallengesSectionProps) {
   const [selected, setSelected] = useState<boolean[]>(new Array(data.challenges.length).fill(false));
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleToggle = (index: number) => {
     setSelected(prev => {
@@ -21,6 +24,40 @@ export default function ProviderChallengesSection({ data }: ProviderChallengesSe
       copy[index] = !copy[index];
       return copy;
     });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (formData.name && formData.email && formData.phone) {
+      setIsSubmitting(true);
+      try {
+        const selectedChallenges = data.challenges
+          .filter((_, idx) => selected[idx])
+          .map((c) => c.label)
+          .join(', ');
+
+        const res = await fetch('/api/forms/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            formName: 'Home Provider Challenges Assessment Form',
+            sourcePage: typeof window !== 'undefined' ? window.location.pathname : '/',
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            message: selectedChallenges ? `Selected Challenges: ${selectedChallenges}` : '',
+          }),
+        });
+
+        if (res.ok) {
+          setIsSubmitted(true);
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setIsSubmitting(false);
+      }
+    }
   };
 
   return (
@@ -85,39 +122,56 @@ export default function ProviderChallengesSection({ data }: ProviderChallengesSe
                 </p>
               </div>
 
-              <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-4">
-                <Input
-                  type="text"
-                  placeholder="Name"
-                  icon={User}
-                  required
-                  className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:bg-white/10 focus:border-blue-400/50 focus:ring-blue-400/20"
-                />
-                <Input
-                  type="email"
-                  placeholder="Email"
-                  icon={Mail}
-                  required
-                  className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:bg-white/10 focus:border-blue-400/50 focus:ring-blue-400/20"
-                />
-                <Input
-                  type="tel"
-                  placeholder="Phone Number"
-                  icon={Phone}
-                  required
-                  className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:bg-white/10 focus:border-blue-400/50 focus:ring-blue-400/20"
-                />
+              {isSubmitted ? (
+                <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 p-6 rounded-2xl text-center space-y-2">
+                  <Check className="w-8 h-8 text-emerald-400 mx-auto stroke-[3]" />
+                  <h4 className="text-base font-bold text-white">Assessment Request Submitted!</h4>
+                  <p className="text-xs text-emerald-200">
+                    Thank you {formData.name}. Our billing specialists will review your selections and contact you shortly.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                  <Input
+                    type="text"
+                    placeholder="Name"
+                    icon={User}
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    required
+                    className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:bg-white/10 focus:border-blue-400/50 focus:ring-blue-400/20"
+                  />
+                  <Input
+                    type="email"
+                    placeholder="Email"
+                    icon={Mail}
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    required
+                    className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:bg-white/10 focus:border-blue-400/50 focus:ring-blue-400/20"
+                  />
+                  <Input
+                    type="tel"
+                    placeholder="Phone Number"
+                    icon={Phone}
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    required
+                    className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:bg-white/10 focus:border-blue-400/50 focus:ring-blue-400/20"
+                  />
 
-                <AppButton
-                  type="submit"
-                  variant="primary"
-                  size="lg"
-                  showArrow
-                  className="w-full mt-2"
-                >
-                  {data.formCtaLabel}
-                </AppButton>
-              </form>
+                  <AppButton
+                    type="submit"
+                    disabled={isSubmitting}
+                    variant="primary"
+                    size="lg"
+                    showArrow
+                    className="w-full mt-2"
+                  >
+                    {isSubmitting ? "Submitting..." : data.formCtaLabel}
+                  </AppButton>
+                </form>
+              )}
             </div>
           </MotionWrapper>
 

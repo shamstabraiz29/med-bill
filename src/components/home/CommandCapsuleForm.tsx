@@ -72,10 +72,31 @@ export default function CommandCapsuleForm({
     }
 
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 1200));
-    setIsSubmitting(false);
-    setIsSuccess(true);
-    setFormData({ name: "", email: "", phone: "" });
+    try {
+      const response = await fetch('/api/forms/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          formName: formTitle || buttonLabel ? `Capsule Form: ${formTitle || buttonLabel}` : 'Home Hero Capsule Form',
+          sourcePage: typeof window !== 'undefined' ? window.location.pathname : '/',
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+        }),
+      });
+
+      if (response.ok) {
+        setIsSuccess(true);
+        setFormData({ name: "", email: "", phone: "" });
+      } else {
+        const data = await response.json();
+        setErrors({ form: data.error || 'Failed to submit form.' });
+      }
+    } catch (err) {
+      setErrors({ form: 'Network error. Please try again.' });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // Container variants for staggered entrance

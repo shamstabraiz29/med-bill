@@ -25,10 +25,34 @@ export default function HealthcareSeoPricingUnlockCTA({ data }: HealthcareSeoPri
 
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.name && formData.email && formData.phone) {
-      setSubmitted(true);
+      setIsSubmitting(true);
+      try {
+        const res = await fetch('/api/forms/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            formName: 'Healthcare SEO Customized Pricing Quote Form',
+            sourcePage: typeof window !== 'undefined' ? window.location.pathname : '/healthcare-seo',
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            message: formData.practiceType ? `Practice Type: ${formData.practiceType}` : '',
+          }),
+        });
+
+        if (res.ok) {
+          setSubmitted(true);
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
