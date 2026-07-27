@@ -8,40 +8,23 @@ import IconWrapper from "@/components/common/IconWrapper";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { pmsContainerClassName, pmsSectionAltClassName } from "./pmsSectionLayout";
+import { defaultPracticeManagementSoftwarePmsData } from "@/lib/defaults/practiceManagementSoftwarePms";
+import type { PmsManageData } from "@/payload/types/practiceManagementSoftwarePms";
 
-interface ManageItem {
-  title: string;
-  content: string;
-  icon: LucideIcon;
-  summary: string;
+const ICON_MAP: Record<string, LucideIcon> = {
+  Users,
+  TrendingUp,
+  BarChart3,
+};
+
+interface PracticeManagementSoftwarePmsManageProps {
+  data?: PmsManageData;
 }
 
-const MANAGE_ITEMS: ManageItem[] = [
-  {
-    title: "Engage your patient to enhance your practice.",
-    content:
-      "Interact with patients, remind them of appointments, get feedback, and offer online access to health records and resources with patient engagement features.",
-    icon: Users,
-    summary: "Better outcomes through patient engagement",
-  },
-  {
-    title: "Optimize your billing to maximize your profits.",
-    content:
-      "Streamline billing, reduce errors, and improve cash flow for healthcare providers with billing and revenue cycle management features. It also manages claims, verifies insurance, and processes payments.",
-    icon: TrendingUp,
-    summary: "Higher revenue with billing and RCM",
-  },
-  {
-    title: "Explore your data to uncover new opportunities.",
-    content:
-      "Monitor performance, find improvement areas, and support data-driven decisions for healthcare providers with reporting and analytics features. It also reports compliance, measures quality and compares benchmarks.",
-    icon: BarChart3,
-    summary: "Smarter decisions via reporting and analytics",
-  },
-];
-
-export default function PracticeManagementSoftwarePmsManage() {
+export default function PracticeManagementSoftwarePmsManage({ data }: PracticeManagementSoftwarePmsManageProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const content = data || defaultPracticeManagementSoftwarePmsData.manage;
+  const itemsList = content.items && content.items.length > 0 ? content.items : defaultPracticeManagementSoftwarePmsData.manage.items;
 
   const toggleItem = (idx: number) => {
     setOpenIndex((prev) => (prev === idx ? null : idx));
@@ -55,18 +38,18 @@ export default function PracticeManagementSoftwarePmsManage() {
       <div className={pmsContainerClassName}>
         <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
           <SectionHeader
-            badge="Practice Management."
+            badge={content.badge}
             badgeVariant="indigo"
             badgePulse
             align="center"
             className="space-y-4"
             title={
               <span id="practice-management-software-pms-manage-heading">
-                Manage your practice with ease and grace, because we{" "}
-                <span className="text-blue-600">help you ace the medical space!</span>
+                {content.titlePlain}
+                <span className="text-blue-600">{content.titleHighlight}</span>
               </span>
             }
-            description="The Practice Management System by BellMedEx automates clinical workflows and patient records, giving you one platform to schedule appointments, manage billing, and deliver better care with less administrative burden."
+            description={content.description}
           />
         </div>
 
@@ -74,16 +57,16 @@ export default function PracticeManagementSoftwarePmsManage() {
           <MotionWrapper variant="slideRight">
             <div className="space-y-3 lg:sticky lg:top-24">
               <p className="mb-4 text-[11px] font-bold uppercase tracking-widest text-[#475569]">
-                How it connects
+                {content.howItConnectsLabel}
               </p>
 
-              {MANAGE_ITEMS.map((item, idx) => {
+              {itemsList.map((item, idx) => {
                 const isActive = openIndex === idx;
-                const ItemIcon = item.icon;
+                const ItemIcon = (item.iconName && ICON_MAP[item.iconName]) || Users;
 
                 return (
                   <button
-                    key={item.summary}
+                    key={item.summary || idx}
                     type="button"
                     onClick={() => setOpenIndex(idx)}
                     className={cn(
@@ -120,13 +103,13 @@ export default function PracticeManagementSoftwarePmsManage() {
 
           <MotionWrapper variant="slideLeft" delay={0.08}>
             <div className="divide-y divide-[#E2E6EC]">
-              {MANAGE_ITEMS.map((item, idx) => {
+              {itemsList.map((item, idx) => {
                 const isOpen = openIndex === idx;
                 const controlsId = `pms-manage-content-${idx}`;
                 const headerId = `pms-manage-header-${idx}`;
 
                 return (
-                  <div key={item.title} className="first:pt-0 last:pb-0 py-5 sm:py-6">
+                  <div key={item.title || idx} className="first:pt-0 last:pb-0 py-5 sm:py-6">
                     <div className="-mx-4 rounded-2xl px-4 transition-colors duration-300 hover:bg-[#F5F7FA]">
                       <button
                         id={headerId}

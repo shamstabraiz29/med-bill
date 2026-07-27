@@ -4,8 +4,16 @@ import React from "react";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { pmsContainerClassName, pmsSectionClassName } from "./pmsSectionLayout";
+import { defaultPracticeManagementSoftwarePmsData } from "@/lib/defaults/practiceManagementSoftwarePms";
+import type { PmsBalanceData } from "@/payload/types/practiceManagementSoftwarePms";
 
-export default function PracticeManagementSoftwarePmsBalance() {
+interface PracticeManagementSoftwarePmsBalanceProps {
+  data?: PmsBalanceData;
+}
+
+export default function PracticeManagementSoftwarePmsBalance({ data }: PracticeManagementSoftwarePmsBalanceProps) {
+  const content = data || defaultPracticeManagementSoftwarePmsData.balance;
+
   return (
     <section
       className={pmsSectionClassName}
@@ -18,12 +26,12 @@ export default function PracticeManagementSoftwarePmsBalance() {
             className="mx-auto max-w-4xl space-y-4"
             title={
               <span id="practice-management-software-pms-balance-heading">
-                Balance the{" "}
-                <span className="font-bold text-blue-600">Art of Medicine</span> &amp; the
-                Science of Business
+                {content.titlePlain}
+                <span className="font-bold text-blue-600">{content.titleHighlight}</span>
+                {content.titleSuffix}
               </span>
             }
-            description="BellMedEx Practice Management Software helps you balance the art of medicine and the science of business, by providing you with the tools and resources you need to succeed."
+            description={content.description}
           />
         </MotionWrapper>
       </div>

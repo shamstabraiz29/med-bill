@@ -8,8 +8,16 @@ import { Card, CardContent } from "@/components/ui/card";
 import IconWrapper from "@/components/common/IconWrapper";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import { pmsContainerClassName, pmsSectionAltClassName } from "./pmsSectionLayout";
+import { defaultPracticeManagementSoftwarePmsData } from "@/lib/defaults/practiceManagementSoftwarePms";
+import type { PmsAboutData } from "@/payload/types/practiceManagementSoftwarePms";
 
-export default function PracticeManagementSoftwarePmsAbout() {
+interface PracticeManagementSoftwarePmsAboutProps {
+  data?: PmsAboutData;
+}
+
+export default function PracticeManagementSoftwarePmsAbout({ data }: PracticeManagementSoftwarePmsAboutProps) {
+  const content = data || defaultPracticeManagementSoftwarePmsData.about;
+
   return (
     <section
       id="about-pms"
@@ -26,8 +34,8 @@ export default function PracticeManagementSoftwarePmsAbout() {
             <CardContent className="grid grid-cols-1 p-0 lg:grid-cols-2 lg:items-stretch">
               <div className="relative min-h-[260px] sm:min-h-[320px] lg:min-h-[420px]">
                 <Image
-                  src="/rcm-dashboard-laptop1.png"
-                  alt="Medical professionals reviewing practice management dashboards on a monitor"
+                  src={content.imageSrc || "/rcm-dashboard-laptop1.png"}
+                  alt={content.imageAlt || "Medical professionals reviewing practice management dashboards on a monitor"}
                   fill
                   className="object-cover transition-transform duration-700 hover:scale-[1.02]"
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -45,24 +53,19 @@ export default function PracticeManagementSoftwarePmsAbout() {
                   id="practice-management-software-pms-about-heading"
                   className="text-2xl font-bold leading-[1.2] tracking-[-0.02em] text-[#0F172A] sm:text-3xl"
                 >
-                  About PMS
+                  {content.title}
                 </h2>
 
                 <p className="text-xs leading-[1.65] text-[#475569] sm:text-sm">
-                  BellMedEx practice management software (PMS) is a blessing for doctors who
-                  yearn to oversee their healthcare operations effectively. It covers all the
-                  bases from arranging appointments, issuing bills, and processing claims, to
-                  logging patient visits and keeping track of insurance payers. It also links
-                  with EHR, which enables patient information to be stored and transferred
-                  across different settings.
+                  {content.description}
                 </p>
 
                 <div className="pt-1">
                   <Link
-                    href="/schedule-a-demo"
+                    href={content.buttonLink || "/schedule-a-demo"}
                     className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#1D4ED8] transition-colors hover:text-[#1E3A8A]"
                   >
-                    Let&apos;s Get Started
+                    {content.buttonText}
                     <ArrowRight
                       className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
                       aria-hidden="true"

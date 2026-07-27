@@ -6,42 +6,17 @@ import { ChevronDown } from "lucide-react";
 import SectionHeader from "@/components/ui/SectionHeader";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import { pmsContainerClassName, pmsSectionClassName } from "./pmsSectionLayout";
+import { defaultPracticeManagementSoftwarePmsData } from "@/lib/defaults/practiceManagementSoftwarePms";
+import type { PmsFaqData } from "@/payload/types/practiceManagementSoftwarePms";
 
-const PMS_FAQS = [
-  {
-    question: "How to implement and use this practice management software?",
-    answer:
-      "Our PMS is easy to implement and use in your daily workflow. We provide step-by-step guidance to install and configure the software on your systems and devices, plus comprehensive training so your team can schedule, bill, and manage patients effectively.",
-  },
-  {
-    question: "Does this software comply with the healthcare laws?",
-    answer:
-      "BellMedEx PMS meets the standards and requirements that apply to your practice, including HIPAA and other healthcare regulations. We help you follow best practices for data privacy, security, and compliant clinical and billing workflows.",
-  },
-  {
-    question: "How to migrate data to BellMedEx PMS?",
-    answer:
-      "We make it easy to transfer your existing data from paper records or another system to our practice management software. Our team consults with you on a safe, accurate migration plan and verifies that your data is complete after the process.",
-  },
-  {
-    question: "Is this PMS customizable for my specialty?",
-    answer:
-      "Our PMS is flexible and customizable to suit your specialty, preferences, and goals. You can configure templates, workflows, and settings to match your practice, and request additional features or modules when needed.",
-  },
-  {
-    question: "How can I integrate this PMS with EHR and billing?",
-    answer:
-      "BellMedEx PMS is compatible with the systems you already use—EHR, labs, pharmacies, clearinghouses, and telehealth. We help you connect and sync them seamlessly so scheduling, documentation, and billing stay in one flow.",
-  },
-  {
-    question: "What kind of support and training do you provide?",
-    answer:
-      "We provide comprehensive support and training before, during, and after implementation. Dedicated customer service, technical support, documentation, tutorials, webinars, and onboarding resources are available whenever you need them.",
-  },
-];
+interface PracticeManagementSoftwarePmsFaqProps {
+  data?: PmsFaqData;
+}
 
-export default function PracticeManagementSoftwarePmsFaq() {
+export default function PracticeManagementSoftwarePmsFaq({ data }: PracticeManagementSoftwarePmsFaqProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const content = data || defaultPracticeManagementSoftwarePmsData.faq;
+  const faqsList = content.faqs && content.faqs.length > 0 ? content.faqs : defaultPracticeManagementSoftwarePmsData.faq.faqs;
 
   const toggleFAQ = (idx: number) => {
     setOpenIndex((prev) => (prev === idx ? null : idx));
@@ -55,18 +30,18 @@ export default function PracticeManagementSoftwarePmsFaq() {
       <div className={pmsContainerClassName}>
         <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
           <SectionHeader
-            badge="Frequently Asked Questions."
+            badge={content.badge}
             badgeVariant="indigo"
             badgePulse
             align="center"
             className="space-y-4"
             title={
               <span id="practice-management-software-pms-faq-heading">
-                Frequently Asked{" "}
-                <span className="font-bold text-blue-600">Questions</span>
+                {content.titlePlain}{" "}
+                <span className="font-bold text-blue-600">{content.titleHighlight}</span>
               </span>
             }
-            description="Find clear answers about implementing, customizing, integrating, and getting the most from BellMedEx practice management software."
+            description={content.description}
           />
         </div>
 
@@ -75,14 +50,14 @@ export default function PracticeManagementSoftwarePmsFaq() {
           staggerDelay={0.05}
           className="mx-auto max-w-4xl divide-y divide-[#E2E6EC]"
         >
-          {PMS_FAQS.map((faq, idx) => {
+          {faqsList.map((faq, idx) => {
             const isOpen = openIndex === idx;
             const controlsId = `practice-management-software-pms-faq-content-${idx}`;
             const headerId = `practice-management-software-pms-faq-header-${idx}`;
 
             return (
               <MotionWrapper
-                key={faq.question}
+                key={faq.question || idx}
                 variant="staggerItem"
                 className="py-5 first:pt-0 last:pb-0 sm:py-6"
               >

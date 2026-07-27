@@ -4,41 +4,22 @@ import React from "react";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import PmsFeatureRow, { PmsAssetVisual } from "./PmsFeatureRow";
 import { pmsContainerClassName, pmsSectionClassName } from "./pmsSectionLayout";
+import { defaultPracticeManagementSoftwarePmsData } from "@/lib/defaults/practiceManagementSoftwarePms";
+import type { PmsTelemedicineRcmData } from "@/payload/types/practiceManagementSoftwarePms";
 
-const TELEMEDICINE_RCM_FEATURES = [
-  {
-    label: "Telemedicine Feature",
-    title: "Connect, Care, and Cure",
-    paragraphs: [
-      "Schedule virtual visits, send patient reminders, and document telehealth encounters in the same workflow you use for in-office care. BellMedEx PMS keeps appointments, billing, and records aligned so remote care feels seamless for your team and your patients.",
-      "Measure telehealth performance with built-in analytics that track visit volume, engagement, and outcomes—helping you expand virtual services with clarity and control.",
-    ],
-    visual: (
-      <PmsAssetVisual
-        src="/pms-connect-care-cure.png"
-        alt="BellMedEx telemedicine feature with video consult and patient chat"
-      />
-    ),
-    reverse: true,
-  },
-  {
-    label: "Revenue Cycle Reports",
-    title: "Score Billing and RCM Wins",
-    paragraphs: [
-      "Cloud-based practice management software puts billing performance at your fingertips. Generate invoices, monitor collections, and stay on top of every claim without juggling spreadsheets or disconnected tools.",
-      "Build revenue cycle reports that surface gross charges, net collections, top payers, and aging AR—so you can spot trends early, reduce leakage, and celebrate measurable RCM wins.",
-    ],
-    visual: (
-      <PmsAssetVisual
-        src="/pms-score-billing-rcm-wins.png"
-        alt="Physician reviewing BellMedEx billing and RCM dashboard reports"
-      />
-    ),
-    reverse: false,
-  },
+const DEFAULT_IMAGES = [
+  { src: "/pms-connect-care-cure.png", alt: "BellMedEx telemedicine feature with video consult and patient chat" },
+  { src: "/pms-score-billing-rcm-wins.png", alt: "Physician reviewing BellMedEx billing and RCM dashboard reports" },
 ];
 
-export default function PracticeManagementSoftwarePmsTelemedicineRcm() {
+interface PracticeManagementSoftwarePmsTelemedicineRcmProps {
+  data?: PmsTelemedicineRcmData;
+}
+
+export default function PracticeManagementSoftwarePmsTelemedicineRcm({ data }: PracticeManagementSoftwarePmsTelemedicineRcmProps) {
+  const content = data || defaultPracticeManagementSoftwarePmsData.telemedicineRcm;
+  const featuresList = content.features && content.features.length > 0 ? content.features : defaultPracticeManagementSoftwarePmsData.telemedicineRcm.features;
+
   return (
     <section
       className={pmsSectionClassName}
@@ -54,17 +35,34 @@ export default function PracticeManagementSoftwarePmsTelemedicineRcm() {
           staggerDelay={0.1}
           className="space-y-10 sm:space-y-12 lg:space-y-16"
         >
-          {TELEMEDICINE_RCM_FEATURES.map((feature) => (
-            <MotionWrapper key={feature.title} variant="staggerItem">
-              <PmsFeatureRow
-                label={feature.label}
-                title={feature.title}
-                paragraphs={feature.paragraphs}
-                visual={feature.visual}
-                reverse={feature.reverse}
+          {featuresList.map((feature, idx) => {
+            const paragraphs = Array.isArray(feature.paragraphs)
+              ? feature.paragraphs.map((p: any) => (typeof p === "string" ? p : p.text || ""))
+              : [];
+
+            const fallbackImg = DEFAULT_IMAGES[idx % DEFAULT_IMAGES.length];
+            const imgSrc = feature.imageSrc || fallbackImg.src;
+            const imgAlt = feature.imageAlt || fallbackImg.alt;
+
+            const visual = (
+              <PmsAssetVisual
+                src={imgSrc}
+                alt={imgAlt}
               />
-            </MotionWrapper>
-          ))}
+            );
+
+            return (
+              <MotionWrapper key={feature.title || idx} variant="staggerItem">
+                <PmsFeatureRow
+                  label={feature.label}
+                  title={feature.title}
+                  paragraphs={paragraphs}
+                  visual={visual}
+                  reverse={feature.reverse}
+                />
+              </MotionWrapper>
+            );
+          })}
         </MotionWrapper>
       </div>
     </section>

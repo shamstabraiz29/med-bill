@@ -26,6 +26,8 @@ import type { FusionediClearinghousePageData } from '@/payload/types/fusionediCl
 import { defaultFusionediClearinghouseData } from '@/lib/defaults/fusionediClearinghouse'
 import type { ElectronicHealthRecordsEhrPageData } from '@/payload/types/electronicHealthRecordsEhr'
 import { defaultElectronicHealthRecordsEhrData } from '@/lib/defaults/electronicHealthRecordsEhr'
+import type { PracticeManagementSoftwarePmsPageData } from '@/payload/types/practiceManagementSoftwarePms'
+import { defaultPracticeManagementSoftwarePmsData } from '@/lib/defaults/practiceManagementSoftwarePms'
 
 /**
  * Fetches the Homepage global data from Payload CMS using the Local API.
@@ -375,6 +377,25 @@ export async function getElectronicHealthRecordsEhrData(): Promise<ElectronicHea
   } catch (error) {
     console.error('[Payload] Failed to fetch EHR data, using defaults:', error)
     return defaultElectronicHealthRecordsEhrData
+  }
+}
+
+/**
+ * Fetches the Practice Management Software (PMS) global data from Payload CMS.
+ * Uses Payload Local API with fallback to default hardcoded content.
+ */
+export async function getPracticeManagementSoftwarePmsData(): Promise<PracticeManagementSoftwarePmsPageData> {
+  try {
+    const payload = await getPayload({ config })
+
+    const data = await payload.findGlobal({
+      slug: 'practice-management-software-pms',
+    })
+
+    return deepMerge(defaultPracticeManagementSoftwarePmsData, data as unknown as Partial<PracticeManagementSoftwarePmsPageData>)
+  } catch (error) {
+    console.error('[Payload] Failed to fetch PMS data, using defaults:', error)
+    return defaultPracticeManagementSoftwarePmsData
   }
 }
 
