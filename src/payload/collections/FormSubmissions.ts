@@ -4,12 +4,13 @@ export const FormSubmissions: CollectionConfig = {
   slug: 'form-submissions',
   labels: {
     singular: 'Form Submission',
-    plural: 'Form Submissions',
+    plural: 'All Form Submissions',
   },
   admin: {
     useAsTitle: 'name',
-    defaultColumns: ['name', 'email', 'phone', 'formName', 'sourcePage', 'status', 'createdAt'],
+    defaultColumns: ['name', 'email', 'phone', 'formCategory', 'formName', 'status', 'createdAt'],
     group: 'Submissions',
+    description: 'Master list of all form submissions across the entire website.',
   },
   access: {
     // Anyone on the web can submit a form
@@ -21,12 +22,27 @@ export const FormSubmissions: CollectionConfig = {
   },
   fields: [
     {
+      name: 'formCategory',
+      type: 'select',
+      label: 'Form Category',
+      options: [
+        { label: 'Job Applications (Careers)', value: 'careers' },
+        { label: 'Consultations & Quotes', value: 'consultation' },
+        { label: 'Practice Audit Requests', value: 'audit' },
+        { label: 'General Inquiries', value: 'general' },
+      ],
+      defaultValue: 'general',
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
       name: 'formName',
       type: 'text',
       label: 'Form Identifier',
       required: true,
       admin: {
-        description: 'Which form was submitted (e.g. Home Hero Form, Medical Billing Audit Form)',
+        description: 'Which form was submitted (e.g. Home Hero Form, Careers Job Application Form)',
       },
     },
     {
@@ -35,7 +51,7 @@ export const FormSubmissions: CollectionConfig = {
       label: 'Source Page URL',
       required: true,
       admin: {
-        description: 'The page path where the form was submitted (e.g. /, /medical-billing-audit)',
+        description: 'The page path where the form was submitted (e.g. /, /bellmedex-careers)',
       },
     },
     {
@@ -54,6 +70,23 @@ export const FormSubmissions: CollectionConfig = {
       name: 'phone',
       type: 'text',
       label: 'Phone Number',
+    },
+    {
+      name: 'resumeUrl',
+      type: 'text',
+      label: 'Uploaded Resume / CV (File Path)',
+      admin: {
+        description: 'Uploaded CV file name or URL link',
+      },
+    },
+    {
+      name: 'resumeMedia',
+      type: 'upload',
+      relationTo: 'media',
+      label: 'Uploaded Resume / CV Document (Clickable File)',
+      admin: {
+        description: 'Click to view, preview, or download candidate CV document directly',
+      },
     },
     {
       name: 'monthlyCollections',

@@ -18,6 +18,8 @@ import type { MedicalBillingAuditData } from '@/payload/types/medicalBillingAudi
 import { defaultMedicalBillingAuditData } from '@/lib/defaults/medicalBillingAudit'
 import type { BlogPost } from '@/components/blog/BlogCard'
 import { defaultBlogPosts } from '@/lib/defaults/blogs'
+import type { CareersData } from '@/payload/types/careers'
+import { defaultCareersData } from '@/lib/defaults/careers'
 
 /**
  * Fetches the Homepage global data from Payload CMS using the Local API.
@@ -269,6 +271,25 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
     console.error(`[Payload] Failed to fetch post by slug ${slug}:`, error)
     const sample = defaultBlogPosts.find((p) => p.slug === slug)
     return sample || null
+  }
+}
+
+/**
+ * Fetches the Careers global data from Payload CMS.
+ * Uses Payload Local API with fallback to default hardcoded content.
+ */
+export async function getCareersData(): Promise<CareersData> {
+  try {
+    const payload = await getPayload({ config })
+
+    const data = await payload.findGlobal({
+      slug: 'careers',
+    })
+
+    return deepMerge(defaultCareersData, data as unknown as Partial<CareersData>)
+  } catch (error) {
+    console.error('[Payload] Failed to fetch careers data, using defaults:', error)
+    return defaultCareersData
   }
 }
 

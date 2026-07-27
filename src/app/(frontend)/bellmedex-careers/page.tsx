@@ -1,5 +1,4 @@
-import PageContainer from "@/components/PageContainer";
+import CareersPage, { generateMetadata } from "../careers/page";
 
-export default function Page() {
-  return <PageContainer title="BellMedEx Careers" />;
-}
+export { generateMetadata };
+export default CareersPage;

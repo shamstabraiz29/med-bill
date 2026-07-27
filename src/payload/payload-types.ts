@@ -69,7 +69,11 @@ export interface Config {
   collections: {
     users: User;
     'form-submissions': FormSubmission;
+    'careers-submissions': any;
+    'consultation-submissions': any;
+    'audit-submissions': any;
     posts: Post;
+    media: Media;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -79,7 +83,11 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     'form-submissions': any;
+    'careers-submissions': any;
+    'consultation-submissions': any;
+    'audit-submissions': any;
     posts: any;
+    media: any;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -98,6 +106,7 @@ export interface Config {
     'medical-billing': MedicalBilling;
     'medical-coding': MedicalCoding;
     'medical-billing-audit': MedicalBillingAudit;
+    careers: any;
   };
   globalsSelect: {
     homepage: HomepageSelect<false> | HomepageSelect<true>;
@@ -108,6 +117,7 @@ export interface Config {
     'medical-billing': any;
     'medical-coding': any;
     'medical-billing-audit': any;
+    careers: any;
   };
   locale: null;
   widgets: {
@@ -205,11 +215,14 @@ export interface PayloadLockedDocument {
  */
 export interface FormSubmission {
   id: number;
+  formCategory?: 'careers' | 'consultation' | 'audit' | 'general' | null;
   formName: string;
   sourcePage: string;
   name: string;
   email: string;
   phone: string;
+  resumeUrl?: string | null;
+  resumeMedia?: number | Media | null;
   monthlyCollections?: string | null;
   message?: string | null;
   status?: 'new' | 'in_progress' | 'contacted' | 'closed' | null;
@@ -232,6 +245,21 @@ export interface Post {
   readTime: string;
   imageSrc: string;
   content?: any;
+  updatedAt: string;
+  createdAt: string;
+}
+
+export interface Media {
+  id: number;
+  alt?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  url?: string | null;
   updatedAt: string;
   createdAt: string;
 }

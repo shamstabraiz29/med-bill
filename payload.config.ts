@@ -6,7 +6,11 @@ import { fileURLToPath } from 'url'
 
 import { Users } from '@/payload/collections/Users'
 import { FormSubmissions } from '@/payload/collections/FormSubmissions'
+import { CareersSubmissions } from '@/payload/collections/CareersSubmissions'
+import { ConsultationSubmissions } from '@/payload/collections/ConsultationSubmissions'
+import { AuditSubmissions } from '@/payload/collections/AuditSubmissions'
 import { Posts } from '@/payload/collections/Posts'
+import { Media } from '@/payload/collections/Media'
 import { Homepage } from '@/payload/globals/Homepage'
 import { Clearinghouse } from '@/payload/globals/Clearinghouse'
 import { ProviderCredentialing } from '@/payload/globals/ProviderCredentialing'
@@ -19,6 +23,7 @@ import { RevenueCycleManagement } from '@/payload/globals/RevenueCycleManagement
 import { MedicalBilling } from '@/payload/globals/MedicalBilling'
 import { MedicalCoding } from '@/payload/globals/MedicalCoding'
 import { MedicalBillingAudit } from '@/payload/globals/MedicalBillingAudit'
+import { Careers } from '@/payload/globals/Careers'
 
 export default buildConfig({
   admin: {
@@ -28,9 +33,17 @@ export default buildConfig({
     },
   },
 
-  collections: [Users, FormSubmissions, Posts],
+  collections: [
+    Users,
+    FormSubmissions,
+    CareersSubmissions,
+    ConsultationSubmissions,
+    AuditSubmissions,
+    Posts,
+    Media,
+  ],
 
-  globals: [Homepage, Clearinghouse, ProviderCredentialing, HealthcareSeo, RevenueCycleManagement, MedicalBilling, MedicalCoding, MedicalBillingAudit],
+  globals: [Homepage, Clearinghouse, ProviderCredentialing, HealthcareSeo, RevenueCycleManagement, MedicalBilling, MedicalCoding, MedicalBillingAudit, Careers],
 
   db: postgresAdapter({
     pool: {
