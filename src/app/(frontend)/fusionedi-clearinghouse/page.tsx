@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
 import {
   FusionediClearinghouseDashboard,
+  FusionediClearinghouseEdiTransfers,
   FusionediClearinghouseFeatures,
+  FusionediClearinghouseGetStartedCta,
+  FusionediClearinghouseGetStartedSteps,
   FusionediClearinghouseHero,
+  FusionediClearinghouseSolutions,
+  FusionediClearinghouseWhatWeOffer,
 } from "@/components/fusionedi-clearinghouse";
 
 export const metadata: Metadata = {
@@ -17,6 +22,11 @@ export default function FusionediClearinghousePage() {
       <FusionediClearinghouseHero />
       <FusionediClearinghouseDashboard />
       <FusionediClearinghouseFeatures />
+      <FusionediClearinghouseGetStartedSteps />
+      <FusionediClearinghouseWhatWeOffer />
+      <FusionediClearinghouseSolutions />
+      <FusionediClearinghouseEdiTransfers />
+      <FusionediClearinghouseGetStartedCta />
     </div>
   );
 }
