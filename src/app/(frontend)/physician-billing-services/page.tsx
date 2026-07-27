@@ -1,5 +1,16 @@
-import PageContainer from "@/components/PageContainer";
+import type { Metadata } from "next";
+import { PhysicianBillingServicesHero } from "@/components/physician-billing-services";
 
-export default function Page() {
-  return <PageContainer title="Physician Billing Services" />;
+export const metadata: Metadata = {
+  title: "Physician Billing Services | BellMedEx",
+  description:
+    "BellMedEx Physician Billing Services help physicians obtain rightful payments through accurate claim filing, coding, denial resolution, and follow-up.",
+};
+
+export default function PhysicianBillingServicesPage() {
+  return (
+    <div className="relative min-h-screen">
+      <PhysicianBillingServicesHero />
+    </div>
+  );
 }
