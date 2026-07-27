@@ -1,5 +1,4 @@
-import PageContainer from "@/components/PageContainer";
+import TestimonialsPage, { metadata } from "../testimonials/page";
 
-export default function Page() {
-  return <PageContainer title="BellMedEx Client Testimonials" />;
-}
+export { metadata };
+export default TestimonialsPage;

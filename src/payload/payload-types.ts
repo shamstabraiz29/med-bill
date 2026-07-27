@@ -107,6 +107,7 @@ export interface Config {
     'medical-coding': MedicalCoding;
     'medical-billing-audit': MedicalBillingAudit;
     careers: any;
+    'testimonials-page': any;
   };
   globalsSelect: {
     homepage: HomepageSelect<false> | HomepageSelect<true>;
@@ -118,6 +119,7 @@ export interface Config {
     'medical-coding': any;
     'medical-billing-audit': any;
     careers: any;
+    'testimonials-page': any;
   };
   locale: null;
   widgets: {

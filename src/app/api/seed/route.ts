@@ -10,6 +10,7 @@ import { defaultMedicalCodingData } from '@/lib/defaults/medicalCoding'
 import { defaultMedicalBillingAuditData } from '@/lib/defaults/medicalBillingAudit'
 import { defaultBlogPosts } from '@/lib/defaults/blogs'
 import { defaultCareersData } from '@/lib/defaults/careers'
+import { defaultTestimonialsData } from '@/lib/defaults/testimonials'
 import { NextResponse } from 'next/server'
 
 export async function GET() {
@@ -59,6 +60,11 @@ export async function GET() {
     await payload.updateGlobal({
       slug: 'careers',
       data: defaultCareersData as any,
+    })
+
+    await payload.updateGlobal({
+      slug: 'testimonials-page',
+      data: defaultTestimonialsData as any,
     })
 
     // Seed Posts Collection if empty

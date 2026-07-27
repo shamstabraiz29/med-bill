@@ -293,6 +293,28 @@ export async function getCareersData(): Promise<CareersData> {
   }
 }
 
+import type { TestimonialsPageData } from '@/payload/types/testimonials'
+import { defaultTestimonialsData } from '@/lib/defaults/testimonials'
+
+/**
+ * Fetches the Testimonials global data from Payload CMS.
+ * Uses Payload Local API with fallback to default hardcoded content.
+ */
+export async function getTestimonialsData(): Promise<TestimonialsPageData> {
+  try {
+    const payload = await getPayload({ config })
+
+    const data = await payload.findGlobal({
+      slug: 'testimonials-page',
+    })
+
+    return deepMerge(defaultTestimonialsData, data as unknown as Partial<TestimonialsPageData>)
+  } catch (error) {
+    console.error('[Payload] Failed to fetch testimonials data, using defaults:', error)
+    return defaultTestimonialsData
+  }
+}
+
 /**
  * Deep-merges a source into a target object. Source values override target
  * values, but only when defined (non-null, non-undefined). Arrays from source

@@ -24,6 +24,7 @@ import { MedicalBilling } from '@/payload/globals/MedicalBilling'
 import { MedicalCoding } from '@/payload/globals/MedicalCoding'
 import { MedicalBillingAudit } from '@/payload/globals/MedicalBillingAudit'
 import { Careers } from '@/payload/globals/Careers'
+import { Testimonials } from '@/payload/globals/Testimonials'
 
 export default buildConfig({
   admin: {
@@ -43,7 +44,18 @@ export default buildConfig({
     Media,
   ],
 
-  globals: [Homepage, Clearinghouse, ProviderCredentialing, HealthcareSeo, RevenueCycleManagement, MedicalBilling, MedicalCoding, MedicalBillingAudit, Careers],
+  globals: [
+    Homepage,
+    Clearinghouse,
+    ProviderCredentialing,
+    HealthcareSeo,
+    RevenueCycleManagement,
+    MedicalBilling,
+    MedicalCoding,
+    MedicalBillingAudit,
+    Careers,
+    Testimonials,
+  ],
 
   db: postgresAdapter({
     pool: {
