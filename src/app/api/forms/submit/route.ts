@@ -7,10 +7,10 @@ export async function POST(req: Request) {
     const body = await req.json()
     const { formName, sourcePage, name, email, phone, monthlyCollections, message } = body
 
-    // Validation
-    if (!name || !email || !phone) {
+    // Validation: Name and Email are required; Phone is optional for short forms
+    if (!name || !email) {
       return NextResponse.json(
-        { success: false, error: 'Name, Email, and Phone number are required fields.' },
+        { success: false, error: 'Name and Email address are required fields.' },
         { status: 400 },
       )
     }
@@ -25,7 +25,7 @@ export async function POST(req: Request) {
         sourcePage: sourcePage || '/',
         name: name.trim(),
         email: email.trim().toLowerCase(),
-        phone: phone.trim(),
+        phone: phone ? phone.trim() : '',
         monthlyCollections: monthlyCollections || '',
         message: message || '',
         status: 'new',

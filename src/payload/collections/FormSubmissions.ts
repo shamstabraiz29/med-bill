@@ -54,7 +54,6 @@ export const FormSubmissions: CollectionConfig = {
       name: 'phone',
       type: 'text',
       label: 'Phone Number',
-      required: true,
     },
     {
       name: 'monthlyCollections',
