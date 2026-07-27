@@ -8,7 +8,16 @@ import {
   fusionediSectionAltClassName,
 } from "./fusionediSectionLayout";
 
-export default function FusionediClearinghouseDashboard() {
+import { FusionediDashboardData } from "@/payload/types/fusionediClearinghouse";
+import { defaultFusionediClearinghouseData } from "@/lib/defaults/fusionediClearinghouse";
+
+interface FusionediClearinghouseDashboardProps {
+  data?: FusionediDashboardData;
+}
+
+export default function FusionediClearinghouseDashboard({ data }: FusionediClearinghouseDashboardProps) {
+  const content = data || defaultFusionediClearinghouseData.dashboard;
+
   return (
     <section
       className={`${fusionediSectionAltClassName} pt-0 sm:pt-0`}
@@ -22,8 +31,8 @@ export default function FusionediClearinghouseDashboard() {
             </h2>
 
             <Image
-              src="/fusionedi-dashboard.png"
-              alt="FusionEDI clearinghouse dashboard showing claim balance, ERA payments, enrollments, transactions, and claim submission trends"
+              src={content.imageSrc || "/fusionedi-dashboard.png"}
+              alt={content.imageAlt || "FusionEDI clearinghouse dashboard"}
               width={1024}
               height={774}
               priority

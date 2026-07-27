@@ -184,7 +184,28 @@ function EdiTransferRow({
   );
 }
 
-export default function FusionediClearinghouseEdiTransfers() {
+import { FusionediEdiTransfersData } from "@/payload/types/fusionediClearinghouse";
+import { defaultFusionediClearinghouseData } from "@/lib/defaults/fusionediClearinghouse";
+
+const iconMap: Record<string, any> = {
+  Pill,
+  ShieldCheck,
+  Wallet,
+  BarChart3,
+  FileText,
+  ListChecks,
+  MessageSquare,
+  ClipboardCheck,
+};
+
+interface FusionediClearinghouseEdiTransfersProps {
+  data?: FusionediEdiTransfersData;
+}
+
+export default function FusionediClearinghouseEdiTransfers({ data }: FusionediClearinghouseEdiTransfersProps) {
+  const content = data || defaultFusionediClearinghouseData.ediTransfers;
+  const transfersList = content.transfers && content.transfers.length > 0 ? content.transfers : defaultFusionediClearinghouseData.ediTransfers.transfers;
+
   return (
     <section
       className={fusionediSectionAltClassName}
@@ -192,39 +213,40 @@ export default function FusionediClearinghouseEdiTransfers() {
     >
       <div className={fusionediContainerClassName}>
         <SectionHeader
-          badge="HIPAA Compliant Electronic Data Exchanges."
+          badge={content.badge}
           badgeVariant="indigo"
           badgePulse
           align="center"
           className="mx-auto mb-12 max-w-4xl space-y-4 sm:mb-16"
           title={
             <span id="fusionedi-clearinghouse-edi-transfers-heading">
-              The Next Generation Of{" "}
-              <span className="text-blue-600">Electronic Data Transfers</span> In
-              Healthcare
+              {content.titlePlain}{" "}
+              <span className="text-blue-600">{content.titleHighlight}</span>
+              {content.titleSuffix}
             </span>
           }
-          description={
-            <>
-              FusionEDI is powerful software that can handle various data types that are vital
-              for the healthcare industry. Whether you need to submit, process, receive, or
-              verify healthcare data, FusionEDI can do it all for you electronically. Here
-              are some of the data types that FusionEDI supports:
-            </>
-          }
+          description={content.description}
         />
 
         <MotionWrapper variant="stagger" staggerDelay={0.08} className="mx-auto max-w-5xl">
           <div role="list" className="relative">
-            {EDI_TRANSFERS.map((transfer, index) => (
-              <div key={transfer.title} role="listitem">
-                <EdiTransferRow
-                  transfer={transfer}
-                  index={index}
-                  isLast={index === EDI_TRANSFERS.length - 1}
-                />
-              </div>
-            ))}
+            {transfersList.map((transfer, index) => {
+              const IconComponent = (transfer.iconName && iconMap[transfer.iconName]) || FileText;
+              return (
+                <div key={transfer.title || index} role="listitem">
+                  <EdiTransferRow
+                    transfer={{
+                      title: transfer.title,
+                      description: transfer.description,
+                      icon: IconComponent,
+                      side: (transfer.side as "left" | "right") || (index % 2 === 0 ? "left" : "right"),
+                    }}
+                    index={index}
+                    isLast={index === transfersList.length - 1}
+                  />
+                </div>
+              );
+            })}
           </div>
         </MotionWrapper>
       </div>

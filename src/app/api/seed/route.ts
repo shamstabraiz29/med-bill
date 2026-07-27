@@ -12,6 +12,7 @@ import { defaultBlogPosts } from '@/lib/defaults/blogs'
 import { defaultCareersData } from '@/lib/defaults/careers'
 import { defaultTestimonialsData } from '@/lib/defaults/testimonials'
 import { defaultMedicalBillingSoftwareData } from '@/lib/defaults/medicalBillingSoftware'
+import { defaultFusionediClearinghouseData } from '@/lib/defaults/fusionediClearinghouse'
 import { NextResponse } from 'next/server'
 
 export async function GET() {
@@ -71,6 +72,11 @@ export async function GET() {
     await payload.updateGlobal({
       slug: 'medical-billing-software',
       data: defaultMedicalBillingSoftwareData as any,
+    })
+
+    await payload.updateGlobal({
+      slug: 'fusionedi-clearinghouse',
+      data: defaultFusionediClearinghouseData as any,
     })
 
     // Seed Posts Collection if empty

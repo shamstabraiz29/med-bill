@@ -89,7 +89,26 @@ function FusionediOfferCard({ offer }: { offer: FusionediOffer }) {
   );
 }
 
-export default function FusionediClearinghouseWhatWeOffer() {
+import { FusionediWhatWeOfferData } from "@/payload/types/fusionediClearinghouse";
+import { defaultFusionediClearinghouseData } from "@/lib/defaults/fusionediClearinghouse";
+
+const iconMap: Record<string, any> = {
+  ScanSearch,
+  ClipboardCheck,
+  Rocket,
+  CircleDollarSign,
+  UserCheck,
+  FileSearch,
+};
+
+interface FusionediClearinghouseWhatWeOfferProps {
+  data?: FusionediWhatWeOfferData;
+}
+
+export default function FusionediClearinghouseWhatWeOffer({ data }: FusionediClearinghouseWhatWeOfferProps) {
+  const content = data || defaultFusionediClearinghouseData.whatWeOffer;
+  const offersList = content.offers && content.offers.length > 0 ? content.offers : defaultFusionediClearinghouseData.whatWeOffer.offers;
+
   return (
     <section
       className={fusionediSectionClassName}
@@ -97,15 +116,15 @@ export default function FusionediClearinghouseWhatWeOffer() {
     >
       <div className={fusionediContainerClassName}>
         <SectionHeader
-          badge="What We Offer."
+          badge={content.badge}
           badgeVariant="indigo"
           badgePulse
           align="center"
           className="mx-auto mb-12 max-w-4xl space-y-4 sm:mb-16"
           title={
             <span id="fusionedi-clearinghouse-what-we-offer-heading">
-              More Features, More Efficiency, and{" "}
-              <span className="text-blue-600">More Profitability.</span>
+              {content.titlePlain}{" "}
+              <span className="text-blue-600">{content.titleHighlight}</span>
             </span>
           }
         />
@@ -115,11 +134,20 @@ export default function FusionediClearinghouseWhatWeOffer() {
           staggerDelay={0.08}
           className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
         >
-          {FUSIONEDI_OFFERS.map((offer) => (
-            <MotionWrapper key={offer.title} variant="staggerItem" className="h-full">
-              <FusionediOfferCard offer={offer} />
-            </MotionWrapper>
-          ))}
+          {offersList.map((offer, idx) => {
+            const IconComponent = (offer.iconName && iconMap[offer.iconName]) || ScanSearch;
+            return (
+              <MotionWrapper key={offer.title || idx} variant="staggerItem" className="h-full">
+                <FusionediOfferCard
+                  offer={{
+                    icon: IconComponent,
+                    title: offer.title,
+                    description: offer.description,
+                  }}
+                />
+              </MotionWrapper>
+            );
+          })}
         </MotionWrapper>
       </div>
     </section>

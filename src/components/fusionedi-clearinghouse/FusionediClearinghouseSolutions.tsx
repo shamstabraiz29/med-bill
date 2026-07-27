@@ -69,7 +69,24 @@ function FusionediSolutionCard({ solution }: { solution: FusionediSolution }) {
   );
 }
 
-export default function FusionediClearinghouseSolutions() {
+import { FusionediSolutionsData } from "@/payload/types/fusionediClearinghouse";
+import { defaultFusionediClearinghouseData } from "@/lib/defaults/fusionediClearinghouse";
+
+const iconMap: Record<string, any> = {
+  Send,
+  UserCheck,
+  Plug,
+  ShieldCheck,
+};
+
+interface FusionediClearinghouseSolutionsProps {
+  data?: FusionediSolutionsData;
+}
+
+export default function FusionediClearinghouseSolutions({ data }: FusionediClearinghouseSolutionsProps) {
+  const content = data || defaultFusionediClearinghouseData.solutions;
+  const solutionsList = content.solutions && content.solutions.length > 0 ? content.solutions : defaultFusionediClearinghouseData.solutions.solutions;
+
   return (
     <section
       className="relative w-full overflow-hidden"
@@ -84,7 +101,7 @@ export default function FusionediClearinghouseSolutions() {
         <div className={`${fusionediContainerClassName} relative z-10 text-center text-white`}>
           <div className="mb-4 flex justify-center sm:mb-5">
             <SectionBadge variant="indigo" pulse>
-              Medical EDI Solutions.
+              {content.badge}
             </SectionBadge>
           </div>
 
@@ -92,14 +109,12 @@ export default function FusionediClearinghouseSolutions() {
             id="fusionedi-clearinghouse-solutions-heading"
             className="mx-auto max-w-4xl text-2xl font-bold leading-tight tracking-[-0.02em] sm:text-3xl lg:text-4xl"
           >
-            Clear the way for Better Healthcare with our{" "}
-            <span className="font-bold text-amber-300">Clearinghouse Solutions.</span>
+            {content.titlePlain}{" "}
+            <span className="font-bold text-amber-300">{content.titleHighlight}</span>
           </h2>
 
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-[1.6] text-blue-200 sm:mt-5 sm:text-base">
-            FusionEDI connects your practice to payers with fast claim submission, real-time
-            eligibility checks, and built-in quality control—so billing runs cleaner and
-            reimbursements arrive sooner.
+            {content.subtitle}
           </p>
         </div>
       </div>
@@ -112,11 +127,20 @@ export default function FusionediClearinghouseSolutions() {
           staggerDelay={0.1}
           className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8"
         >
-          {FUSIONEDI_SOLUTIONS.map((solution) => (
-            <MotionWrapper key={solution.title} variant="staggerItem" className="h-full">
-              <FusionediSolutionCard solution={solution} />
-            </MotionWrapper>
-          ))}
+          {solutionsList.map((solution, idx) => {
+            const IconComponent = (solution.iconName && iconMap[solution.iconName]) || Send;
+            return (
+              <MotionWrapper key={solution.title || idx} variant="staggerItem" className="h-full">
+                <FusionediSolutionCard
+                  solution={{
+                    icon: IconComponent,
+                    title: solution.title,
+                    description: solution.description,
+                  }}
+                />
+              </MotionWrapper>
+            );
+          })}
         </MotionWrapper>
       </div>
     </section>

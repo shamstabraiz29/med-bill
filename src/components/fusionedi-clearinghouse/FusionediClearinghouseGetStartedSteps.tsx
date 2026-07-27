@@ -67,7 +67,23 @@ function FusionediStepCard({ step }: { step: FusionediStep }) {
   );
 }
 
-export default function FusionediClearinghouseGetStartedSteps() {
+import { FusionediGetStartedStepsData } from "@/payload/types/fusionediClearinghouse";
+import { defaultFusionediClearinghouseData } from "@/lib/defaults/fusionediClearinghouse";
+
+const iconMap: Record<string, any> = {
+  Phone,
+  Settings,
+  Gauge,
+};
+
+interface FusionediClearinghouseGetStartedStepsProps {
+  data?: FusionediGetStartedStepsData;
+}
+
+export default function FusionediClearinghouseGetStartedSteps({ data }: FusionediClearinghouseGetStartedStepsProps) {
+  const content = data || defaultFusionediClearinghouseData.getStartedSteps;
+  const stepsList = content.steps && content.steps.length > 0 ? content.steps : defaultFusionediClearinghouseData.getStartedSteps.steps;
+
   return (
     <section
       className={fusionediSectionAltClassName}
@@ -75,24 +91,18 @@ export default function FusionediClearinghouseGetStartedSteps() {
     >
       <div className={fusionediContainerClassName}>
         <SectionHeader
-          badge="Get Started for Free."
+          badge={content.badge}
           badgeVariant="indigo"
           badgePulse
           align="center"
           className="mx-auto mb-12 max-w-4xl space-y-4 sm:mb-16"
           title={
             <span id="fusionedi-clearinghouse-get-started-heading">
-              Get Started for Free in{" "}
-              <span className="text-blue-600">3 Easy Steps</span>
+              {content.titlePlain}{" "}
+              <span className="text-blue-600">{content.titleHighlight}</span>
             </span>
           }
-          description={
-            <>
-              Our software is the most affordable EDI solution for healthcare.
-              <br className="hidden sm:inline" /> It&apos;s free to use and has no
-              hidden fees.
-            </>
-          }
+          description={content.description}
         />
 
         <MotionWrapper
@@ -100,11 +110,21 @@ export default function FusionediClearinghouseGetStartedSteps() {
           staggerDelay={0.12}
           className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
         >
-          {FUSIONEDI_STEPS.map((step) => (
-            <MotionWrapper key={step.stepLabel} variant="staggerItem" className="h-full">
-              <FusionediStepCard step={step} />
-            </MotionWrapper>
-          ))}
+          {stepsList.map((step, idx) => {
+            const IconComponent = (step.iconName && iconMap[step.iconName]) || Phone;
+            return (
+              <MotionWrapper key={step.stepLabel || idx} variant="staggerItem" className="h-full">
+                <FusionediStepCard
+                  step={{
+                    stepLabel: step.stepLabel,
+                    icon: IconComponent,
+                    title: step.title,
+                    description: step.description,
+                  }}
+                />
+              </MotionWrapper>
+            );
+          })}
         </MotionWrapper>
       </div>
     </section>

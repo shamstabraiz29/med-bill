@@ -86,7 +86,23 @@ function FusionediFeatureCard({ feature }: { feature: FusionediFeature }) {
   );
 }
 
-export default function FusionediClearinghouseFeatures() {
+import { FusionediFeaturesData } from "@/payload/types/fusionediClearinghouse";
+import { defaultFusionediClearinghouseData } from "@/lib/defaults/fusionediClearinghouse";
+
+const iconMap: Record<string, any> = {
+  ShieldCheck,
+  FileText,
+  Send,
+};
+
+interface FusionediClearinghouseFeaturesProps {
+  data?: FusionediFeaturesData;
+}
+
+export default function FusionediClearinghouseFeatures({ data }: FusionediClearinghouseFeaturesProps) {
+  const content = data || defaultFusionediClearinghouseData.features;
+  const featuresList = content.features && content.features.length > 0 ? content.features : defaultFusionediClearinghouseData.features.features;
+
   return (
     <section
       className={fusionediSectionClassName}
@@ -94,18 +110,18 @@ export default function FusionediClearinghouseFeatures() {
     >
       <div className={fusionediContainerClassName}>
         <SectionHeader
-          badge="Health Institute EDI Software Features."
+          badge={content.badge}
           badgeVariant="indigo"
           badgePulse
           align="center"
           className="mx-auto mb-12 max-w-4xl space-y-4 sm:mb-16"
           title={
             <span id="fusionedi-clearinghouse-features-heading">
-              The <span className="text-blue-600">No.1 Solution</span> For The
-              Billing Evolution
+              {content.titlePlain}{" "}
+              <span className="text-blue-600">{content.titleHighlight}</span>
             </span>
           }
-          description="FusionEDI brings together claim scrubbing, standardized EDI formats, and instant payer submission—giving healthcare institutes a single platform built for faster, cleaner billing."
+          description={content.description}
         />
 
         <MotionWrapper
@@ -113,11 +129,22 @@ export default function FusionediClearinghouseFeatures() {
           staggerDelay={0.12}
           className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
         >
-          {FUSIONEDI_FEATURES.map((feature) => (
-            <MotionWrapper key={feature.title} variant="staggerItem" className="h-full">
-              <FusionediFeatureCard feature={feature} />
-            </MotionWrapper>
-          ))}
+          {featuresList.map((feature, idx) => {
+            const IconComponent = (feature.iconName && iconMap[feature.iconName]) || ShieldCheck;
+            return (
+              <MotionWrapper key={feature.title || idx} variant="staggerItem" className="h-full">
+                <FusionediFeatureCard
+                  feature={{
+                    icon: IconComponent,
+                    title: feature.title,
+                    description: feature.description,
+                    imageSrc: feature.imageSrc || "/clearinghouse-nurse-hero.png",
+                    imageAlt: feature.imageAlt || feature.title,
+                  }}
+                />
+              </MotionWrapper>
+            );
+          })}
         </MotionWrapper>
       </div>
     </section>

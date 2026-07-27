@@ -20,6 +20,10 @@ import type { BlogPost } from '@/components/blog/BlogCard'
 import { defaultBlogPosts } from '@/lib/defaults/blogs'
 import type { CareersData } from '@/payload/types/careers'
 import { defaultCareersData } from '@/lib/defaults/careers'
+import type { MedicalBillingSoftwarePageData } from '@/payload/types/medicalBillingSoftware'
+import { defaultMedicalBillingSoftwareData } from '@/lib/defaults/medicalBillingSoftware'
+import type { FusionediClearinghousePageData } from '@/payload/types/fusionediClearinghouse'
+import { defaultFusionediClearinghouseData } from '@/lib/defaults/fusionediClearinghouse'
 
 /**
  * Fetches the Homepage global data from Payload CMS using the Local API.
@@ -295,8 +299,6 @@ export async function getCareersData(): Promise<CareersData> {
 
 import type { TestimonialsPageData } from '@/payload/types/testimonials'
 import { defaultTestimonialsData } from '@/lib/defaults/testimonials'
-import type { MedicalBillingSoftwarePageData } from '@/payload/types/medicalBillingSoftware'
-import { defaultMedicalBillingSoftwareData } from '@/lib/defaults/medicalBillingSoftware'
 
 /**
  * Fetches the Testimonials global data from Payload CMS.
@@ -333,6 +335,25 @@ export async function getMedicalBillingSoftwareData(): Promise<MedicalBillingSof
   } catch (error) {
     console.error('[Payload] Failed to fetch medical billing software data, using defaults:', error)
     return defaultMedicalBillingSoftwareData
+  }
+}
+
+/**
+ * Fetches the FusionEDI Clearinghouse global data from Payload CMS.
+ * Uses Payload Local API with fallback to default hardcoded content.
+ */
+export async function getFusionediClearinghouseData(): Promise<FusionediClearinghousePageData> {
+  try {
+    const payload = await getPayload({ config })
+
+    const data = await payload.findGlobal({
+      slug: 'fusionedi-clearinghouse',
+    })
+
+    return deepMerge(defaultFusionediClearinghouseData, data as unknown as Partial<FusionediClearinghousePageData>)
+  } catch (error) {
+    console.error('[Payload] Failed to fetch fusionedi clearinghouse data, using defaults:', error)
+    return defaultFusionediClearinghouseData
   }
 }
 

@@ -109,6 +109,7 @@ export interface Config {
     careers: any;
     'testimonials-page': any;
     'medical-billing-software': any;
+    'fusionedi-clearinghouse': any;
   };
   globalsSelect: {
     homepage: HomepageSelect<false> | HomepageSelect<true>;
@@ -122,6 +123,7 @@ export interface Config {
     careers: any;
     'testimonials-page': any;
     'medical-billing-software': any;
+    'fusionedi-clearinghouse': any;
   };
   locale: null;
   widgets: {
