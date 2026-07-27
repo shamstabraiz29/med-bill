@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     users: User;
     'form-submissions': FormSubmission;
+    posts: Post;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,6 +79,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     'form-submissions': any;
+    posts: any;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -211,6 +213,25 @@ export interface FormSubmission {
   monthlyCollections?: string | null;
   message?: string | null;
   status?: 'new' | 'in_progress' | 'contacted' | 'closed' | null;
+  updatedAt: string;
+  createdAt: string;
+}
+
+export interface Post {
+  id: number;
+  title: string;
+  slug: string;
+  excerpt: string;
+  category: string;
+  author: {
+    name: string;
+    role: string;
+    avatar: string;
+  };
+  publishedAt: string;
+  readTime: string;
+  imageSrc: string;
+  content?: any;
   updatedAt: string;
   createdAt: string;
 }

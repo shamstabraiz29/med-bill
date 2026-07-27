@@ -1,5 +1,4 @@
-import PageContainer from "@/components/PageContainer";
+import BlogPage, { metadata } from "../blog/page";
 
-export default function Page() {
-  return <PageContainer title="Blogs" />;
-}
+export { metadata };
+export default BlogPage;

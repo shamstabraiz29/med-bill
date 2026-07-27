@@ -8,6 +8,7 @@ import { defaultRevenueCycleManagementData } from '@/lib/defaults/revenueCycleMa
 import { defaultMedicalBillingData } from '@/lib/defaults/medicalBilling'
 import { defaultMedicalCodingData } from '@/lib/defaults/medicalCoding'
 import { defaultMedicalBillingAuditData } from '@/lib/defaults/medicalBillingAudit'
+import { defaultBlogPosts } from '@/lib/defaults/blogs'
 import { NextResponse } from 'next/server'
 
 export async function GET() {
@@ -54,9 +55,37 @@ export async function GET() {
       data: defaultMedicalBillingAuditData as any,
     })
 
+    // Seed Posts Collection if empty
+    const existingPosts = await payload.find({
+      collection: 'posts',
+      limit: 1,
+    })
+
+    if (existingPosts.totalDocs === 0) {
+      for (const post of defaultBlogPosts) {
+        await payload.create({
+          collection: 'posts',
+          data: {
+            title: post.title,
+            slug: post.slug,
+            excerpt: post.excerpt,
+            category: post.category,
+            author: {
+              name: post.author.name,
+              role: post.author.role || 'Specialist',
+              avatar: post.author.avatar,
+            },
+            publishedAt: post.publishedAt,
+            readTime: post.readTime,
+            imageSrc: post.imageSrc,
+          },
+        })
+      }
+    }
+
     return NextResponse.json({
       success: true,
-      message: 'Homepage, Clearinghouse, Provider Credentialing, Healthcare SEO, Revenue Cycle Management, Medical Billing, Medical Coding, and Medical Billing Audit globals seeded successfully!',
+      message: 'All globals and Blog posts collection seeded successfully!',
     })
   } catch (error: any) {
     console.error('[Seed Route Error]:', error)

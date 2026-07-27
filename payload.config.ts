@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url'
 
 import { Users } from '@/payload/collections/Users'
 import { FormSubmissions } from '@/payload/collections/FormSubmissions'
+import { Posts } from '@/payload/collections/Posts'
 import { Homepage } from '@/payload/globals/Homepage'
 import { Clearinghouse } from '@/payload/globals/Clearinghouse'
 import { ProviderCredentialing } from '@/payload/globals/ProviderCredentialing'
@@ -27,7 +28,7 @@ export default buildConfig({
     },
   },
 
-  collections: [Users, FormSubmissions],
+  collections: [Users, FormSubmissions, Posts],
 
   globals: [Homepage, Clearinghouse, ProviderCredentialing, HealthcareSeo, RevenueCycleManagement, MedicalBilling, MedicalCoding, MedicalBillingAudit],
 
