@@ -27,6 +27,7 @@ import { Careers } from '@/payload/globals/Careers'
 import { Testimonials } from '@/payload/globals/Testimonials'
 import { MedicalBillingSoftware } from '@/payload/globals/MedicalBillingSoftware'
 import { FusionediClearinghouse } from '@/payload/globals/FusionediClearinghouse'
+import { ElectronicHealthRecordsEhr } from '@/payload/globals/ElectronicHealthRecordsEhr'
 
 export default buildConfig({
   admin: {
@@ -59,6 +60,7 @@ export default buildConfig({
     Testimonials,
     MedicalBillingSoftware,
     FusionediClearinghouse,
+    ElectronicHealthRecordsEhr,
   ],
 
   db: postgresAdapter({

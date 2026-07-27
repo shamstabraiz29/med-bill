@@ -110,6 +110,7 @@ export interface Config {
     'testimonials-page': any;
     'medical-billing-software': any;
     'fusionedi-clearinghouse': any;
+    'electronic-health-records-ehr': any;
   };
   globalsSelect: {
     homepage: HomepageSelect<false> | HomepageSelect<true>;
@@ -124,6 +125,7 @@ export interface Config {
     'testimonials-page': any;
     'medical-billing-software': any;
     'fusionedi-clearinghouse': any;
+    'electronic-health-records-ehr': any;
   };
   locale: null;
   widgets: {

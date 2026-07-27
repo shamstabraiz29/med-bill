@@ -69,7 +69,23 @@ function EhrBenefitCard({ benefit }: { benefit: EhrBenefit }) {
   );
 }
 
-export default function ElectronicHealthRecordsEhrBenefits() {
+import { EhrBenefitsData } from "@/payload/types/electronicHealthRecordsEhr";
+import { defaultElectronicHealthRecordsEhrData } from "@/lib/defaults/electronicHealthRecordsEhr";
+
+const iconMap: Record<string, any> = {
+  SlidersHorizontal,
+  FileBarChart,
+  BriefcaseMedical,
+};
+
+interface ElectronicHealthRecordsEhrBenefitsProps {
+  data?: EhrBenefitsData;
+}
+
+export default function ElectronicHealthRecordsEhrBenefits({ data }: ElectronicHealthRecordsEhrBenefitsProps) {
+  const content = data || defaultElectronicHealthRecordsEhrData.benefits;
+  const benefitsList = content.benefits && content.benefits.length > 0 ? content.benefits : defaultElectronicHealthRecordsEhrData.benefits.benefits;
+
   return (
     <section
       className={ehrSectionClassName}
@@ -85,11 +101,20 @@ export default function ElectronicHealthRecordsEhrBenefits() {
           staggerDelay={0.12}
           className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
         >
-          {EHR_BENEFITS.map((benefit) => (
-            <MotionWrapper key={benefit.title} variant="staggerItem" className="h-full">
-              <EhrBenefitCard benefit={benefit} />
-            </MotionWrapper>
-          ))}
+          {benefitsList.map((benefit, idx) => {
+            const IconComponent = (benefit.iconName && iconMap[benefit.iconName]) || SlidersHorizontal;
+            return (
+              <MotionWrapper key={benefit.title || idx} variant="staggerItem" className="h-full">
+                <EhrBenefitCard
+                  benefit={{
+                    icon: IconComponent,
+                    title: benefit.title,
+                    description: benefit.description,
+                  }}
+                />
+              </MotionWrapper>
+            );
+          })}
         </MotionWrapper>
       </div>
     </section>

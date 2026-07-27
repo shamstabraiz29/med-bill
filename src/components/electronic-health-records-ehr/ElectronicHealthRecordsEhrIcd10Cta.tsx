@@ -6,7 +6,16 @@ import AppButton from "@/components/ui/AppButton";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import { ehrContainerClassName, ehrSectionClassName } from "./ehrSectionLayout";
 
-export default function ElectronicHealthRecordsEhrIcd10Cta() {
+import { EhrIcd10CtaData } from "@/payload/types/electronicHealthRecordsEhr";
+import { defaultElectronicHealthRecordsEhrData } from "@/lib/defaults/electronicHealthRecordsEhr";
+
+interface ElectronicHealthRecordsEhrIcd10CtaProps {
+  data?: EhrIcd10CtaData;
+}
+
+export default function ElectronicHealthRecordsEhrIcd10Cta({ data }: ElectronicHealthRecordsEhrIcd10CtaProps) {
+  const content = data || defaultElectronicHealthRecordsEhrData.icd10Cta;
+
   return (
     <section
       className={`${ehrSectionClassName} pb-20 sm:pb-24 lg:pb-28`}
@@ -19,10 +28,10 @@ export default function ElectronicHealthRecordsEhrIcd10Cta() {
               <div className="lg:col-span-7">
                 <div className="mb-4 flex flex-wrap items-center gap-3">
                   <span className="inline-flex items-center rounded-md border border-white/20 bg-white px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest text-[#0F172A]">
-                    New
+                    {content.badgeTag || "New"}
                   </span>
                   <span className="text-[11px] font-bold uppercase tracking-widest text-blue-100">
-                    Ehr for Icd-10 Coding.
+                    {content.badgeText || "Ehr for Icd-10 Coding."}
                   </span>
                 </div>
 
@@ -30,24 +39,22 @@ export default function ElectronicHealthRecordsEhrIcd10Cta() {
                   id="electronic-health-records-ehr-icd10-cta-heading"
                   className="text-2xl font-bold leading-tight tracking-[-0.02em] sm:text-3xl lg:text-4xl"
                 >
-                  ICD 10 is big change. But our EHR software is a{" "}
-                  <span className="font-bold text-amber-300">bigger solution.</span>
+                  {content.titlePlain}{" "}
+                  <span className="font-bold text-amber-300">{content.titleHighlight}</span>
                 </h2>
 
                 <p className="mt-4 max-w-2xl text-sm leading-[1.6] text-blue-200 sm:mt-5 sm:text-base">
-                  Don&apos;t let the coding change you off guard. Our EHR software is fully
-                  compliant with ICD 10 and can help you make a smooth transition. Sign up
-                  for free and join the future!
+                  {content.subtitle}
                 </p>
 
                 <div className="mt-8">
                   <AppButton
-                    href="/schedule-a-demo"
+                    href={content.buttonLink || "/schedule-a-demo"}
                     variant="secondary-dark"
                     size="lg"
                     showArrow
                   >
-                    Start My Free Trial
+                    {content.buttonText || "Start My Free Trial"}
                   </AppButton>
                 </div>
               </div>

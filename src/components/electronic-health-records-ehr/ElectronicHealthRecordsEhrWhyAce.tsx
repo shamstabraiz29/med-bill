@@ -70,7 +70,23 @@ function WhyAceFeatureItem({
   );
 }
 
-export default function ElectronicHealthRecordsEhrWhyAce() {
+import { EhrWhyAceData } from "@/payload/types/electronicHealthRecordsEhr";
+import { defaultElectronicHealthRecordsEhrData } from "@/lib/defaults/electronicHealthRecordsEhr";
+
+const iconMap: Record<string, any> = {
+  Cloud,
+  Headphones,
+  RefreshCw,
+};
+
+interface ElectronicHealthRecordsEhrWhyAceProps {
+  data?: EhrWhyAceData;
+}
+
+export default function ElectronicHealthRecordsEhrWhyAce({ data }: ElectronicHealthRecordsEhrWhyAceProps) {
+  const content = data || defaultElectronicHealthRecordsEhrData.whyAce;
+  const featuresList = content.features && content.features.length > 0 ? content.features : defaultElectronicHealthRecordsEhrData.whyAce.features;
+
   return (
     <section
       className={ehrSectionAltClassName}
@@ -82,8 +98,8 @@ export default function ElectronicHealthRecordsEhrWhyAce() {
           className="mb-12 sm:mb-16 max-w-4xl"
           title={
             <span id="electronic-health-records-ehr-why-ace-heading">
-              Why do we ace the{" "}
-              <span className="text-blue-600">EHR Software</span> race?
+              {content.titlePlain}{" "}
+              <span className="text-blue-600">{content.titleHighlight}</span> race?
             </span>
           }
         />
@@ -92,8 +108,8 @@ export default function ElectronicHealthRecordsEhrWhyAce() {
           <MotionWrapper variant="slideRight">
             <div className="group relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white transition-all duration-300 hover:-translate-y-1.5 hover:border-[#1D4ED8]/30 hover:shadow-lg hover:shadow-blue-900/5 sm:aspect-16/11">
               <Image
-                src="/consultants-laptop.png"
-                alt="Healthcare provider using BellMedEx EHR software on a laptop"
+                src={content.imageSrc || "/consultants-laptop.png"}
+                alt={content.imageAlt || "BellMedEx EHR software on a laptop"}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -103,14 +119,21 @@ export default function ElectronicHealthRecordsEhrWhyAce() {
 
           <MotionWrapper variant="slideLeft" delay={0.1}>
             <div role="list" className="max-w-xl lg:max-w-none">
-              {WHY_ACE_FEATURES.map((feature, index) => (
-                <div key={feature.title} role="listitem">
-                  <WhyAceFeatureItem
-                    feature={feature}
-                    isLast={index === WHY_ACE_FEATURES.length - 1}
-                  />
-                </div>
-              ))}
+              {featuresList.map((feature, index) => {
+                const IconComponent = (feature.iconName && iconMap[feature.iconName]) || Cloud;
+                return (
+                  <div key={feature.title || index} role="listitem">
+                    <WhyAceFeatureItem
+                      feature={{
+                        title: feature.title,
+                        description: feature.description,
+                        icon: IconComponent,
+                      }}
+                      isLast={index === featuresList.length - 1}
+                    />
+                  </div>
+                );
+              })}
             </div>
           </MotionWrapper>
         </div>

@@ -5,6 +5,7 @@ import {
   CheckCircle2,
   FileCheck,
   Layers,
+  LucideIcon,
   ShieldCheck,
   Users,
 } from "lucide-react";
@@ -56,7 +57,7 @@ function AnimatedMetricBar({
 }: {
   label: string;
   value: number;
-  icon: React.ComponentType<{ className?: string }>;
+  icon: LucideIcon;
   index: number;
 }) {
   const [displayValue, setDisplayValue] = useState(0);

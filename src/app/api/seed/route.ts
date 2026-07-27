@@ -13,6 +13,7 @@ import { defaultCareersData } from '@/lib/defaults/careers'
 import { defaultTestimonialsData } from '@/lib/defaults/testimonials'
 import { defaultMedicalBillingSoftwareData } from '@/lib/defaults/medicalBillingSoftware'
 import { defaultFusionediClearinghouseData } from '@/lib/defaults/fusionediClearinghouse'
+import { defaultElectronicHealthRecordsEhrData } from '@/lib/defaults/electronicHealthRecordsEhr'
 import { NextResponse } from 'next/server'
 
 export async function GET() {
@@ -77,6 +78,11 @@ export async function GET() {
     await payload.updateGlobal({
       slug: 'fusionedi-clearinghouse',
       data: defaultFusionediClearinghouseData as any,
+    })
+
+    await payload.updateGlobal({
+      slug: 'electronic-health-records-ehr',
+      data: defaultElectronicHealthRecordsEhrData as any,
     })
 
     // Seed Posts Collection if empty

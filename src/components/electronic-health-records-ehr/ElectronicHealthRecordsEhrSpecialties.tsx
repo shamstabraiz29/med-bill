@@ -41,7 +41,32 @@ const SPECIALTY_ICONS: SpecialtyIcon[] = [
   { label: "Laboratory", icon: FlaskConical },
 ];
 
-export default function ElectronicHealthRecordsEhrSpecialties() {
+import { EhrSpecialtiesData } from "@/payload/types/electronicHealthRecordsEhr";
+import { defaultElectronicHealthRecordsEhrData } from "@/lib/defaults/electronicHealthRecordsEhr";
+
+const iconMap: Record<string, any> = {
+  Users,
+  HeartPulse,
+  ShieldAlert,
+  Bone,
+  Brain,
+  Activity,
+  Handshake,
+  Eye,
+  Stethoscope,
+  Baby,
+  Cpu,
+  FlaskConical,
+};
+
+interface ElectronicHealthRecordsEhrSpecialtiesProps {
+  data?: EhrSpecialtiesData;
+}
+
+export default function ElectronicHealthRecordsEhrSpecialties({ data }: ElectronicHealthRecordsEhrSpecialtiesProps) {
+  const content = data || defaultElectronicHealthRecordsEhrData.specialties;
+  const specialtiesList = content.specialties && content.specialties.length > 0 ? content.specialties : defaultElectronicHealthRecordsEhrData.specialties.specialties;
+
   return (
     <section
       className={ehrSectionClassName}
@@ -54,34 +79,37 @@ export default function ElectronicHealthRecordsEhrSpecialties() {
               id="electronic-health-records-ehr-specialties-heading"
               className="text-xl font-bold leading-[1.2] tracking-[-0.02em] text-[#0F172A] sm:text-2xl lg:text-3xl xl:text-4xl"
             >
-              Not just a band-aid solution, but a{" "}
-              <span className="text-blue-600">cure for every specialty.</span>
+              {content.titlePlain}{" "}
+              <span className="text-blue-600">{content.titleHighlight}</span>
             </h2>
           </MotionWrapper>
 
           <MotionWrapper variant="slideLeft">
             <div className="grid grid-cols-3 gap-2.5 sm:grid-cols-6 sm:gap-3">
-              {SPECIALTY_ICONS.map((specialty, index) => (
-                <div
-                  key={specialty.label}
-                  title={specialty.label}
-                  className={cn(
-                    "group flex aspect-square items-center justify-center rounded-xl border border-[#E2E6EC] bg-white transition-all duration-300 hover:-translate-y-1 hover:border-[#1D4ED8]/30 hover:shadow-lg hover:shadow-blue-900/5",
-                    index >= 6 && "opacity-30 hover:opacity-100"
-                  )}
-                >
-                  <IconWrapper
-                    icon={specialty.icon}
-                    size="sm"
-                    variant="surface"
-                    className="transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-              ))}
+              {specialtiesList.map((specialty, index) => {
+                const IconComponent = (specialty.iconName && iconMap[specialty.iconName]) || Users;
+                return (
+                  <div
+                    key={specialty.label || index}
+                    title={specialty.label}
+                    className={cn(
+                      "group flex aspect-square items-center justify-center rounded-xl border border-[#E2E6EC] bg-white transition-all duration-300 hover:-translate-y-1 hover:border-[#1D4ED8]/30 hover:shadow-lg hover:shadow-blue-900/5",
+                      index >= 6 && "opacity-30 hover:opacity-100"
+                    )}
+                  >
+                    <IconWrapper
+                      icon={IconComponent}
+                      size="sm"
+                      variant="surface"
+                      className="transition-transform duration-300 group-hover:scale-110"
+                    />
+                  </div>
+                );
+              })}
             </div>
 
             <p className="mt-4 text-center text-[10px] font-bold uppercase tracking-[0.2em] text-[#475569] sm:mt-5 sm:text-xs">
-              And many other specialties
+              {content.footerText || "And many other specialties"}
             </p>
           </MotionWrapper>
         </div>

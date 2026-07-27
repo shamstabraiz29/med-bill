@@ -57,7 +57,17 @@ const EHR_FEATURES = [
   },
 ];
 
-export default function ElectronicHealthRecordsEhrFeatures() {
+import { EhrFeaturesData } from "@/payload/types/electronicHealthRecordsEhr";
+import { defaultElectronicHealthRecordsEhrData } from "@/lib/defaults/electronicHealthRecordsEhr";
+
+interface ElectronicHealthRecordsEhrFeaturesProps {
+  data?: EhrFeaturesData;
+}
+
+export default function ElectronicHealthRecordsEhrFeatures({ data }: ElectronicHealthRecordsEhrFeaturesProps) {
+  const content = data || defaultElectronicHealthRecordsEhrData.features;
+  const featuresList = content.features && content.features.length > 0 ? content.features : defaultElectronicHealthRecordsEhrData.features.features;
+
   return (
     <section
       className={ehrSectionAltClassName}
@@ -65,16 +75,16 @@ export default function ElectronicHealthRecordsEhrFeatures() {
     >
       <div className={ehrContainerClassName}>
         <div className="space-y-12 sm:space-y-16 lg:space-y-20">
-          {EHR_FEATURES.map((feature) => (
+          {featuresList.map((feature, idx) => (
             <EhrFeatureRow
-              key={`${feature.titleHighlight}-${feature.titlePlain}`}
+              key={`${feature.titleHighlight}-${feature.titlePlain}-${idx}`}
               titlePlain={feature.titlePlain}
               titleHighlight={feature.titleHighlight}
               titleSuffix={feature.titleSuffix}
               endPeriod={feature.endPeriod}
               description={feature.description}
-              imageSrc={feature.imageSrc}
-              imageAlt={feature.imageAlt}
+              imageSrc={feature.imageSrc || "/consultants-laptop.png"}
+              imageAlt={feature.imageAlt || feature.titleHighlight}
               reverse={feature.reverse}
             />
           ))}

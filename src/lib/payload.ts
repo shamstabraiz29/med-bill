@@ -24,6 +24,8 @@ import type { MedicalBillingSoftwarePageData } from '@/payload/types/medicalBill
 import { defaultMedicalBillingSoftwareData } from '@/lib/defaults/medicalBillingSoftware'
 import type { FusionediClearinghousePageData } from '@/payload/types/fusionediClearinghouse'
 import { defaultFusionediClearinghouseData } from '@/lib/defaults/fusionediClearinghouse'
+import type { ElectronicHealthRecordsEhrPageData } from '@/payload/types/electronicHealthRecordsEhr'
+import { defaultElectronicHealthRecordsEhrData } from '@/lib/defaults/electronicHealthRecordsEhr'
 
 /**
  * Fetches the Homepage global data from Payload CMS using the Local API.
@@ -354,6 +356,25 @@ export async function getFusionediClearinghouseData(): Promise<FusionediClearing
   } catch (error) {
     console.error('[Payload] Failed to fetch fusionedi clearinghouse data, using defaults:', error)
     return defaultFusionediClearinghouseData
+  }
+}
+
+/**
+ * Fetches the Electronic Health Records (EHR) global data from Payload CMS.
+ * Uses Payload Local API with fallback to default hardcoded content.
+ */
+export async function getElectronicHealthRecordsEhrData(): Promise<ElectronicHealthRecordsEhrPageData> {
+  try {
+    const payload = await getPayload({ config })
+
+    const data = await payload.findGlobal({
+      slug: 'electronic-health-records-ehr',
+    })
+
+    return deepMerge(defaultElectronicHealthRecordsEhrData, data as unknown as Partial<ElectronicHealthRecordsEhrPageData>)
+  } catch (error) {
+    console.error('[Payload] Failed to fetch EHR data, using defaults:', error)
+    return defaultElectronicHealthRecordsEhrData
   }
 }
 

@@ -43,8 +43,17 @@ const EHR_FAQS = [
   },
 ];
 
-export default function ElectronicHealthRecordsEhrFaq() {
+import { EhrFaqData } from "@/payload/types/electronicHealthRecordsEhr";
+import { defaultElectronicHealthRecordsEhrData } from "@/lib/defaults/electronicHealthRecordsEhr";
+
+interface ElectronicHealthRecordsEhrFaqProps {
+  data?: EhrFaqData;
+}
+
+export default function ElectronicHealthRecordsEhrFaq({ data }: ElectronicHealthRecordsEhrFaqProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const content = data || defaultElectronicHealthRecordsEhrData.faq;
+  const faqsList = content.faqs && content.faqs.length > 0 ? content.faqs : defaultElectronicHealthRecordsEhrData.faq.faqs;
 
   const toggleFAQ = (idx: number) => {
     setOpenIndex((prev) => (prev === idx ? null : idx));
@@ -58,17 +67,17 @@ export default function ElectronicHealthRecordsEhrFaq() {
       <div className={ehrContainerClassName}>
         <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
           <SectionHeader
-            badge="Frequently Asked Questions."
+            badge={content.badge}
             badgeVariant="indigo"
             badgePulse
             align="center"
             title={
               <span id="electronic-health-records-ehr-faq-heading">
-                Frequently Asked{" "}
-                <span className="font-bold text-blue-600">Questions</span>
+                {content.titlePlain}{" "}
+                <span className="font-bold text-blue-600">{content.titleHighlight}</span>
               </span>
             }
-            description="Find clear answers about implementing, customizing, integrating, and getting the most from BellMedEx EHR software."
+            description={content.description}
             className="space-y-4"
           />
         </div>
@@ -78,14 +87,14 @@ export default function ElectronicHealthRecordsEhrFaq() {
           staggerDelay={0.05}
           className="mx-auto max-w-4xl divide-y divide-[#E2E6EC]"
         >
-          {EHR_FAQS.map((faq, idx) => {
+          {faqsList.map((faq, idx) => {
             const isOpen = openIndex === idx;
             const controlsId = `electronic-health-records-ehr-faq-content-${idx}`;
             const headerId = `electronic-health-records-ehr-faq-header-${idx}`;
 
             return (
               <MotionWrapper
-                key={faq.question}
+                key={faq.question || idx}
                 variant="staggerItem"
                 className="py-5 first:pt-0 last:pb-0 sm:py-6"
               >
