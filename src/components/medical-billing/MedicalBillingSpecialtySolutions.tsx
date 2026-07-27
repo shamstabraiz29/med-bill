@@ -7,22 +7,19 @@ import { FormSelect } from "@/components/ui/select";
 import AppButton from "@/components/ui/AppButton";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import SectionHeader from "@/components/ui/SectionHeader";
-
-const SPECIALTY_OPTIONS = [
-  "Behavioral Health / Mental Health",
-  "Urgent Care",
-  "Laboratory",
-  "Urology",
-  "Cardiology",
-  "Orthopedics",
-  "General Practice",
-  "Other",
-];
+import { defaultMedicalBillingData } from "@/lib/defaults/medicalBilling";
 
 const fieldClassName =
   "h-11 border border-[#E2E6EC] bg-[#F8FAFC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40";
 
-export default function MedicalBillingSpecialtySolutions() {
+interface MedicalBillingSpecialtySolutionsProps {
+  data?: typeof defaultMedicalBillingData.specialtySolutions;
+}
+
+export default function MedicalBillingSpecialtySolutions({ data }: MedicalBillingSpecialtySolutionsProps) {
+  const specialtyData = data || defaultMedicalBillingData.specialtySolutions;
+  const options = specialtyData.options.map((opt) => opt.label);
+
   const [formData, setFormData] = useState({
     specialty: null as string | null,
     name: "",
@@ -60,18 +57,17 @@ export default function MedicalBillingSpecialtySolutions() {
         <MotionWrapper variant="fadeUp">
           <div className="mx-auto max-w-3xl text-center">
             <SectionHeader
-              badge="All Specialties"
+              badge={specialtyData.badge}
               badgeVariant="indigo"
               badgePulse
               align="center"
               title={
                 <span id="specialty-solutions-heading">
-                  BellMedEx&apos;s Medical Billing Consultancy Solutions Are
-                  Available for{" "}
-                  <span className="font-bold text-blue-600">All Specialties</span>
+                  {specialtyData.titlePrefix}
+                  <span className="font-bold text-blue-600">{specialtyData.titleHighlight}</span>
                 </span>
               }
-              description="BellMedEx offers a comprehensive suite of medical billing consultancy solutions for all specialties, from mental health to urgent care. Our tools and resources help doctors improve their clinic's billing accuracy, so they can give their patients better care."
+              description={specialtyData.description}
               className="mb-8 sm:mb-10"
             />
           </div>
@@ -107,7 +103,7 @@ export default function MedicalBillingSpecialtySolutions() {
                   onValueChange={(value) =>
                     setFormData({ ...formData, specialty: value })
                   }
-                  options={SPECIALTY_OPTIONS}
+                  options={options}
                   placeholder="Choose Specialty"
                   className={fieldClassName}
                 />

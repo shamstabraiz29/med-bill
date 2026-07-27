@@ -4,8 +4,15 @@ import React from "react";
 import Image from "next/image";
 import AppButton from "@/components/ui/AppButton";
 import MotionWrapper from "@/components/ui/MotionWrapper";
+import { defaultMedicalCodingData } from "@/lib/defaults/medicalCoding";
 
-export default function MedicalCodingFrustratedCta() {
+interface MedicalCodingFrustratedCtaProps {
+  data?: typeof defaultMedicalCodingData.frustratedCta;
+}
+
+export default function MedicalCodingFrustratedCta({ data }: MedicalCodingFrustratedCtaProps) {
+  const frustratedData = data || defaultMedicalCodingData.frustratedCta;
+
   return (
     <section
       className="flex w-full items-center justify-center bg-transparent px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20"
@@ -25,28 +32,24 @@ export default function MedicalCodingFrustratedCta() {
                   id="medical-coding-frustrated-cta-heading"
                   className="text-2xl font-bold leading-tight tracking-tight sm:text-3xl sm:leading-snug lg:text-4xl"
                 >
-                  Are You Frustrated with{" "}
+                  {frustratedData.titlePrefix}{" "}
                   <span className="font-bold text-amber-300">
-                    Medical Coding Errors, Denials, and Delays?
+                    {frustratedData.titleHighlight}
                   </span>
                 </h2>
 
                 <p className="max-w-xl text-sm text-blue-200 sm:text-base">
-                  BellMedEx provides complete medical coding solutions and services. Our
-                  certified coders handle all coding projects — in-patient, outpatient,
-                  emergency, or specialty services. So don&apos;t let medical coding
-                  problems affect your bottom line, as our experts will detect them and
-                  correct them before they damage your practice.
+                  {frustratedData.description}
                 </p>
 
                 <div className="pt-1">
                   <AppButton
-                    href="/contact-us"
+                    href={frustratedData.ctaHref || "/contact-us"}
                     variant="secondary-dark"
                     size="lg"
                     showArrow
                   >
-                    Get A Free Quote
+                    {frustratedData.ctaLabel}
                   </AppButton>
                 </div>
               </MotionWrapper>
@@ -55,8 +58,8 @@ export default function MedicalCodingFrustratedCta() {
                 <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-3 sm:p-4">
                   <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
                     <Image
-                      src="/consultants-laptop.png"
-                      alt="BellMedEx medical coding expert reviewing claims on laptop"
+                      src={frustratedData.imageSrc || "/consultants-laptop.png"}
+                      alt={frustratedData.imageAlt || "BellMedEx medical coding expert reviewing claims on laptop"}
                       fill
                       sizes="(max-width: 1024px) 100vw, 50vw"
                       className="object-cover object-center transition-transform duration-700 hover:scale-[1.02]"

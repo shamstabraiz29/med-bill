@@ -4,16 +4,15 @@ import React from "react";
 import Image from "next/image";
 import SectionHeader from "@/components/ui/SectionHeader";
 import MotionWrapper from "@/components/ui/MotionWrapper";
+import { defaultMedicalCodingData } from "@/lib/defaults/medicalCoding";
 
-const REASONS = [
-  "Accurate medical coding has become a necessity, particularly since ACA law has obligated healthcare providers to furnish patients with medical services they receive along with their corresponding expenses.",
-  "At BellMedEx, our certified coders analyze medical records to assign the proper standardized codes. This clinical coding expertise ensures your claims are reimbursed fully and quickly. No more submitting a service only to wait months for payment because of a coding error.",
-  "We follow the latest medical coding guidelines and legislation so your claims comply. This protects you from audit risks and overcharging patients due to unbundling. With BellMedEx, your reimbursements will be timely and accurate.",
-  "Our rigorous training and continuing education gives our coders an edge. They identify the right codes for even the most complex cases. This clinical coding solution helps avoid those claim denials that lead to revenue loss.",
-  "Put BellMedEx\u2019s medical coding services to work for your practice. Our clinical coding solutions bring speedy and correct reimbursements in today\u2019s climate of growing regulations. Outsource your coding needs and gain peace of mind knowing claims are coded right the first time.",
-];
+interface MedicalCodingWhyChooseUsProps {
+  data?: typeof defaultMedicalCodingData.whyChooseUs;
+}
 
-export default function MedicalCodingWhyChooseUs() {
+export default function MedicalCodingWhyChooseUs({ data }: MedicalCodingWhyChooseUsProps) {
+  const whyData = data || defaultMedicalCodingData.whyChooseUs;
+
   return (
     <section
       className="w-full bg-transparent px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20"
@@ -23,15 +22,15 @@ export default function MedicalCodingWhyChooseUs() {
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-14">
           <MotionWrapper variant="slideRight" className="lg:col-span-6">
             <SectionHeader
-              badge="Why Choose Us"
+              badge={whyData.badge}
               badgeVariant="indigo"
               badgePulse
               align="left"
               title={
                 <span id="medical-coding-why-choose-heading">
-                  Why Choose{" "}
+                  {whyData.titlePlain}{" "}
                   <span className="font-bold text-blue-600">
-                    BellMedEx Coding Agency?
+                    {whyData.titleHighlight}
                   </span>
                 </span>
               }
@@ -43,7 +42,7 @@ export default function MedicalCodingWhyChooseUs() {
               staggerDelay={0.06}
               className="flex flex-col gap-3 sm:gap-4"
             >
-              {REASONS.map((paragraph, index) => (
+              {whyData.reasons.map((item, index) => (
                 <MotionWrapper key={index} variant="staggerItem">
                   <div className="group rounded-2xl border border-[#E2E6EC] bg-white p-4 shadow-[0_4px_20px_rgba(29,78,216,0.03)] transition-all duration-300 hover:border-[#1D4ED8]/25 sm:p-5">
                     <div className="flex items-start gap-3">
@@ -51,7 +50,7 @@ export default function MedicalCodingWhyChooseUs() {
                         {index + 1}
                       </span>
                       <p className="text-xs leading-[1.65] text-[#475569] sm:text-[13px]">
-                        {paragraph}
+                        {item.text}
                       </p>
                     </div>
                   </div>
@@ -68,8 +67,8 @@ export default function MedicalCodingWhyChooseUs() {
               <div className="relative overflow-hidden rounded-3xl border border-[#E2E6EC] shadow-md">
                 <div className="relative aspect-[4/5] min-h-[360px] sm:min-h-[460px]">
                   <Image
-                    src="/doctor-hero.png"
-                    alt="BellMedEx certified medical coder reviewing clinical documentation"
+                    src={whyData.imageSrc || "/doctor-hero.png"}
+                    alt={whyData.imageAlt || "BellMedEx certified medical coder reviewing clinical documentation"}
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-cover object-top transition-transform duration-700 hover:scale-[1.02]"

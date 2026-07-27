@@ -10,6 +10,12 @@ import type { HealthcareSeoData } from '@/payload/types/healthcareSeo'
 import { defaultHealthcareSeoData } from '@/lib/defaults/healthcareSeo'
 import type { RevenueCycleManagementData } from '@/payload/types/revenueCycleManagement'
 import { defaultRevenueCycleManagementData } from '@/lib/defaults/revenueCycleManagement'
+import type { MedicalBillingData } from '@/payload/types/medicalBilling'
+import { defaultMedicalBillingData } from '@/lib/defaults/medicalBilling'
+import type { MedicalCodingData } from '@/payload/types/medicalCoding'
+import { defaultMedicalCodingData } from '@/lib/defaults/medicalCoding'
+import type { MedicalBillingAuditData } from '@/payload/types/medicalBillingAudit'
+import { defaultMedicalBillingAuditData } from '@/lib/defaults/medicalBillingAudit'
 
 /**
  * Fetches the Homepage global data from Payload CMS using the Local API.
@@ -113,6 +119,69 @@ export async function getRevenueCycleManagementData(): Promise<RevenueCycleManag
   } catch (error) {
     console.error('[Payload] Failed to fetch revenue cycle management data, using defaults:', error)
     return defaultRevenueCycleManagementData
+  }
+}
+
+/**
+ * Fetches the Medical Billing global data from Payload CMS using the Local API.
+ * Uses the Payload Local API (no HTTP overhead) for maximum performance.
+ * Falls back to default hardcoded content on any error.
+ */
+export async function getMedicalBillingData(): Promise<MedicalBillingData> {
+  try {
+    const payload = await getPayload({ config })
+
+    const data = await payload.findGlobal({
+      slug: 'medical-billing',
+    })
+
+    // Merge with defaults: CMS data takes priority, defaults fill gaps
+    return deepMerge(defaultMedicalBillingData, data as unknown as Partial<MedicalBillingData>)
+  } catch (error) {
+    console.error('[Payload] Failed to fetch medical billing data, using defaults:', error)
+    return defaultMedicalBillingData
+  }
+}
+
+/**
+ * Fetches the Medical Coding global data from Payload CMS using the Local API.
+ * Uses the Payload Local API (no HTTP overhead) for maximum performance.
+ * Falls back to default hardcoded content on any error.
+ */
+export async function getMedicalCodingData(): Promise<MedicalCodingData> {
+  try {
+    const payload = await getPayload({ config })
+
+    const data = await payload.findGlobal({
+      slug: 'medical-coding',
+    })
+
+    // Merge with defaults: CMS data takes priority, defaults fill gaps
+    return deepMerge(defaultMedicalCodingData, data as unknown as Partial<MedicalCodingData>)
+  } catch (error) {
+    console.error('[Payload] Failed to fetch medical coding data, using defaults:', error)
+    return defaultMedicalCodingData
+  }
+}
+
+/**
+ * Fetches the Medical Billing Audit global data from Payload CMS using the Local API.
+ * Uses the Payload Local API (no HTTP overhead) for maximum performance.
+ * Falls back to default hardcoded content on any error.
+ */
+export async function getMedicalBillingAuditData(): Promise<MedicalBillingAuditData> {
+  try {
+    const payload = await getPayload({ config })
+
+    const data = await payload.findGlobal({
+      slug: 'medical-billing-audit',
+    })
+
+    // Merge with defaults: CMS data takes priority, defaults fill gaps
+    return deepMerge(defaultMedicalBillingAuditData, data as unknown as Partial<MedicalBillingAuditData>)
+  } catch (error) {
+    console.error('[Payload] Failed to fetch medical billing audit data, using defaults:', error)
+    return defaultMedicalBillingAuditData
   }
 }
 

@@ -1,60 +1,24 @@
 "use client";
 
 import React, { useCallback, useState } from "react";
-import {
-  BadgeCheck,
-  ClipboardCheck,
-  FileText,
-  Laptop,
-  LucideIcon,
-} from "lucide-react";
 import SectionHeader from "@/components/ui/SectionHeader";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import BillingConsultingFeaturedPanel from "./BillingConsultingFeaturedPanel";
 import BillingConsultingServiceCard from "./BillingConsultingServiceCard";
+import { getIcon } from "@/lib/icons";
+import { defaultMedicalBillingData } from "@/lib/defaults/medicalBilling";
 
-interface ConsultingServiceItem {
-  id: string;
-  icon: LucideIcon;
-  title: string;
-  description: string;
+interface MedicalBillingConsultingServicesProps {
+  data?: typeof defaultMedicalBillingData.consultingServices;
 }
 
-const CONSULTING_SERVICES: ConsultingServiceItem[] = [
-  {
-    id: "medicare-billing",
-    icon: FileText,
-    title: "Medicare Billing Services",
-    description:
-      "Medicare billing is complex, but profitability is simple with our consultants. We combine billing expertise with practice-specific revenue solutions. The result? Maximum, hassle-free Medicare reimbursements. Let us design a roadmap to financial success for your practice.",
-  },
-  {
-    id: "provider-enrollment",
-    icon: BadgeCheck,
-    title: "Provider Enrollment Consultancy",
-    description:
-      "BellMedEx\u2019s superior medical billing consulting service knows the difficulties of provider enrollment firsthand. Therefore, we aid practices in joining insurance networks, steering applications, credentialing, and payor contract negotiations. We target plans benefiting practice and patients equally, allowing stable growth and success. Our aim is your prosperity and peace.",
-  },
-  {
-    id: "reimbursement-forms",
-    icon: ClipboardCheck,
-    title: "Reimbursement Forms Filing Support",
-    description:
-      "File claims confidently with our CMS reimbursement consultants. Our billing experts provide personalized guidance on CMS 1500 and UB-04 forms, code auditing, and timely submission. We optimize reimbursement by managing your CMS paperwork.",
-  },
-  {
-    id: "ehr-adoption",
-    icon: Laptop,
-    title: "Consultation on EHR Adoption and Integration",
-    description:
-      "As certified EHR implementation specialists, BellMedEx\u2019s 24/7 medical billing consultants advise on system selection, data migration, and workflow redesign to facilitate seamless EHR adoption and electronic billing integration in your practice.",
-  },
-];
+export default function MedicalBillingConsultingServices({ data }: MedicalBillingConsultingServicesProps) {
+  const advisoryData = data || defaultMedicalBillingData.consultingServices;
+  const services = advisoryData.services;
 
-export default function MedicalBillingConsultingServices() {
-  const [activeIndex, setActiveIndex] = useState(1);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const activeService = CONSULTING_SERVICES[activeIndex];
+  const activeService = services[activeIndex] || services[0];
 
   const goPrevious = useCallback(() => {
     setActiveIndex((current) => Math.max(current - 1, 0));
@@ -62,9 +26,9 @@ export default function MedicalBillingConsultingServices() {
 
   const goNext = useCallback(() => {
     setActiveIndex((current) =>
-      Math.min(current + 1, CONSULTING_SERVICES.length - 1)
+      Math.min(current + 1, services.length - 1)
     );
-  }, []);
+  }, [services.length]);
 
   const handleTabKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -79,18 +43,18 @@ export default function MedicalBillingConsultingServices() {
       }
 
       if (key === "End") {
-        setActiveIndex(CONSULTING_SERVICES.length - 1);
+        setActiveIndex(services.length - 1);
         return;
       }
 
       setActiveIndex((current) => {
         if (key === "ArrowDown") {
-          return Math.min(current + 1, CONSULTING_SERVICES.length - 1);
+          return Math.min(current + 1, services.length - 1);
         }
         return Math.max(current - 1, 0);
       });
     },
-    []
+    [services.length]
   );
 
   return (
@@ -100,19 +64,19 @@ export default function MedicalBillingConsultingServices() {
     >
       <div className="w-full max-w-7xl">
         <SectionHeader
-          badge="Smart Billing Advisory"
+          badge={advisoryData.badge}
           badgeVariant="indigo"
           badgePulse
           align="center"
           title={
             <span id="billing-advisory-heading">
-              Maximize Your Clinic&apos;s Revenue with BellMedEx&apos;s Smart{" "}
+              {advisoryData.titlePrefix}{" "}
               <span className="font-bold text-blue-600">
-                Billing Advisory Services
+                {advisoryData.titleHighlight}
               </span>
             </span>
           }
-          description="Healthcare providers turn to BellMedEx for medical billing consulting mastery. Our consultancy helps clients gain control of their revenue cycle management, including patient billing, collections, denials management, and accounts receivable. BellMedEx guides you to revenue growth through its customized consulting services."
+          description={advisoryData.description}
           className="mb-12 mx-auto max-w-4xl sm:mb-16"
         />
 
@@ -127,37 +91,42 @@ export default function MedicalBillingConsultingServices() {
                 role="tablist"
                 onKeyDown={handleTabKeyDown}
               >
-                {CONSULTING_SERVICES.map((service, idx) => (
-                  <BillingConsultingServiceCard
-                    key={service.id}
-                    id={`consulting-tab-${service.id}`}
-                    panelId={`consulting-panel-${service.id}`}
-                    icon={service.icon}
-                    title={service.title}
-                    index={idx}
-                    isActive={activeIndex === idx}
-                    onClick={() => setActiveIndex(idx)}
-                    className="lg:flex-1 lg:min-h-0"
-                  />
-                ))}
+                {services.map((service, idx) => {
+                  const Icon = getIcon(service.iconName);
+                  return (
+                    <BillingConsultingServiceCard
+                      key={service.id}
+                      id={`consulting-tab-${service.id}`}
+                      panelId={`consulting-panel-${service.id}`}
+                      icon={Icon}
+                      title={service.title}
+                      index={idx}
+                      isActive={activeIndex === idx}
+                      onClick={() => setActiveIndex(idx)}
+                      className="lg:flex-1 lg:min-h-0"
+                    />
+                  );
+                })}
               </div>
             </nav>
 
             <div className="h-full lg:col-span-8">
-              <MotionWrapper key={activeService.id} variant="fadeUp" className="h-full">
-                <BillingConsultingFeaturedPanel
-                  id={`consulting-panel-${activeService.id}`}
-                  tabId={`consulting-tab-${activeService.id}`}
-                  icon={activeService.icon}
-                  title={activeService.title}
-                  description={activeService.description}
-                  index={activeIndex}
-                  total={CONSULTING_SERVICES.length}
-                  onPrevious={goPrevious}
-                  onNext={goNext}
-                  className="h-full"
-                />
-              </MotionWrapper>
+              {activeService && (
+                <MotionWrapper key={activeService.id} variant="fadeUp" className="h-full">
+                  <BillingConsultingFeaturedPanel
+                    id={`consulting-panel-${activeService.id}`}
+                    tabId={`consulting-tab-${activeService.id}`}
+                    icon={getIcon(activeService.iconName)}
+                    title={activeService.title}
+                    description={activeService.description}
+                    index={activeIndex}
+                    total={services.length}
+                    onPrevious={goPrevious}
+                    onNext={goNext}
+                    className="h-full"
+                  />
+                </MotionWrapper>
+              )}
             </div>
           </div>
         </MotionWrapper>

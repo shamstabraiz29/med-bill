@@ -14,6 +14,9 @@ import { defaultClearinghouseData } from '@/lib/defaults/clearinghouse'
 import { defaultProviderCredentialingData } from '@/lib/defaults/providerCredentialing'
 import { defaultHealthcareSeoData } from '@/lib/defaults/healthcareSeo'
 import { defaultRevenueCycleManagementData } from '@/lib/defaults/revenueCycleManagement'
+import { defaultMedicalBillingData } from '@/lib/defaults/medicalBilling'
+import { defaultMedicalCodingData } from '@/lib/defaults/medicalCoding'
+import { defaultMedicalBillingAuditData } from '@/lib/defaults/medicalBillingAudit'
 
 async function seed() {
   console.log('🌱 Seeding Payload CMS...')
@@ -94,6 +97,39 @@ async function seed() {
     console.log('✅ Revenue Cycle Management global seeded successfully!')
   } catch (error) {
     console.error('❌ Failed to seed revenue cycle management:', error)
+  }
+
+  // Seed Medical Billing Global
+  try {
+    await payload.updateGlobal({
+      slug: 'medical-billing',
+      data: defaultMedicalBillingData as any,
+    })
+    console.log('✅ Medical Billing global seeded successfully!')
+  } catch (error) {
+    console.error('❌ Failed to seed medical billing:', error)
+  }
+
+  // Seed Medical Coding Global
+  try {
+    await payload.updateGlobal({
+      slug: 'medical-coding',
+      data: defaultMedicalCodingData as any,
+    })
+    console.log('✅ Medical Coding global seeded successfully!')
+  } catch (error) {
+    console.error('❌ Failed to seed medical coding:', error)
+  }
+
+  // Seed Medical Billing Audit Global
+  try {
+    await payload.updateGlobal({
+      slug: 'medical-billing-audit',
+      data: defaultMedicalBillingAuditData as any,
+    })
+    console.log('✅ Medical Billing Audit global seeded successfully!')
+  } catch (error) {
+    console.error('❌ Failed to seed medical billing audit:', error)
   }
 
   console.log('🎉 Seeding complete!')

@@ -36,7 +36,17 @@ const INITIAL_FORM_DATA: FormData = {
   message: "",
 };
 
-export default function MedicalBillingAuditHeroForm() {
+interface MedicalBillingAuditHeroFormProps {
+  formTitle?: string;
+  formDescription?: string;
+  formButtonLabel?: string;
+}
+
+export default function MedicalBillingAuditHeroForm({
+  formTitle = "Schedule Free Medical Billing Audit",
+  formDescription = "Enter your contact details below to receive a complimentary audit report from our senior auditors.",
+  formButtonLabel = "BOOK NOW",
+}: MedicalBillingAuditHeroFormProps) {
   const [formData, setFormData] = useState<FormData>(INITIAL_FORM_DATA);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -65,8 +75,13 @@ export default function MedicalBillingAuditHeroForm() {
     >
       <div className="space-y-1.5 border-b border-[#E2E6EC] pb-2 text-center sm:text-left">
         <h2 className="text-xl font-bold tracking-[-0.02em] text-[#0F172A] sm:text-2xl">
-          Claim Free Medical Audit
+          {formTitle}
         </h2>
+        {formDescription && (
+          <p className="text-xs text-[#475569] leading-relaxed">
+            {formDescription}
+          </p>
+        )}
       </div>
 
       {isSubmitted ? (

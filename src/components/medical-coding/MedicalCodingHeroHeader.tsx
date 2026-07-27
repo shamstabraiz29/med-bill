@@ -4,14 +4,15 @@ import { motion } from "motion/react";
 import { Check } from "lucide-react";
 import SectionBadge from "@/components/ui/SectionBadge";
 import { blurRevealVariants, springPopVariants, staggerContainerVariants } from "@/lib/motion";
+import { defaultMedicalCodingData } from "@/lib/defaults/medicalCoding";
 
-const BENEFITS = [
-  "Providers receive timely payment.",
-  "Patients are accurately billed for services.",
-  "Payers accept claims without rejection.",
-];
+interface MedicalCodingHeroHeaderProps {
+  data?: typeof defaultMedicalCodingData.hero;
+}
 
-export default function MedicalCodingHeroHeader() {
+export default function MedicalCodingHeroHeader({ data }: MedicalCodingHeroHeaderProps) {
+  const heroData = data || defaultMedicalCodingData.hero;
+
   return (
     <motion.div
       initial="hidden"
@@ -21,7 +22,7 @@ export default function MedicalCodingHeroHeader() {
     >
       <motion.div variants={springPopVariants}>
         <SectionBadge variant="blue" pulse>
-          Medical Coding Services
+          {heroData.badge}
         </SectionBadge>
       </motion.div>
 
@@ -29,18 +30,15 @@ export default function MedicalCodingHeroHeader() {
         variants={blurRevealVariants}
         className="text-3xl font-bold leading-[1.18] tracking-[-0.02em] text-[#0F172A] sm:text-4xl lg:max-w-2xl lg:text-5xl"
       >
-        Best Medical Coding Solutions. No Revenue Leakage,{" "}
-        <span className="text-[#1D4ED8]">Get Paid On-Time.</span>
+        {heroData.titlePlain}
+        <span className="text-[#1D4ED8]">{heroData.titleHighlight}</span>
       </motion.h1>
 
       <motion.p
         variants={blurRevealVariants}
         className="max-w-2xl text-sm leading-[1.6] text-[#475569] sm:text-base"
       >
-        Medical coding services are the need of healthcare providers in the USA.
-        Our expert clinical coders fulfill the coding needs of every specialty by
-        assigning diagnosis and procedure codes that facilitate the creation of
-        claims for submission to payers.
+        {heroData.description}
       </motion.p>
 
       <motion.ul
@@ -48,16 +46,16 @@ export default function MedicalCodingHeroHeader() {
         className="flex max-w-2xl flex-col gap-2.5"
         role="list"
       >
-        {BENEFITS.map((benefit) => (
+        {heroData.benefits.map((item, idx) => (
           <li
-            key={benefit}
+            key={idx}
             className="flex items-start gap-2 text-sm leading-snug text-[#475569] sm:text-[15px]"
           >
             <Check
               className="mt-0.5 h-4 w-4 shrink-0 stroke-[3] text-[#22C55E]"
               aria-hidden="true"
             />
-            {benefit}
+            {item.label}
           </li>
         ))}
       </motion.ul>

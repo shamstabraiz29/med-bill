@@ -91,6 +91,9 @@ export interface Config {
     'provider-credentialing': ProviderCredentialing;
     'healthcare-seo': HealthcareSeo;
     'revenue-cycle-management': RevenueCycleManagement;
+    'medical-billing': MedicalBilling;
+    'medical-coding': MedicalCoding;
+    'medical-billing-audit': MedicalBillingAudit;
   };
   globalsSelect: {
     homepage: HomepageSelect<false> | HomepageSelect<true>;
@@ -98,6 +101,9 @@ export interface Config {
     'provider-credentialing': any;
     'healthcare-seo': any;
     'revenue-cycle-management': any;
+    'medical-billing': any;
+    'medical-coding': any;
+    'medical-billing-audit': any;
   };
   locale: null;
   widgets: {
@@ -1002,6 +1008,21 @@ export interface HealthcareSeo {
 }
 
 export interface RevenueCycleManagement {
+  id: number;
+  [key: string]: any;
+}
+
+export interface MedicalBilling {
+  id: number;
+  [key: string]: any;
+}
+
+export interface MedicalCoding {
+  id: number;
+  [key: string]: any;
+}
+
+export interface MedicalBillingAudit {
   id: number;
   [key: string]: any;
 }

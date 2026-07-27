@@ -4,8 +4,15 @@ import React from "react";
 import AppButton from "@/components/ui/AppButton";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import SectionBadge from "@/components/ui/SectionBadge";
+import { defaultMedicalCodingData } from "@/lib/defaults/medicalCoding";
 
-export default function MedicalCodingAuditsDemoCta() {
+interface MedicalCodingAuditsDemoCtaProps {
+  data?: typeof defaultMedicalCodingData.auditsDemoCta;
+}
+
+export default function MedicalCodingAuditsDemoCta({ data }: MedicalCodingAuditsDemoCtaProps) {
+  const ctaData = data || defaultMedicalCodingData.auditsDemoCta;
+
   return (
     <section
       className="flex w-full items-center justify-center bg-transparent px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20"
@@ -20,27 +27,27 @@ export default function MedicalCodingAuditsDemoCta() {
             />
 
             <div className="relative mx-auto flex max-w-3xl flex-col items-center space-y-4">
-              <SectionBadge variant="dark">Audits &amp; Consultancy</SectionBadge>
+              <SectionBadge variant="dark">{ctaData.badge}</SectionBadge>
 
               <h2
                 id="medical-coding-audits-demo-cta-heading"
                 className="text-2xl font-bold leading-tight tracking-tight sm:text-3xl lg:leading-snug"
               >
-                Practices thrive when records reflect the{" "}
-                <span className="font-bold text-amber-300">whole patient.</span>
+                {ctaData.titlePrefix}{" "}
+                <span className="font-bold text-amber-300">{ctaData.titleHighlight}</span>
               </h2>
 
               <p className="text-sm leading-relaxed text-blue-200 sm:text-base">
-                Contact us today for medical coding audits and consultancy!
+                {ctaData.description}
               </p>
 
               <AppButton
-                href="/schedule-a-demo"
+                href={ctaData.ctaHref || "/schedule-a-demo"}
                 variant="secondary-dark"
                 size="lg"
                 showArrow
               >
-                Schedule Free Demo
+                {ctaData.ctaLabel}
               </AppButton>
             </div>
           </div>

@@ -14,6 +14,9 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 import { RevenueCycleManagement } from '@/payload/globals/RevenueCycleManagement'
+import { MedicalBilling } from '@/payload/globals/MedicalBilling'
+import { MedicalCoding } from '@/payload/globals/MedicalCoding'
+import { MedicalBillingAudit } from '@/payload/globals/MedicalBillingAudit'
 
 export default buildConfig({
   admin: {
@@ -25,7 +28,7 @@ export default buildConfig({
 
   collections: [Users],
 
-  globals: [Homepage, Clearinghouse, ProviderCredentialing, HealthcareSeo, RevenueCycleManagement],
+  globals: [Homepage, Clearinghouse, ProviderCredentialing, HealthcareSeo, RevenueCycleManagement, MedicalBilling, MedicalCoding, MedicalBillingAudit],
 
   db: postgresAdapter({
     pool: {

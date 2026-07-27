@@ -3,16 +3,15 @@
 import React from "react";
 import AppButton from "@/components/ui/AppButton";
 import MotionWrapper from "@/components/ui/MotionWrapper";
+import { defaultMedicalCodingData } from "@/lib/defaults/medicalCoding";
 
-const PROCESS_STEPS = [
-  "Clinical coders encode medical charts into numerical and letter coded data string sequences.",
-  "Assignment process finds the relevant codes from the medical classification and entering it into the data collection system.",
-  "Clinical coders review medical codes to ensure accuracy, including the diagnosis-related group (DRG) if financed via case mix prototype.",
-  "Medical billing advocates work with payers to ensure fair reimbursement for healthcare providers, resolving any issues with denied claims.",
-  "Medical coding team ensures timely payment by closing tickets only after payment and claims acceptance.",
-];
+interface MedicalCodingProvenProcessProps {
+  data?: typeof defaultMedicalCodingData.provenProcess;
+}
 
-export default function MedicalCodingProvenProcess() {
+export default function MedicalCodingProvenProcess({ data }: MedicalCodingProvenProcessProps) {
+  const processData = data || defaultMedicalCodingData.provenProcess;
+
   return (
     <section
       className="w-full bg-transparent px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20"
@@ -26,19 +25,16 @@ export default function MedicalCodingProvenProcess() {
                 id="medical-coding-proven-process-heading"
                 className="text-3xl font-bold leading-[1.18] tracking-[-0.02em] text-[#0F172A] sm:text-4xl lg:text-[2.6rem]"
               >
-                Get medical coding done right with our{" "}
-                <span className="font-bold text-blue-600">proven process</span>
+                {processData.titlePrefix}{" "}
+                <span className="font-bold text-blue-600">{processData.titleHighlight}</span>
               </h2>
 
               <p className="max-w-xl text-sm leading-[1.65] text-[#475569] sm:text-base">
-                Our certified coders know how to ethically optimize billing codes
-                and documentation, uncover billable codes, and capture every dollar
-                you&apos;ve earned from payers.
+                {processData.description1}
               </p>
 
               <p className="max-w-xl text-sm leading-[1.65] text-[#475569] sm:text-base">
-                Here&apos;s our systematic approach to represent patient diagnosis
-                documentation within the codes.
+                {processData.description2}
               </p>
             </div>
           </MotionWrapper>
@@ -50,11 +46,11 @@ export default function MedicalCodingProvenProcess() {
               className="w-full"
             >
               <div className="flex w-full flex-col">
-                {PROCESS_STEPS.map((step, index) => (
+                {processData.steps.map((step, index) => (
                   <MotionWrapper key={index} variant="staggerItem" className="w-full">
                     <div
                       className={`grid w-full grid-cols-[2.5rem_minmax(0,1fr)] items-center gap-x-4 sm:gap-x-5 ${
-                        index < PROCESS_STEPS.length - 1 ? "mb-4 sm:mb-5" : ""
+                        index < processData.steps.length - 1 ? "mb-4 sm:mb-5" : ""
                       }`}
                     >
                       <div className="relative flex items-center justify-center self-stretch">
@@ -69,7 +65,7 @@ export default function MedicalCodingProvenProcess() {
                           {index + 1}
                         </div>
 
-                        {index < PROCESS_STEPS.length - 1 && (
+                        {index < processData.steps.length - 1 && (
                           <div
                             className="absolute left-1/2 top-[calc(50%+1.25rem)] -bottom-4 w-px -translate-x-1/2 bg-[#1D4ED8]/25 sm:-bottom-5"
                             aria-hidden="true"
@@ -79,7 +75,7 @@ export default function MedicalCodingProvenProcess() {
 
                       <div className="min-w-0 rounded-2xl border border-[#E2E6EC] bg-white p-4 shadow-[0_4px_20px_rgba(29,78,216,0.04)] transition-all duration-300 hover:border-[#1D4ED8]/25 sm:p-5">
                         <p className="text-xs leading-[1.65] text-[#475569] sm:text-[13px]">
-                          {step}
+                          {step.text}
                         </p>
                       </div>
                     </div>
@@ -91,12 +87,12 @@ export default function MedicalCodingProvenProcess() {
                     <div aria-hidden="true" />
                     <div>
                       <AppButton
-                        href="/schedule-a-demo"
+                        href={processData.ctaHref || "/schedule-a-demo"}
                         variant="primary"
                         size="lg"
                         showArrow
                       >
-                        Get Started Today
+                        {processData.ctaLabel}
                       </AppButton>
                     </div>
                   </div>

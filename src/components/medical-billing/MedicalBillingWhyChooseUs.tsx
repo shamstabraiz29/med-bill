@@ -2,48 +2,20 @@
 
 import React from "react";
 import Image from "next/image";
-import { 
-  FileText, 
-  TrendingUp, 
-  Clock, 
-  ChevronRight, 
-  ShieldCheck,
-} from "lucide-react";
+import { ChevronRight, ShieldCheck } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import SectionHeader from "@/components/ui/SectionHeader";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import IconWrapper from "@/components/common/IconWrapper";
+import { getIcon } from "@/lib/icons";
+import { defaultMedicalBillingData } from "@/lib/defaults/medicalBilling";
 
-export default function MedicalBillingWhyChooseUs() {
-  const topCards = [
-    {
-      icon: FileText,
-      title: "Optimized RCM",
-      desc: "BellMedEx's medical billing consultancy service optimizes the revenue cycle end-to-end to accelerate patient intake, expedite claims, and maximize collections. The result? More cash on hand, lower expenses, and happier patients.",
-    },
-    {
-      icon: TrendingUp,
-      title: "Increased Revenue",
-      desc: "BellMedEx's medical billing consultation group works closely with health centers to guarantee claims are submitted properly. With reimbursements coming in \"full\" and \"on time\", health facilities thrive. As consultants, we enable long-term revenue growth.",
-    },
-    {
-      icon: Clock,
-      title: "Fast Claim Processing",
-      desc: "BellMedEx's medical billing consulting solutions optimize doctor's cash flow. Our consultants identify issues delaying payments and provide electronic claim processing solutions for faster payouts.",
-    },
-  ];
+interface MedicalBillingWhyChooseUsProps {
+  data?: typeof defaultMedicalBillingData.whyChooseUs;
+}
 
-  const checklistItems = [
-    "Help providers get paid and provide better patient care",
-    "Improve cash flow by speeding up claims payments",
-    "Identify and resolve any billing issues that may be delaying payments.",
-    "Reduce administrative burdens by automating claim processing.",
-    "Avoid revenue leakage by identifying and correcting any errors in billing.",
-    "Help practices meet compliance and regulatory requirements.",
-    "Reduce claim processing time for quick reimbursements.",
-    "Reduce the costs of hiring and training a medical biller.",
-    "Zero out the cost of buying expensive medical billing softwares.",
-  ];
+export default function MedicalBillingWhyChooseUs({ data }: MedicalBillingWhyChooseUsProps) {
+  const whyData = data || defaultMedicalBillingData.whyChooseUs;
 
   return (
     <section className="w-full bg-transparent py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
@@ -51,8 +23,8 @@ export default function MedicalBillingWhyChooseUs() {
         
         {/* Top 3 Column Cards Grid */}
         <MotionWrapper variant="stagger" className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-          {topCards.map((card, idx) => {
-            const Icon = card.icon;
+          {whyData.topCards.map((card, idx) => {
+            const Icon = getIcon(card.iconName);
             return (
               <MotionWrapper key={idx} variant="staggerItem">
                 <Card 
@@ -61,7 +33,6 @@ export default function MedicalBillingWhyChooseUs() {
                   className="h-full bg-white border border-[#E2E6EC] rounded-2xl sm:rounded-3xl p-6 sm:p-8 text-center shadow-[0_4px_24px_rgba(29,78,216,0.04)] hover:border-[#1D4ED8]/30 hover:shadow-lg transition-all duration-300 flex flex-col items-center justify-start group"
                 >
                   <CardContent className="p-0 flex flex-col items-center text-center">
-                    {/* Icon Container */}
                     <IconWrapper
                       icon={Icon}
                       size="lg"
@@ -69,12 +40,10 @@ export default function MedicalBillingWhyChooseUs() {
                       className="mb-5 group-hover:scale-110"
                     />
 
-                    {/* Card Title */}
                     <h3 className="text-xl font-bold text-[#0F172A] mb-3 tracking-[-0.02em]">
                       {card.title}
                     </h3>
 
-                    {/* Card Description */}
                     <p className="text-xs sm:text-[13px] text-[#475569] leading-[1.6]">
                       {card.desc}
                     </p>
@@ -92,7 +61,7 @@ export default function MedicalBillingWhyChooseUs() {
           <MotionWrapper variant="slideLeft" className="lg:col-span-6 relative">
             <div className="relative w-full h-[360px] sm:h-[460px] md:h-[500px] rounded-3xl overflow-hidden border border-[#E2E6EC] shadow-md group">
               <Image
-                src="/consultants-laptop.png"
+                src={whyData.imageSrc || "/consultants-laptop.png"}
                 alt="BellMedEx medical billing consultants reviewing practice analytics on laptop"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -119,38 +88,34 @@ export default function MedicalBillingWhyChooseUs() {
           {/* Right Column: Why Choose Us Content & Checklist */}
           <MotionWrapper variant="slideRight" className="lg:col-span-6 space-y-6 text-left">
             <SectionHeader
-              badge="WHY CHOOSE US"
+              badge={whyData.badge}
               badgeVariant="indigo"
               badgePulse
               align="left"
               title={
                 <>
-                  BellMedEx&apos;s Medical Billing{" "}
-                  <span className="font-bold text-blue-600">Consulting Service</span>{" "}
-                  Gets Doctors Paid On Time
+                  {whyData.titlePrefix}
+                  <span className="font-bold text-blue-600">{whyData.titleHighlight}</span>
+                  {whyData.titleSuffix}
                 </>
               }
               description={
                 <div className="space-y-4">
-                  <p>
-                    BellMedEx medical billing consulting company has subject-matter experts for every specialty&apos;s billing and coding workflows. By leveraging efficient claim filing, precise coding, vigilant A/R follow-up, mastery of ICD-10 billing, and proper auditing &ndash; BellMedEx&apos;s medical billing audit consultants help healthcare providers receive every dollar they&apos;ve earned when they&apos;ve earned it.
-                  </p>
-                  <p>
-                    We assist practices large and small in overcoming lost, delayed, or underpaid claims. Engage our 24/7 medical billing and coding consultancy for the medical billing help your practice needs.
-                  </p>
+                  <p>{whyData.description1}</p>
+                  <p>{whyData.description2}</p>
                 </div>
               }
             />
 
-            {/* 9-Point Checklist */}
+            {/* Checklist */}
             <div className="pt-2 flex flex-col gap-2.5">
-              {checklistItems.map((item, idx) => (
+              {whyData.checklist.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2.5 text-left">
                   <div className="w-4 h-4 rounded-full bg-blue-50 text-[#1D4ED8] flex items-center justify-center shrink-0 mt-0.5">
                     <ChevronRight className="w-3.5 h-3.5 stroke-[2.5]" />
                   </div>
                   <span className="text-xs sm:text-[13px] font-medium text-[#475569] leading-snug">
-                    {item}
+                    {item.label}
                   </span>
                 </div>
               ))}

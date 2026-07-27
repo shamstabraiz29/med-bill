@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getMedicalBillingData } from "@/lib/payload";
 import {
   ConsultationSection,
   MedicalBillingWhyChooseUs,
@@ -14,46 +15,70 @@ import {
   MedicalBillingFAQ,
 } from "@/components/medical-billing";
 
-export const metadata: Metadata = {
-  title: "Medical Billing Consulting Services | BellMedEx",
-  description: "Schedule a free consultation with BellMedEx professional medical billing consultants. Accelerate cash flow, optimize billing processes, and reduce claim denials.",
-};
+/**
+ * Dynamic SEO metadata generated from Payload CMS Medical Billing global.
+ */
+export async function generateMetadata(): Promise<Metadata> {
+  const data = await getMedicalBillingData();
+  const { seo } = data;
 
-export default function MedicalBillingPage() {
+  return {
+    title: seo.metaTitle,
+    description: seo.metaDescription,
+    keywords: seo.keywords,
+    robots: seo.robots,
+    alternates: {
+      canonical: seo.canonicalUrl,
+    },
+    openGraph: {
+      title: seo.openGraph?.ogTitle || seo.metaTitle,
+      description: seo.openGraph?.ogDescription || seo.metaDescription,
+      type: (seo.openGraph?.ogType as "website") || "website",
+      url: seo.openGraph?.ogUrl || seo.canonicalUrl,
+    },
+  };
+}
+
+export default async function MedicalBillingPage() {
+  const data = await getMedicalBillingData();
+
   return (
     <div className="flex flex-col min-h-screen py-4 sm:py-8 space-y-8 sm:space-y-12">
-      {/* Consultation & Schedule Form Section (From Image 1) */}
-      <ConsultationSection />
+      {/* Consultation & Schedule Form Section */}
+      <ConsultationSection data={data.consultation} />
 
-      {/* RCM Highlights & Why Choose Us Section (From Image 2) */}
-      <MedicalBillingWhyChooseUs />
+      {/* RCM Highlights & Why Choose Us Section */}
+      <MedicalBillingWhyChooseUs data={data.whyChooseUs} />
 
       {/* Billing Process Workflow Section */}
-      <MedicalBillingWorkflow />
+      <MedicalBillingWorkflow data={data.workflow} />
 
       {/* What We Offer Section */}
-      <MedicalBillingWhatWeOffer />
+      <MedicalBillingWhatWeOffer data={data.whatWeOffer} />
 
       {/* Smart Billing Advisory Services Section */}
-      <MedicalBillingConsultingServices />
+      <MedicalBillingConsultingServices data={data.consultingServices} />
 
       {/* Consultancy Benefits Section */}
-      <MedicalBillingConsultancyBenefits />
+      <MedicalBillingConsultancyBenefits data={data.consultancyBenefits} />
 
       {/* Consultancy Features Section */}
-      <MedicalBillingConsultancyFeatures />
+      <MedicalBillingConsultancyFeatures data={data.consultancyFeatures} />
 
       {/* Medical Coding Consultants Section */}
-      <MedicalBillingCodingConsultants />
+      <MedicalBillingCodingConsultants data={data.codingConsultants} />
 
       {/* All Specialties Lead Capture Section */}
-      <MedicalBillingSpecialtySolutions />
+      <MedicalBillingSpecialtySolutions data={data.specialtySolutions} />
 
       {/* Partners in Success Section */}
-      <MedicalBillingPartnersSuccess />
+      <MedicalBillingPartnersSuccess data={data.partnersSuccess} />
 
       {/* Revenue Recovery CTA Section */}
-      <MedicalBillingRevenueCta />
+      <MedicalBillingRevenueCta data={data.revenueCta} />
+
+      {/* Medical Billing FAQ Section */}
+      <MedicalBillingFAQ data={data.faq} />
     </div>
   );
 }

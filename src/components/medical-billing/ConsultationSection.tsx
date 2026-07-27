@@ -6,18 +6,23 @@ import {
   Mail, 
   Phone, 
   CheckCircle2, 
-  Send, 
-  ShieldCheck, 
-  TrendingUp, 
-  Clock,
+  Send,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import AppButton from "@/components/ui/AppButton";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import SectionHeader from "@/components/ui/SectionHeader";
 import IconWrapper from "@/components/common/IconWrapper";
+import { getIcon } from "@/lib/icons";
+import { defaultMedicalBillingData } from "@/lib/defaults/medicalBilling";
 
-export default function ConsultationSection() {
+interface ConsultationSectionProps {
+  data?: typeof defaultMedicalBillingData.consultation;
+}
+
+export default function ConsultationSection({ data }: ConsultationSectionProps) {
+  const consultationData = data || defaultMedicalBillingData.consultation;
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -36,53 +41,31 @@ export default function ConsultationSection() {
     }, 900);
   };
 
-  const highlights = [
-    {
-      title: "98% Clean Claim Rate",
-      desc: "Fast first-pass reimbursements",
-      icon: TrendingUp,
-    },
-    {
-      title: "Certified Consultants",
-      desc: "Dedicated CMRS & CPB billers",
-      icon: ShieldCheck,
-    },
-    {
-      title: "24/7 Denial Oversight",
-      desc: "Rapid appeals & aging AR recovery",
-      icon: Clock,
-    },
-  ];
-
   return (
     <section className="w-full bg-transparent py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 flex justify-center items-center">
       <div className="w-full max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           
-          {/* Left Column: Heading, Paragraphs & Highlights (Matching Homepage Typography) */}
+          {/* Left Column: Heading, Paragraphs & Highlights */}
           <MotionWrapper variant="slideLeft" className="lg:col-span-7 flex flex-col items-start text-left space-y-6">
             
             {/* Standard Homepage Section Header */}
             <SectionHeader
-              badge="Schedule Free Consultation"
+              badge={consultationData.badge}
               badgeVariant="indigo"
               badgePulse
               title={
                 <>
-                  Medical Billing{" "}
+                  {consultationData.titlePlain}{" "}
                   <span className="font-bold text-blue-600">
-                    Consulting Service
+                    {consultationData.titleHighlight}
                   </span>
                 </>
               }
               description={
                 <div className="space-y-4 text-[#475569] text-base leading-[1.6]">
-                  <p>
-                    <strong className="text-[#0F172A] font-semibold">BellMedEx</strong> is a Medical Billing Help Company offering medical billing consulting services. Our professional billing consultants work side-by-side with healthcare providers to help them achieve billing success. We immerse ourselves in your practice to pinpoint opportunities for reducing denials and speeding up payments.
-                  </p>
-                  <p>
-                    Our medical billing consulting group provides the strategic guidance and tactical support needed to optimize billing processes, technology, and staff skills. With our consultancy solutions, every practice is positioned to thrive through improved medical billing.
-                  </p>
+                  <p>{consultationData.description1}</p>
+                  <p>{consultationData.description2}</p>
                 </div>
               }
               className="max-w-2xl"
@@ -90,8 +73,8 @@ export default function ConsultationSection() {
 
             {/* Homepage-style Feature Tiles */}
             <div className="w-full pt-2 grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {highlights.map((item, idx) => {
-                const IconComponent = item.icon;
+              {consultationData.highlights.map((item, idx) => {
+                const IconComponent = getIcon(item.iconName);
                 return (
                   <div
                     key={idx}
@@ -116,17 +99,17 @@ export default function ConsultationSection() {
 
           </MotionWrapper>
 
-          {/* Right Column: Schedule Form Card (Homepage Form Styling & Reusable Components) */}
+          {/* Right Column: Schedule Form Card */}
           <MotionWrapper variant="slideRight" className="lg:col-span-5 w-full">
             <div className="relative overflow-hidden rounded-3xl bg-white border border-[#E2E6EC] p-6 sm:p-8 md:p-9 shadow-[0_8px_30px_rgba(29,78,216,0.06)] flex flex-col gap-6 w-full">
               
               {/* Header inside Form Card */}
               <div className="text-left space-y-1.5 pb-2 border-b border-[#E2E6EC]">
                 <h3 className="text-xl sm:text-2xl font-bold text-[#0F172A] tracking-[-0.02em]">
-                  Schedule Free Consultation
+                  {consultationData.formTitle}
                 </h3>
                 <p className="text-xs sm:text-sm text-[#475569] leading-relaxed">
-                  Enter your contact details below to speak with an expert consultant.
+                  {consultationData.formDescription}
                 </p>
               </div>
 
@@ -136,10 +119,10 @@ export default function ConsultationSection() {
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
                   <h4 className="text-lg font-bold text-[#0F172A]">
-                    Request Received!
+                    {consultationData.successTitle}
                   </h4>
                   <p className="text-xs sm:text-sm text-[#475569] max-w-xs mx-auto">
-                    Thank you <span className="font-semibold text-[#0F172A]">{formData.name}</span>. A BellMedEx senior consultant will contact you within 24 hours.
+                    Thank you <span className="font-semibold text-[#0F172A]">{formData.name}</span>. {consultationData.successDescription}
                   </p>
                   <button
                     onClick={() => {
@@ -222,7 +205,7 @@ export default function ConsultationSection() {
                         </span>
                       ) : (
                         <span className="flex items-center gap-2 justify-center">
-                          BOOK NOW
+                          {consultationData.formButtonLabel}
                           <Send className="w-3.5 h-3.5" />
                         </span>
                       )}

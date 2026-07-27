@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getMedicalBillingAuditData } from "@/lib/payload";
 import {
   MedicalBillingAuditChartReviews,
   MedicalBillingAuditClaimAccuracyCta,
@@ -12,25 +13,45 @@ import {
   MedicalBillingAuditSolutionsToDate,
 } from "@/components/medical-billing-audit";
 
-export const metadata: Metadata = {
-  title: "Medical Billing & Coding Audit Services | BellMedEx",
-  description:
-    "BellMedEx offers healthcare coding and compliance audit services. Our experienced billing auditors review billing codes for accuracy, compliance, and optimization.",
-};
+/**
+ * Dynamic SEO metadata generated from Payload CMS Medical Billing Audit global.
+ */
+export async function generateMetadata(): Promise<Metadata> {
+  const data = await getMedicalBillingAuditData();
+  const { seo } = data;
 
-export default function MedicalBillingAuditPage() {
+  return {
+    title: seo.metaTitle,
+    description: seo.metaDescription,
+    keywords: seo.keywords,
+    robots: seo.robots,
+    alternates: {
+      canonical: seo.canonicalUrl,
+    },
+    openGraph: {
+      title: seo.openGraph?.ogTitle || seo.metaTitle,
+      description: seo.openGraph?.ogDescription || seo.metaDescription,
+      type: (seo.openGraph?.ogType as "website") || "website",
+      url: seo.openGraph?.ogUrl || seo.canonicalUrl,
+    },
+  };
+}
+
+export default async function MedicalBillingAuditPage() {
+  const data = await getMedicalBillingAuditData();
+
   return (
     <div className="flex min-h-screen flex-col py-4 sm:py-8">
-      <MedicalBillingAuditHero />
-      <MedicalBillingAuditOverview />
-      <MedicalBillingAuditSolutions />
-      <MedicalBillingAuditRecordsCta /> 
-      <MedicalBillingAuditProblemsSolutions />
-      <MedicalBillingAuditOptimizeProcesses />
-      <MedicalBillingAuditSolutionsToDate />
-      <MedicalBillingAuditPostAuditReports />
-      <MedicalBillingAuditChartReviews />
-      <MedicalBillingAuditClaimAccuracyCta /> 
+      <MedicalBillingAuditHero data={data.hero} />
+      <MedicalBillingAuditOverview data={data.overview} />
+      <MedicalBillingAuditSolutions data={data.solutions} />
+      <MedicalBillingAuditRecordsCta data={data.recordsCta} />
+      <MedicalBillingAuditProblemsSolutions data={data.problemsSolutions} />
+      <MedicalBillingAuditOptimizeProcesses data={data.optimizeProcesses} />
+      <MedicalBillingAuditSolutionsToDate data={data.solutionsToDate} />
+      <MedicalBillingAuditPostAuditReports data={data.postAuditReports} />
+      <MedicalBillingAuditChartReviews data={data.chartReviews} />
+      <MedicalBillingAuditClaimAccuracyCta data={data.claimAccuracyCta} />
     </div>
   );
 }

@@ -1,29 +1,18 @@
 "use client";
 
 import React from "react";
-import {
-  BadgeCheck,
-  CircleDollarSign,
-  LucideIcon,
-  ShieldCheck,
-  Users,
-} from "lucide-react";
 import AppButton from "@/components/ui/AppButton";
 import MotionWrapper from "@/components/ui/MotionWrapper";
+import { getIcon } from "@/lib/icons";
+import { defaultMedicalCodingData } from "@/lib/defaults/medicalCoding";
 
-interface FeatureItem {
-  icon: LucideIcon;
-  title: string;
+interface MedicalCodingFairRevenueCtaProps {
+  data?: typeof defaultMedicalCodingData.fairRevenueCta;
 }
 
-const FEATURES: FeatureItem[] = [
-  { icon: Users, title: "Skilled Coders" },
-  { icon: ShieldCheck, title: "HIPAA Compliant" },
-  { icon: CircleDollarSign, title: "Improved Cash Flow" },
-  { icon: BadgeCheck, title: "Reduced Denials" },
-];
+export default function MedicalCodingFairRevenueCta({ data }: MedicalCodingFairRevenueCtaProps) {
+  const ctaData = data || defaultMedicalCodingData.fairRevenueCta;
 
-export default function MedicalCodingFairRevenueCta() {
   return (
     <section
       className="flex w-full items-center justify-center bg-transparent px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20"
@@ -43,24 +32,23 @@ export default function MedicalCodingFairRevenueCta() {
                   id="medical-coding-fair-revenue-cta-heading"
                   className="text-2xl font-bold leading-tight tracking-tight sm:text-3xl sm:leading-snug lg:text-4xl"
                 >
-                  Let&apos;s transform your medical records into{" "}
-                  <span className="font-bold text-amber-300">fair revenue...</span>
+                  {ctaData.titlePrefix}{" "}
+                  <span className="font-bold text-amber-300">{ctaData.titleHighlight}</span>
                 </h2>
 
                 <p className="text-sm text-blue-200 sm:text-base">
-                  Our dedicated medical coding experts efficiently extract insights
-                  from patient data to maximize your reimbursements.
+                  {ctaData.description}
                 </p>
               </div>
 
               <div className="flex shrink-0 items-start justify-start lg:items-center lg:justify-end">
                 <AppButton
-                  href="/schedule-a-demo"
+                  href={ctaData.ctaHref || "/schedule-a-demo"}
                   variant="secondary-dark"
                   size="lg"
                   showArrow
                 >
-                  Book a demo
+                  {ctaData.ctaLabel}
                 </AppButton>
               </div>
             </div>
@@ -68,20 +56,23 @@ export default function MedicalCodingFairRevenueCta() {
             <div className="my-8 w-full border-t border-white/10 sm:my-10" />
 
             <div className="grid grid-cols-1 gap-4 text-left sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
-              {FEATURES.map(({ icon: Icon, title }) => (
-                <div
-                  key={title}
-                  className="flex flex-col gap-3 rounded-xl border border-white/[0.08] bg-white/[0.04] p-5 transition-colors duration-200 hover:bg-white/[0.08]"
-                >
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-white">
-                    <Icon className="h-4 w-4 stroke-[2]" aria-hidden="true" />
-                  </div>
+              {ctaData.features.map((feature) => {
+                const Icon = getIcon(feature.iconName);
+                return (
+                  <div
+                    key={feature.title}
+                    className="flex flex-col gap-3 rounded-xl border border-white/[0.08] bg-white/[0.04] p-5 transition-colors duration-200 hover:bg-white/[0.08]"
+                  >
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-white">
+                      <Icon className="h-4 w-4 stroke-[2]" aria-hidden="true" />
+                    </div>
 
-                  <h3 className="mt-1 text-xs font-semibold uppercase tracking-wider text-indigo-200">
-                    {title}
-                  </h3>
-                </div>
-              ))}
+                    <h3 className="mt-1 text-xs font-semibold uppercase tracking-wider text-indigo-200">
+                      {feature.title}
+                    </h3>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </MotionWrapper>

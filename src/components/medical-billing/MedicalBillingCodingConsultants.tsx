@@ -2,39 +2,19 @@
 
 import React from "react";
 import Image from "next/image";
-import { Database, ScanSearch, Users, LucideIcon } from "lucide-react";
 import SectionHeader from "@/components/ui/SectionHeader";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import BillingCodingConsultantItem from "./BillingCodingConsultantItem";
+import { getIcon } from "@/lib/icons";
+import { defaultMedicalBillingData } from "@/lib/defaults/medicalBilling";
 
-interface CodingConsultantItem {
-  icon: LucideIcon;
-  title: string;
-  description: string;
+interface MedicalBillingCodingConsultantsProps {
+  data?: typeof defaultMedicalBillingData.codingConsultants;
 }
 
-const CODING_CONSULTANT_ITEMS: CodingConsultantItem[] = [
-  {
-    icon: ScanSearch,
-    title: "Proper Claim Scrubbing",
-    description:
-      "Certified clinical coders scrub codes to identify and correct errors in claims. Our proprietary tools analyze patient statements to identify areas where providers can improve their billing practices. We also examine comparative and predictive data to develop strategies for minimizing denials.",
-  },
-  {
-    icon: Database,
-    title: "Knowledge Base Automation (KBA)",
-    description:
-      "Our KBA systems are trained on a large knowledge of medical billing data, which allows them to learn the rules and regulations that oversee medical billing. These systems automatically scrutinize medical bills for errors, such as missing or incorrect information, before they are sent to the payer.",
-  },
-  {
-    icon: Users,
-    title: "Dedicated Account Management",
-    description:
-      "An organized collections policy ensures accurate billing processes. Our platform merges charting, billing, scheduling, and telehealth services in the cloud. This helps keep patients, providers, and payers in sync. Experienced nosologists calculate the cost of rejections and provide healthcare organizations with a practical plan for managing denials that aligns with their practice.",
-  },
-];
+export default function MedicalBillingCodingConsultants({ data }: MedicalBillingCodingConsultantsProps) {
+  const codingData = data || defaultMedicalBillingData.codingConsultants;
 
-export default function MedicalBillingCodingConsultants() {
   return (
     <section
       className="relative flex w-full items-center justify-center overflow-hidden bg-transparent px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20"
@@ -50,19 +30,19 @@ export default function MedicalBillingCodingConsultants() {
 
       <div className="relative w-full max-w-7xl">
         <SectionHeader
-          badge="Get Fairly Paid Every Time"
+          badge={codingData.badge}
           badgeVariant="indigo"
           badgePulse
           align="center"
           title={
             <span id="coding-consultants-heading">
-              Hire Medical Coding Consultants and Avoid Unfair{" "}
+              {codingData.titlePrefix}{" "}
               <span className="font-bold text-blue-600">
-                Medicare Reimbursement Cuts
+                {codingData.titleHighlight}
               </span>
             </span>
           }
-          description="Physicians can benefit from the medical coding consultation offered by BellMedEx. This is because our medical coding consultancy services improve coding accuracy, reduce denials, expedite reimbursement, and boost cash flow. We do this by focusing on customizing services for each practice and addressing pain points with tailored solutions."
+          description={codingData.description}
           className="mb-12 mx-auto max-w-4xl sm:mb-16"
         />
 
@@ -72,15 +52,18 @@ export default function MedicalBillingCodingConsultants() {
             staggerDelay={0.1}
             className="flex flex-col gap-8 lg:col-span-6 xl:col-span-7"
           >
-            {CODING_CONSULTANT_ITEMS.map((item) => (
-              <MotionWrapper key={item.title} variant="staggerItem">
-                <BillingCodingConsultantItem
-                  icon={item.icon}
-                  title={item.title}
-                  description={item.description}
-                />
-              </MotionWrapper>
-            ))}
+            {codingData.items.map((item) => {
+              const Icon = getIcon(item.iconName);
+              return (
+                <MotionWrapper key={item.title} variant="staggerItem">
+                  <BillingCodingConsultantItem
+                    icon={Icon}
+                    title={item.title}
+                    description={item.description}
+                  />
+                </MotionWrapper>
+              );
+            })}
           </MotionWrapper>
 
           <MotionWrapper
@@ -100,8 +83,8 @@ export default function MedicalBillingCodingConsultants() {
               <div className="relative overflow-hidden rounded-3xl border border-[#E2E6EC] bg-white shadow-[0_8px_30px_rgba(29,78,216,0.08)]">
                 <div className="relative aspect-[4/3] w-full sm:aspect-[5/4]">
                   <Image
-                    src="/consultants-laptop.png"
-                    alt="BellMedEx medical coding dashboard showing claim analytics and reimbursement insights on a laptop"
+                    src={codingData.imageSrc || "/consultants-laptop.png"}
+                    alt={codingData.imageAlt || "BellMedEx medical coding dashboard"}
                     fill
                     sizes="(max-width: 1024px) 100vw, 42vw"
                     className="object-cover transition-transform duration-700 hover:scale-[1.02]"

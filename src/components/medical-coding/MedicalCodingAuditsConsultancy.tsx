@@ -1,39 +1,19 @@
 "use client";
 
 import React from "react";
-import { FileSearch, LucideIcon, ScanSearch, Users } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import SectionHeader from "@/components/ui/SectionHeader";
 import MotionWrapper from "@/components/ui/MotionWrapper";
+import { getIcon } from "@/lib/icons";
+import { defaultMedicalCodingData } from "@/lib/defaults/medicalCoding";
 
-interface AuditServiceItem {
-  icon: LucideIcon;
-  title: string;
-  description: string;
+interface MedicalCodingAuditsConsultancyProps {
+  data?: typeof defaultMedicalCodingData.auditsConsultancy;
 }
 
-const AUDIT_SERVICES: AuditServiceItem[] = [
-  {
-    icon: ScanSearch,
-    title: "Code Audits",
-    description:
-      "Trust our coding auditors to validate your records, maximize revenue, and keep you compliant with regulations. Our experts find issues, fix errors, and optimize your codes.",
-  },
-  {
-    icon: FileSearch,
-    title: "Documentation Review",
-    description:
-      "Documentation holds the keys to coding. Our review unlocks accuracy, capturing every revenue dollar while averting audit risks.",
-  },
-  {
-    icon: Users,
-    title: "Coding Consultancy",
-    description:
-      "Our coding consultants dive deep into patient charts to apply the right codes, enabling proper reimbursement and a clear view of population health.",
-  },
-];
+export default function MedicalCodingAuditsConsultancy({ data }: MedicalCodingAuditsConsultancyProps) {
+  const auditData = data || defaultMedicalCodingData.auditsConsultancy;
 
-export default function MedicalCodingAuditsConsultancy() {
   return (
     <section
       className="relative w-full overflow-hidden bg-transparent py-12 sm:py-16 lg:py-20"
@@ -41,29 +21,23 @@ export default function MedicalCodingAuditsConsultancy() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          badge="Audits & Consultancy"
+          badge={auditData.badge}
           badgeVariant="indigo"
           badgePulse
           align="center"
           title={
             <span id="medical-coding-audits-heading">
-              BellMedEx{" "}
+              {auditData.titlePlain}{" "}
               <span className="font-bold text-blue-600">
-                Coding Audits &amp; Consultancy Solutions
+                {auditData.titleHighlight}
               </span>
             </span>
           }
           description={
             <>
-              <p>
-                For healthcare leaders seeking truth in numbers, our medical coding
-                services deliver. We scrutinize records to derive meaning, value, and
-                direction. The benefits are manifold: reduced costs, optimized
-                reimbursement, and evidence-based care. What results is sustainable
-                growth and mission fulfillment.
-              </p>
+              <p>{auditData.description1}</p>
               <p className="mt-4 font-bold text-[#0F172A]">
-                Our consultancy services help prevent lost revenue from coding errors.
+                {auditData.description2}
               </p>
             </>
           }
@@ -75,8 +49,8 @@ export default function MedicalCodingAuditsConsultancy() {
           staggerDelay={0.12}
           className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
         >
-          {AUDIT_SERVICES.map((service) => {
-            const Icon = service.icon;
+          {auditData.services.map((service) => {
+            const Icon = getIcon(service.iconName);
 
             return (
               <MotionWrapper key={service.title} variant="staggerItem" className="h-full">

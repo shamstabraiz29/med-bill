@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getMedicalCodingData } from "@/lib/payload";
 import {
   MedicalCodingAffordableCta,
   MedicalCodingAdvancedHelp,
@@ -17,30 +18,50 @@ import {
   MedicalCodingWhyChooseUs,
 } from "@/components/medical-coding";
 
-export const metadata: Metadata = {
-  title: "Medical Coding Services | BellMedEx",
-  description:
-    "BellMedEx provides expert medical coding services for every specialty. Reduce revenue leakage, improve claim acceptance, and get paid on time with certified clinical coders.",
-};
+/**
+ * Dynamic SEO metadata generated from Payload CMS Medical Coding global.
+ */
+export async function generateMetadata(): Promise<Metadata> {
+  const data = await getMedicalCodingData();
+  const { seo } = data;
 
-export default function MedicalCodingPage() {
+  return {
+    title: seo.metaTitle,
+    description: seo.metaDescription,
+    keywords: seo.keywords,
+    robots: seo.robots,
+    alternates: {
+      canonical: seo.canonicalUrl,
+    },
+    openGraph: {
+      title: seo.openGraph?.ogTitle || seo.metaTitle,
+      description: seo.openGraph?.ogDescription || seo.metaDescription,
+      type: (seo.openGraph?.ogType as "website") || "website",
+      url: seo.openGraph?.ogUrl || seo.canonicalUrl,
+    },
+  };
+}
+
+export default async function MedicalCodingPage() {
+  const data = await getMedicalCodingData();
+
   return (
     <div className="flex min-h-screen flex-col py-4 sm:py-8">
-      <MedicalCodingHero />
-      <MedicalCodingHowWeHelp />
-      <MedicalCodingWhyChooseUs />
-      <MedicalCodingAffordableCta />
-      <MedicalCodingExpertSections />
-      <MedicalCodingProvenProcess />
-      <MedicalCodingIcd10Services />
-      <MedicalCodingFrustratedCta />
-      <MedicalCodingAuditsConsultancy />
-      <MedicalCodingFairRevenueCta />
-      <MedicalCodingSecurityCompliance />
-      <MedicalCodingAdvancedHelp />
-      <MedicalCodingAuditsDemoCta />
-      <MedicalCodingModernSolutions />
-      <MedicalCodingErrorsRevenueCta />
+      <MedicalCodingHero data={data.hero} />
+      <MedicalCodingHowWeHelp data={data.howWeHelp} />
+      <MedicalCodingWhyChooseUs data={data.whyChooseUs} />
+      <MedicalCodingAffordableCta data={data.affordableCta} />
+      <MedicalCodingExpertSections data={data.expertSections} />
+      <MedicalCodingProvenProcess data={data.provenProcess} />
+      <MedicalCodingIcd10Services data={data.icd10Services} />
+      <MedicalCodingFrustratedCta data={data.frustratedCta} />
+      <MedicalCodingAuditsConsultancy data={data.auditsConsultancy} />
+      <MedicalCodingFairRevenueCta data={data.fairRevenueCta} />
+      <MedicalCodingSecurityCompliance data={data.securityCompliance} />
+      <MedicalCodingAdvancedHelp data={data.advancedHelp} />
+      <MedicalCodingAuditsDemoCta data={data.auditsDemoCta} />
+      <MedicalCodingModernSolutions data={data.modernSolutions} />
+      <MedicalCodingErrorsRevenueCta data={data.errorsRevenueCta} />
     </div>
   );
 }

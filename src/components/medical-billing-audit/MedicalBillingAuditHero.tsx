@@ -8,8 +8,15 @@ import {
   auditContainerClassName,
   auditSectionClassName,
 } from "./auditSectionLayout";
+import { defaultMedicalBillingAuditData } from "@/lib/defaults/medicalBillingAudit";
 
-export default function MedicalBillingAuditHero() {
+interface MedicalBillingAuditHeroProps {
+  data?: typeof defaultMedicalBillingAuditData.hero;
+}
+
+export default function MedicalBillingAuditHero({ data }: MedicalBillingAuditHeroProps) {
+  const heroData = data || defaultMedicalBillingAuditData.hero;
+
   return (
     <section
       className={auditSectionClassName}
@@ -30,36 +37,29 @@ export default function MedicalBillingAuditHero() {
             className="flex flex-col items-start space-y-6 text-left lg:col-span-7"
           >
             <SectionBadge variant="blue" pulse>
-              Medical Billing &amp; Coding Audit Services
+              {heroData.badge}
             </SectionBadge>
 
             <h1
               id="medical-billing-audit-hero-heading"
               className="max-w-2xl text-3xl font-bold leading-[1.18] tracking-[-0.02em] text-[#0F172A] sm:text-4xl lg:text-5xl"
             >
-              Be On The Same Page with{" "}
-              <span className="text-[#1D4ED8]">Your Payers &amp; Patients!</span>
+              {heroData.titlePlain}{" "}
+              <span className="text-[#1D4ED8]">{heroData.titleHighlight}</span>
             </h1>
 
             <div className="max-w-2xl space-y-4 text-sm leading-[1.6] text-[#475569] sm:text-base">
-              <p>
-                You work hard to provide quality care to your patients, but are you getting
-                paid what you deserve? Errors in medical billing means lost revenue, denied
-                claims, and legal troubles. Therefore, medical billing audit services by a
-                medical coding audit company become a necessity.
-              </p>
-              <p>
-                BellMedEx offers healthcare coding and compliance audit services for healthcare
-                providers. Our experienced billing auditors review a provider&apos;s billing
-                codes for accuracy, compliance, and optimization with real-time issue
-                resolution. So don&apos;t put your practice at risk. Get in touch with us
-                today and let us help you meet medical billing compliance.
-              </p>
+              <p>{heroData.description1}</p>
+              <p>{heroData.description2}</p>
             </div>
           </MotionWrapper>
 
           <MotionWrapper variant="slideRight" className="w-full lg:col-span-5">
-            <MedicalBillingAuditHeroForm />
+            <MedicalBillingAuditHeroForm
+              formTitle={heroData.formTitle}
+              formDescription={heroData.formDescription}
+              formButtonLabel={heroData.formButtonLabel}
+            />
           </MotionWrapper>
         </div>
       </div>

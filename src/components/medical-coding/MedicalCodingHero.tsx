@@ -3,8 +3,15 @@
 import DoctorVisuals from "@/components/home/DoctorVisuals";
 import CommandCapsuleForm from "@/components/home/CommandCapsuleForm";
 import MedicalCodingHeroHeader from "./MedicalCodingHeroHeader";
+import { defaultMedicalCodingData } from "@/lib/defaults/medicalCoding";
 
-export default function MedicalCodingHero() {
+interface MedicalCodingHeroProps {
+  data?: typeof defaultMedicalCodingData.hero;
+}
+
+export default function MedicalCodingHero({ data }: MedicalCodingHeroProps) {
+  const heroData = data || defaultMedicalCodingData.hero;
+
   return (
     <section className="relative w-full overflow-hidden bg-transparent pt-12 pb-16 lg:pt-16 lg:pb-20">
       <style>{`
@@ -34,14 +41,14 @@ export default function MedicalCodingHero() {
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-8">
           <div className="flex flex-col space-y-6 text-left lg:col-span-7">
-            <MedicalCodingHeroHeader />
+            <MedicalCodingHeroHeader data={heroData} />
 
             <CommandCapsuleForm
-              formTitle="Schedule Online Appointment:"
+              formTitle={heroData.formTitle || "Schedule Online Appointment:"}
               namePlaceholder="Name"
               emailPlaceholder="Email"
               phonePlaceholder="Phone Number"
-              buttonLabel="BOOK NOW"
+              buttonLabel={heroData.formButtonLabel || "BOOK NOW"}
               showFooter={false}
             />
           </div>

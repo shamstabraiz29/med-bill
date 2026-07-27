@@ -7,8 +7,15 @@ import {
   auditContainerClassName,
   auditSectionClassName,
 } from "./auditSectionLayout";
+import { defaultMedicalBillingAuditData } from "@/lib/defaults/medicalBillingAudit";
 
-export default function MedicalBillingAuditRecordsCta() {
+interface MedicalBillingAuditRecordsCtaProps {
+  data?: typeof defaultMedicalBillingAuditData.recordsCta;
+}
+
+export default function MedicalBillingAuditRecordsCta({ data }: MedicalBillingAuditRecordsCtaProps) {
+  const ctaData = data || defaultMedicalBillingAuditData.recordsCta;
+
   return (
     <section
       className={auditSectionClassName}
@@ -22,22 +29,22 @@ export default function MedicalBillingAuditRecordsCta() {
                 id="medical-billing-audit-records-cta-heading"
                 className="text-2xl font-bold leading-tight tracking-tight sm:text-3xl lg:text-4xl sm:leading-snug"
               >
-                Are you in the dark about the quality of your{" "}
-                <span className="font-bold text-amber-300">medical records?</span>
+                {ctaData.titlePrefix}{" "}
+                <span className="font-bold text-amber-300">{ctaData.titleHighlight}</span>
               </h2>
 
               <p className="mt-3.5 text-sm text-blue-200 sm:text-base">
-                Let us shed some light on them!
+                {ctaData.subtext}
               </p>
 
               <div className="mt-8 flex w-full justify-center">
                 <AppButton
-                  href="#claim-free-medical-audit"
+                  href={ctaData.ctaHref || "#claim-free-medical-audit"}
                   variant="secondary-dark"
                   size="lg"
                   showArrow
                 >
-                  Claim Free Medical Audit
+                  {ctaData.ctaLabel}
                 </AppButton>
               </div>
             </div>

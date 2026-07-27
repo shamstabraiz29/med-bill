@@ -4,8 +4,15 @@ import React from "react";
 import AppButton from "@/components/ui/AppButton";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import SectionBadge from "@/components/ui/SectionBadge";
+import { defaultMedicalBillingData } from "@/lib/defaults/medicalBilling";
 
-export default function MedicalBillingRevenueCta() {
+interface MedicalBillingRevenueCtaProps {
+  data?: typeof defaultMedicalBillingData.revenueCta;
+}
+
+export default function MedicalBillingRevenueCta({ data }: MedicalBillingRevenueCtaProps) {
+  const ctaData = data || defaultMedicalBillingData.revenueCta;
+
   return (
     <section
       className="flex w-full items-center justify-center bg-transparent px-4 pb-12 sm:px-6 sm:pb-16 lg:px-8 lg:pb-20"
@@ -20,31 +27,27 @@ export default function MedicalBillingRevenueCta() {
             />
 
             <div className="relative mx-auto flex max-w-3xl flex-col items-center space-y-4">
-              <SectionBadge variant="dark">Revenue Recovery</SectionBadge>
+              <SectionBadge variant="dark">{ctaData.badge}</SectionBadge>
 
               <h2
                 id="revenue-cta-heading"
                 className="text-2xl font-bold leading-tight tracking-tight sm:text-3xl lg:leading-snug"
               >
-                Reduce Billing Claim Denials and Boost Your Medical Revenue{" "}
-                <span className="font-bold text-amber-300">Up to 30%</span>
+                {ctaData.titlePrefix}{" "}
+                <span className="font-bold text-amber-300">{ctaData.titleHighlight}</span>
               </h2>
 
               <p className="text-sm leading-relaxed text-blue-200 sm:text-base">
-                Claim denials are a major source of lost revenue for healthcare
-                providers. They can result from errors in medical billing and
-                coding. BellMedEx&apos;s medical billing consulting service
-                prevents these errors by ensuring claim submission that&apos;s
-                compliant with payer rules and regulations.
+                {ctaData.description}
               </p>
 
               <AppButton
-                href="/schedule-a-demo"
+                href={ctaData.ctaHref || "/schedule-a-demo"}
                 variant="secondary-dark"
                 size="lg"
                 showArrow
               >
-                Let&apos;s Talk
+                {ctaData.ctaLabel}
               </AppButton>
             </div>
           </div>
