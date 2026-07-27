@@ -7,8 +7,16 @@ import MotionWrapper from "@/components/ui/MotionWrapper";
 import SectionBadge from "@/components/ui/SectionBadge";
 import OutsourceMedicalBillingHeroForm from "./OutsourceMedicalBillingHeroForm";
 import { outsourceContainerClassName } from "./outsourceSectionLayout";
+import { defaultOutsourceMedicalBillingData } from "@/lib/defaults/outsourceMedicalBilling";
+import type { OutsourceHeroData } from "@/payload/types/outsourceMedicalBilling";
 
-export default function OutsourceMedicalBillingHero() {
+interface OutsourceMedicalBillingHeroProps {
+  data?: OutsourceHeroData;
+}
+
+export default function OutsourceMedicalBillingHero({ data }: OutsourceMedicalBillingHeroProps) {
+  const content = data || defaultOutsourceMedicalBillingData.hero;
+
   return (
     <section
       className="relative w-full overflow-hidden bg-[#0F172A] pt-12 pb-16 lg:pt-16 lg:pb-24"
@@ -26,29 +34,28 @@ export default function OutsourceMedicalBillingHero() {
             className="flex flex-col items-start space-y-5 text-left text-white sm:space-y-6 lg:col-span-6"
           >
             <SectionBadge variant="indigo" pulse>
-              Outsource Medical Billing.
+              {content.badge}
             </SectionBadge>
 
             <h1
               id="outsource-medical-billing-hero-heading"
               className="max-w-2xl text-2xl font-bold leading-tight tracking-[-0.02em] sm:text-3xl lg:text-4xl"
             >
-              Outsource Medical Billing Services at Just{" "}
-              <span className="font-bold text-amber-300">2.49%</span>
+              {content.titlePlain}{" "}
+              <span className="font-bold text-amber-300">{content.titleHighlight}</span>
             </h1>
 
             <p className="max-w-xl text-sm leading-[1.6] text-blue-200 sm:text-base">
-              Experience Thorough Compliance, Robust Technology, and Faster
-              Reimbursements!
+              {content.subtitle}
             </p>
 
             <AppButton
-              href="/schedule-a-demo"
+              href={content.buttonLink || "/schedule-a-demo"}
               variant="secondary-dark"
               size="lg"
               showArrow
             >
-              Let&apos;s Schedule a Quick Call
+              {content.buttonText}
             </AppButton>
           </MotionWrapper>
 

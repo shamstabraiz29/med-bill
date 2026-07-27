@@ -10,15 +10,18 @@ import {
   outsourceContainerClassName,
   outsourceSectionAltClassName,
 } from "./outsourceSectionLayout";
+import { defaultOutsourceMedicalBillingData } from "@/lib/defaults/outsourceMedicalBilling";
+import type { OutsourcePracticeEfficiencyData } from "@/payload/types/outsourceMedicalBilling";
 
-const PRACTICE_COPY = [
-  "Well, keep your hands on the wheel, but steer it in the right direction.",
-  "In the healthcare world, patient care and medical billing are co-dependent yet equally different and unique in essence. Therefore, both need relevant specialists.",
-  "Outsourcing billing might seem as if you're losing control over the RCM of your practice. However, in the real world, you are gaining more authority, power, and accuracy over your billing process and overall financial health.",
-  "We only take over the non-clinical burden; front and back-end medical billing services, while you stay laser-focused on your core area; patient care.",
-];
+interface OutsourceMedicalBillingPracticeEfficiencyProps {
+  data?: OutsourcePracticeEfficiencyData;
+}
 
-export default function OutsourceMedicalBillingPracticeEfficiency() {
+export default function OutsourceMedicalBillingPracticeEfficiency({ data }: OutsourceMedicalBillingPracticeEfficiencyProps) {
+  const content = data || defaultOutsourceMedicalBillingData.practiceEfficiency;
+  const rawParagraphs = content.paragraphs && content.paragraphs.length > 0 ? content.paragraphs : defaultOutsourceMedicalBillingData.practiceEfficiency.paragraphs;
+  const paragraphsList = rawParagraphs.map((p: any) => (typeof p === "string" ? p : p.text || ""));
+
   return (
     <section
       className={outsourceSectionAltClassName}
@@ -29,8 +32,8 @@ export default function OutsourceMedicalBillingPracticeEfficiency() {
           <MotionWrapper variant="slideLeft" className="w-full lg:col-span-6">
             <div className="group relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-[0_8px_30px_rgba(29,78,216,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#1D4ED8]/30 hover:shadow-xl hover:shadow-blue-900/10 sm:aspect-16/11">
               <Image
-                src="/doctors-team.png"
-                alt="Healthcare professionals reviewing practice performance on a tablet"
+                src={content.imageSrc || "/doctors-team.png"}
+                alt={content.imageAlt || "Healthcare professionals reviewing practice performance on a tablet"}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -48,10 +51,10 @@ export default function OutsourceMedicalBillingPracticeEfficiency() {
                   />
                   <div>
                     <p className="text-xs font-bold tracking-tight sm:text-sm">
-                      Stay laser-focused on patient care
+                      {content.calloutTitle}
                     </p>
                     <p className="mt-1 text-[11px] leading-relaxed text-blue-100 sm:text-xs">
-                      We take over front and back-end medical billing services.
+                      {content.calloutDescription}
                     </p>
                   </div>
                 </div>
@@ -67,14 +70,14 @@ export default function OutsourceMedicalBillingPracticeEfficiency() {
               id="outsource-medical-billing-practice-efficiency-heading"
               className="max-w-2xl text-2xl font-bold leading-[1.18] tracking-[-0.02em] text-[#0F172A] sm:text-3xl lg:text-4xl"
             >
-              Are You Steering the Wheel of Your{" "}
-              <span className="text-blue-600">Healthcare Practice</span> Efficiently?
+              {content.titlePlain}{" "}
+              <span className="text-blue-600">{content.titleHighlight}</span>
             </h2>
 
             <div className="max-w-2xl space-y-4">
-              {PRACTICE_COPY.map((paragraph) => (
+              {paragraphsList.map((paragraph, idx) => (
                 <p
-                  key={paragraph}
+                  key={paragraph || idx}
                   className="text-sm leading-[1.65] text-[#475569] sm:text-base"
                 >
                   {paragraph}
@@ -82,8 +85,8 @@ export default function OutsourceMedicalBillingPracticeEfficiency() {
               ))}
             </div>
 
-            <AppButton href="/schedule-a-demo" variant="primary" size="lg" showArrow>
-              Get a Demo
+            <AppButton href={content.buttonLink || "/schedule-a-demo"} variant="primary" size="lg" showArrow>
+              {content.buttonText}
             </AppButton>
           </MotionWrapper>
         </div>

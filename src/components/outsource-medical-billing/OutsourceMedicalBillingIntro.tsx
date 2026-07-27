@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { AlertCircle, Clock, FileWarning, TrendingDown } from "lucide-react";
+import { AlertCircle, Clock, FileWarning, LucideIcon, TrendingDown } from "lucide-react";
 import AppButton from "@/components/ui/AppButton";
 import IconWrapper from "@/components/common/IconWrapper";
 import MotionWrapper from "@/components/ui/MotionWrapper";
@@ -13,14 +13,23 @@ import {
   outsourceContainerClassName,
   outsourceSectionClassName,
 } from "./outsourceSectionLayout";
+import { defaultOutsourceMedicalBillingData } from "@/lib/defaults/outsourceMedicalBilling";
+import type { OutsourceIntroData } from "@/payload/types/outsourceMedicalBilling";
 
-const BILLING_CHALLENGES = [
-  { icon: TrendingDown, title: "Lost revenue in denied claims" },
-  { icon: FileWarning, title: "Unaddressed old claims" },
-  { icon: Clock, title: "Delayed and denied claims" },
-];
+const ICON_MAP: Record<string, LucideIcon> = {
+  TrendingDown,
+  FileWarning,
+  Clock,
+};
 
-export default function OutsourceMedicalBillingIntro() {
+interface OutsourceMedicalBillingIntroProps {
+  data?: OutsourceIntroData;
+}
+
+export default function OutsourceMedicalBillingIntro({ data }: OutsourceMedicalBillingIntroProps) {
+  const content = data || defaultOutsourceMedicalBillingData.intro;
+  const challengesList = content.challenges && content.challenges.length > 0 ? content.challenges : defaultOutsourceMedicalBillingData.intro.challenges;
+
   return (
     <section
       className={cn(outsourceSectionClassName, "border-t border-[#E2E6EC]")}
@@ -38,29 +47,22 @@ export default function OutsourceMedicalBillingIntro() {
             className="flex flex-col items-start space-y-8 text-left lg:col-span-6"
           >
             <SectionHeader
-              badge="Reduce Revenue Leaks."
+              badge={content.badge}
               badgeVariant="indigo"
               badgePulse
               className="max-w-2xl"
               title={
                 <span id="outsource-medical-billing-intro-heading">
-                  <span className="text-blue-600">Outsource Medical Billing</span> today
-                  to Reduce Errors, Minimize Revenue Holes, and Maximize Collections
+                  <span className="text-blue-600">{content.titlePlain}</span>
+                  {content.titleHighlight}
                 </span>
               }
-              description={
-                <>
-                  Medical billing is a complex and dynamic process that requires constant
-                  attention and expertise. If you are struggling with billing errors,
-                  revenue leaks, or collection issues, you may be losing money and time
-                  that could be better spent on patient care.
-                </>
-              }
+              description={content.description}
             />
 
             <div className="w-full max-w-2xl">
               <p className="mb-4 text-sm font-semibold text-[#0F172A] sm:text-base">
-                Common problems practices face with billing:
+                {content.commonProblemsTitle}
               </p>
 
               <MotionWrapper
@@ -68,39 +70,43 @@ export default function OutsourceMedicalBillingIntro() {
                 staggerDelay={0.08}
                 className="flex flex-col gap-3"
               >
-                {BILLING_CHALLENGES.map((challenge) => (
-                  <MotionWrapper key={challenge.title} variant="staggerItem">
-                    <div
-                      className={cn(
-                        outsourceCardClassName,
-                        "flex-row items-center gap-4 p-4 sm:flex sm:p-5"
-                      )}
-                    >
-                      <IconWrapper
-                        icon={challenge.icon}
-                        size="sm"
-                        variant="surface"
-                        className="shrink-0 transition-transform duration-300 group-hover:scale-110"
-                      />
-                      <p className="text-sm leading-[1.65] text-[#475569] sm:text-base">
-                        {challenge.title}
-                      </p>
-                    </div>
-                  </MotionWrapper>
-                ))}
+                {challengesList.map((challenge, idx) => {
+                  const Icon = (challenge.iconName && ICON_MAP[challenge.iconName]) || TrendingDown;
+
+                  return (
+                    <MotionWrapper key={challenge.title || idx} variant="staggerItem">
+                      <div
+                        className={cn(
+                          outsourceCardClassName,
+                          "flex-row items-center gap-4 p-4 sm:flex sm:p-5"
+                        )}
+                      >
+                        <IconWrapper
+                          icon={Icon}
+                          size="sm"
+                          variant="surface"
+                          className="shrink-0 transition-transform duration-300 group-hover:scale-110"
+                        />
+                        <p className="text-sm leading-[1.65] text-[#475569] sm:text-base">
+                          {challenge.title}
+                        </p>
+                      </div>
+                    </MotionWrapper>
+                  );
+                })}
               </MotionWrapper>
             </div>
 
-            <AppButton href="/schedule-a-demo" variant="primary" size="lg" showArrow>
-              Set up a Discovery Call
+            <AppButton href={content.buttonLink || "/schedule-a-demo"} variant="primary" size="lg" showArrow>
+              {content.buttonText}
             </AppButton>
           </MotionWrapper>
 
           <MotionWrapper variant="slideRight" className="w-full lg:col-span-6">
             <div className="group relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-[0_8px_30px_rgba(29,78,216,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#1D4ED8]/30 hover:shadow-xl hover:shadow-blue-900/10 sm:aspect-16/11">
               <Image
-                src="/doctor-hero.png"
-                alt="Physician reviewing medical billing workflows on a laptop"
+                src={content.imageSrc || "/doctor-hero.png"}
+                alt={content.imageAlt || "Physician reviewing medical billing workflows on a laptop"}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -118,10 +124,10 @@ export default function OutsourceMedicalBillingIntro() {
                   />
                   <div>
                     <p className="text-xs font-bold tracking-tight sm:text-sm">
-                      Maximize collections with expert billing support
+                      {content.calloutTitle}
                     </p>
                     <p className="mt-1 text-[11px] leading-relaxed text-blue-100 sm:text-xs">
-                      Outsource billing to protect revenue and focus on patient care.
+                      {content.calloutDescription}
                     </p>
                   </div>
                 </div>

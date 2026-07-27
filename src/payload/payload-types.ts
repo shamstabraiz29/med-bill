@@ -112,6 +112,7 @@ export interface Config {
     'fusionedi-clearinghouse': any;
     'electronic-health-records-ehr': any;
     'practice-management-software-pms': any;
+    'outsource-medical-billing': any;
   };
   globalsSelect: {
     homepage: HomepageSelect<false> | HomepageSelect<true>;
@@ -128,6 +129,7 @@ export interface Config {
     'fusionedi-clearinghouse': any;
     'electronic-health-records-ehr': any;
     'practice-management-software-pms': any;
+    'outsource-medical-billing': any;
   };
   locale: null;
   widgets: {

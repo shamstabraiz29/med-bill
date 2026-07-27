@@ -28,6 +28,8 @@ import type { ElectronicHealthRecordsEhrPageData } from '@/payload/types/electro
 import { defaultElectronicHealthRecordsEhrData } from '@/lib/defaults/electronicHealthRecordsEhr'
 import type { PracticeManagementSoftwarePmsPageData } from '@/payload/types/practiceManagementSoftwarePms'
 import { defaultPracticeManagementSoftwarePmsData } from '@/lib/defaults/practiceManagementSoftwarePms'
+import type { OutsourceMedicalBillingPageData } from '@/payload/types/outsourceMedicalBilling'
+import { defaultOutsourceMedicalBillingData } from '@/lib/defaults/outsourceMedicalBilling'
 
 /**
  * Fetches the Homepage global data from Payload CMS using the Local API.
@@ -396,6 +398,25 @@ export async function getPracticeManagementSoftwarePmsData(): Promise<PracticeMa
   } catch (error) {
     console.error('[Payload] Failed to fetch PMS data, using defaults:', error)
     return defaultPracticeManagementSoftwarePmsData
+  }
+}
+
+/**
+ * Fetches the Outsource Medical Billing global data from Payload CMS.
+ * Uses Payload Local API with fallback to default hardcoded content.
+ */
+export async function getOutsourceMedicalBillingData(): Promise<OutsourceMedicalBillingPageData> {
+  try {
+    const payload = await getPayload({ config })
+
+    const data = await payload.findGlobal({
+      slug: 'outsource-medical-billing',
+    })
+
+    return deepMerge(defaultOutsourceMedicalBillingData, data as unknown as Partial<OutsourceMedicalBillingPageData>)
+  } catch (error) {
+    console.error('[Payload] Failed to fetch Outsource Medical Billing data, using defaults:', error)
+    return defaultOutsourceMedicalBillingData
   }
 }
 

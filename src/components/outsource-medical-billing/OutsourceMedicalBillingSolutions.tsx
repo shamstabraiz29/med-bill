@@ -21,89 +21,28 @@ import {
   outsourceContainerClassName,
   outsourceSectionClassName,
 } from "./outsourceSectionLayout";
+import { defaultOutsourceMedicalBillingData } from "@/lib/defaults/outsourceMedicalBilling";
+import type { OutsourceSolutionsData } from "@/payload/types/outsourceMedicalBilling";
 
-interface BillingSolution {
-  icon: LucideIcon;
-  title: string;
-  description: string;
+const ICON_MAP: Record<string, LucideIcon> = {
+  ShieldCheck,
+  UserRound,
+  Code2,
+  ClipboardList,
+  CreditCard,
+  ShieldAlert,
+  RefreshCw,
+  FileText,
+};
+
+interface OutsourceMedicalBillingSolutionsProps {
+  data?: OutsourceSolutionsData;
 }
 
-const BILLING_SOLUTIONS: BillingSolution[] = [
-  {
-    icon: ShieldCheck,
-    title: "Insurance Verification",
-    description:
-      "Verify patient insurance and eligibility to avoid any last minute surprise bills and ensure accurate billing and coding.",
-  },
-  {
-    icon: UserRound,
-    title: "Patient Demographics",
-    description:
-      "Collect patient data such as their name, location, age, sex, address, phone number, etc & patient history for record keeping.",
-  },
-  {
-    icon: Code2,
-    title: "Medical coding",
-    description:
-      "Accurately code medical procedures, diagnoses, and treatments to make sure claims are successfully submitted.",
-  },
-  {
-    icon: ClipboardList,
-    title: "Charge Entry",
-    description:
-      "Charges for medical services as well as other important accounting information is entered into the patient accounts.",
-  },
-  {
-    icon: CreditCard,
-    title: "Payment posting",
-    description:
-      "Payment details are posted into the system and financial status of the patient payments and insurance checks are examined.",
-  },
-  {
-    icon: ShieldAlert,
-    title: "Denial Management",
-    description:
-      "We audit, identify and correct the denial issues immediately and address any denied or delayed claims efficiently.",
-  },
-  {
-    icon: RefreshCw,
-    title: "Accounts Receivable Follow-up",
-    description:
-      "Minimize the A/R days by appealing the claims and pursuing end-to-end denial management.",
-  },
-  {
-    icon: FileText,
-    title: "Patient Statement",
-    description:
-      "Patient statement is created that holds pending patient payment to ensure timely and remaining collections.",
-  },
-];
+export default function OutsourceMedicalBillingSolutions({ data }: OutsourceMedicalBillingSolutionsProps) {
+  const content = data || defaultOutsourceMedicalBillingData.solutions;
+  const solutionsList = content.solutions && content.solutions.length > 0 ? content.solutions : defaultOutsourceMedicalBillingData.solutions.solutions;
 
-function BillingSolutionCard({ solution }: { solution: BillingSolution }) {
-  return (
-    <div className={cn(outsourceCardClassName, "h-full")}>
-      <div className="flex items-start gap-4 sm:gap-5">
-        <IconWrapper
-          icon={solution.icon}
-          size="md"
-          variant="surface"
-          className="shrink-0 transition-transform duration-300 group-hover:scale-110"
-        />
-
-        <div className="min-w-0 text-left">
-          <h3 className="text-base font-bold tracking-[-0.02em] text-[#0F172A] sm:text-lg">
-            {solution.title}
-          </h3>
-          <p className="mt-2 text-xs leading-[1.65] text-[#475569] sm:text-sm">
-            {solution.description}
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default function OutsourceMedicalBillingSolutions() {
   return (
     <section
       className={cn(outsourceSectionClassName, "border-t border-[#E2E6EC]")}
@@ -111,19 +50,18 @@ export default function OutsourceMedicalBillingSolutions() {
     >
       <div className={outsourceContainerClassName}>
         <SectionHeader
-          badge="Comprehensive Billing Solutions."
+          badge={content.badge}
           badgeVariant="indigo"
           badgePulse
           align="center"
           className="mx-auto mb-12 max-w-4xl sm:mb-16"
           title={
             <span id="outsource-medical-billing-solutions-heading">
-              We Deliver Comprehensive{" "}
-              <span className="text-blue-600">Medical Billing Solutions</span> to Individual
-              and Large practices
+              {content.titlePlain}{" "}
+              <span className="text-blue-600">{content.titleHighlight}</span>
             </span>
           }
-          description="Choose one or all of our billing services and manage billing smoothly."
+          description={content.description}
         />
 
         <MotionWrapper
@@ -131,11 +69,33 @@ export default function OutsourceMedicalBillingSolutions() {
           staggerDelay={0.07}
           className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-8"
         >
-          {BILLING_SOLUTIONS.map((solution) => (
-            <MotionWrapper key={solution.title} variant="staggerItem" className="h-full">
-              <BillingSolutionCard solution={solution} />
-            </MotionWrapper>
-          ))}
+          {solutionsList.map((solution, idx) => {
+            const Icon = (solution.iconName && ICON_MAP[solution.iconName]) || ShieldCheck;
+
+            return (
+              <MotionWrapper key={solution.title || idx} variant="staggerItem" className="h-full">
+                <div className={cn(outsourceCardClassName, "h-full")}>
+                  <div className="flex items-start gap-4 sm:gap-5">
+                    <IconWrapper
+                      icon={Icon}
+                      size="md"
+                      variant="surface"
+                      className="shrink-0 transition-transform duration-300 group-hover:scale-110"
+                    />
+
+                    <div className="min-w-0 text-left">
+                      <h3 className="text-base font-bold tracking-[-0.02em] text-[#0F172A] sm:text-lg">
+                        {solution.title}
+                      </h3>
+                      <p className="mt-2 text-xs leading-[1.65] text-[#475569] sm:text-sm">
+                        {solution.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </MotionWrapper>
+            );
+          })}
         </MotionWrapper>
       </div>
     </section>

@@ -18,36 +18,15 @@ import {
   outsourceContainerClassName,
   outsourceSectionClassName,
 } from "./outsourceSectionLayout";
+import { defaultOutsourceMedicalBillingData } from "@/lib/defaults/outsourceMedicalBilling";
+import type { OutsourceSpecialistsData } from "@/payload/types/outsourceMedicalBilling";
 
-const EXPERTISE_ITEMS = [
-  "Submit accurate claims, manage patient follow-ups, and communicate with the insurers",
-  "Maintain the balance between patient care and the necessary administrative tasks to streamline the systems",
-  "Reduce the overall stress levels in terms of billing complexities",
-  "Gain access to trained billing and coding industry specialists",
-];
-
-const PERFORMANCE_METRICS = [
-  {
-    label: "Successful Claims Submission",
-    value: 98,
-    icon: FileCheck,
-  },
-  {
-    label: "Streamline Administrative Systems",
-    value: 80,
-    icon: Layers,
-  },
-  {
-    label: "Reduce Billing Complexities",
-    value: 95,
-    icon: ShieldCheck,
-  },
-  {
-    label: "Access to Industry Specialists",
-    value: 100,
-    icon: Users,
-  },
-];
+const ICON_MAP: Record<string, LucideIcon> = {
+  FileCheck,
+  Layers,
+  ShieldCheck,
+  Users,
+};
 
 function AnimatedMetricBar({
   label,
@@ -141,7 +120,16 @@ function AnimatedMetricBar({
   );
 }
 
-export default function OutsourceMedicalBillingSpecialists() {
+interface OutsourceMedicalBillingSpecialistsProps {
+  data?: OutsourceSpecialistsData;
+}
+
+export default function OutsourceMedicalBillingSpecialists({ data }: OutsourceMedicalBillingSpecialistsProps) {
+  const content = data || defaultOutsourceMedicalBillingData.specialists;
+  const rawPoints = content.points && content.points.length > 0 ? content.points : defaultOutsourceMedicalBillingData.specialists.points;
+  const pointsList = rawPoints.map((p: any) => (typeof p === "string" ? p : p.text || ""));
+  const metricsList = content.metrics && content.metrics.length > 0 ? content.metrics : defaultOutsourceMedicalBillingData.specialists.metrics;
+
   return (
     <section
       className={cn(outsourceSectionClassName, "border-t border-[#E2E6EC]")}
@@ -149,19 +137,18 @@ export default function OutsourceMedicalBillingSpecialists() {
     >
       <div className={outsourceContainerClassName}>
         <SectionHeader
-          badge="Trained Industry Specialists."
+          badge={content.badge}
           badgeVariant="indigo"
           badgePulse
           align="center"
           className="mx-auto mb-12 max-w-4xl sm:mb-16"
           title={
             <span id="outsource-medical-billing-specialists-heading">
-              Outsourcing your Medical Billing to{" "}
-              <span className="text-blue-600">Trained Industry Specialists</span> is an
-              Ideal Solution for Medical Practices and Practitioners
+              {content.titlePlain}{" "}
+              <span className="text-blue-600">{content.titleHighlight}</span>
             </span>
           }
-          description="Medical billing undergoes a lot of complexity and its laws keep changing every year. So it gets frustrating to keep up with these changes while also enhancing your cash inflows. Managing medical billing is costly and requires meticulous attention to detail, but if there are errors or processing flaws, it can result in denials or rejection of claims. Eventually, it increases your cost and is equally time-consuming."
+          description={content.description}
         />
 
         <div className="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-2 lg:gap-10 xl:gap-12">
@@ -176,8 +163,8 @@ export default function OutsourceMedicalBillingSpecialists() {
               </p>
 
               <ul className="mt-6 space-y-4">
-                {EXPERTISE_ITEMS.map((item, index) => (
-                  <li key={item} className="flex items-start gap-3">
+                {pointsList.map((item, index) => (
+                  <li key={item || index} className="flex items-start gap-3">
                     <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-50 text-[#1D4ED8] ring-1 ring-[#1D4ED8]/15">
                       <CheckCircle2 className="h-3.5 w-3.5 stroke-[2]" aria-hidden="true" />
                     </span>
@@ -207,16 +194,20 @@ export default function OutsourceMedicalBillingSpecialists() {
                 staggerDelay={0.1}
                 className="relative z-10 space-y-6 sm:space-y-7"
               >
-                {PERFORMANCE_METRICS.map((metric, index) => (
-                  <MotionWrapper key={metric.label} variant="staggerItem">
-                    <AnimatedMetricBar
-                      label={metric.label}
-                      value={metric.value}
-                      icon={metric.icon}
-                      index={index}
-                    />
-                  </MotionWrapper>
-                ))}
+                {metricsList.map((metric, index) => {
+                  const Icon = (metric.iconName && ICON_MAP[metric.iconName]) || FileCheck;
+
+                  return (
+                    <MotionWrapper key={metric.label || index} variant="staggerItem">
+                      <AnimatedMetricBar
+                        label={metric.label}
+                        value={metric.value}
+                        icon={Icon}
+                        index={index}
+                      />
+                    </MotionWrapper>
+                  );
+                })}
               </MotionWrapper>
             </div>
           </MotionWrapper>

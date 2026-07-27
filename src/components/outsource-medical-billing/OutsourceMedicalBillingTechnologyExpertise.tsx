@@ -24,72 +24,38 @@ import {
   outsourceContainerClassName,
   outsourceSectionClassName,
 } from "./outsourceSectionLayout";
+import { defaultOutsourceMedicalBillingData } from "@/lib/defaults/outsourceMedicalBilling";
+import type { OutsourceTechnologyExpertiseData } from "@/payload/types/outsourceMedicalBilling";
+
+const ICON_MAP: Record<string, LucideIcon> = {
+  Database,
+  MonitorSmartphone,
+  Cloud,
+  MessageSquare,
+  ClipboardCheck,
+  ShieldCheck,
+  FileSearch,
+};
 
 interface FeatureItem {
-  icon: LucideIcon;
+  iconName?: string;
   title: string;
   description: string;
 }
 
-const TECHNOLOGY_FEATURES: FeatureItem[] = [
-  {
-    icon: Database,
-    title: "Collects Important Data",
-    description:
-      "Captures all the necessary information and data, and keeps it safe without any trust breach.",
-  },
-  {
-    icon: MonitorSmartphone,
-    title: "Foolproof EHRs",
-    description:
-      "Our cloud-based EHRs are foolproof and come with revenue cycle management software to help your staff streamline billing operations.",
-  },
-  {
-    icon: Cloud,
-    title: "Access Data Any Time",
-    description:
-      "Includes little to no downtime, secure data backup, and you can access patient data from anywhere at any time.",
-  },
-];
-
-const EXPERTISE_FEATURES: FeatureItem[] = [
-  {
-    icon: MessageSquare,
-    title: "Upfront Communication",
-    description:
-      "Establishes good communication pathways with the payer, provider, and patient.",
-  },
-  {
-    icon: ClipboardCheck,
-    title: "Precise Submission",
-    description:
-      "Accurately submits claims to lower the percentage of claims being denied.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Familiarity with Payers",
-    description:
-      "Has a strong client base and is familiar with payers and their constantly changing policies and handles all types of specialties.",
-  },
-  {
-    icon: FileSearch,
-    title: "Performs Audits and Analyses",
-    description:
-      "Audits and identifies areas where your billing needs improvement.",
-  },
-];
-
 function FeatureCard({ feature }: { feature: FeatureItem }) {
+  const Icon = (feature.iconName && ICON_MAP[feature.iconName]) || Database;
+
   return (
     <div className={cn(outsourceCardClassName, "h-full")}>
       <div className="flex items-start gap-4 sm:gap-5">
         <IconWrapper
-          icon={feature.icon}
+          icon={Icon}
           size="md"
           variant="surface"
           className="shrink-0 transition-transform duration-300 group-hover:scale-110"
         />
-        <div className="min-w-0">
+        <div className="min-w-0 text-left">
           <h3 className="text-base font-bold tracking-[-0.02em] text-[#0F172A] sm:text-lg">
             {feature.title}
           </h3>
@@ -131,7 +97,15 @@ function SubsectionBanner({
   );
 }
 
-export default function OutsourceMedicalBillingTechnologyExpertise() {
+interface OutsourceMedicalBillingTechnologyExpertiseProps {
+  data?: OutsourceTechnologyExpertiseData;
+}
+
+export default function OutsourceMedicalBillingTechnologyExpertise({ data }: OutsourceMedicalBillingTechnologyExpertiseProps) {
+  const content = data || defaultOutsourceMedicalBillingData.technologyExpertise;
+  const techFeaturesList = content.techFeatures && content.techFeatures.length > 0 ? content.techFeatures : defaultOutsourceMedicalBillingData.technologyExpertise.techFeatures;
+  const expFeaturesList = content.expFeatures && content.expFeatures.length > 0 ? content.expFeatures : defaultOutsourceMedicalBillingData.technologyExpertise.expFeatures;
+
   return (
     <section
       className={cn(outsourceSectionClassName, "border-t border-[#E2E6EC]")}
@@ -161,7 +135,7 @@ export default function OutsourceMedicalBillingTechnologyExpertise() {
         <div className="space-y-10 sm:space-y-12">
           <MotionWrapper variant="fadeUp" className="space-y-6">
             <SubsectionBanner
-              badge="Technology"
+              badge={content.techBadge || "Technology"}
               icon={Cpu}
               description="The technology we use comes with advanced features to cater to your billing needs. Here's how these advanced features help you compete with the best. Our cloud-based HIPAA-compliant PMS:"
             />
@@ -171,8 +145,8 @@ export default function OutsourceMedicalBillingTechnologyExpertise() {
               staggerDelay={0.07}
               className="grid grid-cols-1 gap-5 md:grid-cols-3 lg:gap-6"
             >
-              {TECHNOLOGY_FEATURES.map((feature) => (
-                <MotionWrapper key={feature.title} variant="staggerItem" className="h-full">
+              {techFeaturesList.map((feature, idx) => (
+                <MotionWrapper key={feature.title || idx} variant="staggerItem" className="h-full">
                   <FeatureCard feature={feature} />
                 </MotionWrapper>
               ))}
@@ -181,7 +155,7 @@ export default function OutsourceMedicalBillingTechnologyExpertise() {
 
           <MotionWrapper variant="fadeUp" className="space-y-6">
             <SubsectionBanner
-              badge="Expertise"
+              badge={content.expBadge || "Expertise"}
               icon={Users}
               description="BellMedEx brings you not only their technology but experience as well. When the two join with your healthcare practice it will enhance patient experience and payment collections. Our adept team:"
             />
@@ -191,8 +165,8 @@ export default function OutsourceMedicalBillingTechnologyExpertise() {
               staggerDelay={0.07}
               className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:gap-6"
             >
-              {EXPERTISE_FEATURES.map((feature) => (
-                <MotionWrapper key={feature.title} variant="staggerItem" className="h-full">
+              {expFeaturesList.map((feature, idx) => (
+                <MotionWrapper key={feature.title || idx} variant="staggerItem" className="h-full">
                   <FeatureCard feature={feature} />
                 </MotionWrapper>
               ))}
@@ -201,8 +175,8 @@ export default function OutsourceMedicalBillingTechnologyExpertise() {
         </div>
 
         <MotionWrapper variant="fadeUp" className="mt-12 flex justify-center sm:mt-14">
-          <AppButton href="/schedule-a-demo" variant="primary" size="lg" showArrow>
-            Request Demo
+          <AppButton href={content.ctaButtonLink || "/schedule-a-demo"} variant="primary" size="lg" showArrow>
+            {content.ctaButtonText || "Request Demo"}
           </AppButton>
         </MotionWrapper>
       </div>

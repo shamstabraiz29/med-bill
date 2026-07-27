@@ -29,6 +29,7 @@ import { MedicalBillingSoftware } from '@/payload/globals/MedicalBillingSoftware
 import { FusionediClearinghouse } from '@/payload/globals/FusionediClearinghouse'
 import { ElectronicHealthRecordsEhr } from '@/payload/globals/ElectronicHealthRecordsEhr'
 import { PracticeManagementSoftwarePms } from '@/payload/globals/PracticeManagementSoftwarePms'
+import { OutsourceMedicalBilling } from '@/payload/globals/OutsourceMedicalBilling'
 
 export default buildConfig({
   admin: {
@@ -63,6 +64,7 @@ export default buildConfig({
     FusionediClearinghouse,
     ElectronicHealthRecordsEhr,
     PracticeManagementSoftwarePms,
+    OutsourceMedicalBilling,
   ],
 
   db: postgresAdapter({

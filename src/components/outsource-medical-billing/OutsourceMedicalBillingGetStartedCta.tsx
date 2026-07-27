@@ -8,8 +8,16 @@ import {
   outsourceContainerClassName,
   outsourceSectionClassName,
 } from "./outsourceSectionLayout";
+import { defaultOutsourceMedicalBillingData } from "@/lib/defaults/outsourceMedicalBilling";
+import type { OutsourceGetStartedCtaData } from "@/payload/types/outsourceMedicalBilling";
 
-export default function OutsourceMedicalBillingGetStartedCta() {
+interface OutsourceMedicalBillingGetStartedCtaProps {
+  data?: OutsourceGetStartedCtaData;
+}
+
+export default function OutsourceMedicalBillingGetStartedCta({ data }: OutsourceMedicalBillingGetStartedCtaProps) {
+  const content = data || defaultOutsourceMedicalBillingData.getStartedCta;
+
   return (
     <section
       className={`${outsourceSectionClassName} pb-20 sm:pb-24 lg:pb-28`}
@@ -30,7 +38,7 @@ export default function OutsourceMedicalBillingGetStartedCta() {
             <div className="relative z-10">
               <div className="mb-6 flex justify-center sm:mb-8">
                 <SectionBadge variant="dark" pulse>
-                  Outsourcing Medical Billing.
+                  {content.badge}
                 </SectionBadge>
               </div>
 
@@ -38,26 +46,22 @@ export default function OutsourceMedicalBillingGetStartedCta() {
                 id="outsource-medical-billing-get-started-cta-heading"
                 className="mx-auto max-w-3xl text-2xl font-bold leading-tight tracking-[-0.02em] sm:text-3xl lg:text-4xl"
               >
-                Let&apos;s Find Out if We are a{" "}
-                <span className="text-amber-300">Good Fit</span> for Outsourcing Medical
-                Billing
+                {content.titleLine1}{" "}
+                <span className="text-amber-300">{content.titleHighlight}</span>
               </h2>
 
               <p className="mx-auto mt-4 max-w-2xl text-sm leading-[1.65] text-blue-200 sm:mt-5 sm:text-base">
-                Outsourcing medical billing can be a stressful decision, considering who
-                will be the best fit for the job. After all, this is your revenue and you
-                want to make sure you&apos;re working with someone who is efficient and has
-                the potential to not only streamline your RCM but also increase cash flow.
+                {content.subtitle}
               </p>
 
               <div className="mt-8 flex justify-center sm:mt-10">
                 <AppButton
-                  href="/schedule-a-demo"
+                  href={content.buttonLink || "/schedule-a-demo"}
                   variant="secondary-dark"
                   size="lg"
                   showArrow
                 >
-                  Get Started
+                  {content.buttonText}
                 </AppButton>
               </div>
             </div>
