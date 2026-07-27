@@ -11,6 +11,7 @@ import { defaultMedicalBillingAuditData } from '@/lib/defaults/medicalBillingAud
 import { defaultBlogPosts } from '@/lib/defaults/blogs'
 import { defaultCareersData } from '@/lib/defaults/careers'
 import { defaultTestimonialsData } from '@/lib/defaults/testimonials'
+import { defaultMedicalBillingSoftwareData } from '@/lib/defaults/medicalBillingSoftware'
 import { NextResponse } from 'next/server'
 
 export async function GET() {
@@ -65,6 +66,11 @@ export async function GET() {
     await payload.updateGlobal({
       slug: 'testimonials-page',
       data: defaultTestimonialsData as any,
+    })
+
+    await payload.updateGlobal({
+      slug: 'medical-billing-software',
+      data: defaultMedicalBillingSoftwareData as any,
     })
 
     // Seed Posts Collection if empty

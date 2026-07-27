@@ -41,7 +41,23 @@ const GROWTH_TOOLS: GrowthTool[] = [
   },
 ];
 
-export default function MedicalBillingSoftwareGrowthTools() {
+import { MedicalBillingSoftwareGrowthToolsData } from "@/payload/types/medicalBillingSoftware";
+import { defaultMedicalBillingSoftwareData } from "@/lib/defaults/medicalBillingSoftware";
+
+const iconMap: Record<string, any> = {
+  Award,
+  RefreshCcw,
+  Settings2,
+};
+
+interface MedicalBillingSoftwareGrowthToolsProps {
+  data?: MedicalBillingSoftwareGrowthToolsData;
+}
+
+export default function MedicalBillingSoftwareGrowthTools({ data }: MedicalBillingSoftwareGrowthToolsProps) {
+  const content = data || defaultMedicalBillingSoftwareData.growthTools;
+  const toolsList = content.tools && content.tools.length > 0 ? content.tools : defaultMedicalBillingSoftwareData.growthTools.tools;
+
   return (
     <section
       className={softwareSectionAltClassName}
@@ -50,10 +66,10 @@ export default function MedicalBillingSoftwareGrowthTools() {
       <div className={softwareContainerClassName}>
         <SoftwareSectionHeader
           headingId="medical-billing-software-growth-tools-heading"
-          badge="Growth Driven Billing Software"
-          titleHighlight="Do more"
-          titleSuffix="than just billing."
-          description="This medical billing software is a collaborator for excellence with support for credentialing, clearinghouse, and practice management tools."
+          badge={content.badge}
+          titleHighlight={content.titleHighlight}
+          titleSuffix={content.titleSuffix}
+          description={content.description}
           className="mx-auto mb-12 max-w-4xl sm:mb-16"
         />
 
@@ -62,17 +78,20 @@ export default function MedicalBillingSoftwareGrowthTools() {
           staggerDelay={0.12}
           className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
         >
-          {GROWTH_TOOLS.map((tool) => (
-            <MotionWrapper key={tool.title} variant="staggerItem" className="h-full">
-              <SoftwareHomeCard
-                icon={tool.icon}
-                title={tool.title}
-                description={tool.description}
-                href={tool.href}
-                linkLabel="Learn More"
-              />
-            </MotionWrapper>
-          ))}
+          {toolsList.map((tool, idx) => {
+            const IconComponent = (tool.iconName && iconMap[tool.iconName]) || Award;
+            return (
+              <MotionWrapper key={tool.title || idx} variant="staggerItem" className="h-full">
+                <SoftwareHomeCard
+                  icon={IconComponent}
+                  title={tool.title}
+                  description={tool.description}
+                  href={tool.href}
+                  linkLabel="Learn More"
+                />
+              </MotionWrapper>
+            );
+          })}
         </MotionWrapper>
       </div>
     </section>

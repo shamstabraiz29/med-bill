@@ -108,6 +108,7 @@ export interface Config {
     'medical-billing-audit': MedicalBillingAudit;
     careers: any;
     'testimonials-page': any;
+    'medical-billing-software': any;
   };
   globalsSelect: {
     homepage: HomepageSelect<false> | HomepageSelect<true>;
@@ -120,6 +121,7 @@ export interface Config {
     'medical-billing-audit': any;
     careers: any;
     'testimonials-page': any;
+    'medical-billing-software': any;
   };
   locale: null;
   widgets: {

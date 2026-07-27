@@ -7,14 +7,16 @@ import CommandCapsuleForm from "@/components/home/CommandCapsuleForm";
 import DoctorVisuals from "@/components/home/DoctorVisuals";
 import MedicalBillingSoftwareTrustBar from "./MedicalBillingSoftwareTrustBar";
 
-const TESTIMONIAL = {
-  quote:
-    "I would recommend this for large practices that aim to grow. It resolves claims, completes insurance verifications, and keeps payment postings organized.",
-  author: "Dr. L Presutti",
-  role: "Founder @ Psychiatric Hospital",
-};
+import { MedicalBillingSoftwareHeroData } from "@/payload/types/medicalBillingSoftware";
+import { defaultMedicalBillingSoftwareData } from "@/lib/defaults/medicalBillingSoftware";
 
-export default function MedicalBillingSoftwareHero() {
+interface MedicalBillingSoftwareHeroProps {
+  data?: MedicalBillingSoftwareHeroData;
+}
+
+export default function MedicalBillingSoftwareHero({ data }: MedicalBillingSoftwareHeroProps) {
+  const content = data || defaultMedicalBillingSoftwareData.hero;
+
   return (
     <section
       className="relative w-full overflow-hidden bg-transparent pt-12 pb-16 lg:pt-16 lg:pb-20"
@@ -49,14 +51,15 @@ export default function MedicalBillingSoftwareHero() {
           <div className="flex flex-col space-y-6 text-left lg:col-span-7">
             <HeroHeader
               headingId="medical-billing-software-hero-heading"
-              eyebrow="Medical Billing Software"
-              titlePrefix="Medical Billing"
-              titleHighlight="Software"
-              description1="Automate billing workflow. Eliminate errors. Maximize reimbursement."
-              description2="100% free to try. No credit card required."
+              eyebrow={content.eyebrow}
+              titlePrefix={content.titlePrefix}
+              titleHighlight={content.titleHighlight}
+              description1={content.description1}
+              description2={content.description2}
             />
 
             <CommandCapsuleForm
+              formTitle="Medical Billing Software Sign Up"
               buttonLabel="Sign Up For Free"
               namePlaceholder="Name"
               emailPlaceholder="Email"
@@ -81,11 +84,11 @@ export default function MedicalBillingSoftwareHero() {
               </div>
 
               <blockquote className="text-xs leading-[1.65] text-[#475569] sm:text-[13px]">
-                &ldquo;{TESTIMONIAL.quote}&rdquo;
+                &ldquo;{content.testimonialQuote}&rdquo;
               </blockquote>
 
               <figcaption className="mt-4 text-xs font-bold text-[#0F172A] sm:text-sm">
-                {TESTIMONIAL.author} &ndash; {TESTIMONIAL.role}
+                {content.testimonialAuthor} &ndash; {content.testimonialRole}
               </figcaption>
             </figure>
           </div>

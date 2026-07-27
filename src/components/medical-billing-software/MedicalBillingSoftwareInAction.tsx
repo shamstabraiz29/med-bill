@@ -64,7 +64,26 @@ const SOFTWARE_ACTION_FEATURES: SoftwareActionFeature[] = [
   },
 ];
 
-export default function MedicalBillingSoftwareInAction() {
+import { MedicalBillingSoftwareInActionData } from "@/payload/types/medicalBillingSoftware";
+import { defaultMedicalBillingSoftwareData } from "@/lib/defaults/medicalBillingSoftware";
+
+const iconMap: Record<string, any> = {
+  ClipboardCheck,
+  Laptop,
+  Bell,
+  BarChart3,
+  Workflow,
+  Receipt,
+};
+
+interface MedicalBillingSoftwareInActionProps {
+  data?: MedicalBillingSoftwareInActionData;
+}
+
+export default function MedicalBillingSoftwareInAction({ data }: MedicalBillingSoftwareInActionProps) {
+  const content = data || defaultMedicalBillingSoftwareData.inAction;
+  const featuresList = content.features && content.features.length > 0 ? content.features : defaultMedicalBillingSoftwareData.inAction.features;
+
   return (
     <section
       className={softwareSectionAltClassName}
@@ -73,9 +92,9 @@ export default function MedicalBillingSoftwareInAction() {
       <div className={softwareContainerClassName}>
         <SoftwareSectionHeader
           headingId="medical-billing-software-in-action-heading"
-          badge="Software In Action"
-          titlePlain="Billing made"
-          titleHighlight="fast, easy, and accurate"
+          badge={content.badge}
+          titlePlain={content.titlePlain}
+          titleHighlight={content.titleHighlight}
           endPeriod
           className="mx-auto mb-12 max-w-4xl sm:mb-16"
         />
@@ -85,23 +104,23 @@ export default function MedicalBillingSoftwareInAction() {
           staggerDelay={0.12}
           className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
         >
-          {SOFTWARE_ACTION_FEATURES.map((feature) => (
-            <MotionWrapper key={feature.title} variant="staggerItem" className="h-full">
-              <SoftwareHomeCard
-                icon={feature.icon}
-                title={feature.title}
-                description={feature.description}
-              />
-            </MotionWrapper>
-          ))}
+          {featuresList.map((feature, idx) => {
+            const IconComponent = (feature.iconName && iconMap[feature.iconName]) || ClipboardCheck;
+            return (
+              <MotionWrapper key={feature.title || idx} variant="staggerItem" className="h-full">
+                <SoftwareHomeCard
+                  icon={IconComponent}
+                  title={feature.title}
+                  description={feature.description}
+                />
+              </MotionWrapper>
+            );
+          })}
         </MotionWrapper>
 
         <div className="mx-auto mt-16 max-w-3xl text-center sm:mt-20">
           <p className="text-sm leading-[1.6] text-[#475569] sm:text-base">
-            There&apos;s never been a better time to switch to our software and take
-            advantage of our unbeatable features and benefits. For a limited time only,
-            get a free installation, a free upgrade, and a free month of service when
-            you sign up now.
+            {content.descriptionText}
           </p>
 
           <div className="mt-8">
@@ -111,7 +130,7 @@ export default function MedicalBillingSoftwareInAction() {
               size="lg"
               showArrow
             >
-              Get Started for Free
+              {content.buttonText || "Get Started for Free"}
             </AppButton>
           </div>
         </div>

@@ -62,12 +62,20 @@ const SOFTWARE_TESTIMONIALS: SoftwareTestimonial[] = [
   },
 ];
 
-export default function MedicalBillingSoftwareTestimonials() {
+import { MedicalBillingSoftwareTestimonialsData } from "@/payload/types/medicalBillingSoftware";
+import { defaultMedicalBillingSoftwareData } from "@/lib/defaults/medicalBillingSoftware";
+
+interface MedicalBillingSoftwareTestimonialsProps {
+  data?: MedicalBillingSoftwareTestimonialsData;
+}
+
+export default function MedicalBillingSoftwareTestimonials({ data }: MedicalBillingSoftwareTestimonialsProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  const activeTestimonial = SOFTWARE_TESTIMONIALS[activeIndex];
-  const total = SOFTWARE_TESTIMONIALS.length;
+  const testimonialsList = (data && data.testimonials && data.testimonials.length > 0) ? data.testimonials : defaultMedicalBillingSoftwareData.testimonials.testimonials;
+  const activeTestimonial = testimonialsList[activeIndex] || testimonialsList[0];
+  const total = testimonialsList.length;
 
   const goPrevious = useCallback(() => {
     setActiveIndex((current) => (current === 0 ? total - 1 : current - 1));
@@ -78,7 +86,7 @@ export default function MedicalBillingSoftwareTestimonials() {
   }, [total]);
 
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || total === 0) return;
 
     const interval = setInterval(() => {
       setActiveIndex((current) => (current === total - 1 ? 0 : current + 1));
@@ -113,7 +121,7 @@ export default function MedicalBillingSoftwareTestimonials() {
           onKeyDown={handleKeyDown}
           tabIndex={0}
         >
-          <MotionWrapper key={activeTestimonial.id} variant="fadeUp">
+          <MotionWrapper key={activeTestimonial?.name || activeIndex} variant="fadeUp">
             <div className="overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-[0_4px_24px_rgba(29,78,216,0.04)] sm:rounded-3xl">
               <div className="grid grid-cols-1 lg:grid-cols-12">
                 <div className="flex flex-col justify-between p-6 sm:p-8 lg:col-span-7 lg:p-10">
@@ -126,23 +134,23 @@ export default function MedicalBillingSoftwareTestimonials() {
                     />
 
                     <blockquote className="text-sm leading-[1.7] text-[#475569] sm:text-base">
-                      &ldquo;{activeTestimonial.quote}&rdquo;
+                      &ldquo;{activeTestimonial?.quote}&rdquo;
                     </blockquote>
                   </div>
 
                   <div className="mt-8 border-t border-[#E2E6EC] pt-6">
                     <p className="text-base font-bold tracking-[-0.02em] text-[#0F172A]">
-                      {activeTestimonial.name}
+                      {activeTestimonial?.name}
                     </p>
                     <p className="mt-1 text-xs font-medium text-[#475569] sm:text-sm">
-                      {activeTestimonial.role}
+                      {activeTestimonial?.role}
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-center border-t border-[#E2E6EC] bg-[#0F172A] p-6 sm:p-8 lg:col-span-5 lg:border-l lg:border-t-0 lg:p-10">
                   <p className="text-lg font-bold leading-snug tracking-[-0.02em] text-white sm:text-xl lg:text-2xl">
-                    {activeTestimonial.highlight}
+                    {activeTestimonial?.highlightText}
                   </p>
                 </div>
               </div>
@@ -151,9 +159,9 @@ export default function MedicalBillingSoftwareTestimonials() {
 
           <div className="mt-8 flex flex-col items-center justify-between gap-5 sm:flex-row">
             <div className="flex items-center gap-2.5">
-              {SOFTWARE_TESTIMONIALS.map((item, index) => (
+              {testimonialsList.map((item, index) => (
                 <button
-                  key={item.id}
+                  key={item.name || index}
                   type="button"
                   onClick={() => setActiveIndex(index)}
                   aria-label={`Go to testimonial ${index + 1}`}

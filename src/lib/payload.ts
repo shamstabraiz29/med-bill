@@ -295,6 +295,8 @@ export async function getCareersData(): Promise<CareersData> {
 
 import type { TestimonialsPageData } from '@/payload/types/testimonials'
 import { defaultTestimonialsData } from '@/lib/defaults/testimonials'
+import type { MedicalBillingSoftwarePageData } from '@/payload/types/medicalBillingSoftware'
+import { defaultMedicalBillingSoftwareData } from '@/lib/defaults/medicalBillingSoftware'
 
 /**
  * Fetches the Testimonials global data from Payload CMS.
@@ -312,6 +314,25 @@ export async function getTestimonialsData(): Promise<TestimonialsPageData> {
   } catch (error) {
     console.error('[Payload] Failed to fetch testimonials data, using defaults:', error)
     return defaultTestimonialsData
+  }
+}
+
+/**
+ * Fetches the Medical Billing Software global data from Payload CMS.
+ * Uses Payload Local API with fallback to default hardcoded content.
+ */
+export async function getMedicalBillingSoftwareData(): Promise<MedicalBillingSoftwarePageData> {
+  try {
+    const payload = await getPayload({ config })
+
+    const data = await payload.findGlobal({
+      slug: 'medical-billing-software',
+    })
+
+    return deepMerge(defaultMedicalBillingSoftwareData, data as unknown as Partial<MedicalBillingSoftwarePageData>)
+  } catch (error) {
+    console.error('[Payload] Failed to fetch medical billing software data, using defaults:', error)
+    return defaultMedicalBillingSoftwareData
   }
 }
 

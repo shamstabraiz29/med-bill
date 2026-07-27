@@ -55,7 +55,31 @@ const NEW_FEATURES = [
   },
 ];
 
-export default function MedicalBillingSoftwareNewFeatures() {
+import { MedicalBillingSoftwareNewFeaturesData } from "@/payload/types/medicalBillingSoftware";
+import { defaultMedicalBillingSoftwareData } from "@/lib/defaults/medicalBillingSoftware";
+
+const iconMap: Record<string, any> = {
+  FilePenLine,
+  FlaskConical,
+  ShieldCheck,
+  PieChart,
+};
+
+const visualMap: Record<number, { visual: React.ReactNode; reverse: boolean }> = {
+  0: { visual: <PrescriptionScheduleVisual />, reverse: false },
+  1: { visual: <LabTestsVisual />, reverse: true },
+  2: { visual: <TopPayersVisual />, reverse: false },
+  3: { visual: <BusinessManagementVisual />, reverse: true },
+};
+
+interface MedicalBillingSoftwareNewFeaturesProps {
+  data?: MedicalBillingSoftwareNewFeaturesData;
+}
+
+export default function MedicalBillingSoftwareNewFeatures({ data }: MedicalBillingSoftwareNewFeaturesProps) {
+  const content = data || defaultMedicalBillingSoftwareData.newFeatures;
+  const featuresList = content.features && content.features.length > 0 ? content.features : defaultMedicalBillingSoftwareData.newFeatures.features;
+
   return (
     <section
       className={softwareSectionClassName}
@@ -64,25 +88,29 @@ export default function MedicalBillingSoftwareNewFeatures() {
       <div className={softwareContainerClassName}>
         <SoftwareSectionHeader
           headingId="medical-billing-software-new-features-heading"
-          badge="Exciting New Features"
-          titlePlain="Boost your medical billing"
-          titleHighlight="efficiency and profitability"
+          badge={content.badge}
+          titlePlain={content.titlePlain}
+          titleHighlight={content.titleHighlight}
           endPeriod
-          description="Our software is designed by medical billing professionals who understand your needs and challenges. We also provide you with dedicated account managers, training sessions, and technical support to ensure your success."
+          description={content.description}
           className="mx-auto mb-12 max-w-4xl sm:mb-16"
         />
 
         <div className="space-y-8 sm:space-y-10 lg:space-y-12">
-          {NEW_FEATURES.map((feature) => (
-            <MedicalBillingSoftwareFeatureRow
-              key={feature.title}
-              icon={feature.icon}
-              title={feature.title}
-              description={feature.description}
-              visual={feature.visual}
-              reverse={feature.reverse}
-            />
-          ))}
+          {featuresList.map((feature, idx) => {
+            const IconComponent = (feature.iconName && iconMap[feature.iconName]) || FilePenLine;
+            const visualConfig = visualMap[idx % 4];
+            return (
+              <MedicalBillingSoftwareFeatureRow
+                key={feature.title || idx}
+                icon={IconComponent}
+                title={feature.title}
+                description={feature.description}
+                visual={visualConfig.visual}
+                reverse={visualConfig.reverse}
+              />
+            );
+          })}
         </div>
       </div>
     </section>

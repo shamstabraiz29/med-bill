@@ -38,7 +38,23 @@ const SOFTWARE_FEATURES: SoftwareFeature[] = [
   },
 ];
 
-export default function MedicalBillingSoftwareDelivers() {
+import { MedicalBillingSoftwareDeliversData } from "@/payload/types/medicalBillingSoftware";
+import { defaultMedicalBillingSoftwareData } from "@/lib/defaults/medicalBillingSoftware";
+
+const iconMap: Record<string, any> = {
+  FileText,
+  TrendingUp,
+  Users,
+};
+
+interface MedicalBillingSoftwareDeliversProps {
+  data?: MedicalBillingSoftwareDeliversData;
+}
+
+export default function MedicalBillingSoftwareDelivers({ data }: MedicalBillingSoftwareDeliversProps) {
+  const content = data || defaultMedicalBillingSoftwareData.delivers;
+  const featuresList = content.features && content.features.length > 0 ? content.features : defaultMedicalBillingSoftwareData.delivers.features;
+
   return (
     <section
       className={softwareSectionClassName}
@@ -47,11 +63,11 @@ export default function MedicalBillingSoftwareDelivers() {
       <div className={softwareContainerClassName}>
         <SoftwareSectionHeader
           headingId="medical-billing-software-delivers-heading"
-          badge="Medical Billing Software"
-          titlePlain="A billing software that"
-          titleHighlight="delivers"
+          badge={content.badge}
+          titlePlain={content.titlePlain}
+          titleHighlight={content.titleHighlight}
           endPeriod
-          description="Our medical billing software masters the alpha and omega of the billing cycle management with features like claim submission, payment processing, reporting, and analytics."
+          description={content.description}
           className="mx-auto mb-12 max-w-4xl sm:mb-16"
         />
 
@@ -61,21 +77,24 @@ export default function MedicalBillingSoftwareDelivers() {
             staggerDelay={0.12}
             className="flex flex-col gap-4 sm:gap-5"
           >
-            {SOFTWARE_FEATURES.map((feature) => (
-              <MotionWrapper key={feature.title} variant="staggerItem">
-                <SoftwareHomeCard
-                  icon={feature.icon}
-                  title={feature.title}
-                  description={feature.description}
-                />
-              </MotionWrapper>
-            ))}
+            {featuresList.map((feature, idx) => {
+              const IconComponent = (feature.iconName && iconMap[feature.iconName]) || FileText;
+              return (
+                <MotionWrapper key={feature.title || idx} variant="staggerItem">
+                  <SoftwareHomeCard
+                    icon={IconComponent}
+                    title={feature.title}
+                    description={feature.description}
+                  />
+                </MotionWrapper>
+              );
+            })}
           </MotionWrapper>
 
           <MotionWrapper variant="slideLeft">
             <div className="group relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white transition-all duration-300 hover:-translate-y-1.5 hover:border-[#1D4ED8]/30 hover:shadow-lg hover:shadow-blue-900/5 sm:aspect-16/11">
               <Image
-                src="/consultants-laptop.png"
+                src={content.imageSrc || "/consultants-laptop.png"}
                 alt="BellMedEx medical billing software dashboard on laptop"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
