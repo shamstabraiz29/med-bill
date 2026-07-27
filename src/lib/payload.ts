@@ -30,6 +30,8 @@ import type { PracticeManagementSoftwarePmsPageData } from '@/payload/types/prac
 import { defaultPracticeManagementSoftwarePmsData } from '@/lib/defaults/practiceManagementSoftwarePms'
 import type { OutsourceMedicalBillingPageData } from '@/payload/types/outsourceMedicalBilling'
 import { defaultOutsourceMedicalBillingData } from '@/lib/defaults/outsourceMedicalBilling'
+import type { AboutUsPageData } from '@/payload/types/aboutUs'
+import { defaultAboutUsData } from '@/lib/defaults/aboutUs'
 
 /**
  * Fetches the Homepage global data from Payload CMS using the Local API.
@@ -417,6 +419,25 @@ export async function getOutsourceMedicalBillingData(): Promise<OutsourceMedical
   } catch (error) {
     console.error('[Payload] Failed to fetch Outsource Medical Billing data, using defaults:', error)
     return defaultOutsourceMedicalBillingData
+  }
+}
+
+/**
+ * Fetches the About Us global data from Payload CMS.
+ * Uses Payload Local API with fallback to default hardcoded content.
+ */
+export async function getAboutUsData(): Promise<AboutUsPageData> {
+  try {
+    const payload = await getPayload({ config })
+
+    const data = await payload.findGlobal({
+      slug: 'about-us',
+    })
+
+    return deepMerge(defaultAboutUsData, data as unknown as Partial<AboutUsPageData>)
+  } catch (error) {
+    console.error('[Payload] Failed to fetch About Us data, using defaults:', error)
+    return defaultAboutUsData
   }
 }
 

@@ -1,5 +1,4 @@
-import PageContainer from "@/components/PageContainer";
+import AboutUsPage, { metadata } from "../about-us/page";
 
-export default function Page() {
-  return <PageContainer title="About BellMedEx" />;
-}
+export { metadata };
+export default AboutUsPage;

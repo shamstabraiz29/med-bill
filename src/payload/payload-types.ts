@@ -113,6 +113,7 @@ export interface Config {
     'electronic-health-records-ehr': any;
     'practice-management-software-pms': any;
     'outsource-medical-billing': any;
+    'about-us': any;
   };
   globalsSelect: {
     homepage: HomepageSelect<false> | HomepageSelect<true>;
@@ -130,6 +131,7 @@ export interface Config {
     'electronic-health-records-ehr': any;
     'practice-management-software-pms': any;
     'outsource-medical-billing': any;
+    'about-us': any;
   };
   locale: null;
   widgets: {
