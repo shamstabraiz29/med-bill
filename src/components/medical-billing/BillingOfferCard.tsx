@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import IconWrapper from "@/components/common/IconWrapper";
 
 export interface BillingOfferCardProps {
+  step?: number;
   icon: LucideIcon;
   title: string;
   items: string[];
@@ -14,6 +15,7 @@ export interface BillingOfferCardProps {
 }
 
 export default function BillingOfferCard({
+  step,
   icon,
   title,
   items,
@@ -24,11 +26,20 @@ export default function BillingOfferCard({
       glass={false}
       hoverEffect="none"
       className={cn(
-        "group h-full rounded-[12px] border border-border bg-card shadow-none transition-colors duration-300 hover:border-primary/30",
+        "group relative h-full overflow-hidden rounded-[12px] border border-border bg-card shadow-none transition-colors duration-300 hover:border-primary/30",
         className
       )}
     >
-      <CardContent className="p-6 sm:p-8">
+      {step ? (
+        <span
+          className="pointer-events-none absolute top-3 right-4 text-[5.5rem] font-extrabold leading-none text-foreground/[0.05] select-none sm:text-[6.5rem]"
+          aria-hidden="true"
+        >
+          {step}
+        </span>
+      ) : null}
+
+      <CardContent className="relative z-[1] p-6 sm:p-8">
         <div className="mb-5 flex items-start gap-3 sm:gap-4">
           <IconWrapper
             icon={icon}

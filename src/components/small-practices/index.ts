@@ -1,0 +1,12 @@
+export { default as SmallPracticesPartnerCtaSection } from "./SmallPracticesPartnerCtaSection";
+export { default as SmallPracticesTransparencySection } from "./SmallPracticesTransparencySection";
+export { default as SmallPracticesEaseBillingSection } from "./SmallPracticesEaseBillingSection";
+export { default as SmallPracticesBillingProcessSection } from "./SmallPracticesBillingProcessSection";
+export { default as SmallPracticesRevenueLossSection } from "./SmallPracticesRevenueLossSection";
+export { default as SmallPracticesSpecialtyFormSection } from "./SmallPracticesSpecialtyFormSection";
+export { default as SmallPracticesAffordableBillingSection } from "./SmallPracticesAffordableBillingSection";
+export { default as SmallPracticesCollaborateSection } from "./SmallPracticesCollaborateSection";
+export { default as SmallPracticesHero } from "./SmallPracticesHero";
+export { default as SmallPracticesHeroBenefits } from "./SmallPracticesHeroBenefits";
+export { default as SmallPracticesHeroDemoForm } from "./SmallPracticesHeroDemoForm";
+export { default as SmallPracticesHeroHeader } from "./SmallPracticesHeroHeader";
