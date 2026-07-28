@@ -13,9 +13,10 @@ export default async function MedicalBillingPricingPage() {
   const data = await getMedicalBillingPricingData();
 
   return (
-    <div className="flex flex-col min-h-screen bg-transparent">
+    <main className="flex flex-col min-h-screen bg-transparent pb-12 sm:pb-16">
       <PricingHero data={data.hero} />
       <PricingUnlockForm data={data.unlockForm} />
-    </div>
+    </main>
   );
 }
+

@@ -3,15 +3,9 @@
 import React from "react";
 import SectionBadge from "@/components/ui/SectionBadge";
 import MotionWrapper from "@/components/ui/MotionWrapper";
-import { Clock, ShieldCheck, Headphones, MessageSquare, LucideIcon } from "lucide-react";
+import { MessageSquare, CheckCircle2 } from "lucide-react";
 import { defaultContactUsData } from "@/lib/defaults/contactUs";
 import type { ContactHeroData } from "@/payload/types/contactUs";
-
-const ICON_MAP: Record<string, LucideIcon> = {
-  Clock,
-  Headphones,
-  ShieldCheck,
-};
 
 interface ContactHeroProps {
   data?: ContactHeroData;
@@ -19,15 +13,17 @@ interface ContactHeroProps {
 
 export default function ContactHero({ data }: ContactHeroProps) {
   const content = data || defaultContactUsData.hero;
-  const highlightsList = content.highlights && content.highlights.length > 0 ? content.highlights : defaultContactUsData.hero.highlights;
+  const highlightsList =
+    content.highlights && content.highlights.length > 0
+      ? content.highlights
+      : defaultContactUsData.hero.highlights;
 
   return (
-    <section className="relative w-full pt-12 pb-10 sm:pt-16 sm:pb-14 bg-transparent overflow-hidden">
+    <section className="relative w-full pt-12 pb-8 sm:pt-16 sm:pb-12 bg-transparent overflow-hidden">
       {/* Ambient Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-b from-blue-50/60 via-indigo-50/30 to-transparent pointer-events-none -z-10 rounded-full blur-3xl" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-b from-blue-50/70 via-indigo-50/20 to-transparent pointer-events-none -z-10 rounded-full blur-3xl" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-        
         <MotionWrapper variant="fadeIn">
           <div className="flex justify-center">
             <SectionBadge variant="blue" pulse icon={MessageSquare}>
@@ -37,7 +33,7 @@ export default function ContactHero({ data }: ContactHeroProps) {
         </MotionWrapper>
 
         <MotionWrapper variant="fadeUp" delay={0.1}>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#0F172A] max-w-4xl mx-auto leading-[1.18]">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#0F172A] max-w-4xl mx-auto leading-[1.18]">
             {content.titlePlain}{" "}
             <span className="text-[#1D4ED8]">{content.titleHighlight}</span>
           </h1>
@@ -49,33 +45,23 @@ export default function ContactHero({ data }: ContactHeroProps) {
           </p>
         </MotionWrapper>
 
-        {/* Quick Highlights Bar - Clean Non-Card Layout */}
+        {/* Quick Trust Highlights Strip matching PricingHero */}
         <MotionWrapper variant="fadeIn" delay={0.3}>
-          <div className="pt-6 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 lg:gap-14 max-w-4xl mx-auto">
+          <div className="pt-2 flex flex-wrap items-center justify-center gap-3 sm:gap-4 max-w-4xl mx-auto">
             {highlightsList.map((item, idx) => {
-              const Icon = (item.iconName && ICON_MAP[item.iconName]) || Clock;
+              const label = typeof item === "string" ? item : item.title || "";
               return (
                 <div
-                  key={item.title || idx}
-                  className="group flex items-start gap-3.5 text-left"
+                  key={label || idx}
+                  className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#0F172A] bg-white/90 border border-[#E2E6EC] px-4 py-2 rounded-full shadow-xs hover:border-[#1D4ED8]/30 transition-all duration-300"
                 >
-                  <div className="w-11 h-11 rounded-2xl bg-blue-50 border border-blue-100/80 flex items-center justify-center text-[#1D4ED8] shrink-0 group-hover:bg-[#1D4ED8] group-hover:text-white transition-all duration-300">
-                    <Icon className="w-5 h-5" />
-                  </div>
-                  <div className="space-y-0.5">
-                    <h3 className="text-sm font-bold text-[#0F172A] group-hover:text-[#1D4ED8] transition-colors">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs text-[#475569] leading-tight">
-                      {item.desc}
-                    </p>
-                  </div>
+                  <CheckCircle2 className="w-4 h-4 text-[#1D4ED8] shrink-0" />
+                  <span>{label}</span>
                 </div>
               );
             })}
           </div>
         </MotionWrapper>
-
       </div>
     </section>
   );

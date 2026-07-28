@@ -15,11 +15,11 @@ export default async function ContactUsPage() {
   const data = await getContactUsData();
 
   return (
-    <div className="flex flex-col min-h-screen bg-transparent">
+    <main className="flex flex-col min-h-screen bg-transparent pb-12 sm:pb-16">
       <ContactHero data={data.hero} />
       <ContactFormSection data={data.formSection} />
       <ContactFaq data={data.faq} />
       <ContactCTA data={data.cta} />
-    </div>
+    </main>
   );
 }

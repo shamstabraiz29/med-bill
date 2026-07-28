@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import MotionWrapper from "@/components/ui/MotionWrapper";
-import SectionBadge from "@/components/ui/SectionBadge";
 import { Input } from "@/components/ui/input";
 import AppButton from "@/components/ui/AppButton";
 import { FormSelect } from "@/components/ui/select";
@@ -16,6 +15,8 @@ import {
   Send,
   CheckCircle2,
   ShieldCheck,
+  Headphones,
+  LockKeyhole,
   LucideIcon,
 } from "lucide-react";
 import { defaultContactUsData } from "@/lib/defaults/contactUs";
@@ -26,10 +27,11 @@ const ICON_MAP: Record<string, LucideIcon> = {
   Mail,
   MapPin,
   Clock,
+  Headphones,
 };
 
 const inputClassName =
-  "bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm";
+  "bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-xl transition-all";
 
 interface ContactFormSectionProps {
   data?: ContactFormSectionData;
@@ -37,10 +39,18 @@ interface ContactFormSectionProps {
 
 export default function ContactFormSection({ data }: ContactFormSectionProps) {
   const content = data || defaultContactUsData.formSection;
-  const channelsList = content.channels && content.channels.length > 0 ? content.channels : defaultContactUsData.formSection.channels;
-  
-  const rawServices = content.serviceOptions && content.serviceOptions.length > 0 ? content.serviceOptions : defaultContactUsData.formSection.serviceOptions;
-  const serviceOptionsList = rawServices.map((s: any) => (typeof s === "string" ? s : s.label || ""));
+  const channelsList =
+    content.channels && content.channels.length > 0
+      ? content.channels
+      : defaultContactUsData.formSection.channels;
+
+  const rawServices =
+    content.serviceOptions && content.serviceOptions.length > 0
+      ? content.serviceOptions
+      : defaultContactUsData.formSection.serviceOptions;
+  const serviceOptionsList = rawServices.map((s: any) =>
+    typeof s === "string" ? s : s.label || ""
+  );
 
   const [formData, setFormData] = useState({
     name: "",
@@ -50,6 +60,7 @@ export default function ContactFormSection({ data }: ContactFormSectionProps) {
     serviceInterest: serviceOptionsList[0] || "Revenue Cycle Management (RCM)",
     message: "",
   });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -64,7 +75,9 @@ export default function ContactFormSection({ data }: ContactFormSectionProps) {
         body: JSON.stringify({
           formName: "Contact Us Submission",
           sourcePage:
-            typeof window !== "undefined" ? window.location.pathname : "/contact-bellmedex",
+            typeof window !== "undefined"
+              ? window.location.pathname
+              : "/contact-bellmedex",
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
@@ -76,14 +89,6 @@ export default function ContactFormSection({ data }: ContactFormSectionProps) {
 
       if (response.ok) {
         setIsSubmitted(true);
-        setFormData({
-          name: "",
-          email: "",
-          phone: "",
-          organization: "",
-          serviceInterest: serviceOptionsList[0] || "Revenue Cycle Management (RCM)",
-          message: "",
-        });
       }
     } catch (error) {
       console.error("[ContactFormSection error]:", error);
@@ -93,140 +98,137 @@ export default function ContactFormSection({ data }: ContactFormSectionProps) {
   };
 
   return (
-    <section className="relative w-full py-10 sm:py-14 bg-transparent">
+    <section className="relative w-full py-8 sm:py-14 bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-          
-          {/* Left Column: Direct Channels & Info */}
-          <MotionWrapper variant="slideLeft" className="lg:col-span-5 space-y-6 text-left">
-            
-            {/* Header */}
-            <div className="space-y-3">
-              <span className="inline-block text-xs font-bold uppercase tracking-wider text-[#1D4ED8] bg-blue-50 border border-blue-100/80 px-3.5 py-1 rounded-full">
-                {content.badge}
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#0F172A] tracking-tight leading-tight">
-                {content.titlePlain}{" "}
-                <span className="text-[#1D4ED8]">{content.titleHighlight}</span>
-              </h2>
-              <p className="text-xs sm:text-sm text-[#475569] leading-relaxed">
-                {content.description}
-              </p>
-            </div>
-
-            {/* Interactive Channels List */}
-            <div className="space-y-3.5 pt-1">
-              {channelsList.map((item, idx) => {
-                const Icon = (item.iconName && ICON_MAP[item.iconName]) || Phone;
-                const channelContent = (
-                  <div className="group relative p-4 rounded-2xl bg-white border border-[#E2E6EC] hover:border-blue-300 hover:shadow-[0_8px_25px_rgba(29,78,216,0.08)] transition-all duration-300 flex items-center justify-between">
-                    <div className="flex items-center gap-3.5">
-                      <div className="w-11 h-11 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-[#1D4ED8] group-hover:bg-[#1D4ED8] group-hover:text-white group-hover:border-[#1D4ED8] transition-all duration-300 shrink-0 shadow-xs">
-                        <Icon className="w-5 h-5" />
-                      </div>
-                      <div className="space-y-0.5">
-                        <h3 className="text-xs font-bold text-[#0F172A] group-hover:text-[#1D4ED8] transition-colors">
-                          {item.title}
-                        </h3>
-                        <p className="text-xs sm:text-sm font-semibold text-[#0F172A]">
-                          {item.details}
-                        </p>
-                        {item.subtext && (
-                          <p className="text-[11px] text-[#475569]">{item.subtext}</p>
-                        )}
-                      </div>
-                    </div>
-
-                    {item.href && (
-                      <div className="w-8 h-8 rounded-xl bg-slate-50 group-hover:bg-blue-50 border border-transparent group-hover:border-blue-100 flex items-center justify-center text-slate-400 group-hover:text-[#1D4ED8] transition-all shrink-0">
-                        <svg
-                          className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          strokeWidth={2.5}
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
-                        </svg>
-                      </div>
-                    )}
-                  </div>
-                );
-
-                return item.href ? (
-                  <a
-                    key={item.title || idx}
-                    href={item.href}
-                    target={item.href.startsWith("http") ? "_blank" : undefined}
-                    rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="block text-left"
-                  >
-                    {channelContent}
-                  </a>
-                ) : (
-                  <div key={item.title || idx} className="text-left">
-                    {channelContent}
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Quick Trust Guarantee Callout */}
-            <div className="p-5 rounded-2xl bg-[#0F172A] border border-slate-800 text-white space-y-2.5 text-left shadow-lg relative overflow-hidden">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-sky-500/10 border border-sky-400/20 flex items-center justify-center text-sky-400 shrink-0">
-                  <ShieldCheck className="w-5 h-5" />
+        <MotionWrapper variant="scaleUp">
+          {/* Main 2-Column Split Card Container (matching PricingUnlockForm) */}
+          <div className="bg-white rounded-3xl border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 overflow-hidden grid grid-cols-1 lg:grid-cols-12">
+            {/* Left Column: Solid #0F172A Direct Channels Spotlight */}
+            <div className="lg:col-span-5 bg-[#0F172A] text-white p-8 sm:p-10 lg:p-12 flex flex-col justify-between relative overflow-hidden">
+              <div className="relative space-y-6 sm:space-y-8 z-10">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/15 border border-blue-400/20 text-blue-300 text-xs font-semibold">
+                  <Headphones className="w-3.5 h-3.5 text-blue-400" />
+                  <span>{content.badge || "Direct Communication"}</span>
                 </div>
-                <h3 className="text-xs font-bold uppercase tracking-wider text-sky-400">
-                  {content.guaranteeTitle}
-                </h3>
+
+                <div className="space-y-3">
+                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight text-white">
+                    {content.titlePlain}{" "}
+                    <span className="text-blue-400">{content.titleHighlight}</span>
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-md">
+                    {content.description}
+                  </p>
+                </div>
+
+                {/* Direct Channels List */}
+                <div className="space-y-4 sm:space-y-5 pt-2">
+                  {channelsList.map((item, idx) => {
+                    const Icon = (item.iconName && ICON_MAP[item.iconName]) || Phone;
+                    const channelElement = (
+                      <div className="flex items-start gap-3.5 group">
+                        <div className="p-2.5 rounded-xl bg-blue-500/15 text-blue-400 shrink-0 mt-0.5 border border-blue-400/20 group-hover:bg-blue-500 group-hover:text-white transition-all duration-300">
+                          <Icon className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <h4 className="text-xs sm:text-sm font-bold text-white group-hover:text-blue-300 transition-colors">
+                            {item.title}
+                          </h4>
+                          <p className="text-xs text-slate-300 font-medium">
+                            {item.details}
+                          </p>
+                          {item.subtext && (
+                            <p className="text-[11px] text-slate-400">{item.subtext}</p>
+                          )}
+                        </div>
+                      </div>
+                    );
+
+                    return item.href ? (
+                      <a
+                        key={item.title || idx}
+                        href={item.href}
+                        target={item.href.startsWith("http") ? "_blank" : undefined}
+                        rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                        className="block"
+                      >
+                        {channelElement}
+                      </a>
+                    ) : (
+                      <div key={item.title || idx}>{channelElement}</div>
+                    );
+                  })}
+                </div>
               </div>
-              <p className="text-xs text-indigo-200/80 leading-relaxed pl-12">
-                {content.guaranteeDescription}
-              </p>
+
+              {/* Trust Badge at bottom of left panel */}
+              <div className="relative pt-8 sm:pt-10 z-10">
+                <div className="flex items-center gap-2.5 p-3.5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm text-xs text-slate-300">
+                  <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span>
+                    {content.guaranteeDescription ||
+                      "HIPAA Compliant & 100% Confidential Guarantee"}
+                  </span>
+                </div>
+              </div>
             </div>
-          </MotionWrapper>
 
-          {/* Right Column: Modern Minimalist Form */}
-          <MotionWrapper variant="slideRight" className="lg:col-span-7">
-            <div className="bg-white border border-[#E2E6EC] rounded-3xl p-6 sm:p-8 lg:p-9 shadow-[0_12px_40px_rgba(15,23,42,0.06)] text-left relative overflow-hidden">
-
-              <div className="border-b border-[#E2E6EC] pb-4 mb-6 space-y-1">
-                <span className="text-[11px] font-extrabold uppercase tracking-wider text-[#1D4ED8]">
-                  {content.formBadge}
-                </span>
-                <h3 className="text-xl sm:text-2xl font-bold text-[#0F172A] tracking-tight">
-                  {content.formTitlePlain} <span className="text-[#1D4ED8]">{content.formTitleHighlight}</span>
-                </h3>
-                <p className="text-xs text-[#475569]">
+            {/* Right Column: Form Container */}
+            <div className="lg:col-span-7 p-7 sm:p-10 lg:p-12 flex flex-col justify-center bg-white">
+              {/* Form Header */}
+              <div className="border-b border-[#E2E6EC] pb-4 mb-5 space-y-1">
+                <div className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-[#1D4ED8]">
+                  <span>{content.formBadge}</span>
+                </div>
+                <h2 className="text-xl sm:text-2xl font-extrabold text-[#0F172A] tracking-tight">
+                  {content.formTitlePlain}{" "}
+                  <span className="text-[#1D4ED8]">{content.formTitleHighlight}</span>
+                </h2>
+                <p className="text-xs text-[#475569] leading-relaxed">
                   {content.formSubtitle}
                 </p>
               </div>
 
               {isSubmitted ? (
-                <div className="space-y-4 py-12 text-center">
-                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
-                    <CheckCircle2 className="h-8 w-8" aria-hidden="true" />
+                <div className="space-y-5 py-8 text-center">
+                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-50 text-emerald-600 shadow-xs border border-emerald-100">
+                    <CheckCircle2 className="h-9 w-9" aria-hidden="true" />
                   </div>
-                  <h4 className="text-xl font-bold text-[#0F172A]">Message Received!</h4>
-                  <p className="mx-auto max-w-sm text-xs sm:text-sm leading-relaxed text-[#475569]">
-                    Thank you for reaching out to BellMedEx. A dedicated billing specialist has been notified and will contact you shortly.
-                  </p>
-                  <button
-                    type="button"
-                    onClick={() => setIsSubmitted(false)}
-                    className="cursor-pointer pt-2 text-xs font-semibold text-[#1D4ED8] hover:underline"
-                  >
-                    Send another message
-                  </button>
+                  <div className="space-y-2">
+                    <h3 className="text-xl font-extrabold text-[#0F172A]">
+                      Message Received!
+                    </h3>
+                    <p className="mx-auto max-w-md text-xs sm:text-sm leading-relaxed text-[#475569]">
+                      Thank you,{" "}
+                      <span className="font-semibold text-[#0F172A]">
+                        {formData.name}
+                      </span>
+                      . A dedicated billing specialist has been notified and will reach out to{" "}
+                      <span className="font-semibold text-[#1D4ED8]">
+                        {formData.email}
+                      </span>{" "}
+                      within 1 business hour.
+                    </p>
+                  </div>
+                  <div className="pt-2">
+                    <button
+                      type="button"
+                      onClick={() => setIsSubmitted(false)}
+                      className="cursor-pointer text-xs font-semibold text-[#1D4ED8] hover:text-[#1E3A8A] hover:underline inline-flex items-center gap-1.5 transition-colors"
+                    >
+                      <span>Send another inquiry</span>
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
-
-                  {/* Row 1: Name & Email */}
+                  {/* Row 1: Full Name & Email Address */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-1.5">
-                      <label htmlFor="contact-name" className="text-xs font-semibold text-[#0F172A]">
+                    <div className="space-y-1">
+                      <label
+                        htmlFor="contact-name"
+                        className="text-xs font-semibold text-[#0F172A]"
+                      >
                         Full Name <span className="text-red-500">*</span>
                       </label>
                       <Input
@@ -237,14 +239,20 @@ export default function ContactFormSection({ data }: ContactFormSectionProps) {
                         icon={User}
                         value={formData.name}
                         onChange={(e) =>
-                          setFormData((prev) => ({ ...prev, name: e.target.value }))
+                          setFormData((prev) => ({
+                            ...prev,
+                            name: e.target.value,
+                          }))
                         }
                         className={inputClassName}
                       />
                     </div>
 
-                    <div className="space-y-1.5">
-                      <label htmlFor="contact-email" className="text-xs font-semibold text-[#0F172A]">
+                    <div className="space-y-1">
+                      <label
+                        htmlFor="contact-email"
+                        className="text-xs font-semibold text-[#0F172A]"
+                      >
                         Email Address <span className="text-red-500">*</span>
                       </label>
                       <Input
@@ -255,17 +263,23 @@ export default function ContactFormSection({ data }: ContactFormSectionProps) {
                         icon={Mail}
                         value={formData.email}
                         onChange={(e) =>
-                          setFormData((prev) => ({ ...prev, email: e.target.value }))
+                          setFormData((prev) => ({
+                            ...prev,
+                            email: e.target.value,
+                          }))
                         }
                         className={inputClassName}
                       />
                     </div>
                   </div>
 
-                  {/* Row 2: Phone & Organization */}
+                  {/* Row 2: Phone Number & Practice / Organization */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-1.5">
-                      <label htmlFor="contact-phone" className="text-xs font-semibold text-[#0F172A]">
+                    <div className="space-y-1">
+                      <label
+                        htmlFor="contact-phone"
+                        className="text-xs font-semibold text-[#0F172A]"
+                      >
                         Phone Number <span className="text-red-500">*</span>
                       </label>
                       <Input
@@ -276,14 +290,20 @@ export default function ContactFormSection({ data }: ContactFormSectionProps) {
                         icon={Phone}
                         value={formData.phone}
                         onChange={(e) =>
-                          setFormData((prev) => ({ ...prev, phone: e.target.value }))
+                          setFormData((prev) => ({
+                            ...prev,
+                            phone: e.target.value,
+                          }))
                         }
                         className={inputClassName}
                       />
                     </div>
 
-                    <div className="space-y-1.5">
-                      <label htmlFor="contact-org" className="text-xs font-semibold text-[#0F172A]">
+                    <div className="space-y-1">
+                      <label
+                        htmlFor="contact-org"
+                        className="text-xs font-semibold text-[#0F172A]"
+                      >
                         Practice / Organization
                       </label>
                       <Input
@@ -293,48 +313,66 @@ export default function ContactFormSection({ data }: ContactFormSectionProps) {
                         icon={Building2}
                         value={formData.organization}
                         onChange={(e) =>
-                          setFormData((prev) => ({ ...prev, organization: e.target.value }))
+                          setFormData((prev) => ({
+                            ...prev,
+                            organization: e.target.value,
+                          }))
                         }
                         className={inputClassName}
                       />
                     </div>
                   </div>
 
-                  {/* Row 3: Service Interested In */}
-                  <div className="space-y-1.5">
-                    <label htmlFor="contact-service" className="text-xs font-semibold text-[#0F172A]">
+                  {/* Row 3: Service Interested In Dropdown */}
+                  <div className="space-y-1">
+                    <label
+                      htmlFor="contact-service"
+                      className="text-xs font-semibold text-[#0F172A]"
+                    >
                       Service Interested In
                     </label>
                     <FormSelect
+                      id="contact-service"
                       options={serviceOptionsList}
                       value={formData.serviceInterest}
                       onValueChange={(val) =>
-                        setFormData((prev) => ({ ...prev, serviceInterest: val || "" }))
+                        setFormData((prev) => ({
+                          ...prev,
+                          serviceInterest: val || "",
+                        }))
                       }
-                      className="w-full bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] focus:bg-white focus:border-[#1D4ED8] h-11 text-xs sm:text-sm rounded-xl"
+                      className="w-full bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] focus-visible:bg-white focus-visible:border-[#1D4ED8] h-11 text-xs sm:text-sm rounded-xl"
                     />
                   </div>
 
-                  {/* Row 4: Message */}
-                  <div className="space-y-1.5">
-                    <label htmlFor="contact-message" className="text-xs font-semibold text-[#0F172A]">
+                  {/* Row 4: Message / Special Requirements */}
+                  <div className="space-y-1">
+                    <label
+                      htmlFor="contact-message"
+                      className="text-xs font-semibold text-[#0F172A]"
+                    >
                       Message / Notes <span className="text-red-500">*</span>
                     </label>
-                    <textarea
-                      id="contact-message"
-                      required
-                      rows={4}
-                      placeholder="Tell us about your practice size, specialty, or current billing challenges..."
-                      value={formData.message}
-                      onChange={(e) =>
-                        setFormData((prev) => ({ ...prev, message: e.target.value }))
-                      }
-                      className="w-full rounded-xl bg-[#F8FAFC] border border-[#E2E6EC] p-3 text-xs sm:text-sm text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 outline-none transition-colors resize-none"
-                    />
+                    <div className="relative w-full">
+                      <textarea
+                        id="contact-message"
+                        required
+                        rows={3}
+                        placeholder="Tell us about your practice size, specialty, or current billing challenges..."
+                        value={formData.message}
+                        onChange={(e) =>
+                          setFormData((prev) => ({
+                            ...prev,
+                            message: e.target.value,
+                          }))
+                        }
+                        className="w-full rounded-xl bg-[#F8FAFC] border border-[#E2E6EC] p-3 text-xs sm:text-sm text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 outline-none transition-all resize-none"
+                      />
+                    </div>
                   </div>
 
-                  {/* Submit Button */}
-                  <div className="pt-2">
+                  {/* Submit Action Button */}
+                  <div className="pt-2 space-y-2.5">
                     <AppButton
                       type="submit"
                       disabled={isSubmitting}
@@ -349,20 +387,25 @@ export default function ContactFormSection({ data }: ContactFormSectionProps) {
                         </span>
                       ) : (
                         <span className="flex items-center justify-center gap-2">
-                          Send Message
+                          SEND MESSAGE NOW
                           <Send className="h-4 w-4" aria-hidden="true" />
                         </span>
                       )}
                     </AppButton>
-                  </div>
 
+                    {/* Security Guarantee Note */}
+                    <div className="flex items-center justify-center gap-1.5 text-[11px] text-[#64748B]">
+                      <LockKeyhole className="w-3.5 h-3.5 text-[#1D4ED8] shrink-0" />
+                      <span>
+                        Your information is 100% confidential. No spam guaranteed.
+                      </span>
+                    </div>
+                  </div>
                 </form>
               )}
-
             </div>
-          </MotionWrapper>
-
-        </div>
+          </div>
+        </MotionWrapper>
       </div>
     </section>
   );

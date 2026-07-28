@@ -13,9 +13,9 @@ export default async function ScheduleDemoPage() {
   const data = await getScheduleDemoData();
 
   return (
-    <div className="flex flex-col min-h-screen bg-transparent">
+    <main className="flex flex-col min-h-screen bg-transparent pb-12 sm:pb-16">
       <ScheduleDemoHero data={data.hero} />
       <ScheduleDemoFormSection data={data.formSection} />
-    </div>
+    </main>
   );
 }
