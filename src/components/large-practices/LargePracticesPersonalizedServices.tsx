@@ -1,83 +1,77 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
-import AppButton from "@/components/ui/AppButton";
+import { Binary, FileCheck, LucideIcon, TrendingUp, Users } from "lucide-react";
+import IconWrapper from "@/components/common/IconWrapper";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import SectionHeader from "@/components/ui/SectionHeader";
 import {
+  largePracticeCardClassName,
   largePracticeContainerClassName,
-  largePracticeSectionClassName,
+  largePracticeSectionAltClassName,
 } from "./largePracticeSectionLayout";
+import { defaultLargePracticesData } from "@/lib/defaults/largePractices";
+import type { LargePracticesPageData } from "@/payload/types/largePractices";
 
-const PERSONALIZED_COPY = [
-  "We understand one-size doesn't fit all and your large practice needs customized services that are transparent yet error-less. We audit your billing process, identify, and rectify errors and check all unpaid and aging claims.",
-  "Your Large Practice is fighting multiple battles from patient registration to claims submission and denial management. We take over all your non-clinical burden to help you focus on delivering patient care.",
-  "In fact, we have billing, coding, and RCM systems for your large practice in place. We submit clean claims more than 99% of the time, ensure timely submission of medical claims, follow up on aging A/R daily, and increase reimbursements.",
-] as const;
+const ICON_MAP: Record<string, LucideIcon> = {
+  Binary,
+  TrendingUp,
+  Users,
+  FileCheck,
+};
 
-export default function LargePracticesPersonalizedServices() {
+interface LargePracticesPersonalizedServicesProps {
+  data?: LargePracticesPageData["personalizedServices"];
+}
+
+export default function LargePracticesPersonalizedServices({ data }: LargePracticesPersonalizedServicesProps) {
+  const content = data || defaultLargePracticesData.personalizedServices;
+  const rawServices = content.services && content.services.length > 0 ? content.services : defaultLargePracticesData.personalizedServices.services;
+
   return (
     <section
-      className={`${largePracticeSectionClassName} border-t border-[#E2E6EC]`}
+      className={largePracticeSectionAltClassName}
       aria-labelledby="large-practices-personalized-services-heading"
     >
       <div className={largePracticeContainerClassName}>
         <SectionHeader
-          badge="Personalized Billing."
+          badge={content.badge}
           badgeVariant="indigo"
           badgePulse
           align="center"
-          className="mx-auto mb-12 max-w-4xl sm:mb-14"
+          className="mx-auto mb-12 max-w-3xl sm:mb-14"
           title={
             <span id="large-practices-personalized-services-heading">
-              Get Personalized Medical Billing Services to Refine your{" "}
-              <span className="text-blue-600">
-                Billing, Coding, and overall RCM Strengths
-              </span>
+              {content.titlePlain}{" "}
+              <span className="text-blue-600">{content.titleHighlight}</span>
             </span>
           }
         />
 
-        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-16">
-          <MotionWrapper
-            variant="slideLeft"
-            className="flex flex-col items-start space-y-6 text-left lg:col-span-6"
-          >
-            <div className="max-w-2xl space-y-4">
-              {PERSONALIZED_COPY.map((paragraph) => (
-                <p
-                  key={paragraph}
-                  className="text-sm leading-[1.65] text-[#475569] sm:text-base"
+        <MotionWrapper
+          variant="stagger"
+          staggerDelay={0.08}
+          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6"
+        >
+          {rawServices.map((service, idx) => {
+            const Icon = (service.iconName && ICON_MAP[service.iconName]) || Binary;
+            return (
+              <MotionWrapper key={service.title || idx} variant="staggerItem" className="h-full">
+                <div
+                  className={`${largePracticeCardClassName} flex h-full flex-col p-6 text-left transition-all duration-300 hover:border-[#1D4ED8]/30 hover:shadow-lg hover:shadow-blue-900/5`}
                 >
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-
-            <AppButton
-              href="/schedule-a-demo"
-              variant="primary"
-              size="lg"
-              showArrow
-              className="w-full shadow-md shadow-blue-900/10 sm:w-auto"
-            >
-              Book Free Consultation Now
-            </AppButton>
-          </MotionWrapper>
-
-          <MotionWrapper variant="slideRight" className="w-full lg:col-span-6">
-            <div className="group relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-[0_8px_30px_rgba(29,78,216,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#1D4ED8]/30 hover:shadow-xl hover:shadow-blue-900/10 sm:aspect-16/11">
-              <Image
-                src="/consultants-laptop.png"
-                alt="Medical billing consultant supporting a large healthcare practice"
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-            </div>
-          </MotionWrapper>
-        </div>
+                  <IconWrapper icon={Icon} size="md" variant="surface" className="mb-4" />
+                  <h3 className="mb-2 text-base font-bold text-[#0F172A]">
+                    {service.title}
+                  </h3>
+                  <p className="text-xs leading-relaxed text-[#475569]">
+                    {service.description}
+                  </p>
+                </div>
+              </MotionWrapper>
+            );
+          })}
+        </MotionWrapper>
       </div>
     </section>
   );

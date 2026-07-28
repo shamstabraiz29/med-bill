@@ -12,8 +12,16 @@ import {
   physicianContainerClassName,
   physicianSectionClassName,
 } from "./physicianSectionLayout";
+import { defaultPhysicianBillingServicesData } from "@/lib/defaults/physicianBillingServices";
+import type { PhysicianBillingServicesPageData } from "@/payload/types/physicianBillingServices";
 
-export default function PhysicianBillingServicesHero() {
+interface PhysicianBillingServicesHeroProps {
+  data?: PhysicianBillingServicesPageData["hero"];
+}
+
+export default function PhysicianBillingServicesHero({ data }: PhysicianBillingServicesHeroProps) {
+  const content = data || defaultPhysicianBillingServicesData.hero;
+
   return (
     <section
       className={physicianSectionClassName}
@@ -46,11 +54,11 @@ export default function PhysicianBillingServicesHero() {
       <div className={`${physicianContainerClassName} relative z-10`}>
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-8">
           <div className="flex flex-col space-y-6 text-left lg:col-span-7">
-            <PhysicianBillingServicesHeroHeader headingId="physician-billing-services-hero-heading" />
+            <PhysicianBillingServicesHeroHeader headingId="physician-billing-services-hero-heading" data={content} />
 
             <MotionWrapper variant="fadeUp" className="flex flex-wrap items-center gap-3 sm:gap-4">
-              <AppButton href="/schedule-a-demo" variant="primary" size="lg" showArrow>
-                Get A Demo
+              <AppButton href={content.ctaHref || "/schedule-a-demo"} variant="primary" size="lg" showArrow>
+                {content.ctaText || "Get A Demo"}
               </AppButton>
               <AppButton
                 href="https://youtube.com"
@@ -63,7 +71,7 @@ export default function PhysicianBillingServicesHero() {
             </MotionWrapper>
 
             <MotionWrapper variant="fadeUp">
-              <PhysicianBillingServicesHeroAccordion />
+              <PhysicianBillingServicesHeroAccordion items={content.faqItems} />
             </MotionWrapper>
           </div>
 

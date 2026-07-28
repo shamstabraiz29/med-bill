@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import AppButton from "@/components/ui/AppButton";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import SectionHeader from "@/components/ui/SectionHeader";
 import {
@@ -9,61 +8,60 @@ import {
   largePracticeContainerClassName,
   largePracticeSectionClassName,
 } from "./largePracticeSectionLayout";
+import { defaultLargePracticesData } from "@/lib/defaults/largePractices";
+import type { LargePracticesPageData } from "@/payload/types/largePractices";
 
-const INFRASTRUCTURE_COPY = [
-  "Large practices face myriad challenges from patient registration to claims submission and follow-up. One of the grand struggles is filing multiple claims above all the other administrative burdens.",
-  "A solid billing infrastructure ensures transparency, affordability, and flexibility that fine-tunes the weak areas of billing processes and this is where BellMedEx comes in. Our billing services are handled by efficient systems — that have up-to-date denial management resources and experienced personnel — who provide solutions and 24/7 assistance.",
-] as const;
+interface LargePracticesBillingInfrastructureProps {
+  data?: LargePracticesPageData["infrastructure"];
+}
 
-export default function LargePracticesBillingInfrastructure() {
+export default function LargePracticesBillingInfrastructure({ data }: LargePracticesBillingInfrastructureProps) {
+  const content = data || defaultLargePracticesData.infrastructure;
+  const rawHighlights = content.highlights && content.highlights.length > 0 ? content.highlights : defaultLargePracticesData.infrastructure.highlights;
+
   return (
     <section
-      className={`${largePracticeSectionClassName} border-t border-[#E2E6EC]`}
-      aria-labelledby="large-practices-billing-infrastructure-heading"
+      className={largePracticeSectionClassName}
+      aria-labelledby="large-practices-[#0F172A]-heading"
     >
       <div className={largePracticeContainerClassName}>
         <SectionHeader
-          badge="Billing Infrastructure."
+          badge={content.badge}
           badgeVariant="indigo"
           badgePulse
-          align="center"
-          className="mx-auto mb-12 max-w-4xl sm:mb-14"
+          align="left"
+          className="mb-10 max-w-3xl sm:mb-12"
           title={
-            <span id="large-practices-billing-infrastructure-heading">
-              <span className="text-blue-600">Robust Billing Infrastructure</span> is a
-              Promising Feature of Our Medical Billing Services
+            <span id="large-practices-[#0F172A]-heading">
+              {content.titlePlain}{" "}
+              <span className="text-[#1D4ED8]">{content.titleHighlight}</span>
             </span>
           }
+          description={content.description}
         />
 
         <MotionWrapper
           variant="stagger"
-          staggerDelay={0.1}
-          className="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-8"
+          staggerDelay={0.08}
+          className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4 lg:gap-6"
         >
-          {INFRASTRUCTURE_COPY.map((paragraph) => (
-            <MotionWrapper key={paragraph} variant="staggerItem" className="h-full">
+          {rawHighlights.map((item, idx) => (
+            <MotionWrapper key={item.title || idx} variant="staggerItem" className="h-full">
               <div
-                className={`${largePracticeCardClassName} h-full p-6 transition-all duration-300 hover:border-[#1D4ED8]/30 hover:shadow-lg hover:shadow-blue-900/5 sm:p-8`}
+                className={`${largePracticeCardClassName} flex h-full flex-col p-6 text-left transition-all duration-300 hover:border-[#1D4ED8]/30 hover:shadow-lg hover:shadow-blue-900/5`}
               >
-                <p className="text-sm leading-[1.7] text-[#475569] sm:text-base">
-                  {paragraph}
+                <div className="mb-3.5 flex h-7 w-7 items-center justify-center rounded-full bg-blue-50 text-[11px] font-extrabold text-[#1D4ED8]">
+                  0{idx + 1}
+                </div>
+                <h3 className="mb-2 text-base font-bold text-[#0F172A]">
+                  {item.title}
+                </h3>
+                <p className="text-xs leading-relaxed text-[#475569]">
+                  {item.description}
                 </p>
               </div>
             </MotionWrapper>
           ))}
-        </MotionWrapper>
-
-        <MotionWrapper variant="fadeUp" delay={0.2} className="mt-10 flex justify-center sm:mt-12">
-          <AppButton
-            href="/schedule-a-demo"
-            variant="primary"
-            size="lg"
-            showArrow
-            className="w-full shadow-md shadow-blue-900/10 sm:w-auto"
-          >
-            Let&apos;s Hop on a Quick Call
-          </AppButton>
         </MotionWrapper>
       </div>
     </section>

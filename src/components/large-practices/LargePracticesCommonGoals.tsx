@@ -18,35 +18,26 @@ import {
   largePracticeContainerClassName,
   largePracticeSectionAltClassName,
 } from "./largePracticeSectionLayout";
+import { defaultLargePracticesData } from "@/lib/defaults/largePractices";
+import type { LargePracticesPageData } from "@/payload/types/largePractices";
 
-interface CommonGoal {
-  icon: LucideIcon;
-  label: string;
+const ICON_MAP: Record<string, LucideIcon> = {
+  CircleDollarSign,
+  Target,
+  Heart,
+  ShieldCheck,
+  Scale,
+  PiggyBank,
+};
+
+interface LargePracticesCommonGoalsProps {
+  data?: LargePracticesPageData["commonGoals"];
 }
 
-const COMMON_GOALS: CommonGoal[] = [
-  { icon: CircleDollarSign, label: "Faster and More Cash Inflow" },
-  { icon: Target, label: "Billing and Coding Accuracy" },
-  { icon: Heart, label: "Improve Patient Experience" },
-  { icon: ShieldCheck, label: "End-to-End Denial Management" },
-  { icon: Scale, label: "Compliance Regulation" },
-  { icon: PiggyBank, label: "Cost Savings" },
-];
+export default function LargePracticesCommonGoals({ data }: LargePracticesCommonGoalsProps) {
+  const content = data || defaultLargePracticesData.commonGoals;
+  const rawGoals = content.goals && content.goals.length > 0 ? content.goals : defaultLargePracticesData.commonGoals.goals;
 
-function CommonGoalCard({ goal }: { goal: CommonGoal }) {
-  return (
-    <div
-      className={`${largePracticeCardClassName} flex h-full flex-col items-center px-5 py-7 text-center transition-all duration-300 hover:border-[#1D4ED8]/30 hover:shadow-lg hover:shadow-blue-900/5 sm:px-6 sm:py-8`}
-    >
-      <IconWrapper icon={goal.icon} size="md" variant="surface" className="mb-4" />
-      <p className="text-sm font-bold leading-snug tracking-[-0.02em] text-[#0F172A]">
-        {goal.label}
-      </p>
-    </div>
-  );
-}
-
-export default function LargePracticesCommonGoals() {
   return (
     <section
       className={largePracticeSectionAltClassName}
@@ -54,15 +45,15 @@ export default function LargePracticesCommonGoals() {
     >
       <div className={largePracticeContainerClassName}>
         <SectionHeader
-          badge="Shared Objectives."
+          badge={content.badge}
           badgeVariant="indigo"
           badgePulse
           align="center"
           className="mx-auto mb-12 max-w-3xl sm:mb-14"
           title={
             <span id="large-practices-common-goals-heading">
-              BellMedEx and Large Practices Share{" "}
-              <span className="text-blue-600">Common Goals</span>
+              {content.titlePlain}{" "}
+              <span className="text-blue-600">{content.titleHighlight}</span>
             </span>
           }
         />
@@ -72,11 +63,21 @@ export default function LargePracticesCommonGoals() {
           staggerDelay={0.08}
           className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-8"
         >
-          {COMMON_GOALS.map((goal) => (
-            <MotionWrapper key={goal.label} variant="staggerItem" className="h-full">
-              <CommonGoalCard goal={goal} />
-            </MotionWrapper>
-          ))}
+          {rawGoals.map((goal, idx) => {
+            const Icon = (goal.iconName && ICON_MAP[goal.iconName]) || CircleDollarSign;
+            return (
+              <MotionWrapper key={goal.label || idx} variant="staggerItem" className="h-full">
+                <div
+                  className={`${largePracticeCardClassName} flex h-full flex-col items-center px-5 py-7 text-center transition-all duration-300 hover:border-[#1D4ED8]/30 hover:shadow-lg hover:shadow-blue-900/5 sm:px-6 sm:py-8`}
+                >
+                  <IconWrapper icon={Icon} size="md" variant="surface" className="mb-4" />
+                  <p className="text-sm font-bold leading-snug tracking-[-0.02em] text-[#0F172A]">
+                    {goal.label}
+                  </p>
+                </div>
+              </MotionWrapper>
+            );
+          })}
         </MotionWrapper>
       </div>
     </section>

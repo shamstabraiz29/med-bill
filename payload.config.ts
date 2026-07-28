@@ -16,6 +16,7 @@ import { Homepage } from '@/payload/globals/Homepage'
 import { Clearinghouse } from '@/payload/globals/Clearinghouse'
 import { ProviderCredentialing } from '@/payload/globals/ProviderCredentialing'
 import { HealthcareSeo } from '@/payload/globals/HealthcareSeo'
+import { PhysicianBillingServices } from '@/payload/globals/PhysicianBillingServices'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -31,6 +32,7 @@ import { FusionediClearinghouse } from '@/payload/globals/FusionediClearinghouse
 import { ElectronicHealthRecordsEhr } from '@/payload/globals/ElectronicHealthRecordsEhr'
 import { PracticeManagementSoftwarePms } from '@/payload/globals/PracticeManagementSoftwarePms'
 import { OutsourceMedicalBilling } from '@/payload/globals/OutsourceMedicalBilling'
+import { LargePractices } from '@/payload/globals/LargePractices'
 import { AboutUs } from '@/payload/globals/AboutUs'
 import { ContactUs } from '@/payload/globals/ContactUs'
 import { MedicalBillingPricing } from '@/payload/globals/MedicalBillingPricing'
@@ -83,6 +85,8 @@ export default buildConfig({
 
     // 4. Solutions Pages
     OutsourceMedicalBilling,
+    LargePractices,
+    PhysicianBillingServices,
 
     // 5. Resources & Company Pages
     Careers,

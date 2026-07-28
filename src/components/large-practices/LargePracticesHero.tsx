@@ -9,23 +9,17 @@ import {
   largePracticeContainerClassName,
   largePracticeSectionClassName,
 } from "./largePracticeSectionLayout";
+import { defaultLargePracticesData } from "@/lib/defaults/largePractices";
+import type { LargePracticesPageData } from "@/payload/types/largePractices";
 
-const HERO_STATS = [
-  {
-    value: "30-60%",
-    label: "Annual Payroll Savings",
-  },
-  {
-    value: "97%",
-    label: "Claim Denial Reduction",
-  },
-  {
-    value: "50",
-    label: "States Nationwide",
-  },
-];
+interface LargePracticesHeroProps {
+  data?: LargePracticesPageData["hero"];
+}
 
-export default function LargePracticesHero() {
+export default function LargePracticesHero({ data }: LargePracticesHeroProps) {
+  const content = data || defaultLargePracticesData.hero;
+  const statsList = content.stats && content.stats.length > 0 ? content.stats : defaultLargePracticesData.hero.stats;
+
   return (
     <section
       className={largePracticeSectionClassName}
@@ -47,17 +41,17 @@ export default function LargePracticesHero() {
       <div className={`${largePracticeContainerClassName} relative z-10`}>
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-10">
           <div className="flex flex-col space-y-8 lg:col-span-7">
-            <LargePracticesHeroHeader headingId="large-practices-hero-heading" />
+            <LargePracticesHeroHeader headingId="large-practices-hero-heading" data={content} />
 
             <MotionWrapper variant="fadeUp" delay={0.25}>
               <AppButton
-                href="/contact-bellmedex"
+                href={content.ctaHref || "/contact-bellmedex"}
                 variant="primary"
                 size="lg"
                 showArrow
                 className="w-full shadow-md shadow-blue-900/10 sm:w-auto"
               >
-                Contact BellMedEx Now
+                {content.ctaText || "Contact BellMedEx Now"}
               </AppButton>
             </MotionWrapper>
           </div>
@@ -69,8 +63,8 @@ export default function LargePracticesHero() {
               </p>
 
               <div className="divide-y divide-[#E2E6EC]">
-                {HERO_STATS.map((stat) => (
-                  <div key={stat.label} className="py-5 first:pt-0 last:pb-0">
+                {statsList.map((stat, idx) => (
+                  <div key={stat.label || idx} className="py-5 first:pt-0 last:pb-0">
                     <p className="text-3xl font-extrabold tracking-[-0.03em] text-[#1D4ED8] sm:text-4xl">
                       {stat.value}
                     </p>

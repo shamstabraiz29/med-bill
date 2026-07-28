@@ -7,8 +7,16 @@ import {
   physicianSectionBlockClassName,
 } from "./physicianSectionLayout";
 import PhysicianBillingServicesDemoForm from "./PhysicianBillingServicesDemoForm";
+import { defaultPhysicianBillingServicesData } from "@/lib/defaults/physicianBillingServices";
+import type { PhysicianBillingServicesPageData } from "@/payload/types/physicianBillingServices";
 
-export default function PhysicianBillingServicesDemoCta() {
+interface PhysicianBillingServicesDemoCtaProps {
+  data?: PhysicianBillingServicesPageData["demoCta"];
+}
+
+export default function PhysicianBillingServicesDemoCta({ data }: PhysicianBillingServicesDemoCtaProps) {
+  const content = data || defaultPhysicianBillingServicesData.demoCta;
+
   return (
     <section
       className={`${physicianSectionBlockClassName} border-t border-[#E2E6EC] bg-[#0F172A] py-16 sm:py-20 lg:py-24`}
@@ -24,20 +32,20 @@ export default function PhysicianBillingServicesDemoCta() {
           <PhysicianBillingServicesDemoForm />
 
           <div className="flex flex-col items-start space-y-6 text-left text-white lg:pl-4">
-            <p className="text-sm text-blue-200 sm:text-base">New Low Rates From</p>
+            <p className="text-sm text-blue-200 sm:text-base">{content.rateLabel}</p>
 
             <p
               id="physician-billing-demo-cta-heading"
               className="text-5xl font-extrabold leading-none tracking-[-0.03em] text-amber-300 sm:text-6xl lg:text-7xl"
             >
-              2.49%
+              {content.rateValue}
             </p>
 
-            <p className="text-sm text-blue-200 sm:text-base">of your monthly collections</p>
+            <p className="text-sm text-blue-200 sm:text-base">{content.rateSubtext}</p>
 
             <div className="w-full max-w-xs border-t border-white/15 pt-6">
-              <AppButton href="/schedule-a-demo" variant="secondary-dark" size="lg" showArrow>
-                Take Advantage Now!
+              <AppButton href={content.buttonHref || "/schedule-a-demo"} variant="secondary-dark" size="lg" showArrow>
+                {content.buttonText || "Take Advantage Now!"}
               </AppButton>
             </div>
           </div>

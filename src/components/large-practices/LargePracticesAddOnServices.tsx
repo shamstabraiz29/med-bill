@@ -1,112 +1,75 @@
 "use client";
 
 import React from "react";
-import {
-  BarChart3,
-  ClipboardCheck,
-  LucideIcon,
-  ShieldCheck,
-  UserCheck,
-} from "lucide-react";
+import { Award, Calculator, ClipboardCheck, LucideIcon } from "lucide-react";
 import IconWrapper from "@/components/common/IconWrapper";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import SectionHeader from "@/components/ui/SectionHeader";
-import { cn } from "@/lib/utils";
 import {
   largePracticeCardClassName,
   largePracticeContainerClassName,
-  largePracticeSectionAltClassName,
+  largePracticeSectionClassName,
 } from "./largePracticeSectionLayout";
+import { defaultLargePracticesData } from "@/lib/defaults/largePractices";
+import type { LargePracticesPageData } from "@/payload/types/largePractices";
 
-interface AddOnService {
-  icon: LucideIcon;
-  title: string;
-  description: string;
+const ICON_MAP: Record<string, LucideIcon> = {
+  Award,
+  Calculator,
+  ClipboardCheck,
+};
+
+interface LargePracticesAddOnServicesProps {
+  data?: LargePracticesPageData["addOnServices"];
 }
 
-const ADD_ON_SERVICES: AddOnService[] = [
-  {
-    icon: ClipboardCheck,
-    title: "Prior Authorizations",
-    description:
-      "Get beforehand approval form the insurance company as to whether the service or treatment will be paid or not and avoid extra hassle, time, and cost.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Eligibility & Benefits Verification",
-    description:
-      "We help you confirm the patient's insurance coverage, eligibility, and benefits to increase the chances of steady cash flow and avoid denials.",
-  },
-  {
-    icon: BarChart3,
-    title: "Comprehensive Analysis and Reporting",
-    description:
-      "Get regular reports and audits to monitor revenue cycle performance and make informed decisions.",
-  },
-  {
-    icon: UserCheck,
-    title: "Credentialing",
-    description:
-      "We offer credentialing services to help practices avoid the trouble of assessing a physician's qualification, authenticity, and licensing.",
-  },
-];
+export default function LargePracticesAddOnServices({ data }: LargePracticesAddOnServicesProps) {
+  const content = data || defaultLargePracticesData.addOnServices;
+  const rawServices = content.services && content.services.length > 0 ? content.services : defaultLargePracticesData.addOnServices.services;
 
-function AddOnServiceCard({ service }: { service: AddOnService }) {
-  return (
-    <div
-      className={cn(
-        largePracticeCardClassName,
-        "group h-full p-6 transition-all duration-300 hover:border-[#1D4ED8]/30 hover:shadow-lg hover:shadow-blue-900/5 sm:p-7"
-      )}
-    >
-      <IconWrapper
-        icon={service.icon}
-        size="md"
-        variant="surface"
-        className="mb-4 transition-transform duration-300 group-hover:scale-110"
-      />
-      <h3 className="text-base font-bold tracking-[-0.02em] text-[#0F172A] sm:text-lg">
-        {service.title}
-      </h3>
-      <p className="mt-2 text-sm leading-[1.65] text-[#475569]">{service.description}</p>
-    </div>
-  );
-}
-
-export default function LargePracticesAddOnServices() {
   return (
     <section
-      className={largePracticeSectionAltClassName}
+      className={largePracticeSectionClassName}
       aria-labelledby="large-practices-add-on-services-heading"
     >
       <div className={largePracticeContainerClassName}>
         <SectionHeader
-          badge="Add-On Services."
+          badge={content.badge}
           badgeVariant="indigo"
           badgePulse
           align="center"
-          className="mx-auto mb-12 max-w-4xl sm:mb-14"
+          className="mx-auto mb-12 max-w-3xl sm:mb-14"
           title={
             <span id="large-practices-add-on-services-heading">
-              Add on Services to Provide a{" "}
-              <span className="text-blue-600">
-                One-Stop Solution for your Large Practice&apos;s Thorough Billing and RCM Needs
-              </span>
+              {content.titlePlain}{" "}
+              <span className="text-[#1D4ED8]">{content.titleHighlight}</span>
             </span>
           }
-          description="Unlock your fullest revenue and care potential with these add-on services available individually as well as complete package."
         />
 
         <MotionWrapper
           variant="stagger"
           staggerDelay={0.08}
-          className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:gap-8"
+          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
         >
-          {ADD_ON_SERVICES.map((service) => (
-            <MotionWrapper key={service.title} variant="staggerItem" className="h-full">
-              <AddOnServiceCard service={service} />
-            </MotionWrapper>
-          ))}
+          {rawServices.map((service, idx) => {
+            const Icon = (service.iconName && ICON_MAP[service.iconName]) || Award;
+            return (
+              <MotionWrapper key={service.title || idx} variant="staggerItem" className="h-full">
+                <div
+                  className={`${largePracticeCardClassName} flex h-full flex-col p-6 text-left transition-all duration-300 hover:border-[#1D4ED8]/30 hover:shadow-lg hover:shadow-blue-900/5`}
+                >
+                  <IconWrapper icon={Icon} size="md" variant="surface" className="mb-4" />
+                  <h3 className="mb-2 text-base font-bold text-[#0F172A]">
+                    {service.title}
+                  </h3>
+                  <p className="text-xs leading-relaxed text-[#475569]">
+                    {service.description}
+                  </p>
+                </div>
+              </MotionWrapper>
+            );
+          })}
         </MotionWrapper>
       </div>
     </section>
