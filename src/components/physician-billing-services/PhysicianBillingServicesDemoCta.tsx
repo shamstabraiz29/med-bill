@@ -2,9 +2,11 @@
 
 import React from "react";
 import AppButton from "@/components/ui/AppButton";
+import MotionWrapper from "@/components/ui/MotionWrapper";
 import {
+  physicianCardClassName,
   physicianContainerClassName,
-  physicianSectionBlockClassName,
+  physicianSectionAltClassName,
 } from "./physicianSectionLayout";
 import PhysicianBillingServicesDemoForm from "./PhysicianBillingServicesDemoForm";
 import { defaultPhysicianBillingServicesData } from "@/lib/defaults/physicianBillingServices";
@@ -19,37 +21,49 @@ export default function PhysicianBillingServicesDemoCta({ data }: PhysicianBilli
 
   return (
     <section
-      className={`${physicianSectionBlockClassName} border-t border-[#E2E6EC] bg-[#0F172A] py-16 sm:py-20 lg:py-24`}
+      className={physicianSectionAltClassName}
       aria-labelledby="physician-billing-demo-cta-heading"
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(29,78,216,0.18),transparent_42%),radial-gradient(circle_at_80%_80%,rgba(96,165,250,0.1),transparent_40%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:32px_32px] opacity-25"
       />
 
       <div className={`${physicianContainerClassName} relative z-10`}>
-        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-16">
-          <PhysicianBillingServicesDemoForm />
+        <MotionWrapper variant="fadeUp">
+          <div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2 lg:gap-8">
+            <PhysicianBillingServicesDemoForm />
 
-          <div className="flex flex-col items-start space-y-6 text-left text-white lg:pl-4">
-            <p className="text-sm text-blue-200 sm:text-base">{content.rateLabel}</p>
-
-            <p
-              id="physician-billing-demo-cta-heading"
-              className="text-5xl font-extrabold leading-none tracking-[-0.03em] text-amber-300 sm:text-6xl lg:text-7xl"
+            <div
+              className={`${physicianCardClassName} flex h-full flex-col items-center justify-center p-8 text-center sm:p-10`}
             >
-              {content.rateValue}
-            </p>
+              <p className="text-sm font-medium text-[#475569] sm:text-base">
+                {content.rateLabel}
+              </p>
 
-            <p className="text-sm text-blue-200 sm:text-base">{content.rateSubtext}</p>
+              <p
+                id="physician-billing-demo-cta-heading"
+                className="mt-3 text-5xl font-extrabold leading-none tracking-[-0.03em] text-[#1D4ED8] sm:text-6xl"
+              >
+                {content.rateValue}
+              </p>
 
-            <div className="w-full max-w-xs border-t border-white/15 pt-6">
-              <AppButton href={content.buttonHref || "/schedule-a-demo"} variant="secondary-dark" size="lg" showArrow>
-                {content.buttonText || "Take Advantage Now!"}
-              </AppButton>
+              <p className="mt-3 text-sm text-[#475569] sm:text-base">{content.rateSubtext}</p>
+
+              <div className="mt-8 w-full max-w-xs border-t border-[#E2E6EC] pt-8">
+                <AppButton
+                  href={content.buttonHref || "/schedule-a-demo"}
+                  variant="primary"
+                  size="lg"
+                  showArrow
+                  className="w-full"
+                >
+                  {content.buttonText || "Take Advantage Now!"}
+                </AppButton>
+              </div>
             </div>
           </div>
-        </div>
+        </MotionWrapper>
       </div>
     </section>
   );

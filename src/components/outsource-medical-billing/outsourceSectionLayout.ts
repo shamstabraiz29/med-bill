@@ -1,3 +1,6 @@
+export const outsourceHeroSectionClassName =
+  "relative w-full overflow-hidden bg-transparent pt-12 pb-16 lg:pt-16 lg:pb-20";
+
 export const outsourceSectionClassName =
   "relative w-full overflow-hidden py-16 sm:py-20 lg:py-24";
 
