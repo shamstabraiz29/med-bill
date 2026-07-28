@@ -48,6 +48,8 @@ import type { LargePracticesPageData } from '@/payload/types/largePractices'
 import { defaultLargePracticesData } from '@/lib/defaults/largePractices'
 import type { PhysicianBillingServicesPageData } from '@/payload/types/physicianBillingServices'
 import { defaultPhysicianBillingServicesData } from '@/lib/defaults/physicianBillingServices'
+import type { SmallPracticesPageData } from '@/payload/types/smallPractices'
+import { defaultSmallPracticesData } from '@/lib/defaults/smallPractices'
 
 /**
  * Fetches the Homepage global data from Payload CMS using the Local API.
@@ -581,6 +583,20 @@ export async function getPhysicianBillingServicesData(): Promise<PhysicianBillin
   } catch (error) {
     console.error('[Payload] Failed to fetch Physician Billing Services data, using defaults:', error)
     return defaultPhysicianBillingServicesData
+  }
+}
+
+/**
+ * Fetches the Small Practices global data from Payload CMS.
+ */
+export async function getSmallPracticesData(): Promise<SmallPracticesPageData> {
+  try {
+    const payload = await getPayload({ config })
+    const data = await payload.findGlobal({ slug: 'small-practices' as any })
+    return deepMerge(defaultSmallPracticesData, data as unknown as Partial<SmallPracticesPageData>)
+  } catch (error) {
+    console.error('[Payload] Failed to fetch Small Practices data, using defaults:', error)
+    return defaultSmallPracticesData
   }
 }
 

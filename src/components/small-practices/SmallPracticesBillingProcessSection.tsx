@@ -10,8 +10,9 @@ import {
   smallPracticeContainerClassName,
   smallPracticeSectionAltClassName,
 } from "./smallPracticeSectionLayout";
+import type { SmallPracticesPageData } from "@/payload/types/smallPractices";
 
-const BILLING_PROCESS_STEPS = [
+const DEFAULT_STEPS = [
   {
     iconName: "UserCheck",
     title: "Patient Registration",
@@ -78,9 +79,30 @@ const BILLING_PROCESS_STEPS = [
       "Thorough tracking of the steps improves the potential RCM",
     ],
   },
-] as const;
+];
 
-export default function SmallPracticesBillingProcessSection() {
+interface SmallPracticesBillingProcessSectionProps {
+  data?: SmallPracticesPageData["billingProcess"];
+}
+
+export default function SmallPracticesBillingProcessSection({ data }: SmallPracticesBillingProcessSectionProps) {
+  const badge = data?.badge ?? "Billing Process.";
+  const titlePlain = data?.titlePlain ?? "Our Medical Billing Process to Prevent Revenue Loss and ";
+  const titleHighlight = data?.titleHighlight ?? "Minimize A/R Aging Cycles";
+  const description =
+    data?.description ??
+    "Our medical billing services flowchart helps you take a progressive approach toward maintaining efficient revenue cycle management. We assist you in transforming your healthcare practice by combating claim denials, enhancing practice revenue, and taking non-clinical burdens off your shoulders.";
+  const ctaText = data?.ctaText ?? "Get FREE Consultation, No Obligations";
+  const ctaHref = data?.ctaHref ?? "/schedule-a-demo";
+
+  const stepsList = data?.steps && data.steps.length > 0
+    ? data.steps.map((step) => ({
+        iconName: step.iconName,
+        title: step.title,
+        items: step.items.map((it) => (typeof it === "string" ? it : it.text)),
+      }))
+    : DEFAULT_STEPS;
+
   return (
     <section
       className={smallPracticeSectionAltClassName}
@@ -88,17 +110,17 @@ export default function SmallPracticesBillingProcessSection() {
     >
       <div className={smallPracticeContainerClassName}>
         <SectionHeader
-          badge="Billing Process."
+          badge={badge}
           badgeVariant="indigo"
           badgePulse
           align="center"
           title={
             <span id="small-practices-billing-process-heading">
-              Our Medical Billing Process to Prevent Revenue Loss and{" "}
-              <span className="text-blue-600">Minimize A/R Aging Cycles</span>
+              {titlePlain}
+              <span className="text-blue-600">{titleHighlight}</span>
             </span>
           }
-          description="Our medical billing services flowchart helps you take a progressive approach toward maintaining efficient revenue cycle management. We assist you in transforming your healthcare practice by combating claim denials, enhancing practice revenue, and taking non-clinical burdens off your shoulders."
+          description={description}
           className="mx-auto mb-12 max-w-4xl sm:mb-16"
         />
 
@@ -107,7 +129,7 @@ export default function SmallPracticesBillingProcessSection() {
           staggerDelay={0.08}
           className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:gap-5"
         >
-          {BILLING_PROCESS_STEPS.map((step, index) => {
+          {stepsList.map((step, index) => {
             const Icon = getIcon(step.iconName);
 
             return (
@@ -125,8 +147,8 @@ export default function SmallPracticesBillingProcessSection() {
         </MotionWrapper>
 
         <MotionWrapper variant="fadeUp" className="mt-10 flex justify-center sm:mt-12">
-          <AppButton href="/schedule-a-demo" variant="primary" size="lg" showArrow>
-            Get FREE Consultation, No Obligations
+          <AppButton href={ctaHref} variant="primary" size="lg" showArrow>
+            {ctaText}
           </AppButton>
         </MotionWrapper>
       </div>

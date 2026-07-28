@@ -33,6 +33,7 @@ import { ElectronicHealthRecordsEhr } from '@/payload/globals/ElectronicHealthRe
 import { PracticeManagementSoftwarePms } from '@/payload/globals/PracticeManagementSoftwarePms'
 import { OutsourceMedicalBilling } from '@/payload/globals/OutsourceMedicalBilling'
 import { LargePractices } from '@/payload/globals/LargePractices'
+import { SmallPractices } from '@/payload/globals/SmallPractices'
 import { AboutUs } from '@/payload/globals/AboutUs'
 import { ContactUs } from '@/payload/globals/ContactUs'
 import { MedicalBillingPricing } from '@/payload/globals/MedicalBillingPricing'
@@ -86,6 +87,7 @@ export default buildConfig({
     // 4. Solutions Pages
     OutsourceMedicalBilling,
     LargePractices,
+    SmallPractices,
     PhysicianBillingServices,
 
     // 5. Resources & Company Pages

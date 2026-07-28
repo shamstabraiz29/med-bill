@@ -11,8 +11,13 @@ import {
   smallPracticeContainerClassName,
   smallPracticeSectionClassName,
 } from "./smallPracticeSectionLayout";
+import type { SmallPracticesPageData } from "@/payload/types/smallPractices";
 
-export default function SmallPracticesHero() {
+interface SmallPracticesHeroProps {
+  data?: SmallPracticesPageData["hero"];
+}
+
+export default function SmallPracticesHero({ data }: SmallPracticesHeroProps) {
   return (
     <section
       className={smallPracticeSectionClassName}
@@ -34,20 +39,20 @@ export default function SmallPracticesHero() {
       <div className={`${smallPracticeContainerClassName} relative z-10`}>
         <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:gap-10">
           <div className="flex flex-col space-y-6 lg:col-span-7">
-            <SmallPracticesHeroHeader headingId="small-practices-hero-heading" />
+            <SmallPracticesHeroHeader headingId="small-practices-hero-heading" data={data} />
 
             <MotionWrapper variant="fadeUp" delay={0.2}>
-              <SmallPracticesHeroTrustBadges />
+              <SmallPracticesHeroTrustBadges stats={data?.trustStats} />
             </MotionWrapper>
           </div>
 
           <MotionWrapper variant="slideRight" delay={0.15} className="lg:col-span-5">
-            <SmallPracticesHeroBenefits />
+            <SmallPracticesHeroBenefits benefits={data?.benefits} />
           </MotionWrapper>
         </div>
 
         <MotionWrapper variant="fadeUp" delay={0.25} className="mt-12 sm:mt-14 lg:mt-16">
-          <SmallPracticesHeroDemoForm />
+          <SmallPracticesHeroDemoForm formTitle={data?.formTitle} formSubtitle={data?.formSubtitle} />
         </MotionWrapper>
       </div>
     </section>
