@@ -72,6 +72,7 @@ export interface Config {
     'careers-submissions': any;
     'consultation-submissions': any;
     'audit-submissions': any;
+    'contact-submissions': any;
     posts: Post;
     media: Media;
     'payload-kv': PayloadKv;
@@ -86,6 +87,7 @@ export interface Config {
     'careers-submissions': any;
     'consultation-submissions': any;
     'audit-submissions': any;
+    'contact-submissions': any;
     posts: any;
     media: any;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -114,6 +116,7 @@ export interface Config {
     'practice-management-software-pms': any;
     'outsource-medical-billing': any;
     'about-us': any;
+    'contact-us': any;
   };
   globalsSelect: {
     homepage: HomepageSelect<false> | HomepageSelect<true>;
@@ -132,6 +135,7 @@ export interface Config {
     'practice-management-software-pms': any;
     'outsource-medical-billing': any;
     'about-us': any;
+    'contact-us': any;
   };
   locale: null;
   widgets: {
@@ -229,7 +233,7 @@ export interface PayloadLockedDocument {
  */
 export interface FormSubmission {
   id: number;
-  formCategory?: 'careers' | 'consultation' | 'audit' | 'general' | null;
+  formCategory?: 'careers' | 'consultation' | 'audit' | 'contact' | 'general' | null;
   formName: string;
   sourcePage: string;
   name: string;

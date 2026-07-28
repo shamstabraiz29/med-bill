@@ -1,5 +1,4 @@
-import PageContainer from "@/components/PageContainer";
+import ContactUsPage, { metadata } from "../contact-us/page";
 
-export default function Page() {
-  return <PageContainer title="Contact BellMedEx" />;
-}
+export { metadata };
+export default ContactUsPage;

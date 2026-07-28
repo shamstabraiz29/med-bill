@@ -29,6 +29,7 @@ export const FormSubmissions: CollectionConfig = {
         { label: 'Job Applications (Careers)', value: 'careers' },
         { label: 'Consultations & Quotes', value: 'consultation' },
         { label: 'Practice Audit Requests', value: 'audit' },
+        { label: 'Contact Us Inquiries', value: 'contact' },
         { label: 'General Inquiries', value: 'general' },
       ],
       defaultValue: 'general',

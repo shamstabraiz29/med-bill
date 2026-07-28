@@ -16,6 +16,8 @@ export async function POST(req: Request) {
     let monthlyCollections = ''
     let message = ''
     let resumeUrl = ''
+    let organization = ''
+    let serviceInterest = ''
 
     const payload = await getPayload({ config })
 
@@ -30,6 +32,8 @@ export async function POST(req: Request) {
       phone = (formData.get('phone') as string) || ''
       monthlyCollections = (formData.get('monthlyCollections') as string) || ''
       message = (formData.get('message') as string) || ''
+      organization = (formData.get('organization') as string) || ''
+      serviceInterest = (formData.get('serviceInterest') as string) || ''
       
       const file = formData.get('resume') as any
       const passedResumeUrl = (formData.get('resumeUrl') as string) || ''
@@ -87,6 +91,8 @@ export async function POST(req: Request) {
       monthlyCollections = body.monthlyCollections || ''
       message = body.message || ''
       resumeUrl = body.resumeUrl || ''
+      organization = body.organization || ''
+      serviceInterest = body.serviceInterest || ''
     }
 
     // Validation: Name and Email are required; Phone is optional
@@ -98,11 +104,13 @@ export async function POST(req: Request) {
     }
 
     // Categorize Form Submission
-    let formCategory: 'careers' | 'consultation' | 'audit' | 'general' = 'general'
+    let formCategory: 'careers' | 'consultation' | 'audit' | 'contact' | 'general' = 'general'
     const lowerForm = (formName + ' ' + sourcePage).toLowerCase()
 
     if (lowerForm.includes('career') || lowerForm.includes('job') || resumeUrl || resumeMediaId) {
       formCategory = 'careers'
+    } else if (lowerForm.includes('contact') || lowerForm.includes('inquiry') || lowerForm.includes('message')) {
+      formCategory = 'contact'
     } else if (lowerForm.includes('audit') || lowerForm.includes('assessment')) {
       formCategory = 'audit'
     } else if (lowerForm.includes('consult') || lowerForm.includes('quote') || lowerForm.includes('pric') || lowerForm.includes('specialty')) {
@@ -140,6 +148,21 @@ export async function POST(req: Request) {
             phone: phone ? phone.trim() : '',
             resumeUrl: resumeUrl || '',
             ...(resumeMediaId ? { resumeMedia: resumeMediaId } : {}),
+            message: message || '',
+            status: 'new',
+          },
+        })
+      } else if (formCategory === 'contact') {
+        await payload.create({
+          collection: 'contact-submissions',
+          data: {
+            formName: formName || 'Contact Us Submission',
+            sourcePage: sourcePage || '/contact-bellmedex',
+            name: name.trim(),
+            email: email.trim().toLowerCase(),
+            phone: phone ? phone.trim() : '',
+            organization: organization || '',
+            serviceInterest: serviceInterest || '',
             message: message || '',
             status: 'new',
           },

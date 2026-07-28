@@ -9,6 +9,7 @@ import { FormSubmissions } from '@/payload/collections/FormSubmissions'
 import { CareersSubmissions } from '@/payload/collections/CareersSubmissions'
 import { ConsultationSubmissions } from '@/payload/collections/ConsultationSubmissions'
 import { AuditSubmissions } from '@/payload/collections/AuditSubmissions'
+import { ContactSubmissions } from '@/payload/collections/ContactSubmissions'
 import { Posts } from '@/payload/collections/Posts'
 import { Media } from '@/payload/collections/Media'
 import { Homepage } from '@/payload/globals/Homepage'
@@ -31,6 +32,7 @@ import { ElectronicHealthRecordsEhr } from '@/payload/globals/ElectronicHealthRe
 import { PracticeManagementSoftwarePms } from '@/payload/globals/PracticeManagementSoftwarePms'
 import { OutsourceMedicalBilling } from '@/payload/globals/OutsourceMedicalBilling'
 import { AboutUs } from '@/payload/globals/AboutUs'
+import { ContactUs } from '@/payload/globals/ContactUs'
 
 export default buildConfig({
   admin: {
@@ -46,6 +48,7 @@ export default buildConfig({
     CareersSubmissions,
     ConsultationSubmissions,
     AuditSubmissions,
+    ContactSubmissions,
     Posts,
     Media,
   ],
@@ -67,6 +70,7 @@ export default buildConfig({
     PracticeManagementSoftwarePms,
     OutsourceMedicalBilling,
     AboutUs,
+    ContactUs,
   ],
 
   db: postgresAdapter({
