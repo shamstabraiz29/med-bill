@@ -20,31 +20,30 @@ export default function PhysicianBillingServicesHero() {
       aria-labelledby="physician-billing-services-hero-heading"
     >
       <style>{`
-        @keyframes float-slow {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-8px) rotate(1.5deg); }
-        }
-        @keyframes float-medium {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(10px) rotate(-1.5deg); }
-        }
         @keyframes spin-slow {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }
-        }
-        .animate-float-slow {
-          animation: float-slow 9s ease-in-out infinite;
-        }
-        .animate-float-medium {
-          animation: float-medium 7.5s ease-in-out infinite;
         }
         .animate-spin-slow {
           animation: spin-slow 35s linear infinite;
         }
       `}</style>
 
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:32px_32px] opacity-40"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-24 -left-24 h-96 w-96 rounded-full bg-blue-500/5 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute top-1/2 -right-24 h-96 w-96 rounded-full bg-indigo-500/5 blur-3xl"
+      />
+
       <div className={`${physicianContainerClassName} relative z-10`}>
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-8">
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-10">
           <div className="flex flex-col space-y-6 text-left lg:col-span-7">
             <PhysicianBillingServicesHeroHeader headingId="physician-billing-services-hero-heading" />
 
@@ -52,12 +51,7 @@ export default function PhysicianBillingServicesHero() {
               <AppButton href="/schedule-a-demo" variant="primary" size="lg" showArrow>
                 Get A Demo
               </AppButton>
-              <AppButton
-                href="https://youtube.com"
-                variant="secondary"
-                size="lg"
-                icon={Play}
-              >
+              <AppButton href="https://youtube.com" variant="secondary" size="lg" icon={Play}>
                 Watch Video
               </AppButton>
             </MotionWrapper>
@@ -67,10 +61,12 @@ export default function PhysicianBillingServicesHero() {
             </MotionWrapper>
           </div>
 
-          <DoctorVisuals />
+          <MotionWrapper variant="slideRight" delay={0.1} className="lg:col-span-5">
+            <DoctorVisuals />
+          </MotionWrapper>
         </div>
 
-        <MotionWrapper variant="fadeUp" className="mt-12 sm:mt-14 lg:mt-16">
+        <MotionWrapper variant="fadeUp" delay={0.15} className="mt-12 sm:mt-14 lg:mt-16">
           <PhysicianBillingServicesConsultationForm />
         </MotionWrapper>
       </div>

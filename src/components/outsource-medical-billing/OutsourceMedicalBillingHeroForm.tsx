@@ -1,12 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { CheckCircle2, Mail, Phone, Send, User } from "lucide-react";
+import { CheckCircle2, Mail, Phone, User } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import AppButton from "@/components/ui/AppButton";
+import { outsourceCardClassName } from "./outsourceSectionLayout";
 
 const inputClassName =
-  "bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11";
+  "h-11 border-[#E2E6EC] bg-[#F8FAFC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40";
 
 export default function OutsourceMedicalBillingHeroForm() {
   const [formData, setFormData] = useState({
@@ -49,8 +50,8 @@ export default function OutsourceMedicalBillingHeroForm() {
   };
 
   return (
-    <div className="relative z-10 flex w-full flex-col gap-6 overflow-hidden rounded-3xl border border-[#E2E6EC] bg-white p-6 shadow-[0_8px_30px_rgba(29,78,216,0.08)] sm:p-8 md:p-9">
-      <div className="space-y-1.5 border-b border-[#E2E6EC] pb-2 text-left">
+    <div className={`${outsourceCardClassName} p-6 sm:p-8`}>
+      <div className="mb-6 border-b border-[#E2E6EC] pb-5 text-left">
         <h2 className="text-xl font-bold tracking-[-0.02em] text-[#0F172A] sm:text-2xl">
           Tell Us Where to Send You the{" "}
           <span className="text-[#1D4ED8]">Demo</span>
@@ -58,99 +59,75 @@ export default function OutsourceMedicalBillingHeroForm() {
       </div>
 
       {isSubmitted ? (
-        <div className="space-y-4 py-8 text-center">
+        <div className="space-y-4 py-4 text-center sm:py-6">
           <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
             <CheckCircle2 className="h-8 w-8" aria-hidden="true" />
           </div>
           <h3 className="text-lg font-bold text-[#0F172A]">Demo Request Received!</h3>
-          <p className="mx-auto max-w-xs text-xs leading-relaxed text-[#475569] sm:text-sm">
+          <p className="mx-auto max-w-md text-sm leading-relaxed text-[#475569]">
             Thank you. A BellMedEx billing specialist will send your demo details shortly.
           </p>
           <button
             type="button"
             onClick={() => setIsSubmitted(false)}
-            className="cursor-pointer pt-2 text-xs font-semibold text-[#1D4ED8] hover:underline"
+            className="cursor-pointer text-xs font-semibold text-[#1D4ED8] hover:underline"
           >
             Submit another request
           </button>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <div className="space-y-1.5 text-left">
-            <label htmlFor="outsource-billing-name" className="text-xs font-semibold text-[#0F172A]">
-              Name <span className="text-red-500">*</span>
-            </label>
-            <Input
-              id="outsource-billing-name"
-              type="text"
-              required
-              placeholder="Name"
-              icon={User}
-              value={formData.name}
-              onChange={(event) =>
-                setFormData((current) => ({ ...current, name: event.target.value }))
-              }
-              className={inputClassName}
-            />
-          </div>
+          <Input
+            id="outsource-billing-name"
+            type="text"
+            required
+            placeholder="Name"
+            aria-label="Name"
+            icon={User}
+            value={formData.name}
+            onChange={(event) =>
+              setFormData((current) => ({ ...current, name: event.target.value }))
+            }
+            className={inputClassName}
+          />
 
-          <div className="space-y-1.5 text-left">
-            <label htmlFor="outsource-billing-email" className="text-xs font-semibold text-[#0F172A]">
-              Email <span className="text-red-500">*</span>
-            </label>
-            <Input
-              id="outsource-billing-email"
-              type="email"
-              required
-              placeholder="Email"
-              icon={Mail}
-              value={formData.email}
-              onChange={(event) =>
-                setFormData((current) => ({ ...current, email: event.target.value }))
-              }
-              className={inputClassName}
-            />
-          </div>
+          <Input
+            id="outsource-billing-email"
+            type="email"
+            required
+            placeholder="Email"
+            aria-label="Email"
+            icon={Mail}
+            value={formData.email}
+            onChange={(event) =>
+              setFormData((current) => ({ ...current, email: event.target.value }))
+            }
+            className={inputClassName}
+          />
 
-          <div className="space-y-1.5 text-left">
-            <label htmlFor="outsource-billing-phone" className="text-xs font-semibold text-[#0F172A]">
-              Phone Number <span className="text-red-500">*</span>
-            </label>
-            <Input
-              id="outsource-billing-phone"
-              type="tel"
-              required
-              placeholder="+12 345 67895"
-              icon={Phone}
-              value={formData.phone}
-              onChange={(event) =>
-                setFormData((current) => ({ ...current, phone: event.target.value }))
-              }
-              className={inputClassName}
-            />
-          </div>
+          <Input
+            id="outsource-billing-phone"
+            type="tel"
+            required
+            placeholder="Phone Number"
+            aria-label="Phone Number"
+            icon={Phone}
+            value={formData.phone}
+            onChange={(event) =>
+              setFormData((current) => ({ ...current, phone: event.target.value }))
+            }
+            className={inputClassName}
+          />
 
-          <div className="pt-2">
-            <AppButton
-              type="submit"
-              disabled={isSubmitting}
-              variant="primary"
-              size="lg"
-              className="w-full py-3.5 font-bold uppercase tracking-wider shadow-md shadow-blue-900/10"
-            >
-              {isSubmitting ? (
-                <span className="flex items-center justify-center gap-2">
-                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
-                  Processing...
-                </span>
-              ) : (
-                <span className="flex items-center justify-center gap-2">
-                  Submit
-                  <Send className="h-3.5 w-3.5" aria-hidden="true" />
-                </span>
-              )}
-            </AppButton>
-          </div>
+          <AppButton
+            type="submit"
+            disabled={isSubmitting}
+            variant="primary"
+            size="lg"
+            className="w-full uppercase tracking-wider"
+          >
+            {isSubmitting ? "Processing..." : "Submit"}
+          </AppButton>
         </form>
       )}
     </div>
