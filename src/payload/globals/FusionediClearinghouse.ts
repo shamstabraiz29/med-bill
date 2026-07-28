@@ -4,7 +4,7 @@ export const FusionediClearinghouse: GlobalConfig = {
   slug: 'fusionedi-clearinghouse',
   label: 'FusionEDI Clearinghouse Page',
   admin: {
-    group: 'Pages',
+    group: 'Software',
   },
   access: {
     read: () => true,

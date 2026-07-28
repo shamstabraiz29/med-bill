@@ -4,7 +4,7 @@ export const MedicalBilling: GlobalConfig = {
   slug: 'medical-billing',
   label: 'Medical Billing Page',
   admin: {
-    group: 'Content',
+    group: 'Services',
   },
   fields: [
     // ── SEO ──

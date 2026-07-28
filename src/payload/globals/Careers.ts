@@ -8,7 +8,7 @@ export const Careers: GlobalConfig = {
     update: ({ req }) => Boolean(req.user),
   },
   admin: {
-    group: 'Pages',
+    group: 'Resources',
   },
   fields: [
     {

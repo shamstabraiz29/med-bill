@@ -4,7 +4,7 @@ export const MedicalBillingAudit: GlobalConfig = {
   slug: 'medical-billing-audit',
   label: 'Medical Billing Audit Page',
   admin: {
-    group: 'Content',
+    group: 'Services',
   },
   fields: [
     // ── SEO ──

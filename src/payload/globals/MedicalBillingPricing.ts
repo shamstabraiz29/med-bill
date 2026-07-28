@@ -5,7 +5,7 @@ export const MedicalBillingPricing: GlobalConfig = {
   dbName: 'mb_pricing',
   label: 'Medical Billing Pricing Page',
   admin: {
-    group: 'Pages',
+    group: 'Core Pages',
   },
   access: {
     read: () => true,

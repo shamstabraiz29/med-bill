@@ -4,7 +4,7 @@ export const Testimonials: GlobalConfig = {
   slug: 'testimonials-page',
   label: 'Client Testimonials Page',
   admin: {
-    group: 'Pages',
+    group: 'Resources',
   },
   access: {
     read: () => true,

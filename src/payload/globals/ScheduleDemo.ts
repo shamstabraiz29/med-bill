@@ -5,7 +5,7 @@ export const ScheduleDemo: GlobalConfig = {
   dbName: 'sch_demo',
   label: 'Schedule a Demo Page',
   admin: {
-    group: 'Pages',
+    group: 'Core Pages',
   },
   access: {
     read: () => true,

@@ -56,25 +56,34 @@ export default buildConfig({
   ],
 
   globals: [
+    // 1. Core Pages
     Homepage,
-    Clearinghouse,
-    ProviderCredentialing,
-    HealthcareSeo,
-    RevenueCycleManagement,
-    MedicalBilling,
-    MedicalCoding,
-    MedicalBillingAudit,
-    Careers,
-    Testimonials,
-    MedicalBillingSoftware,
-    FusionediClearinghouse,
-    ElectronicHealthRecordsEhr,
-    PracticeManagementSoftwarePms,
-    OutsourceMedicalBilling,
     AboutUs,
     ContactUs,
     MedicalBillingPricing,
     ScheduleDemo,
+
+    // 2. Services Pages
+    MedicalBilling,
+    MedicalCoding,
+    RevenueCycleManagement,
+    MedicalBillingAudit,
+    Clearinghouse,
+    ProviderCredentialing,
+    HealthcareSeo,
+
+    // 3. Software Pages
+    MedicalBillingSoftware,
+    FusionediClearinghouse,
+    ElectronicHealthRecordsEhr,
+    PracticeManagementSoftwarePms,
+
+    // 4. Solutions Pages
+    OutsourceMedicalBilling,
+
+    // 5. Resources & Company Pages
+    Careers,
+    Testimonials,
   ],
 
   db: postgresAdapter({

@@ -4,7 +4,7 @@ export const ElectronicHealthRecordsEhr: GlobalConfig = {
   slug: 'electronic-health-records-ehr',
   label: 'Electronic Health Records (EHR) Page',
   admin: {
-    group: 'Pages',
+    group: 'Software',
   },
   access: {
     read: () => true,

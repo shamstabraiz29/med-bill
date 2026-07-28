@@ -4,7 +4,7 @@ export const MedicalBillingSoftware: GlobalConfig = {
   slug: 'medical-billing-software',
   label: 'Medical Billing Software Page',
   admin: {
-    group: 'Pages',
+    group: 'Software',
   },
   access: {
     read: () => true,

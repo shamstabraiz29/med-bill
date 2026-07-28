@@ -4,7 +4,7 @@ export const MedicalCoding: GlobalConfig = {
   slug: 'medical-coding',
   label: 'Medical Coding Page',
   admin: {
-    group: 'Content',
+    group: 'Services',
   },
   fields: [
     // ── SEO ──

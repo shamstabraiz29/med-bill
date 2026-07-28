@@ -18,7 +18,7 @@ export const Homepage: GlobalConfig = {
   slug: 'homepage',
   label: 'Homepage',
   admin: {
-    group: 'Content',
+    group: 'Core Pages',
   },
   fields: [
     // ─────────────────────────────────────

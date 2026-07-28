@@ -4,7 +4,7 @@ export const ProviderCredentialing: GlobalConfig = {
   slug: 'provider-credentialing',
   label: 'Provider Credentialing Page',
   admin: {
-    group: 'Content',
+    group: 'Services',
   },
   fields: [
     // ── SEO ──

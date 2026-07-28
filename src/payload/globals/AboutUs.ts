@@ -5,7 +5,7 @@ export const AboutUs: GlobalConfig = {
   dbName: 'about_us',
   label: 'About Us / About BellMedEx Page',
   admin: {
-    group: 'Pages',
+    group: 'Core Pages',
   },
   access: {
     read: () => true,

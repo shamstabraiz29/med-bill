@@ -4,7 +4,7 @@ export const HealthcareSeo: GlobalConfig = {
   slug: 'healthcare-seo',
   label: 'Healthcare SEO Page',
   admin: {
-    group: 'Content',
+    group: 'Services',
   },
   fields: [
     // ── SEO ──

@@ -5,7 +5,7 @@ export const ContactUs: GlobalConfig = {
   dbName: 'contact_us',
   label: 'Contact Us / Contact BellMedEx Page',
   admin: {
-    group: 'Pages',
+    group: 'Core Pages',
   },
   access: {
     read: () => true,

@@ -4,7 +4,7 @@ export const Clearinghouse: GlobalConfig = {
   slug: 'clearinghouse',
   label: 'Clearinghouse Page',
   admin: {
-    group: 'Content',
+    group: 'Services',
   },
   fields: [
     // ── SEO ──

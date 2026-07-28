@@ -5,7 +5,7 @@ export const OutsourceMedicalBilling: GlobalConfig = {
   dbName: 'outsource_mb',
   label: 'Outsource Medical Billing Page',
   admin: {
-    group: 'Pages',
+    group: 'Solutions',
   },
   access: {
     read: () => true,

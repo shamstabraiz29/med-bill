@@ -4,7 +4,7 @@ export const RevenueCycleManagement: GlobalConfig = {
   slug: 'revenue-cycle-management',
   label: 'Revenue Cycle Management Page',
   admin: {
-    group: 'Content',
+    group: 'Services',
   },
   fields: [
     // ── SEO ──

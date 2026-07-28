@@ -5,7 +5,7 @@ export const PracticeManagementSoftwarePms: GlobalConfig = {
   dbName: 'pms_page',
   label: 'Practice Management Software (PMS) Page',
   admin: {
-    group: 'Pages',
+    group: 'Software',
   },
   access: {
     read: () => true,
