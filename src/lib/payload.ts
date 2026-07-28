@@ -36,6 +36,8 @@ import type { ContactUsPageData } from '@/payload/types/contactUs'
 import { defaultContactUsData } from '@/lib/defaults/contactUs'
 import type { MedicalBillingPricingPageData } from '@/payload/types/medicalBillingPricing'
 import { defaultMedicalBillingPricingData } from '@/lib/defaults/medicalBillingPricing'
+import type { ScheduleDemoPageData } from '@/payload/types/scheduleDemo'
+import { defaultScheduleDemoData } from '@/lib/defaults/scheduleDemo'
 
 /**
  * Fetches the Homepage global data from Payload CMS using the Local API.
@@ -480,6 +482,25 @@ export async function getMedicalBillingPricingData(): Promise<MedicalBillingPric
   } catch (error) {
     console.error('[Payload] Failed to fetch Medical Billing Pricing data, using defaults:', error)
     return defaultMedicalBillingPricingData
+  }
+}
+
+/**
+ * Fetches the Schedule a Demo global data from Payload CMS.
+ * Uses Payload Local API with fallback to default hardcoded content.
+ */
+export async function getScheduleDemoData(): Promise<ScheduleDemoPageData> {
+  try {
+    const payload = await getPayload({ config })
+
+    const data = await payload.findGlobal({
+      slug: 'schedule-demo' as any,
+    })
+
+    return deepMerge(defaultScheduleDemoData, data as unknown as Partial<ScheduleDemoPageData>)
+  } catch (error) {
+    console.error('[Payload] Failed to fetch Schedule a Demo data, using defaults:', error)
+    return defaultScheduleDemoData
   }
 }
 

@@ -34,6 +34,7 @@ import { OutsourceMedicalBilling } from '@/payload/globals/OutsourceMedicalBilli
 import { AboutUs } from '@/payload/globals/AboutUs'
 import { ContactUs } from '@/payload/globals/ContactUs'
 import { MedicalBillingPricing } from '@/payload/globals/MedicalBillingPricing'
+import { ScheduleDemo } from '@/payload/globals/ScheduleDemo'
 
 export default buildConfig({
   admin: {
@@ -73,6 +74,7 @@ export default buildConfig({
     AboutUs,
     ContactUs,
     MedicalBillingPricing,
+    ScheduleDemo,
   ],
 
   db: postgresAdapter({
