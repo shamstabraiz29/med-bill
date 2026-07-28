@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import CareersHero from "@/components/careers/CareersHero";
 import CareersApplicationForm from "@/components/careers/CareersApplicationForm";
+import CareersFaq from "@/components/careers/CareersFaq";
+import CareersCTA from "@/components/careers/CareersCTA";
 import { getCareersData } from "@/lib/payload";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -22,9 +24,12 @@ export default async function CareersPage() {
   const data = await getCareersData();
 
   return (
-    <div className="flex flex-col min-h-screen bg-transparent">
+    <main className="flex flex-col min-h-screen bg-transparent pb-12 sm:pb-16">
       <CareersHero data={data.hero} />
       <CareersApplicationForm data={data.formSection} />
-    </div>
+      <CareersFaq data={data.faq} />
+      <CareersCTA data={data.cta} />
+    </main>
   );
 }
+

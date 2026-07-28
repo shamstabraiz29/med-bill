@@ -1,7 +1,24 @@
 "use client";
 
 import React, { useState } from "react";
-import { UploadCloud, CheckCircle2, FileText, Check, User, Mail, Phone, MapPin, Building2 } from "lucide-react";
+import {
+  UploadCloud,
+  CheckCircle2,
+  FileText,
+  Check,
+  User,
+  Mail,
+  Phone,
+  MapPin,
+  Building2,
+  Briefcase,
+  Globe,
+  Heart,
+  Award,
+  TrendingUp,
+  ShieldCheck,
+  Send,
+} from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { FormSelect } from "@/components/ui/select";
 import MotionWrapper from "@/components/ui/MotionWrapper";
@@ -13,6 +30,9 @@ import { defaultCareersData } from "@/lib/defaults/careers";
 interface CareersApplicationFormProps {
   data?: CareersFormSectionData;
 }
+
+const inputClassName =
+  "bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-xl transition-all";
 
 export default function CareersApplicationForm({ data }: CareersApplicationFormProps) {
   const content = data || defaultCareersData.formSection;
@@ -75,7 +95,10 @@ export default function CareersApplicationForm({ data }: CareersApplicationFormP
         payloadData.append("name", `${formData.firstName} ${formData.lastName}`.trim());
         payloadData.append("email", formData.email);
         payloadData.append("phone", formData.phone);
-        payloadData.append("message", `Departments: ${formData.departments.join(", ") || "General"} | Address: ${formData.address1} ${formData.address2}, ${formData.city}, ${formData.state} ${formData.postalCode}, ${formData.country}`);
+        payloadData.append(
+          "message",
+          `Departments: ${formData.departments.join(", ") || "General"} | Address: ${formData.address1} ${formData.address2}, ${formData.city}, ${formData.state} ${formData.postalCode}, ${formData.country}`
+        );
         
         if (resumeFile) {
           payloadData.append("resume", resumeFile);
@@ -97,254 +120,305 @@ export default function CareersApplicationForm({ data }: CareersApplicationFormP
     }
   };
 
+  const perksSpotlight = [
+    {
+      icon: Globe,
+      title: "Flexible Remote & Hybrid Roles",
+      desc: "Work comfortably from home or collaborate in our modern healthcare hubs.",
+    },
+    {
+      icon: TrendingUp,
+      title: "Competitive Compensation & Bonuses",
+      desc: "Market-leading salary packages with biannual performance incentives.",
+    },
+    {
+      icon: Heart,
+      title: "Comprehensive Medical Insurance",
+      desc: "Full healthcare benefits for you and your eligible family dependents.",
+    },
+    {
+      icon: Award,
+      title: "Mentorship & Professional Upskilling",
+      desc: "Gain AAPC / AHIMA certifications and fast-track your leadership career.",
+    },
+  ];
+
   return (
-    <section className="relative w-full py-12 sm:py-16 bg-transparent">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="careers-apply-form" className="relative w-full py-8 sm:py-14 bg-transparent">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <MotionWrapper variant="scaleUp">
           
-          <div className="bg-white border border-[#E2E6EC] rounded-3xl p-6 sm:p-10 lg:p-12 shadow-xl text-left">
+          {/* Main 2-Column Split Card Container (matching ContactFormSection & PricingUnlockForm) */}
+          <div className="bg-white rounded-3xl border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 overflow-hidden grid grid-cols-1 lg:grid-cols-12">
             
-            <div className="border-b border-[#E2E6EC] pb-6 mb-8">
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#0F172A] tracking-tight">
-                {content.title}
-              </h2>
-              <p className="text-xs sm:text-sm text-[#475569] mt-1">
-                {content.subtitle}
-              </p>
+            {/* Left Column: Solid #0F172A Spotlight Panel */}
+            <div className="lg:col-span-5 bg-[#0F172A] text-white p-8 sm:p-10 lg:p-12 flex flex-col justify-between relative overflow-hidden">
+              <div className="relative space-y-6 sm:space-y-8 z-10">
+                
+                {/* Badge Pill */}
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/15 border border-blue-400/20 text-blue-300 text-xs font-semibold">
+                  <Briefcase className="w-3.5 h-3.5 text-blue-400" />
+                  <span>Why Join BellMedEx</span>
+                </div>
+
+                {/* Title & Subtitle */}
+                <div className="space-y-3">
+                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight text-white">
+                    Build Your Career With{" "}
+                    <span className="text-blue-400">Industry Leaders</span>
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-md">
+                    Join a culture dedicated to innovation, continuous learning, and empowering healthcare providers across the nation.
+                  </p>
+                </div>
+
+                {/* Perks Spotlight List */}
+                <div className="space-y-4 sm:space-y-5 pt-2">
+                  {perksSpotlight.map((item, idx) => {
+                    const Icon = item.icon;
+                    return (
+                      <div key={idx} className="flex items-start gap-3.5 group">
+                        <div className="p-2.5 rounded-xl bg-blue-500/15 text-blue-400 shrink-0 mt-0.5 border border-blue-400/20 group-hover:bg-blue-500 group-hover:text-white transition-all duration-300">
+                          <Icon className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <h4 className="text-xs sm:text-sm font-bold text-white group-hover:text-blue-300 transition-colors">
+                            {item.title}
+                          </h4>
+                          <p className="text-xs text-slate-300 font-medium leading-relaxed">
+                            {item.desc}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+              </div>
+
+              {/* Trust Guarantee Box at bottom */}
+              <div className="relative pt-8 sm:pt-10 z-10">
+                <div className="flex items-center gap-2.5 p-3.5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm text-xs text-slate-300">
+                  <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span>Equal Opportunity Employer & 100% Confidential Candidate Support</span>
+                </div>
+              </div>
             </div>
 
-            {submitted ? (
-              <div className="bg-emerald-50 border border-emerald-200 text-emerald-900 p-8 rounded-2xl text-center space-y-3 shadow-sm">
-                <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
-                <h3 className="text-xl font-bold">{content.successTitle}</h3>
-                <p className="text-sm text-emerald-800">
-                  {content.successDescription}
+            {/* Right Column: Form Container */}
+            <div className="lg:col-span-7 p-7 sm:p-10 lg:p-12 flex flex-col justify-center bg-white text-left">
+              
+              {/* Form Header */}
+              <div className="border-b border-[#E2E6EC] pb-4 mb-6 space-y-1">
+                <div className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-[#1D4ED8]">
+                  <span>CAREERS APPLICATION</span>
+                </div>
+                <h2 className="text-xl sm:text-2xl font-extrabold text-[#0F172A] tracking-tight">
+                  {content.title}
+                </h2>
+                <p className="text-xs text-[#475569] leading-relaxed">
+                  {content.subtitle}
                 </p>
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                
-                {/* 1. Name Field (First & Last) */}
-                <div className="space-y-1.5">
-                  <label className="text-xs sm:text-[13px] font-semibold text-[#0F172A] block">
-                    Name <span className="text-red-500 font-bold">*</span>
-                  </label>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
+
+              {submitted ? (
+                <div className="space-y-5 py-8 text-center">
+                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-50 text-emerald-600 shadow-xs border border-emerald-100">
+                    <CheckCircle2 className="h-9 w-9" aria-hidden="true" />
+                  </div>
+                  <div className="space-y-2 max-w-md mx-auto">
+                    <h3 className="text-xl font-extrabold text-[#0F172A]">
+                      {content.successTitle}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#475569] leading-relaxed">
+                      {content.successDescription}
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  
+                  {/* Name Fields (First & Last) */}
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-[#0F172A] uppercase tracking-wider block">
+                      Applicant Name <span className="text-red-500">*</span>
+                    </label>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                       <Input
                         type="text"
                         required
-                        placeholder="First"
+                        placeholder="First Name"
                         value={formData.firstName}
                         onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                        className="h-11 sm:h-12 border-[#D1D5DB] focus:border-[#1D4ED8] focus:ring-2 focus:ring-[#1D4ED8]/20 rounded-xl text-sm bg-white font-medium"
+                        icon={User}
+                        className={inputClassName}
                       />
-                      <span className="text-[11px] text-slate-400 mt-1 block">First</span>
-                    </div>
-
-                    <div>
                       <Input
                         type="text"
                         required
-                        placeholder="Last"
+                        placeholder="Last Name"
                         value={formData.lastName}
                         onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                        className="h-11 sm:h-12 border-[#D1D5DB] focus:border-[#1D4ED8] focus:ring-2 focus:ring-[#1D4ED8]/20 rounded-xl text-sm bg-white font-medium"
+                        icon={User}
+                        className={inputClassName}
                       />
-                      <span className="text-[11px] text-slate-400 mt-1 block">Last</span>
                     </div>
                   </div>
-                </div>
 
-                {/* 2. Email Field */}
-                <div className="space-y-1.5">
-                  <label className="text-xs sm:text-[13px] font-semibold text-[#0F172A] block">
-                    Email <span className="text-red-500 font-bold">*</span>
-                  </label>
-                  <Input
-                    type="email"
-                    required
-                    placeholder="Email Address"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="h-11 sm:h-12 border-[#D1D5DB] focus:border-[#1D4ED8] focus:ring-2 focus:ring-[#1D4ED8]/20 rounded-xl text-sm bg-white font-medium"
-                  />
-                </div>
+                  {/* Email & Phone Fields */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-bold text-[#0F172A] uppercase tracking-wider block">
+                        Email Address <span className="text-red-500">*</span>
+                      </label>
+                      <Input
+                        type="email"
+                        required
+                        placeholder="you@example.com"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        icon={Mail}
+                        className={inputClassName}
+                      />
+                    </div>
 
-                {/* 3. Address Section */}
-                <div className="space-y-3 pt-2">
-                  <label className="text-xs sm:text-[13px] font-semibold text-[#0F172A] block">
-                    Address
-                  </label>
-
-                  {/* Address Line 1 */}
-                  <div>
-                    <Input
-                      type="text"
-                      placeholder="Address Line 1"
-                      value={formData.address1}
-                      onChange={(e) => setFormData({ ...formData, address1: e.target.value })}
-                      className="h-11 sm:h-12 border-[#D1D5DB] focus:border-[#1D4ED8] focus:ring-2 focus:ring-[#1D4ED8]/20 rounded-xl text-sm bg-white font-medium"
-                    />
-                    <span className="text-[11px] text-slate-400 mt-1 block">Address Line 1</span>
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-bold text-[#0F172A] uppercase tracking-wider block">
+                        Phone Number <span className="text-red-500">*</span>
+                      </label>
+                      <Input
+                        type="tel"
+                        required
+                        placeholder="(555) 000-0000"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        icon={Phone}
+                        className={inputClassName}
+                      />
+                    </div>
                   </div>
 
-                  {/* Address Line 2 */}
-                  <div>
-                    <Input
-                      type="text"
-                      placeholder="Address Line 2"
-                      value={formData.address2}
-                      onChange={(e) => setFormData({ ...formData, address2: e.target.value })}
-                      className="h-11 sm:h-12 border-[#D1D5DB] focus:border-[#1D4ED8] focus:ring-2 focus:ring-[#1D4ED8]/20 rounded-xl text-sm bg-white font-medium"
-                    />
-                    <span className="text-[11px] text-slate-400 mt-1 block">Address Line 2</span>
-                  </div>
+                  {/* Address Section */}
+                  <div className="space-y-3 pt-1">
+                    <label className="text-xs font-bold text-[#0F172A] uppercase tracking-wider block">
+                      Location / Address Details
+                    </label>
 
-                  {/* City & State */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                      <Input
+                        type="text"
+                        placeholder="Address Line 1"
+                        value={formData.address1}
+                        onChange={(e) => setFormData({ ...formData, address1: e.target.value })}
+                        icon={MapPin}
+                        className={inputClassName}
+                      />
                       <Input
                         type="text"
                         placeholder="City"
                         value={formData.city}
                         onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                        className="h-11 sm:h-12 border-[#D1D5DB] focus:border-[#1D4ED8] focus:ring-2 focus:ring-[#1D4ED8]/20 rounded-xl text-sm bg-white font-medium"
+                        icon={Building2}
+                        className={inputClassName}
                       />
-                      <span className="text-[11px] text-slate-400 mt-1 block">City</span>
                     </div>
 
-                    <div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                       <Input
                         type="text"
-                        placeholder="State / Province / Region"
+                        placeholder="State / Region"
                         value={formData.state}
                         onChange={(e) => setFormData({ ...formData, state: e.target.value })}
-                        className="h-11 sm:h-12 border-[#D1D5DB] focus:border-[#1D4ED8] focus:ring-2 focus:ring-[#1D4ED8]/20 rounded-xl text-sm bg-white font-medium"
+                        className={inputClassName}
                       />
-                      <span className="text-[11px] text-slate-400 mt-1 block">State / Province / Region</span>
-                    </div>
-                  </div>
-
-                  {/* Postal Code & Country */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <Input
-                        type="text"
-                        placeholder="Postal Code"
-                        value={formData.postalCode}
-                        onChange={(e) => setFormData({ ...formData, postalCode: e.target.value })}
-                        className="h-11 sm:h-12 border-[#D1D5DB] focus:border-[#1D4ED8] focus:ring-2 focus:ring-[#1D4ED8]/20 rounded-xl text-sm bg-white font-medium"
-                      />
-                      <span className="text-[11px] text-slate-400 mt-1 block">Postal Code</span>
-                    </div>
-
-                    <div>
                       <FormSelect
                         value={formData.country}
                         onValueChange={(val) => val && setFormData({ ...formData, country: val })}
                         options={countryOptions}
-                        placeholder="Select country"
-                        className="h-11 sm:h-12 rounded-xl border-[#D1D5DB] focus:border-[#1D4ED8] bg-white font-medium"
+                        placeholder="Select Country"
+                        className="h-11 rounded-xl border-[#E2E6EC] bg-[#F8FAFC] text-xs sm:text-sm font-medium"
                       />
-                      <span className="text-[11px] text-slate-400 mt-1 block">Country</span>
                     </div>
                   </div>
-                </div>
 
-                {/* 4. Phone Field */}
-                <div className="space-y-1.5 pt-2">
-                  <label className="text-xs sm:text-[13px] font-semibold text-[#0F172A] block">
-                    Phone <span className="text-red-500 font-bold">*</span>
-                  </label>
-                  <Input
-                    type="tel"
-                    required
-                    placeholder="Phone Number"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="h-11 sm:h-12 border-[#D1D5DB] focus:border-[#1D4ED8] focus:ring-2 focus:ring-[#1D4ED8]/20 rounded-xl text-sm bg-white font-medium"
-                  />
-                </div>
-
-                {/* 5. Departments of Interest (Checkboxes) */}
-                <div className="space-y-2.5 pt-2">
-                  <label className="text-xs sm:text-[13px] font-semibold text-[#0F172A] block">
-                    Departments of Interest <span className="text-red-500 font-bold">*</span>
-                  </label>
-                  
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-1">
-                    {departmentOptions.map((dept) => {
-                      const isChecked = formData.departments.includes(dept);
-                      return (
-                        <div
-                          key={dept}
-                          onClick={() => toggleDepartment(dept)}
-                          className={`flex items-center gap-2.5 p-2.5 rounded-xl border cursor-pointer select-none transition-all ${
-                            isChecked
-                              ? "bg-blue-50/80 border-[#1D4ED8] text-[#1D4ED8] font-semibold shadow-xs"
-                              : "bg-slate-50/60 border-[#E2E6EC] text-[#0F172A] hover:bg-slate-100/80"
-                          }`}
-                        >
-                          <div className={`w-4 h-4 rounded border flex items-center justify-center transition-colors shrink-0 ${
-                            isChecked ? "bg-[#1D4ED8] border-[#1D4ED8] text-white" : "border-slate-300 bg-white"
-                          }`}>
-                            {isChecked && <Check className="w-3 h-3 stroke-[3]" />}
-                          </div>
-                          <span className="text-xs sm:text-sm">{dept}</span>
-                        </div>
-                      );
-                    })}
+                  {/* Department Interests Selection */}
+                  <div className="space-y-2 pt-2">
+                    <label className="text-xs font-bold text-[#0F172A] uppercase tracking-wider block">
+                      Select Department(s) of Interest
+                    </label>
+                    <div className="flex flex-wrap gap-2 pt-1">
+                      {departmentOptions.map((dept) => {
+                        const isSelected = formData.departments.includes(dept);
+                        return (
+                          <button
+                            type="button"
+                            key={dept}
+                            onClick={() => toggleDepartment(dept)}
+                            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border transition-all cursor-pointer ${
+                              isSelected
+                                ? "bg-[#1D4ED8] text-white border-[#1D4ED8] shadow-xs"
+                                : "bg-[#F8FAFC] text-[#475569] border-[#E2E6EC] hover:border-[#1D4ED8]/40 hover:text-[#1D4ED8]"
+                            }`}
+                          >
+                            {isSelected && <Check className="w-3.5 h-3.5" />}
+                            <span>{dept}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
 
-                {/* 6. Upload Resume Drag & Drop Zone */}
-                <div className="space-y-1.5 pt-2">
-                  <label className="text-xs sm:text-[13px] font-semibold text-[#0F172A] block">
-                    Upload Resume <span className="text-red-500 font-bold">*</span>
-                  </label>
+                  {/* Resume Upload Dropzone */}
+                  <div className="space-y-1.5 pt-2">
+                    <label className="text-xs font-bold text-[#0F172A] uppercase tracking-wider block">
+                      Upload Resume / CV
+                    </label>
+                    <label className="flex flex-col items-center justify-center p-5 border-2 border-dashed border-[#E2E6EC] hover:border-[#1D4ED8] rounded-2xl cursor-pointer bg-[#F8FAFC] hover:bg-blue-50/40 transition-all text-center group">
+                      <UploadCloud className="w-8 h-8 text-slate-400 group-hover:text-[#1D4ED8] transition-colors mb-2" />
+                      {resumeFile ? (
+                        <div className="flex items-center gap-2 text-xs font-bold text-[#1D4ED8]">
+                          <FileText className="w-4 h-4" />
+                          <span>{resumeFile.name}</span>
+                        </div>
+                      ) : (
+                        <div className="space-y-0.5">
+                          <p className="text-xs font-bold text-[#0F172A] group-hover:text-[#1D4ED8] transition-colors">
+                            Click to upload resume (PDF, DOCX)
+                          </p>
+                          <p className="text-[11px] text-slate-400">
+                            Max file size: 10MB
+                          </p>
+                        </div>
+                      )}
+                      <input
+                        type="file"
+                        accept=".pdf,.doc,.docx"
+                        onChange={handleFileChange}
+                        className="hidden"
+                      />
+                    </label>
+                  </div>
 
-                  <label className="relative border-2 border-dashed border-[#CBD5E1] hover:border-[#1D4ED8] rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-center text-center cursor-pointer transition-colors bg-slate-50/50 hover:bg-blue-50/30 group">
-                    <input
-                      type="file"
-                      accept=".pdf,.doc,.docx"
-                      onChange={handleFileChange}
-                      className="hidden"
-                    />
+                  {/* Submit Button */}
+                  <div className="pt-3">
+                    <AppButton
+                      type="submit"
+                      variant="primary"
+                      size="lg"
+                      disabled={isSubmitting}
+                      icon={Send}
+                      className="w-full justify-center h-12 rounded-xl font-bold shadow-md shadow-blue-900/15"
+                    >
+                      {isSubmitting ? "Submitting Application..." : "Submit Job Application"}
+                    </AppButton>
+                  </div>
 
-                    {resumeFile ? (
-                      <div className="flex items-center gap-3 text-emerald-600 font-semibold text-xs sm:text-sm">
-                        <FileText className="w-6 h-6 text-emerald-600" />
-                        <span>{resumeFile.name} ({(resumeFile.size / 1024).toFixed(1)} KB)</span>
-                      </div>
-                    ) : (
-                      <>
-                        <UploadCloud className="w-10 h-10 text-slate-400 group-hover:text-[#1D4ED8] transition-colors mb-2" />
-                        <p className="text-xs sm:text-sm text-slate-600 font-medium">
-                          Drag & Drop Files, <span className="text-[#1D4ED8] font-bold underline">Choose Files to Upload</span>
-                        </p>
-                        <p className="text-[11px] text-slate-400 mt-1">Supports PDF, DOC, DOCX up to 10MB</p>
-                      </>
-                    )}
-                  </label>
-                </div>
+                </form>
+              )}
 
-                {/* 7. Submit Action Button */}
-                <div className="pt-4">
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full sm:w-auto px-10 py-3.5 bg-[#1D4ED8] hover:bg-[#1e40af] text-white font-extrabold text-xs sm:text-sm tracking-wider uppercase rounded-xl transition-all shadow-md cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50"
-                  >
-                    <span>{isSubmitting ? "SUBMITTING..." : "SUBMIT"}</span>
-                  </button>
-                </div>
-
-              </form>
-            )}
+            </div>
 
           </div>
-
         </MotionWrapper>
       </div>
     </section>

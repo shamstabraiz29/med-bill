@@ -1,9 +1,10 @@
 "use client";
 
 import React from "react";
-import { Search } from "lucide-react";
+import { Search, X, Filter, Layers, User, RotateCcw } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { FormSelect } from "@/components/ui/select";
+import { motion, AnimatePresence } from "motion/react";
 
 interface BlogFilterBarProps {
   searchTerm: string;
@@ -34,72 +35,143 @@ export default function BlogFilterBar({
 }: BlogFilterBarProps) {
   const categoryOptions = ["All Blogs", ...categories];
 
+  const hasActiveFilters =
+    searchTerm !== "" ||
+    selectedCategory !== "All Blogs" ||
+    selectedSoftware !== "All Softwares" ||
+    selectedAuthor !== "All Authors";
+
+  const handleReset = () => {
+    onSearchChange("");
+    onCategorySelect("All Blogs");
+    if (onSoftwareSelect) onSoftwareSelect("All Softwares");
+    if (onAuthorSelect) onAuthorSelect("All Authors");
+  };
+
   return (
-    <div className="w-full max-w-4xl mx-auto flex flex-col items-center gap-6 text-center mb-12 sm:mb-16">
+    <div className="w-full max-w-5xl mx-auto mb-10 sm:mb-14">
       
-      {/* Search Term Input Field using shadcn/ui Input */}
-      <div className="w-full max-w-xl">
-        <Input
-          type="text"
-          placeholder="Enter Search Term"
-          value={searchTerm}
-          onChange={(e) => onSearchChange(e.target.value)}
-          icon={Search}
-          className="h-12 sm:h-13 bg-white border border-[#D1D5DB] focus:border-[#1D4ED8] focus:ring-2 focus:ring-[#1D4ED8]/20 rounded-full text-sm text-[#0F172A] placeholder:text-slate-400 pl-12 pr-6 shadow-md font-medium"
-        />
-      </div>
-
-      {/* Categories & Dropdowns Row using shadcn/ui FormSelect */}
-      <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+      {/* Animated Apple / Vercel-Style Pill Command Bar */}
+      <motion.div
+        initial={{ opacity: 0, y: 16, scale: 0.98 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+        whileHover={{ y: -2, boxShadow: "0 18px 44px rgba(29, 78, 216, 0.1)" }}
+        className="w-full bg-white/95 backdrop-blur-xl border border-[#E2E6EC] rounded-full p-2 sm:p-2.5 shadow-[0_10px_30px_rgba(15,23,42,0.06)] transition-all duration-300 flex flex-col md:flex-row items-center gap-2 md:gap-3"
+      >
         
-        {/* All Blogs Quick Pill */}
-        <button
-          type="button"
-          onClick={() => onCategorySelect("All Blogs")}
-          className={`text-xs sm:text-sm font-bold transition-all px-4 py-2.5 rounded-full cursor-pointer border ${
-            selectedCategory === "All Blogs"
-              ? "bg-[#1D4ED8] text-white border-[#1D4ED8] shadow-md shadow-blue-900/15"
-              : "text-slate-600 hover:text-[#1D4ED8] bg-slate-100 hover:bg-blue-50 border-transparent"
-          }`}
-        >
-          All Blogs
-        </button>
-
-        {/* Categories Dropdown Filter using shadcn/ui FormSelect */}
-        <div className="min-w-[160px] sm:min-w-[180px]">
-          <FormSelect
-            value={selectedCategory}
-            onValueChange={(val) => val && onCategorySelect(val)}
-            options={categoryOptions}
-            placeholder="Categories"
-            className="rounded-full bg-white border-[#D1D5DB] hover:border-[#1D4ED8] text-[#0F172A] font-semibold text-xs sm:text-sm shadow-sm h-10 px-4"
+        {/* Left: Search Bar with Smooth Focus Ring Animation */}
+        <div className="flex-1 w-full flex items-center">
+          <Input
+            type="text"
+            placeholder="Search articles, topics, or software..."
+            value={searchTerm}
+            onChange={(e) => onSearchChange(e.target.value)}
+            icon={Search}
+            rightElement={
+              searchTerm ? (
+                <motion.button
+                  initial={{ opacity: 0, scale: 0.7 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.7 }}
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onSearchChange("");
+                  }}
+                  className="p-1 text-slate-400 hover:text-[#0F172A] rounded-full hover:bg-slate-200/60 transition-colors"
+                  title="Clear search"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </motion.button>
+              ) : null
+            }
+            className="h-11 sm:h-12 bg-slate-50/80 border-transparent hover:bg-slate-100/60 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-[#1D4ED8]/10 rounded-full text-sm text-[#0F172A] placeholder:text-slate-400 font-medium shadow-none transition-all duration-200"
           />
         </div>
 
-        {/* Softwares Dropdown Filter using shadcn/ui FormSelect */}
-        <div className="min-w-[160px] sm:min-w-[180px]">
-          <FormSelect
-            value={selectedSoftware}
-            onValueChange={(val) => val && onSoftwareSelect && onSoftwareSelect(val)}
-            options={softwares}
-            placeholder="Softwares"
-            className="rounded-full bg-white border-[#D1D5DB] hover:border-[#1D4ED8] text-[#0F172A] font-semibold text-xs sm:text-sm shadow-sm h-10 px-4"
-          />
+        {/* Divider line for desktop */}
+        <div className="hidden md:block h-7 w-px bg-slate-200 shrink-0" />
+
+        {/* Right: Interactive Dropdown Pill Selectors */}
+        <div className="flex flex-wrap items-center justify-center md:justify-end gap-2 w-full md:w-auto">
+          
+          {/* Category Dropdown */}
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="min-w-[130px] sm:min-w-[155px]"
+          >
+            <FormSelect
+              value={selectedCategory}
+              onValueChange={(val) => val && onCategorySelect(val)}
+              options={categoryOptions}
+              placeholder="Category"
+              icon={Filter}
+              className="rounded-full bg-slate-50/80 hover:bg-blue-50/80 border-transparent text-[#0F172A] font-semibold text-xs sm:text-sm h-11 px-3.5 shadow-none transition-all duration-200"
+            />
+          </motion.div>
+
+          {/* Software Dropdown */}
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="min-w-[130px] sm:min-w-[155px]"
+          >
+            <FormSelect
+              value={selectedSoftware}
+              onValueChange={(val) => val && onSoftwareSelect && onSoftwareSelect(val)}
+              options={softwares}
+              placeholder="Software"
+              icon={Layers}
+              className="rounded-full bg-slate-50/80 hover:bg-blue-50/80 border-transparent text-[#0F172A] font-semibold text-xs sm:text-sm h-11 px-3.5 shadow-none transition-all duration-200"
+            />
+          </motion.div>
+
+          {/* Author Dropdown */}
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="min-w-[130px] sm:min-w-[155px]"
+          >
+            <FormSelect
+              value={selectedAuthor}
+              onValueChange={(val) => val && onAuthorSelect && onAuthorSelect(val)}
+              options={authors}
+              placeholder="Author"
+              icon={User}
+              className="rounded-full bg-slate-50/80 hover:bg-blue-50/80 border-transparent text-[#0F172A] font-semibold text-xs sm:text-sm h-11 px-3.5 shadow-none transition-all duration-200"
+            />
+          </motion.div>
+
+          {/* Clear / Reset Pill Button with AnimatePresence */}
+          <AnimatePresence>
+            {hasActiveFilters && (
+              <motion.button
+                initial={{ opacity: 0, scale: 0.8, x: 8 }}
+                animate={{ opacity: 1, scale: 1, x: 0 }}
+                exit={{ opacity: 0, scale: 0.8, x: 8 }}
+                transition={{ duration: 0.2 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                type="button"
+                onClick={handleReset}
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1D4ED8] bg-blue-50 hover:bg-blue-100 border border-blue-200/60 px-3.5 py-2.5 rounded-full transition-all shrink-0 cursor-pointer shadow-2xs"
+                title="Reset all filters"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Reset</span>
+              </motion.button>
+            )}
+          </AnimatePresence>
+
         </div>
 
-        {/* Authors Dropdown Filter using shadcn/ui FormSelect */}
-        <div className="min-w-[160px] sm:min-w-[180px]">
-          <FormSelect
-            value={selectedAuthor}
-            onValueChange={(val) => val && onAuthorSelect && onAuthorSelect(val)}
-            options={authors}
-            placeholder="Authors"
-            className="rounded-full bg-white border-[#D1D5DB] hover:border-[#1D4ED8] text-[#0F172A] font-semibold text-xs sm:text-sm shadow-sm h-10 px-4"
-          />
-        </div>
-
-      </div>
+      </motion.div>
 
     </div>
   );
 }
+
+
+

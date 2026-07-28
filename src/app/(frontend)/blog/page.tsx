@@ -13,7 +13,7 @@ export default async function BlogPage() {
   const posts = await getBlogPosts();
 
   return (
-    <div className="flex flex-col min-h-screen bg-transparent py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+    <div className="flex flex-col min-h-screen bg-transparent px-4 sm:px-6 lg:px-8">
       <BlogHero />
       <BlogFeed initialPosts={posts} />
     </div>
