@@ -9,7 +9,7 @@ import IconWrapper from "@/components/common/IconWrapper";
 export interface BillingWorkflowStepCardProps {
   step: number;
   icon: LucideIcon;
-  title: string;
+  title?: string;
   description: string;
   className?: string;
 }
@@ -45,11 +45,18 @@ export default function BillingWorkflowStepCard({
           className="mb-5 transition-transform duration-300 group-hover:scale-105"
         />
 
-        <h3 className="text-base font-bold text-foreground mb-2 tracking-[-0.02em] leading-snug">
-          {title}
-        </h3>
+        {title ? (
+          <h3 className="mb-2 text-base font-bold leading-snug tracking-[-0.02em] text-foreground">
+            {title}
+          </h3>
+        ) : null}
 
-        <p className="text-xs sm:text-[13px] text-muted-foreground leading-[1.6]">
+        <p
+          className={cn(
+            "text-muted-foreground leading-[1.6]",
+            title ? "text-xs sm:text-[13px]" : "text-sm sm:text-[15px]"
+          )}
+        >
           {description}
         </p>
       </CardContent>
