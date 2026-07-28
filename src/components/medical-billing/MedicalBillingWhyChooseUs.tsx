@@ -30,7 +30,7 @@ export default function MedicalBillingWhyChooseUs({ data }: MedicalBillingWhyCho
                 <Card 
                   glass={false} 
                   hoverEffect="both" 
-                  className="h-full bg-white border border-[#E2E6EC] rounded-2xl sm:rounded-3xl p-6 sm:p-8 text-center shadow-[0_4px_24px_rgba(29,78,216,0.04)] hover:border-[#1D4ED8]/30 hover:shadow-lg transition-all duration-300 flex flex-col items-center justify-start group"
+                  className="h-full bg-white border border-[#E2E6EC] rounded-2xl sm:rounded-2xl p-6 sm:p-8 text-center shadow-[0_4px_24px_rgba(29,78,216,0.04)] hover:border-[#1D4ED8]/30 hover:shadow-lg transition-all duration-300 flex flex-col items-center justify-start group"
                 >
                   <CardContent className="p-0 flex flex-col items-center text-center">
                     <IconWrapper
@@ -59,7 +59,7 @@ export default function MedicalBillingWhyChooseUs({ data }: MedicalBillingWhyCho
           
           {/* Left Column: Consultants Laptop Image */}
           <MotionWrapper variant="slideLeft" className="lg:col-span-6 relative">
-            <div className="relative w-full h-[360px] sm:h-[460px] md:h-[500px] rounded-3xl overflow-hidden border border-[#E2E6EC] shadow-md group">
+            <div className="relative w-full h-[360px] sm:h-[460px] md:h-[500px] rounded-2xl overflow-hidden border border-[#E2E6EC] shadow-md group">
               <Image
                 src={whyData.imageSrc || "/consultants-laptop.png"}
                 alt="BellMedEx medical billing consultants reviewing practice analytics on laptop"

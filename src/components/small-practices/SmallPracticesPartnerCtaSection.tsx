@@ -32,7 +32,7 @@ export default function SmallPracticesPartnerCtaSection({ data }: SmallPractices
     >
       <div className={smallPracticeContainerClassName}>
         <MotionWrapper variant="scaleUp">
-          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0F172A] px-6 py-10 text-white shadow-lg sm:rounded-3xl sm:px-10 sm:py-12 lg:px-14 lg:py-16">
+          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0F172A] px-6 py-10 text-white shadow-lg sm:rounded-2xl sm:px-10 sm:py-12 lg:px-14 lg:py-16">
             <div
               className="pointer-events-none absolute -left-24 top-0 h-72 w-72 rounded-full bg-[#1D4ED8]/20 blur-3xl"
               aria-hidden="true"

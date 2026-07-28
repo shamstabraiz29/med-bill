@@ -80,7 +80,7 @@ export default function MedicalBillingCodingConsultants({ data }: MedicalBilling
                 aria-hidden="true"
               />
 
-              <div className="relative overflow-hidden rounded-3xl border border-[#E2E6EC] bg-white shadow-[0_8px_30px_rgba(29,78,216,0.08)]">
+              <div className="relative overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-[0_8px_30px_rgba(29,78,216,0.08)]">
                 <div className="relative aspect-[4/3] w-full sm:aspect-[5/4]">
                   <Image
                     src={codingData.imageSrc || "/consultants-laptop.png"}

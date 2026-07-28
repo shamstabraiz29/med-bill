@@ -23,7 +23,7 @@ export default function ElectronicHealthRecordsEhrIcd10Cta({ data }: ElectronicH
     >
       <div className={ehrContainerClassName}>
         <MotionWrapper variant="scaleUp">
-          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0F172A] p-8 text-white shadow-lg sm:rounded-3xl sm:p-10 lg:p-12">
+          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0F172A] p-8 text-white shadow-lg sm:rounded-2xl sm:p-10 lg:p-12">
             <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12">
               <div className="lg:col-span-7">
                 <div className="mb-4 flex flex-wrap items-center gap-3">

@@ -63,7 +63,7 @@ export default function OutsourceMedicalBillingHero({ data }: OutsourceMedicalBi
             <div className="relative mx-auto w-full max-w-xl lg:max-w-none">
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-0 overflow-hidden rounded-3xl"
+                className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl"
               >
                 <Image
                   src="/clearinghouse-nurse-hero.png"

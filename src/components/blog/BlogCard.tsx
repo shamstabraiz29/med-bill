@@ -49,9 +49,9 @@ export function BlogStyleCard({
     <MotionWrapper variant="scaleUp" className="h-full flex">
       <Link
         href={href}
-        className="group relative flex flex-col w-full bg-white border border-[#E2E6EC] rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 h-full text-left"
+        className="group relative flex flex-col w-full bg-white border border-[#E2E6EC] rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 h-full text-left"
       >
-        <div className="relative w-full h-52 sm:h-56 overflow-hidden rounded-t-3xl bg-slate-900">
+        <div className="relative w-full h-52 sm:h-56 overflow-hidden rounded-t-2xl bg-slate-900">
           <img
             src={imageSrc}
             alt={imageAlt}

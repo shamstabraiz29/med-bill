@@ -51,7 +51,7 @@ export default function MedicalCodingModernSolutions({ data }: MedicalCodingMode
                 aria-hidden="true"
               />
 
-              <div className="relative overflow-hidden rounded-3xl border border-border shadow-md">
+              <div className="relative overflow-hidden rounded-2xl border border-border shadow-md">
                 <div className="relative aspect-[5/4] min-h-[280px] sm:min-h-[340px]">
                   <Image
                     src={modernData.imageSrc || "/doctor-hero.png"}

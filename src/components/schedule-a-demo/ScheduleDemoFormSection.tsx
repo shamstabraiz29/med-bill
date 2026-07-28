@@ -102,7 +102,7 @@ export default function ScheduleDemoFormSection({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <MotionWrapper variant="scaleUp">
           {/* Main 2-Column Split Card Container (matching PricingUnlockForm) */}
-          <div className="bg-white rounded-3xl border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 overflow-hidden grid grid-cols-1 lg:grid-cols-12">
+          <div className="bg-white rounded-2xl border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 overflow-hidden grid grid-cols-1 lg:grid-cols-12">
             {/* Left Column: Solid #0F172A Value Proposition Spotlight */}
             <div className="lg:col-span-5 bg-[#0F172A] text-white p-8 sm:p-10 lg:p-12 flex flex-col justify-between relative overflow-hidden">
               <div className="relative space-y-6 sm:space-y-8 z-10">

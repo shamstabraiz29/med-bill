@@ -57,7 +57,8 @@ export default function BlogFilterBar({
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
         whileHover={{ y: -2, boxShadow: "0 18px 44px rgba(29, 78, 216, 0.1)" }}
-        className="w-full bg-white/95 backdrop-blur-xl border border-[#E2E6EC] rounded-full p-2 sm:p-2.5 shadow-[0_10px_30px_rgba(15,23,42,0.06)] transition-all duration-300 flex flex-col md:flex-row items-center gap-2 md:gap-3"
+        className="w-full bg-white/95 backdrop-blur-xl border border-[#E2E6EC] rounded-2xl p-2 sm:p-2.5 shadow-[0_10px_30px_rgba(15,23,42,0.06)] transition-all duration-300 flex flex-col md:flex-row items-center gap-2 md:gap-3"
+
       >
         
         {/* Left: Search Bar with Smooth Focus Ring Animation */}

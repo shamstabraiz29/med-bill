@@ -51,7 +51,7 @@ export default function PhysicianBillingServicesConsultationForm() {
   return (
     <div
       id="physician-billing-consultation-form"
-      className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0F172A] px-5 py-6 sm:rounded-3xl sm:px-8 sm:py-8"
+      className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0F172A] px-5 py-6 sm:rounded-2xl sm:px-8 sm:py-8"
     >
       <div
         aria-hidden="true"

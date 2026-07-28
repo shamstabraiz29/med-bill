@@ -26,7 +26,7 @@ export default function AboutWhyUs({ data }: AboutWhyUsProps) {
     <section className="relative w-full py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <MotionWrapper variant="scaleUp">
-          <div className="relative overflow-hidden rounded-3xl bg-[#0F172A] border border-white/10 text-white p-8 sm:p-12 lg:p-14 shadow-2xl">
+          <div className="relative overflow-hidden rounded-2xl bg-[#0F172A] border border-white/10 text-white p-8 sm:p-12 lg:p-14 shadow-2xl">
             
             {/* Ambient Lighting */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
@@ -71,7 +71,7 @@ export default function AboutWhyUs({ data }: AboutWhyUsProps) {
 
               {/* RIGHT COLUMN: Performance Impact Card */}
               <div className="lg:col-span-5 w-full">
-                <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 border border-white/15 p-6 sm:p-8 rounded-3xl shadow-2xl space-y-6">
+                <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 border border-white/15 p-6 sm:p-8 rounded-2xl shadow-2xl space-y-6">
                   
                   <div className="space-y-1">
                     <span className="text-[11px] font-extrabold uppercase tracking-wider text-sky-400">

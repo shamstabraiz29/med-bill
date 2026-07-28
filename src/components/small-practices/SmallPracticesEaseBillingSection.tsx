@@ -83,7 +83,7 @@ export default function SmallPracticesEaseBillingSection({ data }: SmallPractice
                 <Card
                   glass={false}
                   hoverEffect="both"
-                  className="group flex h-full flex-col items-center justify-start rounded-2xl border border-[#E2E6EC] bg-white p-6 text-center shadow-[0_4px_24px_rgba(29,78,216,0.04)] transition-all duration-300 hover:border-[#1D4ED8]/30 hover:shadow-lg sm:rounded-3xl sm:p-8"
+                  className="group flex h-full flex-col items-center justify-start rounded-2xl border border-[#E2E6EC] bg-white p-6 text-center shadow-[0_4px_24px_rgba(29,78,216,0.04)] transition-all duration-300 hover:border-[#1D4ED8]/30 hover:shadow-lg sm:rounded-2xl sm:p-8"
                 >
                   <CardContent className="flex flex-col items-center p-0 text-center">
                     <IconWrapper

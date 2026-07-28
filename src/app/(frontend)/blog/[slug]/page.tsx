@@ -90,7 +90,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </div>
 
         {/* Featured Image */}
-        <div className="relative aspect-[16/9] w-full rounded-3xl overflow-hidden shadow-lg border border-[#E2E6EC]">
+        <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden shadow-lg border border-[#E2E6EC]">
           <img
             src={post.imageSrc}
             alt={post.title}
@@ -133,7 +133,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </div>
 
         {/* Bottom Callout Banner */}
-        <div className="relative overflow-hidden rounded-3xl bg-[#0F172A] text-white p-8 sm:p-10 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6 my-12">
+        <div className="relative overflow-hidden rounded-2xl bg-[#0F172A] text-white p-8 sm:p-10 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6 my-12">
           <div className="space-y-2">
             <h3 className="text-xl font-bold text-white">Need Help Optimizing Your Practice Revenue?</h3>
             <p className="text-xs sm:text-sm text-indigo-200/70">

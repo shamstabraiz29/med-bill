@@ -42,7 +42,7 @@ export default function ClearinghouseEFTERA({ data }: ClearinghouseEFTERAProps) 
 
           {/* LEFT COLUMN: Laptop Software Showcase Visual */}
           <MotionWrapper variant="slideLeft" className="lg:col-span-5 w-full">
-            <div className="relative w-full max-w-lg mx-auto lg:mr-auto aspect-[4/3] rounded-3xl bg-white border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 p-3 sm:p-3.5 overflow-hidden group">
+            <div className="relative w-full max-w-lg mx-auto lg:mr-auto aspect-[4/3] rounded-2xl bg-white border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 p-3 sm:p-3.5 overflow-hidden group">
               
               <div className="relative w-full h-full rounded-2xl overflow-hidden bg-[#0F172A]">
                 {/* Laptop / Software Screen Image */}

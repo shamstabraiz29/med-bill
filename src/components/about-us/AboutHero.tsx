@@ -68,7 +68,7 @@ export default function AboutHero({ data }: AboutHeroProps) {
 
           {/* RIGHT COLUMN: Layered Visual Composite with Floating Glass Badges */}
           <MotionWrapper variant="slideRight" className="lg:col-span-5 w-full">
-            <div className="relative w-full aspect-[4/5] sm:aspect-[1/1] lg:aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border border-[#E2E6EC] bg-slate-900 group">
+            <div className="relative w-full aspect-[4/5] sm:aspect-[1/1] lg:aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl border border-[#E2E6EC] bg-slate-900 group">
               
               {/* Doctor / Team Image */}
               <img

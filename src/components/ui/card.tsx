@@ -12,7 +12,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       <div
         ref={ref}
         className={cn(
-          "rounded-3xl transition-all duration-500 overflow-hidden relative group",
+          "rounded-2xl transition-all duration-500 overflow-hidden relative group",
           glass && "bg-white/70 dark:bg-slate-900/60 backdrop-blur-xl border border-white/50 dark:border-white/5 shadow-[0_8px_30px_rgba(30,27,75,0.03)]",
           !glass && "bg-card text-card-foreground border border-border shadow-sm",
           hoverEffect === "translate" && "hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(30,27,75,0.06)] cursor-pointer",

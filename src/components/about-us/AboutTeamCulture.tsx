@@ -62,7 +62,7 @@ export default function AboutTeamCulture() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {leaders.map((member, idx) => (
             <MotionWrapper key={idx} variant="scaleUp" delay={idx * 0.06}>
-              <div className="group bg-white border border-[#E2E6EC] rounded-3xl overflow-hidden shadow-xs hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between h-full text-left">
+              <div className="group bg-white border border-[#E2E6EC] rounded-2xl overflow-hidden shadow-xs hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between h-full text-left">
                 
                 {/* Photo Header */}
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-900">

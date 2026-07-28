@@ -62,7 +62,7 @@ export default function HealthcareSeoPricingUnlockCTA({ data }: HealthcareSeoPri
         
         {/* Floating Rounded Dark Container Box */}
         <MotionWrapper variant="scaleUp">
-          <div className="relative overflow-hidden rounded-3xl bg-[#0F172A] border border-white/10 text-white p-8 sm:p-12 lg:p-14 shadow-2xl">
+          <div className="relative overflow-hidden rounded-2xl bg-[#0F172A] border border-white/10 text-white p-8 sm:p-12 lg:p-14 shadow-2xl">
             
             {/* Ambient Pattern Grid */}
             <div className="absolute inset-0 bg-[radial-gradient(#1D4ED8_1px,transparent_1px)] [background-size:24px_24px] opacity-10 pointer-events-none" />
@@ -88,7 +88,7 @@ export default function HealthcareSeoPricingUnlockCTA({ data }: HealthcareSeoPri
 
               {/* RIGHT COLUMN: Request Form Card */}
               <div className="lg:col-span-6 w-full">
-                <div className="relative overflow-hidden rounded-3xl bg-white/[0.03] border border-white/10 p-6 sm:p-8 md:p-10 shadow-lg flex flex-col gap-6 w-full text-left backdrop-blur-md">
+                <div className="relative overflow-hidden rounded-2xl bg-white/[0.03] border border-white/10 p-6 sm:p-8 md:p-10 shadow-lg flex flex-col gap-6 w-full text-left backdrop-blur-md">
                   
                   {/* Form Title & Subtitle */}
                   <div className="text-left space-y-1.5">

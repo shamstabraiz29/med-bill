@@ -79,7 +79,7 @@ export default function MedicalBillingAuditSolutionsToDate({ data }: MedicalBill
           <Card
             glass={false}
             hoverEffect="none"
-            className="overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-sm transition-all duration-300 hover:border-primary/20 hover:shadow-lg hover:shadow-primary/5 sm:rounded-3xl"
+            className="overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-sm transition-all duration-300 hover:border-primary/20 hover:shadow-lg hover:shadow-primary/5 sm:rounded-2xl"
           >
             <CardContent className="grid grid-cols-1 lg:grid-cols-2 lg:items-stretch p-0">
               <div className="flex flex-col justify-center gap-5 bg-[#F5F7FA] p-6 sm:gap-6 sm:p-8 lg:p-10">

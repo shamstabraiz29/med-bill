@@ -58,7 +58,7 @@ export default function MedicalBillingSoftwareSignUpCta({ data }: MedicalBilling
     >
       <div className={softwareContainerClassName}>
         <MotionWrapper variant="scaleUp">
-          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0F172A] p-8 text-white shadow-lg sm:rounded-3xl sm:p-10 lg:p-12">
+          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0F172A] p-8 text-white shadow-lg sm:rounded-2xl sm:p-10 lg:p-12">
             <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
               <h2
                 id="medical-billing-software-signup-cta-heading"

@@ -149,7 +149,8 @@ export default function CareersApplicationForm({ data }: CareersApplicationFormP
         <MotionWrapper variant="scaleUp">
           
           {/* Main 2-Column Split Card Container (matching ContactFormSection & PricingUnlockForm) */}
-          <div className="bg-white rounded-3xl border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 overflow-hidden grid grid-cols-1 lg:grid-cols-12">
+          <div className="bg-white rounded-2xl border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 overflow-hidden grid grid-cols-1 lg:grid-cols-12">
+
             
             {/* Left Column: Solid #0F172A Spotlight Panel */}
             <div className="lg:col-span-5 bg-[#0F172A] text-white p-8 sm:p-10 lg:p-12 flex flex-col justify-between relative overflow-hidden">

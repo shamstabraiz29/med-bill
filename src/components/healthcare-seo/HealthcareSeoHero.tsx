@@ -69,7 +69,7 @@ export default function HealthcareSeoHero({ data }: HealthcareSeoHeroProps) {
 
           {/* LEFT FLANK: Digital Marketing Specialist Illustration Frame */}
           <MotionWrapper variant="slideLeft" className="hidden lg:block lg:col-span-3">
-            <div className="relative w-full max-w-[280px] aspect-[3/4] mx-auto rounded-3xl bg-white border border-[#E2E6EC] shadow-xl p-3 overflow-hidden group">
+            <div className="relative w-full max-w-[280px] aspect-[3/4] mx-auto rounded-2xl bg-white border border-[#E2E6EC] shadow-xl p-3 overflow-hidden group">
               <div className="relative w-full h-full rounded-2xl overflow-hidden bg-gradient-to-b from-blue-900 to-slate-900">
                 <Image
                   src={content.leftImageSrc || "/consultants-laptop.png"}
@@ -133,7 +133,7 @@ export default function HealthcareSeoHero({ data }: HealthcareSeoHeroProps) {
 
             {/* Interactive Free Proposal Audit Form */}
             <MotionWrapper variant="scaleUp" delay={0.1} className="w-full max-w-xl">
-              <div className="bg-white border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 rounded-3xl p-6 sm:p-8 text-left">
+              <div className="bg-white border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 rounded-2xl p-6 sm:p-8 text-left">
                 
                 {submitted ? (
                   <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 p-6 rounded-2xl text-center space-y-2">
@@ -247,7 +247,7 @@ export default function HealthcareSeoHero({ data }: HealthcareSeoHeroProps) {
 
           {/* RIGHT FLANK: Female Doctor Visual Illustration Frame */}
           <MotionWrapper variant="slideRight" className="hidden lg:block lg:col-span-3">
-            <div className="relative w-full max-w-[280px] aspect-[3/4] mx-auto rounded-3xl bg-white border border-[#E2E6EC] shadow-xl p-3 overflow-hidden group">
+            <div className="relative w-full max-w-[280px] aspect-[3/4] mx-auto rounded-2xl bg-white border border-[#E2E6EC] shadow-xl p-3 overflow-hidden group">
               <div className="relative w-full h-full rounded-2xl overflow-hidden bg-gradient-to-b from-blue-950 to-slate-900">
                 <Image
                   src={content.rightImageSrc || "/clearinghouse-nurse-hero.png"}

@@ -190,7 +190,7 @@ export default function ProviderCredentialingHero({ data }: ProviderCredentialin
           {/* RIGHT COLUMN: Doctor Visual Card */}
           <div className="lg:col-span-5 relative flex justify-center items-center">
             <MotionWrapper variant="scaleUp" delay={0.2} className="w-full">
-              <div className="relative w-full max-w-[460px] aspect-[4/5] mx-auto rounded-3xl bg-white border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 p-3 overflow-hidden group">
+              <div className="relative w-full max-w-[460px] aspect-[4/5] mx-auto rounded-2xl bg-white border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 p-3 overflow-hidden group">
                 
                 <div className="relative w-full h-full rounded-2xl overflow-hidden bg-slate-900">
                   <Image

@@ -86,7 +86,7 @@ export default function ClearinghouseHero({ data }: ClearinghouseHeroProps) {
               <div className="relative w-full max-w-[480px] aspect-square mx-auto flex items-center justify-center">
 
                 {/* Main Static Outer Frame */}
-                <div className="relative w-[90%] h-[90%] rounded-3xl bg-gradient-to-tr from-blue-50/80 via-slate-50 to-indigo-50/80 border border-[#E2E6EC] shadow-xl shadow-blue-900/5 overflow-hidden flex items-end justify-center">
+                <div className="relative w-[90%] h-[90%] rounded-2xl bg-gradient-to-tr from-blue-50/80 via-slate-50 to-indigo-50/80 border border-[#E2E6EC] shadow-xl shadow-blue-900/5 overflow-hidden flex items-end justify-center">
                   <div className="absolute inset-0 bg-[radial-gradient(#1D4ED8_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.06]" />
 
                   <Image

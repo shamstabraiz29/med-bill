@@ -53,7 +53,7 @@ export default function HealthcareSeoExpertise({ data }: HealthcareSeoExpertiseP
 
         {/* Lower Showcase Card Container */}
         <MotionWrapper variant="scaleUp">
-          <Card className="group relative flex flex-col lg:flex-row items-center justify-between w-full bg-slate-50/70 border border-[#E2E6EC] rounded-3xl p-8 sm:p-12 shadow-lg hover:shadow-xl transition-all duration-300 gap-8 lg:gap-12 text-left">
+          <Card className="group relative flex flex-col lg:flex-row items-center justify-between w-full bg-slate-50/70 border border-[#E2E6EC] rounded-2xl p-8 sm:p-12 shadow-lg hover:shadow-xl transition-all duration-300 gap-8 lg:gap-12 text-left">
             <CardContent className="p-0 flex flex-col lg:flex-row items-center justify-between w-full gap-8 lg:gap-12">
               
               {/* LEFT: 4 Value-Proposition Feature Boxes (Horizontal Row) */}

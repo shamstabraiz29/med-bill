@@ -112,7 +112,7 @@ export default function ProviderChallengesSection({ data }: ProviderChallengesSe
 
           {/* Right Column: Request Form Card */}
           <MotionWrapper variant="slideRight" className="lg:col-span-5 w-full">
-            <div className="relative overflow-hidden rounded-3xl bg-white/[0.02] border border-white/5 p-6 sm:p-8 md:p-10 shadow-lg flex flex-col gap-6 w-full">
+            <div className="relative overflow-hidden rounded-2xl bg-white/[0.02] border border-white/5 p-6 sm:p-8 md:p-10 shadow-lg flex flex-col gap-6 w-full">
               <div className="text-left space-y-1.5">
                 <h3 className="text-lg font-bold text-white tracking-tight">
                   {data.formTitle}
