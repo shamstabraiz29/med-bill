@@ -60,6 +60,7 @@ export default function Footer() {
     });
   };
 
+  // 1:1 Matching with Header Navigation Config
   const services = [
     { name: "Medical Billing", href: "/medical-billing" },
     { name: "Medical Coding", href: "/medical-coding" },
@@ -70,22 +71,30 @@ export default function Footer() {
     { name: "Healthcare SEO", href: "/healthcare-seo" },
   ];
 
-  const quickLinks = [
-    { name: "About Us", href: "/about-bellmedex" },
-    { name: "Schedule a Demo", href: "/schedule-a-demo" },
-    { name: "Client Testimonials", href: "/bellmedex-client-testimonials" },
-    { name: "Pricing Plans", href: "/medical-billing-pricing-bellmedex" },
-    { name: "Careers", href: "/bellmedex-careers" },
-    { name: "Contact Us", href: "/contact-bellmedex" },
-  ];
-
-  const resources = [
-    { name: "Industry Blogs", href: "/blogs" },
-    { name: "Free EHR System", href: "/electronic-health-records-ehr" },
-    { name: "Free PMS Software", href: "/practice-management-software-pms" },
+  const software = [
     { name: "Billing Software", href: "/medical-billing-software" },
     { name: "FusionEDI Gateway", href: "/fusionedi-clearinghouse" },
-    { name: "eBooks & Guides", href: "/ebooks" },
+    { name: "Free EHR System", href: "/electronic-health-records-ehr" },
+    { name: "Free PMS Software", href: "/practice-management-software-pms" },
+  ];
+
+  const solutions = [
+    { name: "Outsource Billing", href: "/outsource-medical-billing" },
+    { name: "Small Practices", href: "/small-practices" },
+    { name: "Large Practices", href: "/large-practices" },
+    { name: "Denial Management", href: "/denial-management-services" },
+    { name: "Physician Billing", href: "/physician-billing-services" },
+    { name: "Hospital Billing", href: "/hospital-billing-services" },
+  ];
+
+  const companyAndResources = [
+    { name: "About Us", href: "/about-us" },
+    { name: "Pricing Plans", href: "/medical-billing-pricing-bellmedex" },
+    { name: "Schedule a Demo", href: "/schedule-a-demo" },
+    { name: "Industry Blogs", href: "/blogs" },
+    { name: "Careers", href: "/bellmedex-careers" },
+    { name: "Client Testimonials", href: "/bellmedex-client-testimonials" },
+    { name: "Contact Us", href: "/contact-us" },
   ];
 
   const socialLinks = [
@@ -101,10 +110,10 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto">
         
         {/* ── 1. MULTI-COLUMN MAIN FOOTER CONTENT ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-16 border-b border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-6 pb-16 border-b border-white/10">
           
-          {/* Brand & Trust Section (lg:col-span-4) */}
-          <div className="lg:col-span-4 flex flex-col gap-6">
+          {/* Brand & Trust Section (lg:col-span-3) */}
+          <div className="lg:col-span-3 flex flex-col gap-6">
             <Link href="/" className="inline-flex items-center gap-3 group w-fit">
               <div className="relative flex items-center justify-center w-10 h-10 bg-[#1D4ED8] rounded-xl text-white shadow-sm transition-colors duration-200 group-hover:bg-blue-600">
                 <Activity className="w-5 h-5 animate-pulse" />
@@ -159,9 +168,9 @@ export default function Footer() {
 
           {/* Services Column (lg:col-span-2) */}
           <div className="lg:col-span-2 flex flex-col gap-4">
-            <h4 className="text-xs font-bold tracking-wider text-slate-400 uppercase">
+            <Link href="/services" className="text-xs font-bold tracking-wider text-slate-400 uppercase hover:text-white transition-colors w-fit">
               Services
-            </h4>
+            </Link>
             <ul className="flex flex-col gap-2.5">
               {services.map((item) => (
                 <li key={item.name}>
@@ -177,33 +186,54 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Quick Links Column (lg:col-span-2) */}
-          <div className="lg:col-span-2 flex flex-col gap-4">
-            <h4 className="text-xs font-bold tracking-wider text-slate-400 uppercase">
-              Quick Links
-            </h4>
-            <ul className="flex flex-col gap-2.5">
-              {quickLinks.map((item) => (
-                <li key={item.name}>
-                  <Link
-                    href={item.href}
-                    className="text-[14px] font-medium text-slate-300 hover:text-white transition-colors inline-flex items-center gap-1 group/link"
-                  >
-                    <ChevronRight className="w-3 h-3 text-slate-500 group-hover/link:text-blue-400 group-hover/link:translate-x-0.5 transition-all" />
-                    <span>{item.name}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          {/* Software & Solutions Column (lg:col-span-2) */}
+          <div className="lg:col-span-2 flex flex-col gap-5">
+            <div className="flex flex-col gap-3">
+              <Link href="/medical-billing-software" className="text-xs font-bold tracking-wider text-slate-400 uppercase hover:text-white transition-colors w-fit">
+                Software
+              </Link>
+              <ul className="flex flex-col gap-2">
+                {software.map((item) => (
+                  <li key={item.name}>
+                    <Link
+                      href={item.href}
+                      className="text-[13px] sm:text-[14px] font-medium text-slate-300 hover:text-white transition-colors inline-flex items-center gap-1 group/link"
+                    >
+                      <ChevronRight className="w-3 h-3 text-slate-500 group-hover/link:text-blue-400 group-hover/link:translate-x-0.5 transition-all" />
+                      <span>{item.name}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="flex flex-col gap-2.5 pt-1">
+              <Link href="/outsource-medical-billing" className="text-xs font-bold tracking-wider text-slate-400 uppercase hover:text-white transition-colors w-fit">
+                Solutions
+              </Link>
+              <ul className="flex flex-col gap-2">
+                {solutions.slice(0, 3).map((item) => (
+                  <li key={item.name}>
+                    <Link
+                      href={item.href}
+                      className="text-[13px] sm:text-[14px] font-medium text-slate-300 hover:text-white transition-colors inline-flex items-center gap-1 group/link"
+                    >
+                      <ChevronRight className="w-3 h-3 text-slate-500 group-hover/link:text-blue-400 group-hover/link:translate-x-0.5 transition-all" />
+                      <span>{item.name}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
-          {/* Resources Column (lg:col-span-2) */}
+          {/* Company & Resources Column (lg:col-span-2) */}
           <div className="lg:col-span-2 flex flex-col gap-4">
-            <h4 className="text-xs font-bold tracking-wider text-slate-400 uppercase">
+            <Link href="/about-us" className="text-xs font-bold tracking-wider text-slate-400 uppercase hover:text-white transition-colors w-fit">
               Resources
-            </h4>
+            </Link>
             <ul className="flex flex-col gap-2.5">
-              {resources.map((item) => (
+              {companyAndResources.map((item) => (
                 <li key={item.name}>
                   <Link
                     href={item.href}
@@ -217,14 +247,14 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact Information Column (lg:col-span-2) */}
-          <div className="lg:col-span-2 flex flex-col gap-4">
-            <h4 className="text-xs font-bold tracking-wider text-slate-400 uppercase">
+          {/* Contact Information Column (lg:col-span-3) */}
+          <div className="lg:col-span-3 flex flex-col gap-4">
+            <Link href="/contact-us" className="text-xs font-bold tracking-wider text-slate-400 uppercase hover:text-white transition-colors w-fit">
               Contact Us
-            </h4>
+            </Link>
             <address className="not-italic flex flex-col gap-3.5 text-xs text-slate-300">
               <a
-                href="tel:18005550199"
+                href="tel:8885002455"
                 className="flex items-start gap-2.5 group hover:text-white transition-colors"
                 aria-label="Phone number"
               >
@@ -232,13 +262,13 @@ export default function Footer() {
                   <Phone className="w-3.5 h-3.5" />
                 </div>
                 <div>
-                  <span className="font-semibold text-white block group-hover:text-blue-400 transition-colors">Phone</span>
-                  <span className="text-slate-300">+1 (800) 555-0199</span>
+                  <span className="font-semibold text-white block group-hover:text-blue-400 transition-colors">Toll-Free Phone</span>
+                  <span className="text-slate-300">(888) 500-BILL / (888) 500-2455</span>
                 </div>
               </a>
 
               <a
-                href="mailto:support@bellmedex.com"
+                href="mailto:info@bellmedex.com"
                 className="flex items-start gap-2.5 group hover:text-white transition-colors"
                 aria-label="Email address"
               >
@@ -246,8 +276,8 @@ export default function Footer() {
                   <Mail className="w-3.5 h-3.5" />
                 </div>
                 <div>
-                  <span className="font-semibold text-white block group-hover:text-blue-400 transition-colors">Email</span>
-                  <span className="text-slate-300">support@bellmedex.com</span>
+                  <span className="font-semibold text-white block group-hover:text-blue-400 transition-colors">Email Support</span>
+                  <span className="text-slate-300">info@bellmedex.com</span>
                 </div>
               </a>
 
@@ -256,8 +286,8 @@ export default function Footer() {
                   <MapPin className="w-3.5 h-3.5" />
                 </div>
                 <div>
-                  <span className="font-semibold text-white block">Office</span>
-                  <span className="leading-tight block text-slate-400">100 E Campus View Blvd, Ste 250, Columbus, OH 43235</span>
+                  <span className="font-semibold text-white block">Corporate HQ</span>
+                  <span className="leading-tight block text-slate-400">100 N Howard St, Ste R, Spokane, WA 99201, USA</span>
                 </div>
               </div>
 
@@ -267,7 +297,7 @@ export default function Footer() {
                 </div>
                 <div>
                   <span className="font-semibold text-white block">Business Hours</span>
-                  <span className="text-slate-400">Mon - Fri: 8:00 AM - 7:00 PM EST</span>
+                  <span className="text-slate-400">Mon - Fri: 8:00 AM - 6:00 PM EST</span>
                 </div>
               </div>
             </address>

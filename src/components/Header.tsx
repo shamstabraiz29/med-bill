@@ -86,7 +86,6 @@ export default function Header() {
       items: [
         { name: "Blogs", desc: "Industry insights and billing best practices.", href: "/blogs", icon: BookOpen },
         { name: "Careers", desc: "Join our team of billing experts.", href: "/bellmedex-careers", icon: Briefcase },
-        { name: "eBooks", desc: "Comprehensive guides to RCM and compliance.", href: "/ebooks", icon: Download },
         { name: "Testimonials", desc: "What our clients say about BellMedEx.", href: "/bellmedex-client-testimonials", icon: Star },
       ],
     },
