@@ -19,7 +19,7 @@ export default function PhysicianBillingServicesHeroHeader({
       className="flex flex-col space-y-6 text-left"
     >
       <motion.div variants={springPopVariants}>
-        <SectionBadge variant="blue" pulse>
+        <SectionBadge variant="indigo" pulse>
           Physician Billing Services.
         </SectionBadge>
       </motion.div>
@@ -30,7 +30,7 @@ export default function PhysicianBillingServicesHeroHeader({
         className="max-w-2xl text-3xl font-bold leading-[1.18] tracking-[-0.02em] text-[#0F172A] sm:text-4xl lg:text-5xl"
       >
         Physician{" "}
-        <span className="text-[#1D4ED8]">Billing Services</span>
+        <span className="text-blue-600">Billing Services</span>
       </motion.h1>
 
       <motion.p

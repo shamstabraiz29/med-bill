@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
-import { PhysicianBillingServicesHero } from "@/components/physician-billing-services";
+import {
+  PhysicianBillingServicesDemoCta,
+  PhysicianBillingServicesExploreFeatures,
+  PhysicianBillingServicesHero,
+  PhysicianBillingServicesMipsSection,
+  PhysicianBillingServicesSplitSections,
+} from "@/components/physician-billing-services";
 
 export const metadata: Metadata = {
   title: "Physician Billing Services | BellMedEx",
@@ -11,6 +17,10 @@ export default function PhysicianBillingServicesPage() {
   return (
     <div className="relative min-h-screen">
       <PhysicianBillingServicesHero />
+      <PhysicianBillingServicesSplitSections />
+      <PhysicianBillingServicesMipsSection />
+      <PhysicianBillingServicesExploreFeatures />
+      <PhysicianBillingServicesDemoCta />
     </div>
   );
 }
