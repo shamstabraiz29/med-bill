@@ -22,7 +22,7 @@ export default function PracticeManagementSoftwarePmsSpecialtyCta({ data }: Prac
     >
       <div className={pmsContainerClassName}>
         <MotionWrapper variant="scaleUp">
-          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0F172A] p-8 text-white shadow-lg sm:rounded-3xl sm:p-10 lg:p-12">
+          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0F172A] p-8 text-white shadow-lg sm:rounded-2xl sm:p-10 lg:p-12">
             <div
               aria-hidden="true"
               className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(29,78,216,0.18),transparent_42%),radial-gradient(circle_at_80%_80%,rgba(96,165,250,0.1),transparent_40%)]"

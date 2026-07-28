@@ -8,8 +8,25 @@ import {
   smallPracticeContainerClassName,
   smallPracticeSectionAltClassName,
 } from "./smallPracticeSectionLayout";
+import type { SmallPracticesPageData } from "@/payload/types/smallPractices";
 
-export default function SmallPracticesTransparencySection() {
+interface SmallPracticesTransparencySectionProps {
+  data?: SmallPracticesPageData["transparency"];
+}
+
+export default function SmallPracticesTransparencySection({ data }: SmallPracticesTransparencySectionProps) {
+  const titlePlain = data?.titlePlain ?? "100% Transparency ";
+  const titleHighlight = data?.titleHighlight ?? "and No Hidden Fees";
+  const description =
+    data?.description ??
+    "We offer high-end services for your small practice. Our team at BellMedEx believes in clear communication and making informed decisions to ensure efficiency in all areas of our billing services.";
+  const ctaText = data?.ctaText ?? "Schedule a Demo";
+  const ctaHref = data?.ctaHref ?? "/schedule-a-demo";
+  const imageSrc = data?.imageSrc ?? "/rcm-dashboard-laptop1.png";
+  const imageAlt =
+    data?.imageAlt ??
+    "Healthcare professional reviewing transparent medical billing reports on a tablet";
+
   return (
     <section
       className={smallPracticeSectionAltClassName}
@@ -20,8 +37,8 @@ export default function SmallPracticesTransparencySection() {
           <MotionWrapper variant="slideLeft" className="w-full lg:col-span-6">
             <div className="group relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-[0_8px_30px_rgba(29,78,216,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#1D4ED8]/30 hover:shadow-xl hover:shadow-blue-900/10 sm:aspect-16/11">
               <Image
-                src="/rcm-dashboard-laptop1.png"
-                alt="Healthcare professional reviewing transparent medical billing reports on a tablet"
+                src={imageSrc}
+                alt={imageAlt}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -38,18 +55,16 @@ export default function SmallPracticesTransparencySection() {
               id="small-practices-transparency-heading"
               className="max-w-2xl text-2xl font-bold leading-[1.18] tracking-[-0.02em] text-[#0F172A] sm:text-3xl lg:text-4xl"
             >
-              100% Transparency{" "}
-              <span className="text-blue-600">and No Hidden Fees</span>
+              {titlePlain}
+              <span className="text-blue-600">{titleHighlight}</span>
             </h2>
 
             <p className="max-w-2xl text-sm leading-[1.65] text-[#475569] sm:text-base">
-              We offer high-end services for your small practice. Our team at BellMedEx believes in
-              clear communication and making informed decisions to ensure efficiency in all areas of
-              our billing services.
+              {description}
             </p>
 
-            <AppButton href="/schedule-a-demo" variant="primary" size="lg" showArrow>
-              Schedule a Demo
+            <AppButton href={ctaHref} variant="primary" size="lg" showArrow>
+              {ctaText}
             </AppButton>
           </MotionWrapper>
         </div>

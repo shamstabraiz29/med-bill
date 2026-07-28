@@ -29,7 +29,7 @@ export default function PracticeManagementSoftwarePmsAbout({ data }: PracticeMan
           <Card
             glass={false}
             hoverEffect="none"
-            className="overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-sm transition-all duration-300 hover:border-[#1D4ED8]/20 hover:shadow-lg hover:shadow-blue-900/5 sm:rounded-3xl"
+            className="overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-sm transition-all duration-300 hover:border-[#1D4ED8]/20 hover:shadow-lg hover:shadow-blue-900/5 sm:rounded-2xl"
           >
             <CardContent className="grid grid-cols-1 p-0 lg:grid-cols-2 lg:items-stretch">
               <div className="relative min-h-[260px] sm:min-h-[320px] lg:min-h-[420px]">

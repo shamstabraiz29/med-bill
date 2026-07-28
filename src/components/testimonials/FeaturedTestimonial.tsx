@@ -19,7 +19,7 @@ export default function FeaturedTestimonial({ data }: FeaturedTestimonialProps) 
     <section className="relative w-full py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <MotionWrapper variant="scaleUp">
-          <div className="relative overflow-hidden rounded-3xl bg-[#0F172A] border border-white/10 text-white p-8 sm:p-12 lg:p-16 shadow-2xl">
+          <div className="relative overflow-hidden rounded-2xl bg-[#0F172A] border border-white/10 text-white p-8 sm:p-12 lg:p-16 shadow-2xl">
             
             {/* Ambient Radial Gradient Lighting */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
@@ -84,7 +84,7 @@ export default function FeaturedTestimonial({ data }: FeaturedTestimonialProps) 
                   <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-sky-500/20 via-indigo-500/30 to-blue-600/20 blur-xl animate-pulse" />
                   
                   {/* Photo Container */}
-                  <div className="relative w-full h-full rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl bg-slate-900">
+                  <div className="relative w-full h-full rounded-2xl overflow-hidden border-2 border-white/20 shadow-2xl bg-slate-900">
                     <img
                       src={content.authorImageSrc || "https://images.unsplash.com/photo-1594824813566-88855ce7890b?q=80&w=800&auto=format&fit=crop"}
                       alt={content.authorName}

@@ -118,7 +118,7 @@ export default function ConsultationSection({ data }: ConsultationSectionProps) 
 
           {/* Right Column: Schedule Form Card */}
           <MotionWrapper variant="slideRight" className="lg:col-span-5 w-full">
-            <div className="relative overflow-hidden rounded-3xl bg-white border border-[#E2E6EC] p-6 sm:p-8 md:p-9 shadow-[0_8px_30px_rgba(29,78,216,0.06)] flex flex-col gap-6 w-full">
+            <div className="relative overflow-hidden rounded-2xl bg-white border border-[#E2E6EC] p-6 sm:p-8 md:p-9 shadow-[0_8px_30px_rgba(29,78,216,0.06)] flex flex-col gap-6 w-full">
               
               {/* Header inside Form Card */}
               <div className="text-left space-y-1.5 pb-2 border-b border-[#E2E6EC]">

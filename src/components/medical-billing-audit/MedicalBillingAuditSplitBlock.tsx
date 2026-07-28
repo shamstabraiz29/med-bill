@@ -30,7 +30,7 @@ export default function MedicalBillingAuditSplitBlock({
     <Card
       glass={false}
       hoverEffect="none"
-      className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all duration-300 hover:border-primary/20 hover:shadow-lg hover:shadow-primary/5 sm:rounded-3xl"
+      className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all duration-300 hover:border-primary/20 hover:shadow-lg hover:shadow-primary/5 sm:rounded-2xl"
     >
       <CardContent className="grid grid-cols-1 lg:grid-cols-2 lg:items-stretch p-0">
         <div

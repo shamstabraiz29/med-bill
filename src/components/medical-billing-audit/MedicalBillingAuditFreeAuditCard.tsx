@@ -18,7 +18,7 @@ export default function MedicalBillingAuditFreeAuditCard({
       glass={false}
       hoverEffect="both"
       className={cn(
-        "group relative h-full overflow-hidden rounded-2xl border border-white/10 bg-[#0F172A] text-white shadow-[0_4px_24px_rgba(29,78,216,0.08)] transition-all duration-300 hover:border-[#1D4ED8]/40 hover:shadow-lg sm:rounded-3xl",
+        "group relative h-full overflow-hidden rounded-2xl border border-white/10 bg-[#0F172A] text-white shadow-[0_4px_24px_rgba(29,78,216,0.08)] transition-all duration-300 hover:border-[#1D4ED8]/40 hover:shadow-lg sm:rounded-2xl",
         className
       )}
     >

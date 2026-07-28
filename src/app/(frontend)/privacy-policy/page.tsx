@@ -54,7 +54,7 @@ export default async function PrivacyPolicyPage() {
       <section className="py-10 sm:py-16 bg-transparent">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <MotionWrapper variant="scaleUp">
-            <div className="bg-white border border-[#E2E6EC] rounded-3xl p-6 sm:p-10 lg:p-12 shadow-md shadow-blue-900/5 text-left space-y-8">
+            <div className="bg-white border border-[#E2E6EC] rounded-2xl p-6 sm:p-10 lg:p-12 shadow-md shadow-blue-900/5 text-left space-y-8">
               
               {/* Highlight Box */}
               <div className="p-4 sm:p-5 rounded-2xl bg-[#F8FAFC] border border-[#E2E6EC] flex items-start gap-3.5">

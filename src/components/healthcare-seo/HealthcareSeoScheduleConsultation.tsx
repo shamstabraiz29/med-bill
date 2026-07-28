@@ -74,7 +74,7 @@ export default function HealthcareSeoScheduleConsultation({ data }: HealthcareSe
             </div>
 
             {submitted ? (
-              <div className="bg-emerald-50 border border-emerald-200 text-emerald-900 p-8 rounded-3xl text-center space-y-3 shadow-sm">
+              <div className="bg-emerald-50 border border-emerald-200 text-emerald-900 p-8 rounded-2xl text-center space-y-3 shadow-sm">
                 <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
                 <h3 className="text-xl font-bold">{content.successTitle}</h3>
                 <p className="text-sm text-emerald-800">
@@ -168,7 +168,7 @@ export default function HealthcareSeoScheduleConsultation({ data }: HealthcareSe
 
           {/* RIGHT COLUMN: Professional Healthcare Consultation Image Card */}
           <MotionWrapper variant="slideRight" className="lg:col-span-6 w-full">
-            <div className="relative rounded-3xl overflow-hidden border border-[#E2E6EC] shadow-xl group aspect-[4/3] sm:aspect-[16/11] flex items-center justify-center">
+            <div className="relative rounded-2xl overflow-hidden border border-[#E2E6EC] shadow-xl group aspect-[4/3] sm:aspect-[16/11] flex items-center justify-center">
               
               {/* Background Medical Consultation Image */}
               <img

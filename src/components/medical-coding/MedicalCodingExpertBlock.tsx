@@ -35,7 +35,7 @@ export default function MedicalCodingExpertBlock({
         glass={false}
         hoverEffect="none"
         className={cn(
-          "overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-[0_4px_24px_rgba(29,78,216,0.04)] transition-all duration-300 hover:border-[#1D4ED8]/20 hover:shadow-lg sm:rounded-3xl",
+          "overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-[0_4px_24px_rgba(29,78,216,0.04)] transition-all duration-300 hover:border-[#1D4ED8]/20 hover:shadow-lg sm:rounded-2xl",
           className
         )}
       >

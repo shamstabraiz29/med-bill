@@ -65,7 +65,7 @@ export default function BillingConsultancyFeatureBlock({
         <Card
           glass={false}
           hoverEffect="none"
-          className="overflow-hidden rounded-2xl border border-border bg-card shadow-none sm:rounded-3xl"
+          className="overflow-hidden rounded-2xl border border-border bg-card shadow-none sm:rounded-2xl"
         >
           <CardContent className="relative p-0">
             <div className="relative aspect-[4/3] w-full overflow-hidden sm:aspect-[5/4]">

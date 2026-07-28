@@ -58,7 +58,7 @@ export default function HealthcareSeoServicesList({ data }: HealthcareSeoService
 
             return (
               <MotionWrapper key={item.id} variant="blurReveal" delay={idx * 0.08}>
-                <div className="grid grid-cols-1 md:grid-cols-12 rounded-3xl border border-[#E2E6EC] bg-white overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                <div className="grid grid-cols-1 md:grid-cols-12 rounded-2xl border border-[#E2E6EC] bg-white overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
                   
                   {/* LEFT COLUMN: Text Info & Details (7 cols) */}
                   <div className="md:col-span-7 p-8 sm:p-10 lg:p-12 flex flex-col justify-between text-left space-y-6 bg-slate-50/40">

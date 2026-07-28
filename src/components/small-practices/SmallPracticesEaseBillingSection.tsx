@@ -11,8 +11,9 @@ import {
   smallPracticeContainerClassName,
   smallPracticeSectionClassName,
 } from "./smallPracticeSectionLayout";
+import type { SmallPracticesPageData } from "@/payload/types/smallPractices";
 
-const EASE_BILLING_FEATURES = [
+const DEFAULT_FEATURES = [
   {
     iconName: "Handshake",
     description: "We take up all your non-clinical burdens",
@@ -37,9 +38,18 @@ const EASE_BILLING_FEATURES = [
     iconName: "FileCheck",
     description: "Cater end-to-end denial management",
   },
-] as const;
+];
 
-export default function SmallPracticesEaseBillingSection() {
+interface SmallPracticesEaseBillingSectionProps {
+  data?: SmallPracticesPageData["easeBilling"];
+}
+
+export default function SmallPracticesEaseBillingSection({ data }: SmallPracticesEaseBillingSectionProps) {
+  const badge = data?.badge ?? "Small Practice Support.";
+  const titlePlain = data?.titlePlain ?? "Here's How We Ease Billing for ";
+  const titleHighlight = data?.titleHighlight ?? "Small Practices!";
+  const featuresList = data?.features && data.features.length > 0 ? data.features : DEFAULT_FEATURES;
+
   return (
     <section
       className={cn(smallPracticeSectionClassName, "border-t border-[#E2E6EC]")}
@@ -47,14 +57,14 @@ export default function SmallPracticesEaseBillingSection() {
     >
       <div className={smallPracticeContainerClassName}>
         <SectionHeader
-          badge="Small Practice Support."
+          badge={badge}
           badgeVariant="indigo"
           badgePulse
           align="center"
           title={
             <span id="small-practices-ease-billing-heading">
-              Here&apos;s How We Ease Billing for{" "}
-              <span className="text-blue-600">Small Practices!</span>
+              {titlePlain}
+              <span className="text-blue-600">{titleHighlight}</span>
             </span>
           }
           className="mx-auto mb-12 max-w-4xl sm:mb-16"
@@ -65,7 +75,7 @@ export default function SmallPracticesEaseBillingSection() {
           staggerDelay={0.08}
           className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
         >
-          {EASE_BILLING_FEATURES.map((feature) => {
+          {featuresList.map((feature) => {
             const Icon = getIcon(feature.iconName);
 
             return (
@@ -73,7 +83,7 @@ export default function SmallPracticesEaseBillingSection() {
                 <Card
                   glass={false}
                   hoverEffect="both"
-                  className="group flex h-full flex-col items-center justify-start rounded-2xl border border-[#E2E6EC] bg-white p-6 text-center shadow-[0_4px_24px_rgba(29,78,216,0.04)] transition-all duration-300 hover:border-[#1D4ED8]/30 hover:shadow-lg sm:rounded-3xl sm:p-8"
+                  className="group flex h-full flex-col items-center justify-start rounded-2xl border border-[#E2E6EC] bg-white p-6 text-center shadow-[0_4px_24px_rgba(29,78,216,0.04)] transition-all duration-300 hover:border-[#1D4ED8]/30 hover:shadow-lg sm:rounded-2xl sm:p-8"
                 >
                   <CardContent className="flex flex-col items-center p-0 text-center">
                     <IconWrapper

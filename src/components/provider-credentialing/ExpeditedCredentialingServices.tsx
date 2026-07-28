@@ -64,7 +64,7 @@ export default function ExpeditedCredentialingServices({ data }: ExpeditedCreden
 
           {/* RIGHT: Image Frame */}
           <MotionWrapper variant="slideRight" className="lg:col-span-5 w-full">
-            <div className="relative w-full max-w-lg mx-auto aspect-[4/5] rounded-3xl bg-white border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 p-3 overflow-hidden group">
+            <div className="relative w-full max-w-lg mx-auto aspect-[4/5] rounded-2xl bg-white border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 p-3 overflow-hidden group">
               <div className="relative w-full h-full rounded-2xl overflow-hidden bg-slate-900">
                 <Image
                   src={content.block1ImageSrc || "/clearinghouse-nurse-hero.png"}
@@ -117,7 +117,7 @@ export default function ExpeditedCredentialingServices({ data }: ExpeditedCreden
           
           {/* LEFT: Image Frame */}
           <MotionWrapper variant="slideLeft" className="lg:col-span-5 w-full order-2 lg:order-1">
-            <div className="relative w-full max-w-lg mx-auto aspect-[4/5] rounded-3xl bg-white border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 p-3 overflow-hidden group">
+            <div className="relative w-full max-w-lg mx-auto aspect-[4/5] rounded-2xl bg-white border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 p-3 overflow-hidden group">
               <div className="relative w-full h-full rounded-2xl overflow-hidden bg-slate-900">
                 <Image
                   src={content.block2ImageSrc || "/consultants-laptop.png"}
@@ -212,7 +212,7 @@ export default function ExpeditedCredentialingServices({ data }: ExpeditedCreden
 
           {/* RIGHT: Image Frame */}
           <MotionWrapper variant="slideRight" className="lg:col-span-5 w-full">
-            <div className="relative w-full max-w-lg mx-auto aspect-[4/5] rounded-3xl bg-white border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 p-3 overflow-hidden group">
+            <div className="relative w-full max-w-lg mx-auto aspect-[4/5] rounded-2xl bg-white border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 p-3 overflow-hidden group">
               <div className="relative w-full h-full rounded-2xl overflow-hidden bg-slate-900">
                 <Image
                   src={content.block3ImageSrc || "/consultants-laptop.png"}

@@ -38,7 +38,7 @@ export default function BillingConsultingFeaturedPanel({
       glass={false}
       hoverEffect="none"
       className={cn(
-        "relative h-full min-h-[22rem] overflow-hidden rounded-2xl border border-border bg-card sm:min-h-[24rem] sm:rounded-3xl lg:min-h-0",
+        "relative h-full min-h-[22rem] overflow-hidden rounded-2xl border border-border bg-card sm:min-h-[24rem] sm:rounded-2xl lg:min-h-0",
         className
       )}
     >

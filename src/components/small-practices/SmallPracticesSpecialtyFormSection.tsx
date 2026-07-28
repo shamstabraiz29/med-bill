@@ -8,6 +8,7 @@ import AppButton from "@/components/ui/AppButton";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { defaultMedicalBillingData } from "@/lib/defaults/medicalBilling";
+import type { SmallPracticesPageData } from "@/payload/types/smallPractices";
 import {
   smallPracticeCardClassName,
   smallPracticeContainerClassName,
@@ -21,7 +22,11 @@ const SPECIALTY_OPTIONS = defaultMedicalBillingData.specialtySolutions.options.m
   (option) => option.label
 );
 
-export default function SmallPracticesSpecialtyFormSection() {
+interface SmallPracticesSpecialtyFormSectionProps {
+  data?: SmallPracticesPageData["specialtyForm"];
+}
+
+export default function SmallPracticesSpecialtyFormSection({ data }: SmallPracticesSpecialtyFormSectionProps = {}) {
   const [formData, setFormData] = useState({
     specialty: null as string | null,
     name: "",
@@ -69,17 +74,17 @@ export default function SmallPracticesSpecialtyFormSection() {
       <div className={smallPracticeContainerClassName}>
         <MotionWrapper variant="fadeUp" className="mx-auto max-w-3xl text-center">
           <SectionHeader
-            badge="Specialty Billing."
+            badge={data?.badge ?? "Specialty Billing."}
             badgeVariant="indigo"
             badgePulse
             align="center"
             title={
               <span id="small-practices-specialty-form-heading">
-                Billing Services Customized for{" "}
-                <span className="text-blue-600">Your Specialty</span>
+                {data?.titlePlain ?? "Billing Services Customized for "}
+                <span className="text-blue-600">{data?.titleHighlight ?? "Your Specialty"}</span>
               </span>
             }
-            description="We Cover 75+ Specialties."
+            description={data?.description ?? "We Cover 75+ Specialties."}
             className="mb-10 sm:mb-12"
           />
         </MotionWrapper>

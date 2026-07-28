@@ -147,7 +147,7 @@ export default function TestimonialsGrid({ items }: TestimonialsGridProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredTestimonials.map((item, idx) => (
             <MotionWrapper key={item.id} variant="scaleUp" delay={idx * 0.05}>
-              <div className="bg-white border border-[#E2E6EC] rounded-3xl p-6 sm:p-7 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between h-full text-left space-y-6">
+              <div className="bg-white border border-[#E2E6EC] rounded-2xl p-6 sm:p-7 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between h-full text-left space-y-6">
                 
                 <div className="space-y-4">
                   

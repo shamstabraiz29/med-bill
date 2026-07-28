@@ -69,8 +69,24 @@ export default function OutsourceMedicalBillingHero({ data }: OutsourceMedicalBi
             </AppButton>
           </MotionWrapper>
 
-          <MotionWrapper variant="slideRight" className="w-full lg:col-span-5">
-            <OutsourceMedicalBillingHeroForm />
+          <MotionWrapper variant="slideRight" className="relative w-full lg:col-span-6">
+            <div className="relative mx-auto w-full max-w-xl lg:max-w-none">
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl"
+              >
+                <Image
+                  src="/clearinghouse-nurse-hero.png"
+                  alt=""
+                  fill
+                  className="object-cover object-center opacity-20"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-[#0F172A]/40" />
+              </div>
+
+              <OutsourceMedicalBillingHeroForm />
+            </div>
           </MotionWrapper>
         </div>
       </div>

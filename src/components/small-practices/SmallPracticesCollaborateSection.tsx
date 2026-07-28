@@ -7,8 +7,9 @@ import {
   smallPracticeContainerClassName,
   smallPracticeSectionAltClassName,
 } from "./smallPracticeSectionLayout";
+import type { SmallPracticesPageData } from "@/payload/types/smallPractices";
 
-const COLLABORATE_SERVICES = [
+const DEFAULT_SERVICES = [
   {
     title: "Cloud-Based HIPAA-Compliant PMS",
     description:
@@ -31,7 +32,17 @@ const COLLABORATE_SERVICES = [
   },
 ];
 
-export default function SmallPracticesCollaborateSection() {
+interface SmallPracticesCollaborateSectionProps {
+  data?: SmallPracticesPageData["collaborate"];
+}
+
+export default function SmallPracticesCollaborateSection({ data }: SmallPracticesCollaborateSectionProps) {
+  const badge = data?.badge ?? "Customized Billing.";
+  const titlePlain = data?.titlePlain ?? "Collaborate with BellMedEx and Get ";
+  const titleHighlight = data?.titleHighlight ?? "Customized Billing Services";
+  const titleSuffix = data?.titleSuffix ?? " for Your Small Practice";
+  const services = data?.services && data.services.length > 0 ? data.services : DEFAULT_SERVICES;
+
   return (
     <section
       className={smallPracticeSectionAltClassName}
@@ -39,22 +50,22 @@ export default function SmallPracticesCollaborateSection() {
     >
       <div className={smallPracticeContainerClassName}>
         <SectionHeader
-          badge="Customized Billing."
+          badge={badge}
           badgeVariant="indigo"
           badgePulse
           align="center"
           className="mx-auto mb-12 max-w-4xl sm:mb-14"
           title={
             <span id="small-practices-collaborate-heading">
-              Collaborate with BellMedEx and Get{" "}
-              <span className="text-blue-600">Customized Billing Services</span> for Your Small
-              Practice
+              {titlePlain}
+              <span className="text-blue-600">{titleHighlight}</span>
+              {titleSuffix}
             </span>
           }
         />
 
         <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-10">
-          {COLLABORATE_SERVICES.map((service) => (
+          {services.map((service) => (
             <BlogStyleCard
               key={service.title}
               href={service.href}

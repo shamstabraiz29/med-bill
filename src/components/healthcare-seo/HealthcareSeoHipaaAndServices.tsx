@@ -23,7 +23,7 @@ export default function HealthcareSeoHipaaAndServices({ data }: HealthcareSeoHip
           
           {/* LEFT CARD: HIPAA Compliance & Peace of Mind */}
           <MotionWrapper variant="slideLeft" className="h-full">
-            <Card className="group relative overflow-hidden rounded-3xl bg-slate-50/70 border border-[#E2E6EC] p-8 sm:p-10 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col justify-between h-full text-left">
+            <Card className="group relative overflow-hidden rounded-2xl bg-slate-50/70 border border-[#E2E6EC] p-8 sm:p-10 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col justify-between h-full text-left">
               <CardContent className="p-0 flex flex-col justify-between h-full space-y-8">
                 
                 {/* Top HIPAA Header Pill Banner */}
@@ -61,7 +61,7 @@ export default function HealthcareSeoHipaaAndServices({ data }: HealthcareSeoHip
 
           {/* RIGHT CARD: Other Services To Help You Grow */}
           <MotionWrapper variant="slideRight" className="h-full">
-            <Card className="group relative overflow-hidden rounded-3xl bg-slate-50/70 border border-[#E2E6EC] p-8 sm:p-10 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col justify-between h-full text-left">
+            <Card className="group relative overflow-hidden rounded-2xl bg-slate-50/70 border border-[#E2E6EC] p-8 sm:p-10 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col justify-between h-full text-left">
               <CardContent className="p-0 flex flex-col justify-between h-full space-y-8">
                 
                 {/* Top 3 Service Image Tiles Row */}

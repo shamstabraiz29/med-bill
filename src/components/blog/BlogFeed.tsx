@@ -72,7 +72,7 @@ export default function BlogFeed({ initialPosts }: BlogFeedProps) {
         </div>
       ) : (
         /* Empty State */
-        <div className="bg-slate-50 border border-[#E2E6EC] rounded-3xl p-12 text-center max-w-xl mx-auto space-y-4 my-8 shadow-sm">
+        <div className="bg-slate-50 border border-[#E2E6EC] rounded-2xl p-12 text-center max-w-xl mx-auto space-y-4 my-8 shadow-sm">
           <SearchX className="w-12 h-12 text-slate-400 mx-auto" />
           <h3 className="text-xl font-bold text-[#0F172A]">No Articles Found</h3>
           <p className="text-sm text-[#475569]">
@@ -97,7 +97,7 @@ export default function BlogFeed({ initialPosts }: BlogFeedProps) {
 
       {/* Bottom Newsletter / Consultation CTA Box */}
       <MotionWrapper variant="scaleUp" className="mt-16 sm:mt-24 max-w-7xl mx-auto">
-        <div className="relative overflow-hidden rounded-3xl bg-[#0F172A] border border-white/10 text-white p-8 sm:p-12 lg:p-14 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-8 text-left">
+        <div className="relative overflow-hidden rounded-2xl bg-[#0F172A] border border-white/10 text-white p-8 sm:p-12 lg:p-14 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-8 text-left">
           
           <div className="space-y-3 max-w-xl">
             <span className="text-xs font-extrabold uppercase tracking-widest text-sky-400">

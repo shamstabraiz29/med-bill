@@ -47,7 +47,7 @@ export default function AboutCapabilities({ data }: AboutCapabilitiesProps) {
             const Icon = (cap.iconName && ICON_MAP[cap.iconName]) || FileCode2;
             return (
               <MotionWrapper key={cap.title || idx} variant="scaleUp" delay={idx * 0.05}>
-                <div className="group bg-white border border-[#E2E6EC] rounded-3xl p-7 shadow-xs hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between h-full space-y-5">
+                <div className="group bg-white border border-[#E2E6EC] rounded-2xl p-7 shadow-xs hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between h-full space-y-5">
                   
                   <div className="space-y-4">
                     {/* Icon Container */}

@@ -27,7 +27,7 @@ export default function RcmServicesOverview({ data }: RcmServicesOverviewProps) 
               delay={index * 0.1}
             >
               <div
-                className={`rounded-3xl p-6 sm:p-8 lg:p-12 border ${item.borderColor || "border-indigo-100"} ${item.cardBg || "bg-[#EEF2FF]"} shadow-sm transition-all duration-300 hover:shadow-md relative overflow-hidden`}
+                className={`rounded-2xl p-6 sm:p-8 lg:p-12 border ${item.borderColor || "border-indigo-100"} ${item.cardBg || "bg-[#EEF2FF]"} shadow-sm transition-all duration-300 hover:shadow-md relative overflow-hidden`}
               >
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                   

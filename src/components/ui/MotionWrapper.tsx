@@ -40,10 +40,11 @@ export default function MotionWrapper({
   delay = 0,
   staggerDelay = 0.08,
   className = "",
-  viewportAmount = 0.35,
-  viewportMargin = "-10% 0px -10% 0px",
+  viewportAmount = 0.1,
+  viewportMargin = "0px",
   once = true,
 }: MotionWrapperProps) {
+
   const [isMounted, setIsMounted] = useState(false);
   const shouldReduceMotion = useReducedMotion();
 

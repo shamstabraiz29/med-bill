@@ -25,7 +25,7 @@ export default function FusionediClearinghouseDashboard({ data }: FusionediClear
     >
       <div className={fusionediContainerClassName}>
         <MotionWrapper variant="scaleUp">
-          <div className="group overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-lg shadow-blue-900/5 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#1D4ED8]/30 hover:shadow-xl hover:shadow-blue-900/10 sm:rounded-3xl">
+          <div className="group overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-lg shadow-blue-900/5 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#1D4ED8]/30 hover:shadow-xl hover:shadow-blue-900/10 sm:rounded-2xl">
             <h2 id="fusionedi-clearinghouse-dashboard-heading" className="sr-only">
               FusionEDI clearinghouse dashboard overview
             </h2>

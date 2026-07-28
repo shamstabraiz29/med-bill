@@ -44,6 +44,12 @@ import type { TermsAndConditionsData } from '@/payload/types/termsAndConditions'
 import { defaultTermsAndConditionsData } from '@/lib/defaults/termsAndConditions'
 import type { CookiesPolicyData } from '@/payload/types/cookiesPolicy'
 import { defaultCookiesPolicyData } from '@/lib/defaults/cookiesPolicy'
+import type { LargePracticesPageData } from '@/payload/types/largePractices'
+import { defaultLargePracticesData } from '@/lib/defaults/largePractices'
+import type { PhysicianBillingServicesPageData } from '@/payload/types/physicianBillingServices'
+import { defaultPhysicianBillingServicesData } from '@/lib/defaults/physicianBillingServices'
+import type { SmallPracticesPageData } from '@/payload/types/smallPractices'
+import { defaultSmallPracticesData } from '@/lib/defaults/smallPractices'
 
 /**
  * Fetches the Homepage global data from Payload CMS using the Local API.
@@ -549,6 +555,48 @@ export async function getCookiesPolicyData(): Promise<CookiesPolicyData> {
   } catch (error) {
     console.error('[Payload] Failed to fetch Cookies Policy data, using defaults:', error)
     return defaultCookiesPolicyData
+  }
+}
+
+/**
+ * Fetches the Large Practices global data from Payload CMS.
+ */
+export async function getLargePracticesData(): Promise<LargePracticesPageData> {
+  try {
+    const payload = await getPayload({ config })
+    const data = await payload.findGlobal({ slug: 'large-practices' as any })
+    return deepMerge(defaultLargePracticesData, data as unknown as Partial<LargePracticesPageData>)
+  } catch (error) {
+    console.error('[Payload] Failed to fetch Large Practices data, using defaults:', error)
+    return defaultLargePracticesData
+  }
+}
+
+/**
+ * Fetches the Physician Billing Services global data from Payload CMS.
+ */
+export async function getPhysicianBillingServicesData(): Promise<PhysicianBillingServicesPageData> {
+  try {
+    const payload = await getPayload({ config })
+    const data = await payload.findGlobal({ slug: 'physician-billing-services' as any })
+    return deepMerge(defaultPhysicianBillingServicesData, data as unknown as Partial<PhysicianBillingServicesPageData>)
+  } catch (error) {
+    console.error('[Payload] Failed to fetch Physician Billing Services data, using defaults:', error)
+    return defaultPhysicianBillingServicesData
+  }
+}
+
+/**
+ * Fetches the Small Practices global data from Payload CMS.
+ */
+export async function getSmallPracticesData(): Promise<SmallPracticesPageData> {
+  try {
+    const payload = await getPayload({ config })
+    const data = await payload.findGlobal({ slug: 'small-practices' as any })
+    return deepMerge(defaultSmallPracticesData, data as unknown as Partial<SmallPracticesPageData>)
+  } catch (error) {
+    console.error('[Payload] Failed to fetch Small Practices data, using defaults:', error)
+    return defaultSmallPracticesData
   }
 }
 

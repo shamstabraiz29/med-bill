@@ -94,7 +94,7 @@ export default function RcmHero({ data }: RcmHeroProps) {
 
           {/* RIGHT COLUMN: Request Free RCM Consultancy Form Card */}
           <MotionWrapper variant="slideRight" className="lg:col-span-5 w-full">
-            <div className="bg-white text-[#0F172A] rounded-3xl p-6 sm:p-8 md:p-10 shadow-xl relative overflow-hidden border border-[#E2E6EC] text-left">
+            <div className="bg-white text-[#0F172A] rounded-2xl p-6 sm:p-8 md:p-10 shadow-xl relative overflow-hidden border border-[#E2E6EC] text-left">
               
               <div className="space-y-1.5 mb-6">
                 <h3 className="text-xl sm:text-2xl font-bold text-[#0F172A] tracking-tight">

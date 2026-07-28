@@ -122,7 +122,7 @@ export default function MedicalBillingSoftwareTestimonials({ data }: MedicalBill
           tabIndex={0}
         >
           <MotionWrapper key={activeTestimonial?.name || activeIndex} variant="fadeUp">
-            <div className="overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-[0_4px_24px_rgba(29,78,216,0.04)] sm:rounded-3xl">
+            <div className="overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-[0_4px_24px_rgba(29,78,216,0.04)] sm:rounded-2xl">
               <div className="grid grid-cols-1 lg:grid-cols-12">
                 <div className="flex flex-col justify-between p-6 sm:p-8 lg:col-span-7 lg:p-10">
                   <div>

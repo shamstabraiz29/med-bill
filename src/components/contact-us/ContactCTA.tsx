@@ -30,7 +30,8 @@ export default function ContactCTA({ data }: ContactCTAProps) {
     <section className="relative w-full py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <MotionWrapper variant="scaleUp">
-          <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-[#0F172A] border border-white/10 p-8 sm:p-12 lg:p-14 shadow-lg flex flex-col lg:flex-row items-center justify-between gap-8 text-left text-white">
+          <div className="relative overflow-hidden rounded-2xl bg-[#0F172A] border border-white/10 p-8 sm:p-12 lg:p-14 shadow-lg flex flex-col lg:flex-row items-center justify-between gap-8 text-left text-white">
+
             
             <div className="space-y-4 max-w-2xl relative z-10">
               <div className="flex justify-start">

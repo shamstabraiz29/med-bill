@@ -24,7 +24,7 @@ export default function PracticeManagementSoftwarePmsGetStartedCta({ data }: Pra
     >
       <div className={pmsContainerClassName}>
         <MotionWrapper variant="scaleUp">
-          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0F172A] px-6 py-10 text-center text-white shadow-lg sm:rounded-3xl sm:px-10 sm:py-12 lg:px-14 lg:py-16">
+          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0F172A] px-6 py-10 text-center text-white shadow-lg sm:rounded-2xl sm:px-10 sm:py-12 lg:px-14 lg:py-16">
             <ul className="mb-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 sm:mb-10 sm:gap-x-10">
               {highlightsList.map((label, idx) => (
                 <li

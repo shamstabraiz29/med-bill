@@ -3,36 +3,27 @@
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Plus } from "lucide-react";
+import { defaultPhysicianBillingServicesData } from "@/lib/defaults/physicianBillingServices";
+import type { PhysicianHeroFaq } from "@/payload/types/physicianBillingServices";
 
-const HERO_FAQ_ITEMS = [
-  {
-    question: "What is physician billing?",
-    answer:
-      "Physician billing is the process of coding patient encounters, submitting claims to payers, posting payments, and following up on denials so physicians receive accurate reimbursement for care delivered.",
-  },
-  {
-    question: "How Physician Billing Services help?",
-    answer:
-      "Outsourced physician billing reduces administrative burden, improves clean-claim rates, accelerates collections, and gives your team more time to focus on patient care instead of revenue cycle tasks.",
-  },
-  {
-    question: "How will physician billing be impacted by MIPS?",
-    answer:
-      "MIPS ties a portion of physician reimbursement to quality and cost metrics. Strong billing workflows help capture accurate data, report performance correctly, and protect revenue under value-based payment models.",
-  },
-];
+interface PhysicianBillingServicesHeroAccordionProps {
+  items?: PhysicianHeroFaq[];
+}
 
-export default function PhysicianBillingServicesHeroAccordion() {
+export default function PhysicianBillingServicesHeroAccordion({
+  items,
+}: PhysicianBillingServicesHeroAccordionProps) {
+  const faqItems = items && items.length > 0 ? items : defaultPhysicianBillingServicesData.hero.faqItems;
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
     <div className="w-full max-w-xl divide-y divide-[#E2E6EC] border-t border-[#E2E6EC]">
-      {HERO_FAQ_ITEMS.map((item, index) => {
+      {faqItems.map((item, index) => {
         const isOpen = openIndex === index;
         const panelId = `physician-billing-hero-faq-${index}`;
 
         return (
-          <div key={item.question} className="py-1">
+          <div key={item.question || index} className="py-1">
             <button
               type="button"
               id={`${panelId}-trigger`}

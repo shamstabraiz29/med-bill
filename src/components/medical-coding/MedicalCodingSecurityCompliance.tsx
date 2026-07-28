@@ -74,7 +74,7 @@ export default function MedicalCodingSecurityCompliance({ data }: MedicalCodingS
           <Card
             glass={false}
             hoverEffect="none"
-            className="overflow-hidden rounded-2xl border-border sm:rounded-3xl"
+            className="overflow-hidden rounded-2xl border-border sm:rounded-2xl"
           >
             <div className="grid grid-cols-1 lg:grid-cols-2">
               <div className="border-b border-border lg:border-r">

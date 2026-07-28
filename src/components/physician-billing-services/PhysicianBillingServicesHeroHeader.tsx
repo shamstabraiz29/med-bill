@@ -1,16 +1,23 @@
 "use client";
 
+import React from "react";
 import { motion } from "motion/react";
 import SectionBadge from "@/components/ui/SectionBadge";
 import { blurRevealVariants, springPopVariants, staggerContainerVariants } from "@/lib/motion";
+import { defaultPhysicianBillingServicesData } from "@/lib/defaults/physicianBillingServices";
+import type { PhysicianBillingServicesPageData } from "@/payload/types/physicianBillingServices";
 
 interface PhysicianBillingServicesHeroHeaderProps {
   headingId?: string;
+  data?: PhysicianBillingServicesPageData["hero"];
 }
 
 export default function PhysicianBillingServicesHeroHeader({
   headingId,
+  data,
 }: PhysicianBillingServicesHeroHeaderProps) {
+  const content = data || defaultPhysicianBillingServicesData.hero;
+
   return (
     <motion.div
       initial="hidden"
@@ -20,7 +27,7 @@ export default function PhysicianBillingServicesHeroHeader({
     >
       <motion.div variants={springPopVariants}>
         <SectionBadge variant="indigo" pulse>
-          Physician Billing Services.
+          {content.badge}
         </SectionBadge>
       </motion.div>
 
@@ -29,18 +36,15 @@ export default function PhysicianBillingServicesHeroHeader({
         variants={blurRevealVariants}
         className="max-w-2xl text-3xl font-bold leading-[1.18] tracking-[-0.02em] text-[#0F172A] sm:text-4xl lg:text-5xl"
       >
-        Physician{" "}
-        <span className="text-[#1D4ED8]">Billing Services</span>
+        {content.titlePlain}{" "}
+        <span className="text-blue-600">{content.titleHighlight}</span>
       </motion.h1>
 
       <motion.p
         variants={blurRevealVariants}
         className="max-w-2xl text-sm leading-[1.6] text-[#475569] sm:text-base"
       >
-        BellMedEx Physician Billing Services ensure physicians obtain rightful payments for
-        caring for patients via accurate claim filing, coding, denial resolution, and unpaid
-        claim follow-up. We serve as your outsourced billing team, multiplying income so your
-        medical practice thrives.
+        {content.description}
       </motion.p>
     </motion.div>
   );
