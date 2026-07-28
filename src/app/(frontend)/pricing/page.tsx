@@ -1,5 +1,4 @@
-import PageContainer from "@/components/PageContainer";
+import MedicalBillingPricingPage, { metadata } from "../medical-billing-pricing-bellmedex/page";
 
-export default function Page() {
-  return <PageContainer title="Pricing" />;
-}
+export { metadata };
+export default MedicalBillingPricingPage;

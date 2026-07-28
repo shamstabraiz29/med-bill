@@ -34,6 +34,8 @@ import type { AboutUsPageData } from '@/payload/types/aboutUs'
 import { defaultAboutUsData } from '@/lib/defaults/aboutUs'
 import type { ContactUsPageData } from '@/payload/types/contactUs'
 import { defaultContactUsData } from '@/lib/defaults/contactUs'
+import type { MedicalBillingPricingPageData } from '@/payload/types/medicalBillingPricing'
+import { defaultMedicalBillingPricingData } from '@/lib/defaults/medicalBillingPricing'
 
 /**
  * Fetches the Homepage global data from Payload CMS using the Local API.
@@ -459,6 +461,25 @@ export async function getContactUsData(): Promise<ContactUsPageData> {
   } catch (error) {
     console.error('[Payload] Failed to fetch Contact Us data, using defaults:', error)
     return defaultContactUsData
+  }
+}
+
+/**
+ * Fetches the Medical Billing Pricing global data from Payload CMS.
+ * Uses Payload Local API with fallback to default hardcoded content.
+ */
+export async function getMedicalBillingPricingData(): Promise<MedicalBillingPricingPageData> {
+  try {
+    const payload = await getPayload({ config })
+
+    const data = await payload.findGlobal({
+      slug: 'medical-billing-pricing' as any,
+    })
+
+    return deepMerge(defaultMedicalBillingPricingData, data as unknown as Partial<MedicalBillingPricingPageData>)
+  } catch (error) {
+    console.error('[Payload] Failed to fetch Medical Billing Pricing data, using defaults:', error)
+    return defaultMedicalBillingPricingData
   }
 }
 

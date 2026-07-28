@@ -33,6 +33,7 @@ import { PracticeManagementSoftwarePms } from '@/payload/globals/PracticeManagem
 import { OutsourceMedicalBilling } from '@/payload/globals/OutsourceMedicalBilling'
 import { AboutUs } from '@/payload/globals/AboutUs'
 import { ContactUs } from '@/payload/globals/ContactUs'
+import { MedicalBillingPricing } from '@/payload/globals/MedicalBillingPricing'
 
 export default buildConfig({
   admin: {
@@ -71,6 +72,7 @@ export default buildConfig({
     OutsourceMedicalBilling,
     AboutUs,
     ContactUs,
+    MedicalBillingPricing,
   ],
 
   db: postgresAdapter({
