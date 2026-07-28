@@ -38,6 +38,12 @@ import type { MedicalBillingPricingPageData } from '@/payload/types/medicalBilli
 import { defaultMedicalBillingPricingData } from '@/lib/defaults/medicalBillingPricing'
 import type { ScheduleDemoPageData } from '@/payload/types/scheduleDemo'
 import { defaultScheduleDemoData } from '@/lib/defaults/scheduleDemo'
+import type { PrivacyPolicyData } from '@/payload/types/privacyPolicy'
+import { defaultPrivacyPolicyData } from '@/lib/defaults/privacyPolicy'
+import type { TermsAndConditionsData } from '@/payload/types/termsAndConditions'
+import { defaultTermsAndConditionsData } from '@/lib/defaults/termsAndConditions'
+import type { CookiesPolicyData } from '@/payload/types/cookiesPolicy'
+import { defaultCookiesPolicyData } from '@/lib/defaults/cookiesPolicy'
 
 /**
  * Fetches the Homepage global data from Payload CMS using the Local API.
@@ -501,6 +507,48 @@ export async function getScheduleDemoData(): Promise<ScheduleDemoPageData> {
   } catch (error) {
     console.error('[Payload] Failed to fetch Schedule a Demo data, using defaults:', error)
     return defaultScheduleDemoData
+  }
+}
+
+/**
+ * Fetches the Privacy Policy global data from Payload CMS.
+ */
+export async function getPrivacyPolicyData(): Promise<PrivacyPolicyData> {
+  try {
+    const payload = await getPayload({ config })
+    const data = await payload.findGlobal({ slug: 'privacy-policy' as any })
+    return deepMerge(defaultPrivacyPolicyData, data as unknown as Partial<PrivacyPolicyData>)
+  } catch (error) {
+    console.error('[Payload] Failed to fetch Privacy Policy data, using defaults:', error)
+    return defaultPrivacyPolicyData
+  }
+}
+
+/**
+ * Fetches the Terms & Conditions global data from Payload CMS.
+ */
+export async function getTermsAndConditionsData(): Promise<TermsAndConditionsData> {
+  try {
+    const payload = await getPayload({ config })
+    const data = await payload.findGlobal({ slug: 'terms-and-conditions' as any })
+    return deepMerge(defaultTermsAndConditionsData, data as unknown as Partial<TermsAndConditionsData>)
+  } catch (error) {
+    console.error('[Payload] Failed to fetch Terms & Conditions data, using defaults:', error)
+    return defaultTermsAndConditionsData
+  }
+}
+
+/**
+ * Fetches the Cookies Policy global data from Payload CMS.
+ */
+export async function getCookiesPolicyData(): Promise<CookiesPolicyData> {
+  try {
+    const payload = await getPayload({ config })
+    const data = await payload.findGlobal({ slug: 'cookies-policy' as any })
+    return deepMerge(defaultCookiesPolicyData, data as unknown as Partial<CookiesPolicyData>)
+  } catch (error) {
+    console.error('[Payload] Failed to fetch Cookies Policy data, using defaults:', error)
+    return defaultCookiesPolicyData
   }
 }
 

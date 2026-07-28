@@ -321,10 +321,6 @@ export default function Footer() {
             <Link href="/cookies-policy" className="hover:text-white transition-colors">
               Cookies Policy
             </Link>
-            <span className="text-slate-600">•</span>
-            <Link href="/privacy-web-form" className="hover:text-white transition-colors">
-              Privacy Web Form
-            </Link>
           </div>
 
           {/* Back to Top Button */}

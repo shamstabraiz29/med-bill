@@ -35,6 +35,9 @@ import { AboutUs } from '@/payload/globals/AboutUs'
 import { ContactUs } from '@/payload/globals/ContactUs'
 import { MedicalBillingPricing } from '@/payload/globals/MedicalBillingPricing'
 import { ScheduleDemo } from '@/payload/globals/ScheduleDemo'
+import { PrivacyPolicy } from '@/payload/globals/PrivacyPolicy'
+import { TermsAndConditions } from '@/payload/globals/TermsAndConditions'
+import { CookiesPolicy } from '@/payload/globals/CookiesPolicy'
 
 export default buildConfig({
   admin: {
@@ -84,6 +87,11 @@ export default buildConfig({
     // 5. Resources & Company Pages
     Careers,
     Testimonials,
+
+    // 6. Legal Pages
+    PrivacyPolicy,
+    TermsAndConditions,
+    CookiesPolicy,
   ],
 
   db: postgresAdapter({
