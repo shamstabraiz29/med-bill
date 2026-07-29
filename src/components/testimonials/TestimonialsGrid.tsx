@@ -102,9 +102,10 @@ import { TestimonialItemData } from "@/payload/types/testimonials";
 
 interface TestimonialsGridProps {
   items?: TestimonialItemData[];
+  showFilters?: boolean;
 }
 
-export default function TestimonialsGrid({ items }: TestimonialsGridProps) {
+export default function TestimonialsGrid({ items, showFilters = true }: TestimonialsGridProps) {
   const testimonials = items && items.length > 0 ? items : sampleTestimonials;
   const [selectedSpecialty, setSelectedSpecialty] = useState("All Specialties");
 
@@ -126,6 +127,7 @@ export default function TestimonialsGrid({ items }: TestimonialsGridProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
         {/* Category Filter Tabs */}
+        {showFilters && (
         <div className="flex flex-wrap items-center justify-center gap-2.5">
           {specialties.map((spec) => (
             <button
@@ -142,6 +144,7 @@ export default function TestimonialsGrid({ items }: TestimonialsGridProps) {
             </button>
           ))}
         </div>
+        )}
 
         {/* Testimonial Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
