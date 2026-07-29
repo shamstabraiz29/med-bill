@@ -41,7 +41,7 @@ export default async function MedicalBillingAuditPage() {
   const data = await getMedicalBillingAuditData();
 
   return (
-    <div className="flex min-h-screen flex-col py-4 sm:py-8">
+    <div className="relative min-h-screen">
       <MedicalBillingAuditHero data={data.hero} />
       <MedicalBillingAuditOverview data={data.overview} />
       <MedicalBillingAuditSolutions data={data.solutions} />

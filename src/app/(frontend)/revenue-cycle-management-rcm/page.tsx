@@ -40,7 +40,7 @@ export default async function RevenueCycleManagementPage() {
   const homepageData = await getHomepageData();
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="relative min-h-screen">
       <RcmHero data={data.hero} />
       <RcmImportance data={data.importance} />
       <RcmAuditCTA data={data.auditCta} />

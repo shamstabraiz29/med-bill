@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
-import { User, Mail, Phone, DollarSign, CheckCircle2 } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import React from "react";
 import MotionWrapper from "@/components/ui/MotionWrapper";
-import SectionBadge from "@/components/ui/SectionBadge";
+import HeroHeader from "@/components/home/HeroHeader";
+import CommandCapsuleForm from "@/components/home/CommandCapsuleForm";
+import DoctorVisuals from "@/components/home/DoctorVisuals";
 import { defaultRevenueCycleManagementData } from "@/lib/defaults/revenueCycleManagement";
+import { TrendingUp, ShieldCheck, FileCheck, Lock, DollarSign, Clock, Award } from "lucide-react";
 
 interface RcmHeroProps {
   data?: typeof defaultRevenueCycleManagementData.hero;
@@ -14,187 +15,109 @@ interface RcmHeroProps {
 export default function RcmHero({ data }: RcmHeroProps) {
   const heroData = data || defaultRevenueCycleManagementData.hero;
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    monthlyCollections: "",
-    phone: "",
-  });
-
-  const [submitted, setSubmitted] = useState(false);
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (formData.name && formData.email && formData.phone) {
-      setIsSubmitting(true);
-      try {
-        const res = await fetch('/api/forms/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            formName: 'RCM Hero Consultancy Form',
-            sourcePage: typeof window !== 'undefined' ? window.location.pathname : '/revenue-cycle-management-rcm',
-            name: formData.name,
-            email: formData.email,
-            phone: formData.phone,
-          }),
-        });
-
-        if (res.ok) {
-          setSubmitted(true);
-        }
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setIsSubmitting(false);
-      }
-    }
-  };
+  const featureBullets = [
+    { title: "End-to-End RCM", desc: "Complete billing & coding management", icon: ShieldCheck },
+    { title: "98%+ Clean Claims", desc: "Fast first-pass reimbursements", icon: TrendingUp },
+    { title: "Eligibility Check", desc: "Instant patient verification", icon: FileCheck },
+    { title: "HIPAA Compliant", desc: "SOC2 secure data handling", icon: Lock },
+  ];
 
   return (
-    <section className="relative w-full pt-12 pb-16 lg:pt-16 lg:pb-24 bg-transparent overflow-hidden">
-      
-      {/* Background Ambient Enhancements */}
-      <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:32px_32px] opacity-40 pointer-events-none" />
-      <div className="absolute -top-24 -left-24 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-1/2 -right-24 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
+    <section className="relative w-full bg-transparent pt-12 pb-16 lg:pt-16 lg:pb-20 overflow-hidden">
+      {/* Custom float animations identical to Home page Hero */}
+      <style>{`
+        @keyframes float-slow {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-8px) rotate(1.5deg); }
+        }
+        @keyframes float-medium {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(10px) rotate(-1.5deg); }
+        }
+        @keyframes spin-slow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        .animate-float-slow {
+          animation: float-slow 9s ease-in-out infinite;
+        }
+        .animate-float-medium {
+          animation: float-medium 7.5s ease-in-out infinite;
+        }
+        .animate-spin-slow {
+          animation: spin-slow 35s linear infinite;
+        }
+      `}</style>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          
-          {/* LEFT COLUMN: Headline & Description */}
-          <MotionWrapper variant="slideLeft" className="lg:col-span-7 flex flex-col items-start text-left space-y-6">
-            
-            <SectionBadge variant="blue" pulse>
-              {heroData.badge}
-            </SectionBadge>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          {/* LEFT COLUMN: Content & Form */}
+          <div className="lg:col-span-7 flex flex-col space-y-6 text-left">
+            {/* Home Page HeroHeader */}
+            <HeroHeader
+              eyebrow={heroData.badge}
+              titlePrefix={heroData.titlePrefix}
+              titleHighlight={heroData.titleHighlight}
+              description1={heroData.description}
+              description2="Our RCM billing company optimizes the revenue cycle for better financial outcomes across all specialties and health centers."
+            />
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#0F172A] leading-[1.15]">
-              {heroData.titlePrefix} <br className="hidden sm:inline" />
-              <span className="text-[#1D4ED8]">{heroData.titleHighlight}</span>
-            </h1>
+            {/* Home Page CommandCapsuleForm */}
+            <CommandCapsuleForm
+              buttonLabel={heroData.formButtonLabel || "Request RCM Audit"}
+              formTitle={heroData.formTitle}
+              successTitle={heroData.successTitle}
+              successDescription={heroData.successDescription}
+              trustBadges={[
+                "HIPAA Compliant",
+                "SOC2 Secure",
+                "No Upfront Cost",
+                "24-Hour Callback",
+              ]}
+            />
 
-            <p className="text-[#475569] text-sm sm:text-base leading-[1.65] max-w-2xl font-normal">
-              {heroData.description}
-            </p>
-
-            {/* Feature Bullets */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 w-full text-left">
-              {heroData.bullets.map((bullet, idx) => (
-                <div key={idx} className="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-slate-700">
-                  <CheckCircle2 className="w-4.5 h-4.5 text-[#1D4ED8] shrink-0" />
-                  <span>{bullet.label}</span>
-                </div>
-              ))}
-            </div>
-
-          </MotionWrapper>
-
-          {/* RIGHT COLUMN: Request Free RCM Consultancy Form Card */}
-          <MotionWrapper variant="slideRight" className="lg:col-span-5 w-full">
-            <div className="bg-white text-[#0F172A] rounded-2xl p-6 sm:p-8 md:p-10 shadow-xl relative overflow-hidden border border-[#E2E6EC] text-left">
-              
-              <div className="space-y-1.5 mb-6">
-                <h3 className="text-xl sm:text-2xl font-bold text-[#0F172A] tracking-tight">
-                  {heroData.formTitle}
-                </h3>
-                <p className="text-slate-500 text-xs sm:text-sm">
-                  {heroData.formDescription}
-                </p>
-              </div>
-
-              {submitted ? (
-                <div className="bg-emerald-50 border border-emerald-200 text-emerald-900 p-6 rounded-2xl text-center space-y-2">
-                  <CheckCircle2 className="w-10 h-10 text-emerald-600 mx-auto" />
-                  <h4 className="text-lg font-bold">{heroData.successTitle}</h4>
-                  <p className="text-xs sm:text-sm text-emerald-800">
-                    Thank you, {formData.name}. {heroData.successDescription}
-                  </p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  
-                  {/* Name Input */}
-                  <div className="space-y-2 text-left">
-                    <label className="block text-xs sm:text-sm font-medium text-slate-700">
-                      Full Name <span className="text-red-500">*</span>
-                    </label>
-                    <Input
-                      type="text"
-                      required
-                      placeholder="Name"
-                      icon={User}
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-lg transition-all"
-                    />
-                  </div>
-
-                  {/* Email Input */}
-                  <div className="space-y-2 text-left">
-                    <label className="block text-xs sm:text-sm font-medium text-slate-700">
-                      Email Address <span className="text-red-500">*</span>
-                    </label>
-                    <Input
-                      type="email"
-                      required
-                      placeholder="Email Address"
-                      icon={Mail}
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-lg transition-all"
-                    />
-                  </div>
-
-                  {/* Monthly Collections Input */}
-                  <div className="space-y-2 text-left">
-                    <label className="block text-xs sm:text-sm font-medium text-slate-700">
-                      Monthly Collections
-                    </label>
-                    <Input
-                      type="text"
-                      placeholder="Monthly Collections"
-                      icon={DollarSign}
-                      value={formData.monthlyCollections}
-                      onChange={(e) => setFormData({ ...formData, monthlyCollections: e.target.value })}
-                      className="bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-lg transition-all"
-                    />
-                  </div>
-
-                  {/* Phone Number Input */}
-                  <div className="space-y-2 text-left">
-                    <label className="block text-xs sm:text-sm font-medium text-slate-700">
-                      Phone Number <span className="text-red-500">*</span>
-                    </label>
-                    <Input
-                      type="tel"
-                      required
-                      placeholder="Phone Number"
-                      icon={Phone}
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-lg transition-all"
-                    />
-                  </div>
-
-                  {/* Submit Button */}
-                  <div className="pt-2">
-                    <button
-                      type="submit"
-                      className="w-full bg-[#1D4ED8] hover:bg-[#1e40af] text-white font-extrabold text-xs sm:text-sm tracking-wider uppercase py-3.5 rounded-xl transition-colors shadow-md cursor-pointer flex items-center justify-center gap-2"
+            {/* Minimalist Highlights Feature Bar (NOT CARDS) */}
+            <div className="w-full pt-3 border-t border-[#E2E6EC]/80">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 divide-y sm:divide-y-0 sm:divide-x divide-[#E2E6EC]">
+                {featureBullets.map((item, idx) => {
+                  const Icon = item.icon;
+                  return (
+                    <div
+                      key={idx}
+                      className={`flex items-start gap-2.5 ${
+                        idx !== 0 ? "sm:pl-4 pt-2 sm:pt-0" : ""
+                      }`}
                     >
-                      <span>{heroData.formButtonLabel}</span>
-                    </button>
-                  </div>
-
-                </form>
-              )}
-
+                      <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#1D4ED8] flex items-center justify-center shrink-0 mt-0.5 border border-blue-100/60">
+                        <Icon className="w-3.5 h-3.5 stroke-[2.2]" />
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold text-[#0F172A] tracking-tight">
+                          {item.title}
+                        </h4>
+                        <p className="text-[11px] text-[#475569] leading-snug mt-0.5">
+                          {item.desc}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-          </MotionWrapper>
+          </div>
 
+          {/* RIGHT COLUMN: RCM Custom Doctor Visuals */}
+          <DoctorVisuals
+            pathId="rcm"
+            imageSrc="/clearinghouse-nurse-hero.png"
+            imageAlt="Revenue Cycle Management Specialist BellMedEx"
+            spinningText="COMPLETE REVENUE CYCLE MANAGEMENT • 30% REVENUE INCREASE • COMPLETE REVENUE CYCLE MANAGEMENT • 30% REVENUE INCREASE •"
+            widgets={[
+              { icon: DollarSign, positionClassName: "top-[18%] right-[-3%]", delay: 0.25 },
+              { icon: Clock, positionClassName: "top-[48%] left-[-8%]", delay: 0.35 },
+              { icon: Award, positionClassName: "bottom-[10%] right-[2%]", delay: 0.45 },
+            ]}
+          />
         </div>
       </div>
     </section>

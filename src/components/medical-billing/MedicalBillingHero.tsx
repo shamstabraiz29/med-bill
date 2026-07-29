@@ -69,8 +69,8 @@ export default function MedicalBillingHero() {
           <MotionWrapper variant="fadeUp" delay={0.4}>
             <div className="pt-8 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto text-left">
               {highlights.map((item, idx) => (
-                <div 
-                  key={idx} 
+                <div
+                  key={idx}
                   className="flex items-center gap-2 p-3 rounded-xl bg-white/70 dark:bg-slate-900/60 border border-slate-200/60 dark:border-white/5 shadow-xs"
                 >
                   <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0" />

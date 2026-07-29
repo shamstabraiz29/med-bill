@@ -44,7 +44,7 @@ export default async function ProviderCredentialingPage() {
   const data = await getProviderCredentialingData();
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="relative min-h-screen">
       <ProviderCredentialingHero data={data.hero} />
       <CredentialingWhatToExpect data={data.whatToExpect} />
       <SoloPractitionerCTA data={data.soloPractitionerCta} />

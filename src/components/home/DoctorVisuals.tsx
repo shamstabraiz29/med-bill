@@ -1,11 +1,32 @@
 "use client";
 
+import React from "react";
 import Image from "next/image";
 import { Zap, Stethoscope, Shield } from "lucide-react";
 import { motion } from "motion/react";
 import { easeOutExpo } from "@/lib/motion";
 
-export default function DoctorVisuals() {
+export interface WidgetItem {
+  icon: React.ComponentType<{ className?: string }>;
+  positionClassName?: string;
+  delay?: number;
+}
+
+export interface DoctorVisualsProps {
+  imageSrc?: string;
+  imageAlt?: string;
+  spinningText?: string;
+  widgets?: WidgetItem[];
+  pathId?: string;
+}
+
+export default function DoctorVisuals({
+  imageSrc = "/doctor-hero.png",
+  imageAlt = "Confident Healthcare Professional - BellMedEx",
+  spinningText = "Specialty-Specific Coding • 99% Clean Claims Guarantee • Specialty-Specific Coding • 99% Clean Claims Guarantee •",
+  widgets,
+  pathId = "textPathCurve",
+}: DoctorVisualsProps) {
   const containerVariants = {
     hidden: { opacity: 0, scale: 0.95 },
     visible: {
@@ -32,6 +53,15 @@ export default function DoctorVisuals() {
     },
   });
 
+  const defaultWidgets: WidgetItem[] = [
+    { icon: Zap, positionClassName: "top-[18%] right-[-3%]", delay: 0.25 },
+    { icon: Stethoscope, positionClassName: "top-[48%] left-[-8%]", delay: 0.35 },
+    { icon: Shield, positionClassName: "bottom-[10%] right-[2%]", delay: 0.45 },
+  ];
+
+  const activeWidgets = widgets && widgets.length > 0 ? widgets : defaultWidgets;
+  const uniquePathId = `textPathCurve-${pathId || Math.random().toString(36).substring(2, 7)}`;
+
   return (
     <motion.div
       initial="hidden"
@@ -49,14 +79,14 @@ export default function DoctorVisuals() {
           <div className="absolute inset-[-10px] animate-spin-slow">
             <svg className="w-full h-full" viewBox="0 0 100 100">
               <path
-                id="textPathCurve"
+                id={uniquePathId}
                 d="M 50,50 m -45,0 a 45,45 0 1,1 90,0 a 45,45 0 1,1 -90,0"
                 fill="none"
                 stroke="none"
               />
               <text className="fill-[#0F172A]/70 text-[5px] font-extrabold tracking-[0.25em] uppercase">
-                <textPath href="#textPathCurve" startOffset="0%">
-                  Specialty-Specific Coding • 99% Clean Claims Guarantee • Specialty-Specific Coding • 99% Clean Claims Guarantee •
+                <textPath href={`#${uniquePathId}`} startOffset="0%">
+                  {spinningText}
                 </textPath>
               </text>
             </svg>
@@ -65,11 +95,11 @@ export default function DoctorVisuals() {
           {/* Inner Decorative Ring */}
           <div className="absolute w-[86%] h-[86%] rounded-full border border-[#E2E6EC]" />
 
-          {/* Central Doctor Portrait (Image) */}
+          {/* Central Doctor / Specialist Portrait */}
           <div className="absolute w-[90%] h-[90%] rounded-full overflow-hidden bg-slate-50 border border-[#E2E6EC] flex items-end">
             <Image
-              src="/doctor-hero.png"
-              alt="Confident Healthcare Professional - BellMedEx"
+              src={imageSrc}
+              alt={imageAlt}
               width={400}
               height={440}
               priority
@@ -77,35 +107,24 @@ export default function DoctorVisuals() {
             />
           </div>
 
-          {/* Floating Widget 1: 99.2% Clean Claims */}
-          <motion.div
-            variants={widgetVariants(0.25)}
-            className="absolute top-[18%] right-[-3%] bg-white border border-[#E2E6EC] p-2 rounded-2xl shadow-md flex items-center justify-center hover:scale-105 hover:border-[#1D4ED8]/30 transition-all duration-300 z-10 cursor-pointer"
-          >
-            <div className="w-10 h-10 rounded-[15px] bg-[#1D4ED8] flex items-center justify-center text-white shadow-sm">
-              <Zap className="w-5 h-5 fill-white/10" />
-            </div>
-          </motion.div>
+          {/* Dynamic Floating Widgets */}
+          {activeWidgets.map((widget, idx) => {
+            const Icon = widget.icon;
+            const posClass = widget.positionClassName || "top-[18%] right-[-3%]";
+            const delayVal = widget.delay ?? 0.25 + idx * 0.1;
 
-          {/* Floating Widget 2: Specialty-Specific */}
-          <motion.div
-            variants={widgetVariants(0.35)}
-            className="absolute top-[48%] left-[-8%] bg-white border border-[#E2E6EC] p-2 rounded-2xl shadow-md flex items-center justify-center hover:scale-105 hover:border-[#1D4ED8]/30 transition-all duration-300 z-10 cursor-pointer"
-          >
-            <div className="w-10 h-10 rounded-[15px] bg-[#1D4ED8] flex items-center justify-center text-white shadow-sm">
-              <Stethoscope className="w-5 h-5" />
-            </div>
-          </motion.div>
-
-          {/* Floating Widget 3: HIPAA Compliant */}
-          <motion.div
-            variants={widgetVariants(0.45)}
-            className="absolute bottom-[10%] right-[2%] bg-white border border-[#E2E6EC] p-2 rounded-2xl shadow-md flex items-center justify-center hover:scale-105 hover:border-[#1D4ED8]/30 transition-all duration-300 z-10 cursor-pointer"
-          >
-            <div className="w-10 h-10 rounded-[15px] bg-[#1D4ED8] flex items-center justify-center text-white shadow-sm">
-              <Shield className="w-5 h-5 fill-white/10" />
-            </div>
-          </motion.div>
+            return (
+              <motion.div
+                key={idx}
+                variants={widgetVariants(delayVal)}
+                className={`absolute ${posClass} bg-white border border-[#E2E6EC] p-2 rounded-2xl shadow-md flex items-center justify-center hover:scale-105 hover:border-[#1D4ED8]/30 transition-all duration-300 z-10 cursor-pointer`}
+              >
+                <div className="w-10 h-10 rounded-[15px] bg-[#1D4ED8] flex items-center justify-center text-white shadow-sm">
+                  <Icon className="w-5 h-5 fill-white/10" />
+                </div>
+              </motion.div>
+            );
+          })}
 
         </div>
       </div>

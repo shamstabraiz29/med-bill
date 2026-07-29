@@ -43,7 +43,7 @@ export default async function MedicalBillingPage() {
   const data = await getMedicalBillingData();
 
   return (
-    <div className="flex flex-col min-h-screen py-4 sm:py-8 space-y-8 sm:space-y-12">
+    <div className="relative min-h-screen">
       {/* Consultation & Schedule Form Section */}
       <ConsultationSection data={data.consultation} />
 

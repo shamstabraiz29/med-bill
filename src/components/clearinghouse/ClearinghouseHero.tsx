@@ -1,13 +1,12 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
-import { ShieldCheck, Zap } from "lucide-react";
-import SectionBadge from "@/components/ui/SectionBadge";
-import AppButton from "@/components/ui/AppButton";
-import MotionWrapper from "@/components/ui/MotionWrapper";
+import HeroHeader from "@/components/home/HeroHeader";
+import CommandCapsuleForm from "@/components/home/CommandCapsuleForm";
+import DoctorVisuals from "@/components/home/DoctorVisuals";
 import type { ClearinghouseHeroData } from "@/payload/types/clearinghouse";
 import { defaultClearinghouseData } from "@/lib/defaults/clearinghouse";
+import { Zap, Globe, ShieldCheck } from "lucide-react";
 
 interface ClearinghouseHeroProps {
   data?: ClearinghouseHeroData;
@@ -16,118 +15,106 @@ interface ClearinghouseHeroProps {
 export default function ClearinghouseHero({ data }: ClearinghouseHeroProps) {
   const content = data || defaultClearinghouseData.hero;
 
+  const featureBullets = [
+    { title: "99.2% Clean Claims", desc: "First-pass electronic claim approval", icon: Zap },
+    { title: "2,000+ Payers", desc: "Direct nationwide EDI connectivity", icon: Globe },
+    { title: "HIPAA Secured", desc: "256-bit encrypted EDI 837/835", icon: ShieldCheck },
+  ];
+
   return (
-    <section className="relative w-full pt-12 pb-16 lg:pt-16 lg:pb-24 overflow-hidden">
-      {/* Background Ambient Enhancements */}
-      <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:32px_32px] opacity-40 pointer-events-none" />
-      <div className="absolute -top-24 -left-24 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-1/2 -right-24 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
+    <section className="relative w-full bg-transparent pt-12 pb-16 lg:pt-16 lg:pb-20 overflow-hidden">
+      {/* Custom float animations identical to Home page Hero */}
+      <style>{`
+        @keyframes float-slow {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-8px) rotate(1.5deg); }
+        }
+        @keyframes float-medium {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(10px) rotate(-1.5deg); }
+        }
+        @keyframes spin-slow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        .animate-float-slow {
+          animation: float-slow 9s ease-in-out infinite;
+        }
+        .animate-float-medium {
+          animation: float-medium 7.5s ease-in-out infinite;
+        }
+        .animate-spin-slow {
+          animation: spin-slow 35s linear infinite;
+        }
+      `}</style>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-
-          {/* LEFT COLUMN: Content & CTA */}
+          {/* LEFT COLUMN: Content & Form */}
           <div className="lg:col-span-7 flex flex-col space-y-6 text-left">
+            {/* Home Page HeroHeader */}
+            <HeroHeader
+              eyebrow={content.badge}
+              titlePrefix={content.titlePrefix}
+              titleHighlight={content.titleHighlight}
+              description1={content.description}
+              description2="We connect healthcare providers with over 2,000 commercial & government payers nationwide for real-time eligibility and rapid reimbursement."
+            />
 
-            <MotionWrapper variant="stagger" staggerDelay={0.12} delay={0.05} className="flex flex-col space-y-6 text-left">
-              {/* Eyebrow Badge */}
-              <MotionWrapper variant="springPop">
-                <SectionBadge variant="blue" pulse>
-                  {content.badge}
-                </SectionBadge>
-              </MotionWrapper>
+            {/* Home Page CommandCapsuleForm */}
+            <CommandCapsuleForm
+              buttonLabel={content.primaryCtaLabel || "Claim Free Clearinghouse"}
+              formTitle="Claim Your Free Medical Clearinghouse Audit"
+              trustBadges={[
+                "HIPAA Compliant",
+                "SOC2 Secure",
+                "No Upfront Cost",
+                "24-Hour Callback",
+              ]}
+            />
 
-              {/* Main Headline */}
-              <MotionWrapper variant="blurReveal">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F172A] tracking-[-0.02em] leading-[1.18] lg:max-w-2xl">
-                  {content.titlePrefix}{" "}
-                  <span className="text-[#1D4ED8]">
-                    {content.titleHighlight}
-                  </span>
-                </h1>
-              </MotionWrapper>
-
-              {/* Descriptive Body Text */}
-              <MotionWrapper variant="blurReveal">
-                <div className="space-y-4 text-[#475569] text-sm sm:text-base leading-[1.6] max-w-2xl">
-                  <p>{content.description}</p>
-                </div>
-              </MotionWrapper>
-            </MotionWrapper>
-
-            {/* Action Buttons & Features */}
-            <MotionWrapper variant="fadeUp" delay={0.3}>
-              <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-                <AppButton
-                  href={content.primaryCtaHref}
-                  variant="primary"
-                  size="lg"
-                  showArrow
-                  className="w-full sm:w-auto shadow-md shadow-blue-900/10"
-                >
-                  {content.primaryCtaLabel}
-                </AppButton>
-
-                <AppButton
-                  href={content.secondaryCtaHref}
-                  variant="secondary"
-                  size="lg"
-                  className="w-full sm:w-auto"
-                >
-                  {content.secondaryCtaLabel}
-                </AppButton>
+            {/* Minimalist Highlights Feature Bar (NOT CARDS) */}
+            <div className="w-full pt-3 border-t border-[#E2E6EC]/80">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 divide-y sm:divide-y-0 sm:divide-x divide-[#E2E6EC]">
+                {featureBullets.map((item, idx) => {
+                  const Icon = item.icon;
+                  return (
+                    <div
+                      key={idx}
+                      className={`flex items-start gap-3 ${
+                        idx !== 0 ? "sm:pl-4 pt-3 sm:pt-0" : ""
+                      }`}
+                    >
+                      <div className="w-8 h-8 rounded-xl bg-blue-50 text-[#1D4ED8] flex items-center justify-center shrink-0 mt-0.5 border border-blue-100/60">
+                        <Icon className="w-4 h-4 stroke-[2.2]" />
+                      </div>
+                      <div>
+                        <h4 className="text-xs sm:text-[13px] font-bold text-[#0F172A] tracking-tight">
+                          {item.title}
+                        </h4>
+                        <p className="text-[11px] text-[#475569] leading-relaxed mt-0.5">
+                          {item.desc}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
-            </MotionWrapper>
+            </div>
           </div>
 
-          {/* RIGHT COLUMN: Static Clean Doctor Visual Image */}
-          <div className="lg:col-span-5 relative flex justify-center items-center">
-            <MotionWrapper variant="scaleUp" delay={0.2} className="w-full">
-              <div className="relative w-full max-w-[480px] aspect-square mx-auto flex items-center justify-center">
-
-                {/* Main Static Outer Frame */}
-                <div className="relative w-[90%] h-[90%] rounded-2xl bg-gradient-to-tr from-blue-50/80 via-slate-50 to-indigo-50/80 border border-[#E2E6EC] shadow-xl shadow-blue-900/5 overflow-hidden flex items-end justify-center">
-                  <div className="absolute inset-0 bg-[radial-gradient(#1D4ED8_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.06]" />
-
-                  <Image
-                    src={content.imageSrc || "/clearinghouse-nurse-hero.png"}
-                    alt="Healthcare Professional using Medical Billing Clearinghouse Solution"
-                    width={480}
-                    height={520}
-                    priority
-                    className="object-cover object-top scale-[1.04] translate-y-2 drop-shadow-[0_15px_25px_rgba(15,23,42,0.08)]"
-                  />
-                </div>
-
-                {/* Static Badges / Icons */}
-                <div className="absolute inset-0 pointer-events-none">
-                  {/* Badge 1 */}
-                  <div className="absolute top-[6%] right-[2%] pointer-events-auto bg-white/95 backdrop-blur-md border border-[#E2E6EC] p-3 rounded-2xl shadow-md flex items-center gap-2.5">
-                    <div className="w-9 h-9 rounded-xl bg-[#1D4ED8] text-white flex items-center justify-center shrink-0">
-                      <Zap className="w-4 h-4 fill-white" />
-                    </div>
-                    <div className="text-left pr-1">
-                      <p className="text-[11px] font-bold text-[#0F172A] leading-none">{content.badge1Value}</p>
-                      <p className="text-[10px] text-[#475569] mt-0.5">{content.badge1Label}</p>
-                    </div>
-                  </div>
-
-                  {/* Badge 2 */}
-                  <div className="absolute bottom-[8%] left-[0%] pointer-events-auto bg-white/95 backdrop-blur-md border border-[#E2E6EC] p-3 rounded-2xl shadow-md flex items-center gap-2.5">
-                    <div className="w-9 h-9 rounded-xl bg-blue-50 text-[#1D4ED8] flex items-center justify-center shrink-0 border border-blue-100">
-                      <ShieldCheck className="w-4 h-4" />
-                    </div>
-                    <div className="text-left pr-1">
-                      <p className="text-[11px] font-bold text-[#0F172A] leading-none">{content.badge2Value}</p>
-                      <p className="text-[10px] text-[#475569] mt-0.5">{content.badge2Label}</p>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </MotionWrapper>
-          </div>
-
+          {/* RIGHT COLUMN: Clearinghouse Custom Doctor Visuals */}
+          <DoctorVisuals
+            pathId="clearinghouse"
+            imageSrc="/clearinghouse-nurse-hero.png"
+            imageAlt="Healthcare Clearinghouse EDI Specialist BellMedEx"
+            spinningText="DIRECT NATIONWIDE PAYER EDI NETWORK • 99.2% CLEAN CLAIM APPROVAL • DIRECT NATIONWIDE PAYER EDI NETWORK • 99.2% CLEAN CLAIM APPROVAL •"
+            widgets={[
+              { icon: Zap, positionClassName: "top-[18%] right-[-3%]", delay: 0.25 },
+              { icon: Globe, positionClassName: "top-[48%] left-[-8%]", delay: 0.35 },
+              { icon: ShieldCheck, positionClassName: "bottom-[10%] right-[2%]", delay: 0.45 },
+            ]}
+          />
         </div>
       </div>
     </section>

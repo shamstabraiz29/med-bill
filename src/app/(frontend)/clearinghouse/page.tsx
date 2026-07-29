@@ -43,7 +43,7 @@ export default async function ClearinghousePage() {
   const data = await getClearinghouseData()
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="relative min-h-screen">
       <ClearinghouseHero data={data.hero} />
       <ClearinghouseCapabilities data={data.capabilities} />
       <WhyChooseClearinghouse data={data.whyChoose} />

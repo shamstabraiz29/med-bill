@@ -40,7 +40,7 @@ export default async function HealthcareSeoPage() {
   const data = await getHealthcareSeoData();
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="relative min-h-screen">
       <HealthcareSeoHero data={data.hero} />
       <HealthcareSeoPillars data={data.pillars} />
       <HealthcareSeoExpertise data={data.expertise} />
