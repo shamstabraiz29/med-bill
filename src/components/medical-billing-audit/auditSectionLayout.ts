@@ -1,4 +1,4 @@
 export const auditSectionClassName =
-  "relative w-full overflow-hidden bg-transparent px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20";
+  "relative w-full overflow-hidden bg-transparent py-16 sm:py-20 lg:py-24";
 
 export const auditContainerClassName = "relative mx-auto w-full max-w-7xl";

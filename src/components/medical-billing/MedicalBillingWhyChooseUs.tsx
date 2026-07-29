@@ -18,7 +18,7 @@ export default function MedicalBillingWhyChooseUs({ data }: MedicalBillingWhyCho
   const whyData = data || defaultMedicalBillingData.whyChooseUs;
 
   return (
-    <section className="w-full bg-transparent py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
+    <section className="relative w-full bg-transparent py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="max-w-7xl mx-auto space-y-16 lg:space-y-24">
         
         {/* Top 3 Column Cards Grid */}

@@ -35,7 +35,7 @@ const STEPS = [
 
 export default function MedicalBillingProcess() {
   return (
-    <section className="relative border-y border-[#E2E6EC] bg-[#F5F7FA] py-12 sm:py-16 lg:py-20">
+    <section className="relative w-full border-y border-[#E2E6EC] bg-[#F5F7FA] py-16 sm:py-20 lg:py-24 overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
           badge="Our Simple Process"

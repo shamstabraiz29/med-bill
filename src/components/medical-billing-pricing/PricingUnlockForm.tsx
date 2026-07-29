@@ -96,7 +96,7 @@ export default function PricingUnlockForm({ data }: PricingUnlockFormProps) {
   };
 
   return (
-    <section className="relative w-full py-8 sm:py-14 bg-transparent">
+    <section className="relative w-full py-16 sm:py-20 lg:py-24 bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <MotionWrapper variant="scaleUp">
           {/* Main 2-Column Split Card Container (Full max-w-7xl container width) */}

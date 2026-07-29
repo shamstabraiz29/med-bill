@@ -1,5 +1,5 @@
 export const largePracticeSectionClassName =
-  "relative w-full overflow-hidden bg-transparent pt-12 pb-16 lg:pt-16 lg:pb-24";
+  "relative w-full overflow-hidden bg-transparent pt-12 pb-16 lg:pt-16 lg:pb-20";
 
 export const largePracticeSectionAltClassName =
   "relative w-full overflow-hidden border-y border-[#E2E6EC] bg-slate-50/30 py-16 sm:py-20 lg:py-24";

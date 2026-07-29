@@ -110,7 +110,7 @@ export default function ContactFormSection({ data }: ContactFormSectionProps) {
   ];
 
   return (
-    <section id="contact-form-section" className="relative w-full py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-transparent">
+    <section id="contact-form-section" className="relative w-full py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-transparent">
       <div className="max-w-7xl mx-auto">
         <MotionWrapper variant="scaleUp">
           <div className="relative overflow-hidden rounded-2xl border border-[#E2E6EC] shadow-[0_12px_40px_rgba(15,23,42,0.06)] grid grid-cols-1 lg:grid-cols-12 bg-white">

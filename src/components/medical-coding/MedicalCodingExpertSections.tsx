@@ -14,7 +14,7 @@ export default function MedicalCodingExpertSections({ data }: MedicalCodingExper
 
   return (
     <section
-      className="w-full bg-transparent px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20"
+      className="relative w-full overflow-hidden bg-transparent py-16 sm:py-20 lg:py-24"
       aria-label="Medical coding expert services"
     >
       <div className="mx-auto max-w-7xl">

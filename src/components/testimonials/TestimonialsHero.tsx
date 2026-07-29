@@ -24,7 +24,7 @@ export default function TestimonialsHero({ data }: TestimonialsHeroProps) {
   const statsList = content.stats && content.stats.length > 0 ? content.stats : defaultTestimonialsData.hero.stats;
 
   return (
-    <section className="relative w-full pt-12 pb-8 sm:pt-16 sm:pb-12 bg-transparent text-center overflow-hidden">
+    <section className="relative w-full bg-transparent pt-12 pb-16 lg:pt-16 lg:pb-20 text-center overflow-hidden">
       {/* Background Ambient Pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:32px_32px] opacity-40 pointer-events-none" />
 

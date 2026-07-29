@@ -142,7 +142,7 @@ export default function CareersApplicationForm({ data }: CareersApplicationFormP
   ];
 
   return (
-    <section id="careers-apply-form" className="relative w-full py-8 sm:py-14 bg-transparent">
+    <section id="careers-apply-form" className="relative w-full py-16 sm:py-20 lg:py-24 bg-transparent overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <MotionWrapper variant="scaleUp">
           

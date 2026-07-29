@@ -22,7 +22,7 @@ export default function ScheduleDemoHero({ data }: ScheduleDemoHeroProps) {
   );
 
   return (
-    <section className="relative w-full pt-12 pb-8 sm:pt-16 sm:pb-12 bg-transparent overflow-hidden">
+    <section className="relative w-full bg-transparent pt-12 pb-16 lg:pt-16 lg:pb-20 overflow-hidden">
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
         <MotionWrapper variant="fadeIn">

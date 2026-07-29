@@ -22,7 +22,7 @@ export default function PricingHero({ data }: PricingHeroProps) {
   );
 
   return (
-    <section className="relative w-full pt-12 pb-8 sm:pt-16 sm:pb-12 bg-transparent overflow-hidden">
+    <section className="relative w-full bg-transparent pt-12 pb-16 lg:pt-16 lg:pb-20 overflow-hidden">
       {/* Ambient Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-b from-blue-50/70 via-indigo-50/20 to-transparent pointer-events-none -z-10 rounded-full blur-3xl" />
 

@@ -55,7 +55,7 @@ export default function MedicalBillingServices() {
   ];
 
   return (
-    <section className="py-16 sm:py-20 bg-transparent relative">
+    <section className="relative w-full py-16 sm:py-20 lg:py-24 bg-transparent overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

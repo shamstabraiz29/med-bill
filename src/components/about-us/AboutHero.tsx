@@ -17,7 +17,7 @@ export default function AboutHero({ data }: AboutHeroProps) {
   const checklistItems = content.checklist && content.checklist.length > 0 ? content.checklist : defaultAboutUsData.hero.checklist;
 
   return (
-    <section className="relative w-full pt-12 pb-16 sm:pt-16 sm:pb-20 bg-transparent overflow-hidden">
+    <section className="relative w-full bg-transparent pt-12 pb-16 lg:pt-16 lg:pb-20 overflow-hidden">
       {/* Ambient Radial Background Glows */}
       <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:32px_32px] opacity-40 pointer-events-none" />
       <div className="absolute -top-24 -left-24 w-[450px] h-[450px] bg-blue-500/8 rounded-full blur-3xl pointer-events-none" />

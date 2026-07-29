@@ -22,7 +22,7 @@ export default function ContactFaq({ data }: ContactFaqProps) {
   };
 
   return (
-    <section className="relative w-full py-16 sm:py-20 bg-transparent overflow-hidden">
+    <section className="relative w-full py-16 sm:py-20 lg:py-24 bg-transparent overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header Block - Centered */}

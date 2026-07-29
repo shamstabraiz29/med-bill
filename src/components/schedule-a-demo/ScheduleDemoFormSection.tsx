@@ -104,7 +104,7 @@ export default function ScheduleDemoFormSection({
   };
 
   return (
-    <section id="schedule-demo-form-section" className="relative w-full py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-transparent">
+    <section id="schedule-demo-form-section" className="relative w-full py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-transparent overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <MotionWrapper variant="scaleUp">
           <div className="bg-white rounded-2xl border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 overflow-hidden grid grid-cols-1 lg:grid-cols-12">

@@ -17,7 +17,7 @@ export default function CredentialingPricingPackages({ data }: CredentialingPric
   const content = data || defaultProviderCredentialingData.pricingPackages;
 
   return (
-    <section className="relative w-full pt-20 pb-16 sm:pt-24 sm:pb-20 lg:pt-28 lg:pb-24 bg-transparent border-t border-[#E2E6EC]">
+    <section className="relative w-full py-16 sm:py-20 lg:py-24 bg-transparent border-t border-[#E2E6EC] overflow-hidden">
       {/* Background Ambient Pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:32px_32px] opacity-30 pointer-events-none" />
 

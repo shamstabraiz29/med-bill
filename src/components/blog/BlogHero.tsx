@@ -14,7 +14,7 @@ export default function BlogHero() {
   ];
 
   return (
-    <section className="relative w-full pt-12 pb-12 sm:pt-16 sm:pb-16 bg-transparent text-center">
+    <section className="relative w-full bg-transparent pt-12 pb-16 lg:pt-16 lg:pb-20 text-center overflow-hidden">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4 sm:space-y-5">
         
         {/* Eyebrow Badge */}

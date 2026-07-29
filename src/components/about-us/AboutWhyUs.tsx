@@ -23,7 +23,7 @@ export default function AboutWhyUs({ data }: AboutWhyUsProps) {
   const metricsList = content.metrics && content.metrics.length > 0 ? content.metrics : defaultAboutUsData.whyUs.metrics;
 
   return (
-    <section className="relative w-full py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
+    <section className="relative w-full py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <MotionWrapper variant="scaleUp">
           <div className="relative overflow-hidden rounded-2xl bg-[#0F172A] border border-white/10 text-white p-8 sm:p-12 lg:p-14 shadow-2xl">

@@ -25,7 +25,7 @@ export default function AboutCapabilities({ data }: AboutCapabilitiesProps) {
   const capabilitiesList = content.capabilities && content.capabilities.length > 0 ? content.capabilities : defaultAboutUsData.capabilities.capabilities;
 
   return (
-    <section className="relative w-full py-12 sm:py-16 bg-transparent">
+    <section className="relative w-full py-16 sm:py-20 lg:py-24 bg-transparent overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 text-left">
         
         {/* Section Header */}

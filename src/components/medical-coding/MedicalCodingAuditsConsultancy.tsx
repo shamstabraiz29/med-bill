@@ -16,7 +16,7 @@ export default function MedicalCodingAuditsConsultancy({ data }: MedicalCodingAu
 
   return (
     <section
-      className="relative w-full overflow-hidden bg-transparent py-12 sm:py-16 lg:py-20"
+      className="relative w-full overflow-hidden bg-transparent py-16 sm:py-20 lg:py-24"
       aria-labelledby="medical-coding-audits-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
