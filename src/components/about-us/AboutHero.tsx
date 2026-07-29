@@ -30,7 +30,7 @@ export default function AboutHero({ data }: AboutHeroProps) {
               {content.badge}
             </SectionBadge>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#0F172A] leading-[1.15]">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F172A] tracking-[-0.02em] leading-[1.18]">
               {content.titlePlain}{" "}
               <span className="text-[#1D4ED8]">
                 {content.titleHighlight}

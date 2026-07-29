@@ -26,7 +26,7 @@ export default function BlogHero() {
 
         {/* Title */}
         <MotionWrapper variant="blurReveal">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F172A] tracking-[-0.02em] leading-[1.15]">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F172A] tracking-[-0.02em] leading-[1.18]">
             Knowledge Hub For{" "}
             <span className="bg-gradient-to-r from-[#1D4ED8] via-[#2563EB] to-[#3B82F6] bg-clip-text text-transparent">
               Medical Practice Growth

@@ -203,9 +203,9 @@ export default function CareersApplicationForm({ data }: CareersApplicationFormP
                 <div className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-[#1D4ED8]">
                   <span>CAREERS APPLICATION</span>
                 </div>
-                <h2 className="text-xl sm:text-2xl font-extrabold text-[#0F172A] tracking-tight">
+                <h3 className="text-xl sm:text-2xl font-bold text-[#0F172A] tracking-[-0.02em]">
                   {content.title}
-                </h2>
+                </h3>
                 <p className="text-xs text-[#475569] leading-relaxed">
                   {content.subtitle}
                 </p>

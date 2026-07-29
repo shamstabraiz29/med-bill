@@ -415,12 +415,12 @@ export default function ConsultationSection({
             </SectionBadge>
 
             <MotionWrapper variant="fadeUp" delay={0.1}>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F172A] tracking-[-0.02em] leading-[1.18] max-w-3xl mx-auto">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0F172A] tracking-[-0.02em] leading-[1.2] max-w-3xl mx-auto">
                 {consultationData.titlePlain}{" "}
                 <span className="text-[#1D4ED8]">
                   {consultationData.titleHighlight}
                 </span>
-              </h1>
+              </h2>
             </MotionWrapper>
 
             <MotionWrapper variant="fadeUp" delay={0.15}>
@@ -526,9 +526,9 @@ export default function ConsultationSection({
             <MotionWrapper variant="slideRight" className="lg:col-span-5 w-full">
               <div className="relative overflow-hidden rounded-2xl bg-white border border-[#E2E6EC] p-6 sm:p-8 shadow-[0_12px_40px_rgba(15,23,42,0.06)] flex flex-col gap-6 w-full">
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#1D4ED8] via-[#3B82F6] to-[#60A5FA]" />
-                <h2 className="text-xl sm:text-2xl font-bold text-[#0F172A]">
+                <h3 className="text-xl sm:text-2xl font-bold text-[#0F172A]">
                   {consultationData.formTitle}
-                </h2>
+                </h3>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                   <Input
                     type="text"

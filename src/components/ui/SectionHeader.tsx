@@ -48,7 +48,7 @@ export default function SectionHeader({
       )}
 
       <h2
-        className={`text-3xl sm:text-4xl lg:text-[2.6rem] font-bold tracking-[-0.02em] leading-[1.18] ${
+        className={`text-2xl sm:text-3xl lg:text-4xl font-bold tracking-[-0.02em] leading-[1.2] ${
           isDark ? "text-white" : "text-[#0F172A]"
         } ${titleClassName}`}
       >

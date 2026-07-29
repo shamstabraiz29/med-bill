@@ -27,7 +27,7 @@ export default function MedicalBillingHero() {
 
           {/* Title */}
           <MotionWrapper variant="fadeUp" delay={0.1}>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0F172A] dark:text-white tracking-[-0.02em] leading-[1.12]">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F172A] dark:text-white tracking-[-0.02em] leading-[1.18]">
               Transform Practice Revenue with Expert{" "}
               <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600 bg-clip-text text-transparent">
                 Medical Billing

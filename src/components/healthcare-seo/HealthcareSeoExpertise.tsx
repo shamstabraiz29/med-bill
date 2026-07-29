@@ -36,7 +36,7 @@ export default function HealthcareSeoExpertise({ data }: HealthcareSeoExpertiseP
               {content.badge}
             </SectionBadge>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-bold text-[#0F172A] tracking-[-0.02em] leading-[1.18]">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0F172A] tracking-[-0.02em] leading-[1.2]">
               {content.titlePrefix} <br />
               <span className="text-[#1D4ED8]">{content.titleHighlight}</span>
             </h2>

@@ -63,9 +63,9 @@ export default function DenialManagementServicesHeroForm({
     <MotionWrapper variant="scaleUp" delay={0.15}>
       <div className={`${denialManagementCardClassName} p-6 sm:p-8`}>
         <div className="mb-6 flex flex-col gap-3 border-b border-[#E2E6EC] pb-5 text-left sm:flex-row sm:items-center sm:justify-between">
-          <h2 className="text-xl font-bold tracking-[-0.02em] text-[#0F172A] sm:text-2xl">
+          <h3 className="text-xl font-bold tracking-[-0.02em] text-[#0F172A] sm:text-2xl">
             {content.formTitle}
-          </h2>
+          </h3>
           <p className="flex flex-wrap items-center gap-2 text-xs text-[#475569] sm:text-sm">
             Or Call at{" "}
             <a

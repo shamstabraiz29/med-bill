@@ -58,9 +58,9 @@ export default function SmallPracticesHeroDemoForm({
   return (
     <div className={`${smallPracticeCardClassName} p-6 sm:p-8`}>
       <div className="mb-6 border-b border-[#E2E6EC] pb-5 text-left">
-        <h2 className="text-xl font-bold tracking-[-0.02em] text-[#0F172A] sm:text-2xl">
+        <h3 className="text-xl font-bold tracking-[-0.02em] text-[#0F172A] sm:text-2xl">
           {formTitle}
-        </h2>
+        </h3>
         {formSubtitle && (
           <p className="mt-1 text-xs text-[#475569] sm:text-sm">{formSubtitle}</p>
         )}

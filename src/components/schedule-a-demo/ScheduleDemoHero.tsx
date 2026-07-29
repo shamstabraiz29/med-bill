@@ -34,7 +34,7 @@ export default function ScheduleDemoHero({ data }: ScheduleDemoHeroProps) {
         </MotionWrapper>
 
         <MotionWrapper variant="fadeUp" delay={0.1}>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#0F172A] max-w-4xl mx-auto leading-[1.18]">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-[#0F172A] max-w-4xl mx-auto leading-[1.18]">
             {content.titlePlain}{" "}
             <span className="text-[#1D4ED8]">{content.titleHighlight}</span>
           </h1>

@@ -52,10 +52,10 @@ export default function PhysicianBillingServicesConsultationForm() {
   return (
     <div id="physician-billing-consultation-form" className={`${physicianCardClassName} p-6 sm:p-8`}>
       <div className="mb-6 border-b border-[#E2E6EC] pb-5 text-left">
-        <h2 className="text-xl font-bold tracking-[-0.02em] text-[#0F172A] sm:text-2xl">
+        <h3 className="text-xl font-bold tracking-[-0.02em] text-[#0F172A] sm:text-2xl">
           Book No Obligation{" "}
           <span className="text-[#1D4ED8]">Consultation</span>
-        </h2>
+        </h3>
         <p className="mt-2 text-sm leading-[1.65] text-[#475569]">
           Enter your details for a free billing consultancy.
         </p>

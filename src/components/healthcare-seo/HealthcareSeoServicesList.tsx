@@ -33,10 +33,10 @@ export default function HealthcareSeoServicesList({ data }: HealthcareSeoService
         {/* Top Free Proposal CTA Banner */}
         <MotionWrapper variant="scaleUp">
           <div className="relative overflow-hidden rounded-2xl bg-[#0F172A] border border-white/10 text-white p-6 sm:p-8 mb-12 sm:mb-16 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
-            <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-center sm:text-left text-white">
+            <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-center sm:text-left text-white">
               {content.bannerTitlePlain}{" "}
               <span className="text-amber-300">{content.bannerTitleHighlight}</span>?
-            </h2>
+            </h3>
             <div className="flex-shrink-0">
               <AppButton
                 href={content.bannerCtaHref}

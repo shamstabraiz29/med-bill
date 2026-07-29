@@ -51,9 +51,9 @@ export default function OutsourceMedicalBillingHeroForm() {
   return (
     <div className="bg-white border border-[#E2E6EC] rounded-2xl p-6 sm:p-8 shadow-[0_8px_30px_rgba(15,23,42,0.06)] hover:border-[#1D4ED8]/30 transition-all duration-300">
       <div className="mb-6 border-b border-[#E2E6EC] pb-5 text-left">
-        <h2 className="text-xl font-bold tracking-[-0.02em] text-[#0F172A] sm:text-2xl">
+        <h3 className="text-xl font-bold tracking-[-0.02em] text-[#0F172A] sm:text-2xl">
           Tell Us Where to Send You the <span className="text-[#1D4ED8]">Demo</span>
-        </h2>
+        </h3>
         <p className="text-xs text-[#475569] mt-1.5 leading-relaxed">
           Fill out the form below to request a free custom billing analysis.
         </p>

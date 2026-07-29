@@ -19,7 +19,7 @@ export default function PageContainer({ title }: PageContainerProps) {
         </div>
         
         {/* Page Title */}
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-[#0F172A] tracking-[-0.02em] leading-[1.18] mb-6">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F172A] tracking-[-0.02em] leading-[1.18] mb-6">
           {title}
         </h1>
         

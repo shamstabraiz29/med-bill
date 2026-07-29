@@ -65,7 +65,7 @@ export default function HealthcareSeoScheduleConsultation({ data }: HealthcareSe
             
             {/* Header Title & Subtitle */}
             <div className="space-y-2">
-              <h2 className="text-3xl sm:text-4xl font-bold text-[#0F172A] tracking-tight">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0F172A] tracking-[-0.02em] leading-[1.2]">
                 {content.title}
               </h2>
               <p className="text-[#475569] text-sm sm:text-base">
