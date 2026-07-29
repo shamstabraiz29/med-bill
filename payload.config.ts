@@ -34,6 +34,7 @@ import { PracticeManagementSoftwarePms } from '@/payload/globals/PracticeManagem
 import { OutsourceMedicalBilling } from '@/payload/globals/OutsourceMedicalBilling'
 import { LargePractices } from '@/payload/globals/LargePractices'
 import { SmallPractices } from '@/payload/globals/SmallPractices'
+import { DenialManagementServices } from '@/payload/globals/DenialManagementServices'
 import { AboutUs } from '@/payload/globals/AboutUs'
 import { ContactUs } from '@/payload/globals/ContactUs'
 import { MedicalBillingPricing } from '@/payload/globals/MedicalBillingPricing'
@@ -89,6 +90,7 @@ export default buildConfig({
     LargePractices,
     SmallPractices,
     PhysicianBillingServices,
+    DenialManagementServices,
 
     // 5. Resources & Company Pages
     Careers,
@@ -104,6 +106,7 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URI || '',
     },
+    push: process.env.NODE_ENV !== 'production',
   }),
 
   editor: lexicalEditor(),

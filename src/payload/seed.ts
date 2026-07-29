@@ -17,6 +17,7 @@ import { defaultRevenueCycleManagementData } from '@/lib/defaults/revenueCycleMa
 import { defaultMedicalBillingData } from '@/lib/defaults/medicalBilling'
 import { defaultMedicalCodingData } from '@/lib/defaults/medicalCoding'
 import { defaultMedicalBillingAuditData } from '@/lib/defaults/medicalBillingAudit'
+import { defaultDenialManagementServicesData } from '@/lib/defaults/denialManagementServices'
 
 async function seed() {
   console.log('🌱 Seeding Payload CMS...')
@@ -130,6 +131,17 @@ async function seed() {
     console.log('✅ Medical Billing Audit global seeded successfully!')
   } catch (error) {
     console.error('❌ Failed to seed medical billing audit:', error)
+  }
+
+  // Seed Denial Management Services Global
+  try {
+    await payload.updateGlobal({
+      slug: 'denial-management-services' as any,
+      data: defaultDenialManagementServicesData as any,
+    })
+    console.log('✅ Denial Management Services global seeded successfully!')
+  } catch (error) {
+    console.error('❌ Failed to seed denial management services:', error)
   }
 
   console.log('🎉 Seeding complete!')

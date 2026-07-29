@@ -20,6 +20,7 @@ import {
   DenialManagementServicesWhoWeServeSection,
   DenialManagementServicesWorkflowSection,
 } from "@/components/denial-management-services";
+import { getDenialManagementServicesData } from "@/lib/payload";
 
 export const metadata: Metadata = {
   title: "Denial Management Services | BellMedEx",
@@ -27,28 +28,30 @@ export const metadata: Metadata = {
     "Get paid for denied medical coding claims and patient bills. BellMedEx provides effective denial management services with coding experts, appeal specialists, and denial prevention tactics.",
 };
 
-export default function DenialManagementServicesPage() {
+export default async function DenialManagementServicesPage() {
+  const data = await getDenialManagementServicesData();
+
   return (
     <div className="relative min-h-screen">
-      <DenialManagementServicesHero />
-      <DenialManagementServicesStatsSection />
-      <DenialManagementServicesAboutSection />
-      <DenialManagementServicesHelpSection />
-      <DenialManagementServicesWhoWeServeSection />
-      <DenialManagementServicesRevenueSection />
-      <DenialManagementServicesOfferingsSection />
-      <DenialManagementServicesOutsourceSection />
-      <DenialManagementServicesWorkflowSection />
-      <DenialManagementServicesCodeInsightSection />
-      <DenialManagementServicesCodeInsightHowItWorksSection />
-      <DenialManagementServicesCodeInsightCtaSection />
-      <DenialManagementServicesBenefitsSection />
-      <DenialManagementServicesDenialsCtaSection />
-      <DenialManagementServicesAppealCtaSection />
-      <DenialManagementServicesUnderpaymentRecoverySection />
-      <DenialManagementServicesPhysicianTestimonialsSection />
-      <DenialManagementServicesDeniedServicesBannerSection />
-      <DenialManagementServicesContactSupportSection />
+      <DenialManagementServicesHero data={data.hero} />
+      <DenialManagementServicesStatsSection data={data.stats} />
+      <DenialManagementServicesAboutSection data={data.about} />
+      <DenialManagementServicesHelpSection data={data.help} />
+      <DenialManagementServicesWhoWeServeSection data={data.whoWeServe} />
+      <DenialManagementServicesRevenueSection data={data.revenue} />
+      <DenialManagementServicesOfferingsSection data={data.serviceOfferings} />
+      <DenialManagementServicesOutsourceSection data={data.outsource} />
+      <DenialManagementServicesWorkflowSection data={data.workflow} />
+      <DenialManagementServicesCodeInsightSection data={data.codeInsight} />
+      <DenialManagementServicesCodeInsightHowItWorksSection data={data.codeInsightHowItWorks} />
+      <DenialManagementServicesCodeInsightCtaSection data={data.codeInsightCta} />
+      <DenialManagementServicesBenefitsSection data={data.benefits} />
+      <DenialManagementServicesDenialsCtaSection data={data.denialsCta} />
+      <DenialManagementServicesAppealCtaSection data={data.appealCta} />
+      <DenialManagementServicesUnderpaymentRecoverySection data={data.underpaymentRecovery} />
+      <DenialManagementServicesPhysicianTestimonialsSection data={data.physicianTestimonials} />
+      <DenialManagementServicesDeniedServicesBannerSection data={data.deniedServicesBanner} />
+      <DenialManagementServicesContactSupportSection data={data.contactSupport} />
     </div>
   );
 }

@@ -50,6 +50,8 @@ import type { PhysicianBillingServicesPageData } from '@/payload/types/physician
 import { defaultPhysicianBillingServicesData } from '@/lib/defaults/physicianBillingServices'
 import type { SmallPracticesPageData } from '@/payload/types/smallPractices'
 import { defaultSmallPracticesData } from '@/lib/defaults/smallPractices'
+import type { DenialManagementServicesPageData } from '@/payload/types/denialManagementServices'
+import { defaultDenialManagementServicesData } from '@/lib/defaults/denialManagementServices'
 
 /**
  * Fetches the Homepage global data from Payload CMS using the Local API.
@@ -597,6 +599,47 @@ export async function getSmallPracticesData(): Promise<SmallPracticesPageData> {
   } catch (error) {
     console.error('[Payload] Failed to fetch Small Practices data, using defaults:', error)
     return defaultSmallPracticesData
+  }
+}
+
+/**
+ * Fetches the Denial Management Services global data from Payload CMS.
+ */
+export async function getDenialManagementServicesData(): Promise<DenialManagementServicesPageData> {
+  try {
+    const payload = await getPayload({ config })
+    const data = await payload.findGlobal({ slug: 'denial-management-services' as any })
+    const merged = deepMerge(defaultDenialManagementServicesData, data as unknown as Partial<DenialManagementServicesPageData>)
+
+    // Normalize array fields to ensure frontend components receive expected string / object formats
+    if (merged?.hero?.featureBullets) {
+      merged.hero.featureBullets = merged.hero.featureBullets.map((b: any) =>
+        typeof b === 'string' ? b : b.text || b.label || '',
+      )
+    }
+    if (merged?.stats?.checklist) {
+      merged.stats.checklist = merged.stats.checklist.map((c: any) =>
+        typeof c === 'string' ? { label: c } : { label: c.label || c.text || '' },
+      )
+    }
+    if (merged?.codeInsight?.features) {
+      merged.codeInsight.features = merged.codeInsight.features.map((f: any) =>
+        typeof f === 'string' ? { label: f } : { label: f.label || f.text || '' },
+      )
+    }
+    if (merged?.revenue?.cards) {
+      merged.revenue.cards = merged.revenue.cards.map((card: any) => ({
+        ...card,
+        bullets: (card.bullets || []).map((b: any) =>
+          typeof b === 'string' ? b : b.text || b.label || '',
+        ),
+      }))
+    }
+
+    return merged
+  } catch (error) {
+    console.error('[Payload] Failed to fetch Denial Management Services data, using defaults:', error)
+    return defaultDenialManagementServicesData
   }
 }
 
