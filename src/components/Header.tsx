@@ -3,9 +3,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
-import { 
-  FileText, Binary, TrendingUp, ClipboardCheck, Network, Award, Search, 
-  Laptop, Zap, Activity, Calendar, 
+import {
+  FileText, Binary, TrendingUp, ClipboardCheck, Network, Award, Search,
+  Laptop, Zap, Activity, Calendar,
   Building2, Stethoscope, Building, ShieldAlert, UserCheck, HeartPulse,
   BookOpen, Briefcase, Download, Star, ChevronDown, Menu, X, ArrowRight, LucideIcon
 } from "lucide-react";
@@ -126,19 +126,19 @@ export default function Header() {
                 if (item.items) {
                   return (
                     <div key={item.name} className="relative group py-2 px-1">
-                      <button 
+                      <button
                         className="flex items-center gap-1 px-3 py-2 text-[14px] font-semibold text-[#475569] hover:text-[#1D4ED8] hover:bg-[#F5F7FA] rounded-xl transition-all cursor-pointer"
                         onClick={() => item.dropdownKey && handleDropdown(item.dropdownKey)}
                       >
                         {item.name}
                         <ChevronDown className="w-3.5 h-3.5 text-[#475569] group-hover:text-[#1D4ED8] transition-transform duration-200 group-hover:rotate-180" />
                       </button>
-                      
+
                       {/* Megamenu Dropdown Container */}
                       <div className={`absolute left-1/2 -translate-x-1/2 mt-3 ${item.widthClass || "w-56"} rounded-2xl bg-white shadow-[0_20px_50px_rgba(29,78,216,0.10)] border border-[#E2E6EC] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-3 group-hover:translate-y-0 z-50 overflow-hidden`}>
                         {/* Pointer Arrow */}
                         <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-white rotate-45 border-t border-l border-[#E2E6EC]" />
-                        
+
                         <div className={`relative p-3 bg-white ${item.cols === 2 ? 'grid grid-cols-2 gap-2' : 'flex flex-col gap-1.5'}`}>
                           {item.items.map((subItem) => {
                             const Icon = subItem.icon;
@@ -174,9 +174,9 @@ export default function Header() {
                 }
 
                 return (
-                  <Link 
+                  <Link
                     key={item.name}
-                    href={item.href || "#"} 
+                    href={item.href || "#"}
                     className="px-3.5 py-2 text-[14px] font-semibold text-[#475569] hover:text-[#1D4ED8] hover:bg-[#F5F7FA] rounded-xl transition-all"
                   >
                     {item.name}
@@ -185,16 +185,30 @@ export default function Header() {
               })}
             </nav>
 
-            {/* Action CTA Button */}
+            {/* Action CTA Button with Animated Glow & Live Indicator */}
             <div className="hidden lg:flex items-center">
-              <AppButton
-                href="/schedule-a-demo"
-                variant="primary"
-                size="md"
-                showArrow
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="relative group"
               >
-                Talk To An Expert
-              </AppButton>
+
+                {/* Pulsing Live Online Indicator Pill */}
+                <span className="absolute -top-1 -right-1 z-20 flex h-3.5 w-3.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-white shadow-sm"></span>
+                </span>
+
+                <AppButton
+                  href="/schedule-a-demo"
+                  variant="primary"
+                  size="md"
+                  showArrow
+                  className="relative z-10 shadow-lg shadow-blue-600/30 font-bold overflow-hidden"
+                >
+                  Talk To An Expert
+                </AppButton>
+              </motion.div>
             </div>
 
             {/* Mobile Menu Button */}
@@ -273,16 +287,30 @@ export default function Header() {
                   );
                 })}
 
-                {/* Mobile Call To Action */}
+                {/* Mobile Call To Action with Animation */}
                 <div className="pt-4 border-t border-[#E2E6EC] px-3">
-                  <Link
-                    href="/schedule-a-demo"
-                    onClick={() => setIsOpen(false)}
-                    className="flex items-center justify-center gap-2 w-full bg-[#1D4ED8] text-white font-bold py-3 rounded-2xl hover:bg-[#1E3A8A] transition-colors text-center shadow-md shadow-blue-900/15 tracking-wide"
+                  <motion.div
+                    whileTap={{ scale: 0.98 }}
+                    className="relative group"
                   >
-                    Talk To An Expert
-                    <ArrowRight className="w-5 h-5" />
-                  </Link>
+                    {/* Animated Ambient Glow Ring */}
+                    <span className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-[#1D4ED8] via-[#3B82F6] to-[#1D4ED8] opacity-50 blur-md animate-pulse" />
+
+                    {/* Pulsing Live Indicator */}
+                    <span className="absolute top-2.5 right-4 z-20 flex h-3 w-3">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 border border-white shadow-sm"></span>
+                    </span>
+
+                    <Link
+                      href="/schedule-a-demo"
+                      onClick={() => setIsOpen(false)}
+                      className="relative z-10 flex items-center justify-center gap-2 w-full bg-[#1D4ED8] text-white font-bold py-3.5 rounded-2xl hover:bg-[#1E3A8A] transition-all text-center shadow-lg shadow-blue-900/20 tracking-wide"
+                    >
+                      Talk To An Expert
+                      <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+                    </Link>
+                  </motion.div>
                 </div>
               </div>
             </motion.div>
