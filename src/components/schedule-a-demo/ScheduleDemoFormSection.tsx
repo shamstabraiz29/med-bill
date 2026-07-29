@@ -111,10 +111,6 @@ export default function ScheduleDemoFormSection({
             
             {/* Left Column: Spotlight Panel */}
             <div className="lg:col-span-5 bg-[#0F172A] text-white p-8 sm:p-10 lg:p-12 flex flex-col justify-between relative overflow-hidden text-left">
-              <div
-                className="pointer-events-none absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-[#1D4ED8]/20 blur-3xl"
-                aria-hidden="true"
-              />
 
               <div className="relative space-y-6 sm:space-y-8 z-10">
                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/15 border border-blue-400/20 text-blue-300 text-xs font-semibold">

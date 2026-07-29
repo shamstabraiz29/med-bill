@@ -22,14 +22,6 @@ export default function MedicalBillingAuditHero({ data }: MedicalBillingAuditHer
       className={auditSectionClassName}
       aria-labelledby="medical-billing-audit-hero-heading"
     >
-      <div
-        className="pointer-events-none absolute inset-0 opacity-40"
-        aria-hidden="true"
-      >
-        <div className="absolute -right-24 top-1/4 h-72 w-72 rounded-full bg-blue-100/80 blur-3xl" />
-        <div className="absolute -left-16 bottom-1/4 h-56 w-56 rounded-full bg-blue-50 blur-3xl" />
-      </div>
-
       <div className={auditContainerClassName}>
         <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:gap-16">
           <MotionWrapper

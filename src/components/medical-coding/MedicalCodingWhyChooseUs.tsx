@@ -61,9 +61,6 @@ export default function MedicalCodingWhyChooseUs({ data }: MedicalCodingWhyChoos
 
           <MotionWrapper variant="slideLeft" className="lg:col-span-6">
             <div className="relative mx-auto w-full max-w-xl lg:max-w-none">
-              <div className="absolute -left-4 top-8 -z-10 hidden h-24 w-24 rounded-full bg-blue-50 blur-2xl sm:block" />
-              <div className="absolute -right-3 bottom-10 -z-10 hidden h-28 w-28 rounded-full bg-[#1D4ED8]/10 blur-3xl sm:block" />
-
               <div className="relative overflow-hidden rounded-2xl border border-[#E2E6EC] shadow-md">
                 <div className="relative aspect-[4/5] min-h-[360px] sm:min-h-[460px]">
                   <Image

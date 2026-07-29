@@ -25,19 +25,6 @@ export default function OutsourceMedicalBillingHero({ data }: OutsourceMedicalBi
       className={outsourceHeroSectionClassName}
       aria-labelledby="outsource-medical-billing-hero-heading"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:32px_32px] opacity-40"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-24 -left-24 h-96 w-96 rounded-full bg-blue-500/5 blur-3xl"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute top-1/2 -right-24 h-96 w-96 rounded-full bg-indigo-500/5 blur-3xl"
-      />
-
       <div className={`${outsourceContainerClassName} relative z-10`}>
         <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-16">
           <MotionWrapper

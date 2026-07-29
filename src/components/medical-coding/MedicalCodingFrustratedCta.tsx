@@ -21,11 +21,6 @@ export default function MedicalCodingFrustratedCta({ data }: MedicalCodingFrustr
       <div className="w-full max-w-7xl">
         <MotionWrapper variant="scaleUp">
           <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0F172A] p-8 text-white shadow-lg sm:p-12">
-            <div
-              className="pointer-events-none absolute -left-16 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-[#1D4ED8]/15 blur-3xl"
-              aria-hidden="true"
-            />
-
             <div className="relative grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-10">
               <MotionWrapper variant="slideRight" className="space-y-3.5 text-left">
                 <h2

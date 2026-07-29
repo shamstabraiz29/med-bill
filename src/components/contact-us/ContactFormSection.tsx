@@ -117,10 +117,6 @@ export default function ContactFormSection({ data }: ContactFormSectionProps) {
             
             {/* Left Column: Contact info & Channels */}
             <div className="lg:col-span-5 p-7 sm:p-10 lg:p-12 bg-[#0F172A] text-white flex flex-col justify-between relative overflow-hidden text-left">
-              <div
-                className="pointer-events-none absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-[#1D4ED8]/20 blur-3xl"
-                aria-hidden="true"
-              />
 
               <div className="relative z-10 space-y-6 sm:space-y-8">
                 {/* Header */}

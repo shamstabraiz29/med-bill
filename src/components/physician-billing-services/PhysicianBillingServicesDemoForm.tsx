@@ -1,14 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { CheckCircle2, DollarSign, Mail, Phone, User } from "lucide-react";
+import { CheckCircle2, DollarSign, Mail, Phone, User, Lock } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import AppButton from "@/components/ui/AppButton";
-import SectionBadge from "@/components/ui/SectionBadge";
-import { physicianCardClassName } from "./physicianSectionLayout";
 
-const inputClassName =
-  "h-11 border-[#E2E6EC] bg-[#F8FAFC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 text-xs sm:text-sm rounded-lg transition-all";
+const darkInputClassName =
+  "bg-white/10 border-white/20 text-white placeholder:text-slate-400 focus:bg-white/15 focus:border-white/40 focus:ring-4 focus:ring-white/10 rounded-lg text-xs sm:text-sm transition-all";
 
 export default function PhysicianBillingServicesDemoForm() {
   const [formData, setFormData] = useState({
@@ -55,31 +53,32 @@ export default function PhysicianBillingServicesDemoForm() {
   };
 
   return (
-    <div className={`${physicianCardClassName} h-full p-6 sm:p-8`}>
-      <div className="mb-6 border-b border-[#E2E6EC] pb-5 text-left">
-        <SectionBadge variant="indigo" pulse className="mb-4">
-          Outsource Your Billing, Multiply Your Profits!
-        </SectionBadge>
-
-        <h2 className="text-xl font-bold tracking-[-0.02em] text-[#0F172A] sm:text-2xl">
-          Schedule a Free Demo for{" "}
-          <span className="text-[#1D4ED8]">100% Satisfaction</span>
-        </h2>
+    <div className="relative overflow-hidden rounded-2xl bg-white/[0.04] border border-white/10 p-6 sm:p-8 shadow-xl backdrop-blur-md text-left">
+      <div className="mb-6 space-y-1">
+        <div className="flex items-center gap-2">
+          <Lock className="h-4 w-4 text-amber-400 shrink-0" />
+          <h3 className="text-lg font-bold text-white tracking-tight">
+            Schedule Your Free Demo
+          </h3>
+        </div>
+        <p className="text-xs text-blue-200">
+          Fill out your details to multiply your practice profits.
+        </p>
       </div>
 
       {isSubmitted ? (
-        <div className="space-y-4 py-4 text-center sm:py-6">
-          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
+        <div className="space-y-4 py-6 text-center">
+          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
             <CheckCircle2 className="h-8 w-8" aria-hidden="true" />
           </div>
-          <h3 className="text-lg font-bold text-[#0F172A]">Demo Request Received!</h3>
-          <p className="mx-auto max-w-md text-sm leading-relaxed text-[#475569]">
-            Thank you. A BellMedEx billing specialist will contact you shortly.
+          <h3 className="text-lg font-bold text-white">Demo Request Received!</h3>
+          <p className="mx-auto max-w-md text-sm leading-relaxed text-emerald-200">
+            Thank you, {formData.name}. A BellMedEx billing specialist will contact you shortly.
           </p>
           <button
             type="button"
             onClick={() => setIsSubmitted(false)}
-            className="cursor-pointer text-xs font-semibold text-[#1D4ED8] hover:underline"
+            className="cursor-pointer text-xs font-semibold text-amber-300 hover:underline"
           >
             Submit another request
           </button>
@@ -87,71 +86,70 @@ export default function PhysicianBillingServicesDemoForm() {
       ) : (
         <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div className="space-y-2 text-left">
-            <label htmlFor="physician-billing-demo-name" className="block text-xs sm:text-sm font-medium text-slate-700">
-              Full Name <span className="text-red-500">*</span>
+            <label htmlFor="physician-billing-demo-name" className="block text-xs sm:text-sm font-medium text-slate-200">
+              Full Name <span className="text-red-400">*</span>
             </label>
             <Input
               id="physician-billing-demo-name"
               type="text"
               required
-              placeholder="Name"
+              placeholder="Dr. John Doe"
               aria-label="Name"
               icon={User}
               value={formData.name}
               onChange={(event) =>
                 setFormData((current) => ({ ...current, name: event.target.value }))
               }
-              className={inputClassName}
+              className={darkInputClassName}
             />
           </div>
 
           <div className="space-y-2 text-left">
-            <label htmlFor="physician-billing-demo-email" className="block text-xs sm:text-sm font-medium text-slate-700">
-              Email Address <span className="text-red-500">*</span>
+            <label htmlFor="physician-billing-demo-email" className="block text-xs sm:text-sm font-medium text-slate-200">
+              Email Address <span className="text-red-400">*</span>
             </label>
             <Input
               id="physician-billing-demo-email"
               type="email"
               required
-              placeholder="Email Address"
+              placeholder="doctor@practice.com"
               aria-label="Email Address"
               icon={Mail}
               value={formData.email}
               onChange={(event) =>
                 setFormData((current) => ({ ...current, email: event.target.value }))
               }
-              className={inputClassName}
+              className={darkInputClassName}
             />
           </div>
 
           <div className="space-y-2 text-left">
-            <label htmlFor="physician-billing-demo-phone" className="block text-xs sm:text-sm font-medium text-slate-700">
-              Phone Number <span className="text-red-500">*</span>
+            <label htmlFor="physician-billing-demo-phone" className="block text-xs sm:text-sm font-medium text-slate-200">
+              Phone Number <span className="text-red-400">*</span>
             </label>
             <Input
               id="physician-billing-demo-phone"
               type="tel"
               required
-              placeholder="Phone Number"
+              placeholder="(555) 000-0000"
               aria-label="Phone Number"
               icon={Phone}
               value={formData.phone}
               onChange={(event) =>
                 setFormData((current) => ({ ...current, phone: event.target.value }))
               }
-              className={inputClassName}
+              className={darkInputClassName}
             />
           </div>
 
           <div className="space-y-2 text-left">
-            <label htmlFor="physician-billing-demo-collections" className="block text-xs sm:text-sm font-medium text-slate-700">
-              Monthly Collections <span className="text-red-500">*</span>
+            <label htmlFor="physician-billing-demo-collections" className="block text-xs sm:text-sm font-medium text-slate-200">
+              Monthly Collections
             </label>
             <Input
               id="physician-billing-demo-collections"
               type="text"
-              required
-              placeholder="Monthly Collections"
+              placeholder="$50,000+"
               aria-label="Monthly Collections"
               icon={DollarSign}
               value={formData.monthlyCollections}
@@ -161,19 +159,20 @@ export default function PhysicianBillingServicesDemoForm() {
                   monthlyCollections: event.target.value,
                 }))
               }
-              className={inputClassName}
+              className={darkInputClassName}
             />
           </div>
 
-          <div className="sm:col-span-2">
+          <div className="sm:col-span-2 pt-2">
             <AppButton
               type="submit"
               disabled={isSubmitting}
-              variant="primary"
+              variant="secondary-dark"
               size="lg"
-              className="w-full uppercase tracking-wider"
+              showArrow
+              className="w-full justify-center tracking-wider uppercase font-extrabold"
             >
-              {isSubmitting ? "Processing..." : "Get Started"}
+              {isSubmitting ? "Processing..." : "Get Started Now"}
             </AppButton>
           </div>
         </form>

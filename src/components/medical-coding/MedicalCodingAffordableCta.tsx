@@ -21,11 +21,6 @@ export default function MedicalCodingAffordableCta({ data }: MedicalCodingAfford
       <div className="w-full max-w-7xl">
         <MotionWrapper variant="scaleUp">
           <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0F172A] p-8 text-white shadow-lg sm:p-12">
-            <div
-              className="pointer-events-none absolute -right-20 top-0 h-64 w-64 rounded-full bg-[#1D4ED8]/15 blur-3xl"
-              aria-hidden="true"
-            />
-
             <div className="relative flex flex-col gap-6 md:gap-8 lg:flex-row lg:items-center lg:justify-between">
               <div className="max-w-3xl space-y-3.5 text-left">
                 <h2

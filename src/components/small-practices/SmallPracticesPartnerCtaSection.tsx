@@ -32,38 +32,30 @@ export default function SmallPracticesPartnerCtaSection({ data }: SmallPractices
     >
       <div className={smallPracticeContainerClassName}>
         <MotionWrapper variant="scaleUp">
-          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0F172A] px-6 py-10 text-white shadow-lg sm:rounded-2xl sm:px-10 sm:py-12 lg:px-14 lg:py-16">
-            <div
-              className="pointer-events-none absolute -left-24 top-0 h-72 w-72 rounded-full bg-[#1D4ED8]/20 blur-3xl"
-              aria-hidden="true"
-            />
-            <div
-              className="pointer-events-none absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-[#1D4ED8]/10 blur-3xl"
-              aria-hidden="true"
-            />
+          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0F172A] p-8 text-white shadow-lg sm:p-12">
+            <div className="relative flex flex-col gap-6 md:gap-8 lg:flex-row lg:items-center lg:justify-between">
+              <div className="max-w-3xl space-y-3.5 text-left">
+                <SectionBadge variant="dark">{badge}</SectionBadge>
 
-            <div className="relative mx-auto flex max-w-4xl flex-col items-center text-center">
-              <SectionBadge variant="dark">{badge}</SectionBadge>
+                <h2
+                  id="small-practices-partner-cta-heading"
+                  className="text-2xl font-bold leading-tight tracking-tight sm:text-3xl sm:leading-snug lg:text-4xl"
+                >
+                  {titlePlain}{" "}
+                  <span className="font-bold text-amber-300">{titleHighlight}</span>
+                </h2>
 
-              <h2
-                id="small-practices-partner-cta-heading"
-                className="mt-5 text-2xl font-bold leading-tight tracking-tight sm:mt-6 sm:text-3xl sm:leading-snug lg:text-4xl"
-              >
-                {titlePlain}
-                <span className="font-bold text-amber-300">{titleHighlight}</span>
-              </h2>
+                <p className="text-sm leading-relaxed text-blue-200 sm:text-base">
+                  {description}
+                </p>
+              </div>
 
-              <p className="mt-5 max-w-3xl text-sm leading-relaxed text-blue-200 sm:mt-6 sm:text-base">
-                {description}
-              </p>
-
-              <div className="mt-8 w-full sm:mt-10 sm:w-auto">
+              <div className="flex shrink-0 items-start justify-start lg:items-center lg:justify-end">
                 <AppButton
                   href={ctaHref}
                   variant="secondary-dark"
                   size="lg"
                   showArrow
-                  className="w-full sm:w-auto sm:min-w-[240px]"
                 >
                   {ctaText}
                 </AppButton>
