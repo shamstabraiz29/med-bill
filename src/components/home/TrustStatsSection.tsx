@@ -109,7 +109,7 @@ export default function TrustStatsSection({ data }: TrustStatsSectionProps) {
 
             return (
               <MotionWrapper key={stat.id || idx} variant="staggerItem" className="h-full">
-                <div className="group relative flex flex-col justify-between h-full bg-white border border-[#E2E6EC] rounded-2xl p-8 hover:-translate-y-1 hover:border-[#1D4ED8]/20 hover:shadow-lg hover:shadow-[#1D4ED8]/8 transition-all duration-300">
+                <div className="group relative flex flex-col items-center text-center justify-between h-full bg-white border border-[#E2E6EC] rounded-2xl p-8 hover:-translate-y-1 hover:border-[#1D4ED8]/20 hover:shadow-lg hover:shadow-[#1D4ED8]/8 transition-all duration-300">
                   <div>
                     {/* Icon */}
                     <div className="text-[#1D4ED8] mb-6 transition-transform duration-300 group-hover:scale-110">

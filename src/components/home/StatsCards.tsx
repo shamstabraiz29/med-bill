@@ -90,7 +90,7 @@ export default function StatsCards({ data }: StatsCardsProps) {
               <MotionWrapper
                 key={stat.id || idx}
                 variant="staggerItem"
-                className="group flex flex-col items-center md:items-start text-center md:text-left py-6 md:py-2 md:px-10 lg:px-16 first:pt-0 md:first:pl-0 last:pb-0 md:last:pr-0"
+                className="group flex flex-col items-center text-center py-6 md:py-2 md:px-10 lg:px-16 first:pt-0 md:first:pl-0 last:pb-0 md:last:pr-0"
               >
                 {/* Minimalist Icon Indicator */}
                 <div className="mb-4 text-[#1D4ED8] transition-transform duration-300 group-hover:scale-110">
