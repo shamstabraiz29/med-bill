@@ -187,8 +187,13 @@ export const defaultMedicalBillingSoftwareData: MedicalBillingSoftwarePageData =
     ],
   },
   signUpCta: {
+    badge: "Medical Billing Software",
     titlePlain: "Get Started for ",
     titleHighlight: "Free Today",
+    subtitle:
+      "Transform your practice billing with our intuitive medical billing software. Zero upfront costs, 100% HIPAA compliant, and instant setup.",
+    buttonText: "Get Started For Free",
+    buttonLink: "/schedule-a-demo",
     features: [
       { label: "Invoicing", iconName: "Receipt" },
       { label: "Appointments", iconName: "Calendar" },

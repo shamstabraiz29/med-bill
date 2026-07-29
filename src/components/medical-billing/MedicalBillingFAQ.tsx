@@ -44,7 +44,7 @@ export default function MedicalBillingFAQ({ data }: MedicalBillingFAQProps) {
         <MotionWrapper
           variant="stagger"
           staggerDelay={0.05}
-          className="mx-auto max-w-4xl divide-y divide-[#E2E6EC]"
+          className="w-full divide-y divide-[#E2E6EC]"
         >
           {faqData.faqs.map((faq, idx) => {
             const isOpen = openIndex === idx;

@@ -79,8 +79,12 @@ export interface MedicalBillingSoftwareTestimonialsData {
 }
 
 export interface MedicalBillingSoftwareSignUpCtaData {
+  badge?: string;
   titlePlain: string;
   titleHighlight: string;
+  subtitle?: string;
+  buttonText?: string;
+  buttonLink?: string;
   features: SignUpFeatureItem[];
 }
 

@@ -85,7 +85,7 @@ export default function ElectronicHealthRecordsEhrFaq({ data }: ElectronicHealth
         <MotionWrapper
           variant="stagger"
           staggerDelay={0.05}
-          className="mx-auto max-w-4xl divide-y divide-[#E2E6EC]"
+          className="w-full divide-y divide-[#E2E6EC]"
         >
           {faqsList.map((faq, idx) => {
             const isOpen = openIndex === idx;
