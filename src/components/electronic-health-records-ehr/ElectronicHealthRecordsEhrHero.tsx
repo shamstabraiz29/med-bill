@@ -53,7 +53,7 @@ export default function ElectronicHealthRecordsEhrHero({ data }: ElectronicHealt
             </div>
           </div>
 
-          <div className="mx-auto mt-10 w-full max-w-7xl sm:mt-12">
+          <div className="mx-auto mt-10 w-full sm:mt-12 lg:mt-14">
             <EhrPlatformRatings />
           </div>
         </MotionWrapper>

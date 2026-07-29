@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import { Star } from "lucide-react";
-import HeroHeader from "@/components/home/HeroHeader";
-import CommandCapsuleForm from "@/components/home/CommandCapsuleForm";
-import DoctorVisuals from "@/components/home/DoctorVisuals";
-import MedicalBillingSoftwareTrustBar from "./MedicalBillingSoftwareTrustBar";
+import AppButton from "@/components/ui/AppButton";
+import SectionBadge from "@/components/ui/SectionBadge";
+import MotionWrapper from "@/components/ui/MotionWrapper";
+import EhrPlatformRatings from "@/components/electronic-health-records-ehr/EhrPlatformRatings";
+import { softwareContainerClassName } from "./softwareSectionLayout";
 
 import { MedicalBillingSoftwareHeroData } from "@/payload/types/medicalBillingSoftware";
 import { defaultMedicalBillingSoftwareData } from "@/lib/defaults/medicalBillingSoftware";
@@ -17,88 +17,61 @@ interface MedicalBillingSoftwareHeroProps {
 export default function MedicalBillingSoftwareHero({ data }: MedicalBillingSoftwareHeroProps) {
   const content = data || defaultMedicalBillingSoftwareData.hero;
 
+  const badge = content.badge || content.eyebrow || "Medical Billing Software";
+  const titlePlain = content.titlePlain || content.titlePrefix || "Medical Billing";
+  const titleHighlight = content.titleHighlight || "Software";
+  const subtitle =
+    content.subtitle ||
+    [content.description1, content.description2].filter(Boolean).join(" ") ||
+    "Automate billing workflow. Eliminate errors. Maximize reimbursement. 100% free to try. No credit card required.";
+  const buttonText = content.buttonText || "Get Started For Free";
+  const buttonLink = content.buttonLink || "/schedule-a-demo";
+
   return (
     <section
       className="relative w-full overflow-hidden bg-transparent pt-12 pb-16 lg:pt-16 lg:pb-20"
       aria-labelledby="medical-billing-software-hero-heading"
     >
-      <style>{`
-        @keyframes float-slow {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-8px) rotate(1.5deg); }
-        }
-        @keyframes float-medium {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(10px) rotate(-1.5deg); }
-        }
-        @keyframes spin-slow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        .animate-float-slow {
-          animation: float-slow 9s ease-in-out infinite;
-        }
-        .animate-float-medium {
-          animation: float-medium 7.5s ease-in-out infinite;
-        }
-        .animate-spin-slow {
-          animation: spin-slow 35s linear infinite;
-        }
-      `}</style>
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:32px_32px] opacity-30"
+      />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-8">
-          <div className="flex flex-col space-y-6 text-left lg:col-span-7">
-            <HeroHeader
-              headingId="medical-billing-software-hero-heading"
-              eyebrow={content.eyebrow}
-              titlePrefix={content.titlePrefix}
-              titleHighlight={content.titleHighlight}
-              description1={content.description1}
-              description2={content.description2}
-            />
+      <div className={`${softwareContainerClassName} relative z-10`}>
+        <MotionWrapper variant="fadeUp" className="w-full">
+          <div className="mx-auto flex w-full max-w-4xl flex-col items-center text-center">
+            <SectionBadge variant="indigo" pulse className="mb-4 sm:mb-5">
+              {badge}
+            </SectionBadge>
 
-            <CommandCapsuleForm
-              formTitle="Medical Billing Software Sign Up"
-              buttonLabel="Sign Up For Free"
-              namePlaceholder="Name"
-              emailPlaceholder="Email"
-              phonePlaceholder="Phone"
-              successTitle="Sign Up Request Received!"
-              successDescription="A BellMedEx specialist will contact you shortly to get you started."
-              trustBadges={["100% Free to Try", "No Credit Card Required", "HIPAA Compliant"]}
-            />
+            <h1
+              id="medical-billing-software-hero-heading"
+              className="text-3xl font-bold leading-[1.18] tracking-[-0.02em] text-[#0F172A] sm:text-4xl lg:text-5xl"
+            >
+              {titlePlain}{" "}
+              <span className="text-[#1D4ED8]">{titleHighlight}</span>
+            </h1>
 
-            <figure className="w-full max-w-2xl rounded-2xl border border-[#E2E6EC] bg-white p-5 shadow-[0_4px_24px_rgba(29,78,216,0.04)] sm:p-6">
-              <div
-                className="mb-3 flex items-center gap-0.5 text-[#EAB308]"
-                aria-label="5 out of 5 stars"
+            <p className="mt-4 max-w-3xl text-sm leading-[1.6] text-[#475569] sm:mt-6 sm:text-base">
+              {subtitle}
+            </p>
+
+            <div className="mt-8 sm:mt-10">
+              <AppButton
+                href={buttonLink}
+                variant="primary"
+                size="lg"
+                showArrow
               >
-                {Array.from({ length: 5 }).map((_, index) => (
-                  <Star
-                    key={index}
-                    className="h-4 w-4 fill-[#EAB308] text-[#EAB308]"
-                    aria-hidden="true"
-                  />
-                ))}
-              </div>
-
-              <blockquote className="text-xs leading-[1.65] text-[#475569] sm:text-[13px]">
-                &ldquo;{content.testimonialQuote}&rdquo;
-              </blockquote>
-
-              <figcaption className="mt-4 text-xs font-bold text-[#0F172A] sm:text-sm">
-                {content.testimonialAuthor} &ndash; {content.testimonialRole}
-              </figcaption>
-            </figure>
+                {buttonText}
+              </AppButton>
+            </div>
           </div>
 
-          <DoctorVisuals />
-        </div>
-
-        <div className="mt-12 border-t border-[#E2E6EC] pt-8 sm:mt-14 sm:pt-10 lg:mt-16">
-          <MedicalBillingSoftwareTrustBar />
-        </div>
+          <div className="mx-auto mt-10 w-full sm:mt-12 lg:mt-14">
+            <EhrPlatformRatings />
+          </div>
+        </MotionWrapper>
       </div>
     </section>
   );

@@ -58,7 +58,7 @@ export default function FusionediClearinghouseHero({ data }: FusionediClearingho
             </div>
           </div>
 
-          <div className="mx-auto mt-10 w-full max-w-3xl sm:mt-12">
+          <div className="mx-auto mt-10 w-full sm:mt-12 lg:mt-14">
             <EhrPlatformRatings />
           </div>
         </MotionWrapper>

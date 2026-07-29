@@ -2,11 +2,17 @@ import { MedicalBillingSoftwarePageData } from "@/payload/types/medicalBillingSo
 
 export const defaultMedicalBillingSoftwareData: MedicalBillingSoftwarePageData = {
   hero: {
+    badge: "Medical Billing Software",
     eyebrow: "Medical Billing Software",
+    titlePlain: "Medical Billing",
     titlePrefix: "Medical Billing",
     titleHighlight: "Software",
+    subtitle:
+      "Automate billing workflow, eliminate errors, and maximize reimbursement with our end-to-end medical billing software. 100% free to try. No credit card required.",
     description1: "Automate billing workflow. Eliminate errors. Maximize reimbursement.",
     description2: "100% free to try. No credit card required.",
+    buttonText: "Get Started For Free",
+    buttonLink: "/schedule-a-demo",
     testimonialQuote:
       "I would recommend this for large practices that aim to grow. It resolves claims, completes insurance verifications, and keeps payment postings organized.",
     testimonialAuthor: "Dr. L Presutti",

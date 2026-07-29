@@ -4,8 +4,7 @@ import React from "react";
 import AppButton from "@/components/ui/AppButton";
 import SectionBadge from "@/components/ui/SectionBadge";
 import MotionWrapper from "@/components/ui/MotionWrapper";
-import MedicalBillingSoftwareTrustBar from "@/components/medical-billing-software/MedicalBillingSoftwareTrustBar";
-import PmsHeroVisuals from "./PmsHeroVisuals";
+import EhrPlatformRatings from "@/components/electronic-health-records-ehr/EhrPlatformRatings";
 import { pmsContainerClassName } from "./pmsSectionLayout";
 import { defaultPracticeManagementSoftwarePmsData } from "@/lib/defaults/practiceManagementSoftwarePms";
 import type { PmsHeroData } from "@/payload/types/practiceManagementSoftwarePms";
@@ -22,7 +21,12 @@ export default function PracticeManagementSoftwarePmsHero({ data }: PracticeMana
       className="relative w-full overflow-hidden bg-transparent pt-12 pb-16 lg:pt-16 lg:pb-20"
       aria-labelledby="practice-management-software-pms-hero-heading"
     >
-      <div className={pmsContainerClassName}>
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:32px_32px] opacity-30"
+      />
+
+      <div className={`${pmsContainerClassName} relative z-10`}>
         <MotionWrapper variant="fadeUp" className="w-full">
           <div className="mx-auto flex w-full max-w-4xl flex-col items-center text-center">
             <SectionBadge variant="indigo" pulse className="mb-4 sm:mb-5">
@@ -50,15 +54,13 @@ export default function PracticeManagementSoftwarePmsHero({ data }: PracticeMana
                 size="lg"
                 showArrow
               >
-                {content.buttonText}
+                {content.buttonText || "Get Started For Free"}
               </AppButton>
             </div>
           </div>
 
-          <PmsHeroVisuals />
-
-          <div className="mx-auto mt-10 w-full max-w-7xl border-t border-[#E2E6EC] pt-8 sm:mt-12 sm:pt-10 lg:mt-14">
-            <MedicalBillingSoftwareTrustBar />
+          <div className="mx-auto mt-10 w-full sm:mt-12 lg:mt-14">
+            <EhrPlatformRatings />
           </div>
         </MotionWrapper>
       </div>

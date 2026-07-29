@@ -25,14 +25,19 @@ export interface SignUpFeatureItem {
 }
 
 export interface MedicalBillingSoftwareHeroData {
-  eyebrow: string;
-  titlePrefix: string;
-  titleHighlight: string;
-  description1: string;
-  description2: string;
-  testimonialQuote: string;
-  testimonialAuthor: string;
-  testimonialRole: string;
+  badge?: string;
+  eyebrow?: string;
+  titlePlain?: string;
+  titlePrefix?: string;
+  titleHighlight?: string;
+  subtitle?: string;
+  description1?: string;
+  description2?: string;
+  buttonText?: string;
+  buttonLink?: string;
+  testimonialQuote?: string;
+  testimonialAuthor?: string;
+  testimonialRole?: string;
 }
 
 export interface MedicalBillingSoftwareDeliversData {
