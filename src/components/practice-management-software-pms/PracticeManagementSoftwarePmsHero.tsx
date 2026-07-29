@@ -21,10 +21,7 @@ export default function PracticeManagementSoftwarePmsHero({ data }: PracticeMana
       className="relative w-full overflow-hidden bg-transparent pt-12 pb-16 lg:pt-16 lg:pb-20"
       aria-labelledby="practice-management-software-pms-hero-heading"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:32px_32px] opacity-30"
-      />
+
 
       <div className={`${pmsContainerClassName} relative z-10`}>
         <MotionWrapper variant="fadeUp" className="w-full">

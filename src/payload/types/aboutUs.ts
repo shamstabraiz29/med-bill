@@ -83,8 +83,10 @@ export interface AboutWhyUsData {
 }
 
 export interface AboutCtaData {
-  badge: string;
-  title: string;
+  badge?: string;
+  title?: string;
+  titlePlain?: string;
+  titleHighlight?: string;
   description: string;
   highlights: (string | { label?: string })[];
   buttonText: string;

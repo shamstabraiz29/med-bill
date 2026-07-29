@@ -20,7 +20,7 @@ export default async function MedicalBillingSoftwarePage() {
   const data = await getMedicalBillingSoftwareData();
 
   return (
-    <div className="flex min-h-screen flex-col py-4 sm:py-8">
+    <div className="relative min-h-screen">
       <MedicalBillingSoftwareHero data={data.hero} />
       <MedicalBillingSoftwareDelivers data={data.delivers} />
       <MedicalBillingSoftwareInAction data={data.inAction} />

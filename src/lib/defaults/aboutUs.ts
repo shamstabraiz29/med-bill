@@ -145,6 +145,8 @@ export const defaultAboutUsData: AboutUsPageData = {
   cta: {
     badge: "Partner With BellMedEx",
     title: "Ready to Experience Stress-Free Revenue Cycle Management?",
+    titlePlain: "Ready to Experience Stress-Free ",
+    titleHighlight: "Revenue Cycle Management?",
     description:
       "Schedule a free 1-on-1 consultation with our medical billing specialists today. We will audit your current collection performance and show you how to boost clean claims to 98%+.",
     highlights: [

@@ -17,13 +17,23 @@ export default function AboutCTA({ data }: AboutCTAProps) {
   const rawHighlights = content.highlights && content.highlights.length > 0 ? content.highlights : defaultAboutUsData.cta.highlights;
   const highlightsList = rawHighlights.map((h: any) => (typeof h === "string" ? h : h.label || ""));
 
-  let titlePlain = content.title;
-  let titleHighlight = "";
+  let titlePlain = content.titlePlain || "";
+  let titleHighlight = content.titleHighlight || "";
 
-  if (content.title.includes("Growth")) {
-    const parts = content.title.split("Growth");
-    titlePlain = parts[0];
-    titleHighlight = "Growth";
+  if (!titlePlain && content.title) {
+    if (content.title.includes("Revenue Cycle Management?")) {
+      const parts = content.title.split("Revenue Cycle Management?");
+      titlePlain = parts[0];
+      titleHighlight = "Revenue Cycle Management?";
+    } else {
+      const words = content.title.trim().split(" ");
+      if (words.length > 3) {
+        titleHighlight = words.slice(-3).join(" ");
+        titlePlain = words.slice(0, -3).join(" ");
+      } else {
+        titlePlain = content.title;
+      }
+    }
   }
 
   return (
@@ -42,13 +52,9 @@ export default function AboutCTA({ data }: AboutCTAProps) {
                 )}
 
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight leading-tight sm:leading-snug">
-                  {titleHighlight ? (
-                    <>
-                      {titlePlain}{" "}
-                      <span className="text-amber-300 font-bold">{titleHighlight}</span>
-                    </>
-                  ) : (
-                    content.title
+                  {titlePlain}{" "}
+                  {titleHighlight && (
+                    <span className="text-amber-300 font-bold">{titleHighlight}</span>
                   )}
                 </h2>
 
