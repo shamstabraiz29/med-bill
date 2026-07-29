@@ -115,50 +115,70 @@ export default function HealthcareSeoPricingUnlockCTA({ data }: HealthcareSeoPri
                     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                       
                       {/* 2x2 Form Inputs Grid */}
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
                         
                         {/* Name Input */}
-                        <Input
-                          type="text"
-                          placeholder="Name *"
-                          icon={User}
-                          required
-                          value={formData.name}
-                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:bg-white/10 focus:border-blue-400/50 focus:ring-blue-400/20"
-                        />
+                        <div className="space-y-2">
+                          <label className="block text-xs sm:text-sm font-medium text-slate-200">
+                            Full Name <span className="text-red-400">*</span>
+                          </label>
+                          <Input
+                            type="text"
+                            placeholder="Full Name"
+                            icon={User}
+                            required
+                            value={formData.name}
+                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                            className="bg-white/10 border-white/20 text-white placeholder:text-slate-400 focus:bg-white/15 focus:border-white/40 focus:ring-4 focus:ring-white/10 rounded-lg text-xs sm:text-sm transition-all"
+                          />
+                        </div>
 
                         {/* Email Input */}
-                        <Input
-                          type="email"
-                          placeholder="Email *"
-                          icon={Mail}
-                          required
-                          value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:bg-white/10 focus:border-blue-400/50 focus:ring-blue-400/20"
-                        />
+                        <div className="space-y-2">
+                          <label className="block text-xs sm:text-sm font-medium text-slate-200">
+                            Email Address <span className="text-red-400">*</span>
+                          </label>
+                          <Input
+                            type="email"
+                            placeholder="Email Address"
+                            icon={Mail}
+                            required
+                            value={formData.email}
+                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                            className="bg-white/10 border-white/20 text-white placeholder:text-slate-400 focus:bg-white/15 focus:border-white/40 focus:ring-4 focus:ring-white/10 rounded-lg text-xs sm:text-sm transition-all"
+                          />
+                        </div>
 
                         {/* Phone Number Input */}
-                        <Input
-                          type="tel"
-                          placeholder="Phone Number *"
-                          icon={Phone}
-                          required
-                          value={formData.phone}
-                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:bg-white/10 focus:border-blue-400/50 focus:ring-blue-400/20"
-                        />
+                        <div className="space-y-2">
+                          <label className="block text-xs sm:text-sm font-medium text-slate-200">
+                            Phone Number <span className="text-red-400">*</span>
+                          </label>
+                          <Input
+                            type="tel"
+                            placeholder="Phone Number"
+                            icon={Phone}
+                            required
+                            value={formData.phone}
+                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                            className="bg-white/10 border-white/20 text-white placeholder:text-slate-400 focus:bg-white/15 focus:border-white/40 focus:ring-4 focus:ring-white/10 rounded-lg text-xs sm:text-sm transition-all"
+                          />
+                        </div>
 
                         {/* Practice Type Input */}
-                        <Input
-                          type="text"
-                          placeholder="Practice Type"
-                          icon={Building2}
-                          value={formData.practiceType}
-                          onChange={(e) => setFormData({ ...formData, practiceType: e.target.value })}
-                          className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:bg-white/10 focus:border-blue-400/50 focus:ring-blue-400/20"
-                        />
+                        <div className="space-y-2">
+                          <label className="block text-xs sm:text-sm font-medium text-slate-200">
+                            Practice Type
+                          </label>
+                          <Input
+                            type="text"
+                            placeholder="e.g. Dental, Cardiology"
+                            icon={Building2}
+                            value={formData.practiceType}
+                            onChange={(e) => setFormData({ ...formData, practiceType: e.target.value })}
+                            className="bg-white/10 border-white/20 text-white placeholder:text-slate-400 focus:bg-white/15 focus:border-white/40 focus:ring-4 focus:ring-white/10 rounded-lg text-xs sm:text-sm transition-all"
+                          />
+                        </div>
 
                       </div>
 

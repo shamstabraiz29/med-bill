@@ -7,7 +7,7 @@ import AppButton from "@/components/ui/AppButton";
 import { physicianCardClassName } from "./physicianSectionLayout";
 
 const inputClassName =
-  "h-11 border-[#E2E6EC] bg-[#F8FAFC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40";
+  "h-11 border-[#E2E6EC] bg-[#F8FAFC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 text-xs sm:text-sm rounded-lg transition-all";
 
 export default function PhysicianBillingServicesConsultationForm() {
   const [formData, setFormData] = useState({
@@ -83,7 +83,10 @@ export default function PhysicianBillingServicesConsultationForm() {
           onSubmit={handleSubmit}
           className="grid grid-cols-1 gap-4 lg:grid-cols-12 lg:items-end lg:gap-5"
         >
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-3 space-y-2 text-left">
+            <label htmlFor="physician-billing-name" className="block text-xs sm:text-sm font-medium text-slate-700">
+              Full Name <span className="text-red-500">*</span>
+            </label>
             <Input
               id="physician-billing-name"
               type="text"
@@ -99,7 +102,10 @@ export default function PhysicianBillingServicesConsultationForm() {
             />
           </div>
 
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-3 space-y-2 text-left">
+            <label htmlFor="physician-billing-email" className="block text-xs sm:text-sm font-medium text-slate-700">
+              Email Address <span className="text-red-500">*</span>
+            </label>
             <Input
               id="physician-billing-email"
               type="email"
@@ -115,7 +121,10 @@ export default function PhysicianBillingServicesConsultationForm() {
             />
           </div>
 
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-3 space-y-2 text-left">
+            <label htmlFor="physician-billing-phone" className="block text-xs sm:text-sm font-medium text-slate-700">
+              Phone Number <span className="text-red-500">*</span>
+            </label>
             <Input
               id="physician-billing-phone"
               type="tel"

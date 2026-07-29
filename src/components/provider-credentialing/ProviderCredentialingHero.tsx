@@ -121,10 +121,10 @@ export default function ProviderCredentialingHero({ data }: ProviderCredentialin
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
-                      <div>
-                        <label className="block text-[11px] font-bold text-[#0F172A] uppercase tracking-wider mb-1.5">
-                          Full Name
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      <div className="space-y-2 text-left">
+                        <label className="block text-xs sm:text-sm font-medium text-slate-700">
+                          Full Name <span className="text-red-500">*</span>
                         </label>
                         <Input
                           type="text"
@@ -133,13 +133,13 @@ export default function ProviderCredentialingHero({ data }: ProviderCredentialin
                           icon={User}
                           value={formData.name}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          className="bg-slate-50/60 border-[#E2E6EC] focus:border-[#1D4ED8] focus:ring-[#1D4ED8]/20 focus:bg-white"
+                          className="bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-lg transition-all"
                         />
                       </div>
 
-                      <div>
-                        <label className="block text-[11px] font-bold text-[#0F172A] uppercase tracking-wider mb-1.5">
-                          Email Address
+                      <div className="space-y-2 text-left">
+                        <label className="block text-xs sm:text-sm font-medium text-slate-700">
+                          Email Address <span className="text-red-500">*</span>
                         </label>
                         <Input
                           type="email"
@@ -148,13 +148,13 @@ export default function ProviderCredentialingHero({ data }: ProviderCredentialin
                           icon={Mail}
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          className="bg-slate-50/60 border-[#E2E6EC] focus:border-[#1D4ED8] focus:ring-[#1D4ED8]/20 focus:bg-white"
+                          className="bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-lg transition-all"
                         />
                       </div>
 
-                      <div>
-                        <label className="block text-[11px] font-bold text-[#0F172A] uppercase tracking-wider mb-1.5">
-                          Phone Number
+                      <div className="space-y-2 text-left">
+                        <label className="block text-xs sm:text-sm font-medium text-slate-700">
+                          Phone Number <span className="text-red-500">*</span>
                         </label>
                         <Input
                           type="tel"
@@ -163,7 +163,7 @@ export default function ProviderCredentialingHero({ data }: ProviderCredentialin
                           icon={Phone}
                           value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          className="bg-slate-50/60 border-[#E2E6EC] focus:border-[#1D4ED8] focus:ring-[#1D4ED8]/20 focus:bg-white"
+                          className="bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-lg transition-all"
                         />
                       </div>
                     </div>

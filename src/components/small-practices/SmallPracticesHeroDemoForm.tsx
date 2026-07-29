@@ -7,7 +7,7 @@ import AppButton from "@/components/ui/AppButton";
 import { smallPracticeCardClassName } from "./smallPracticeSectionLayout";
 
 const inputClassName =
-  "bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11";
+  "bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-lg transition-all";
 
 interface SmallPracticesHeroDemoFormProps {
   formTitle?: string;
@@ -88,76 +88,61 @@ export default function SmallPracticesHeroDemoForm({
           onSubmit={handleSubmit}
           className="grid grid-cols-1 gap-4 sm:grid-cols-12 sm:items-end sm:gap-5"
         >
-          <div className="sm:col-span-3">
+          <div className="sm:col-span-3 space-y-2 text-left">
             <label
               htmlFor="sp-form-name"
-              className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-[#0F172A]"
+              className="block text-xs sm:text-sm font-medium text-slate-700"
             >
-              Full Name
+              Full Name <span className="text-red-500">*</span>
             </label>
-            <div className="relative">
-              <User
-                className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
-                aria-hidden="true"
-              />
-              <Input
-                id="sp-form-name"
-                type="text"
-                required
-                placeholder="Dr. John Doe"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className={`${inputClassName} pl-10`}
-              />
-            </div>
+            <Input
+              id="sp-form-name"
+              type="text"
+              required
+              placeholder="Dr. John Doe"
+              icon={User}
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              className={inputClassName}
+            />
           </div>
 
-          <div className="sm:col-span-3">
+          <div className="sm:col-span-3 space-y-2 text-left">
             <label
               htmlFor="sp-form-email"
-              className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-[#0F172A]"
+              className="block text-xs sm:text-sm font-medium text-slate-700"
             >
-              Email Address
+              Email Address <span className="text-red-500">*</span>
             </label>
-            <div className="relative">
-              <Mail
-                className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
-                aria-hidden="true"
-              />
-              <Input
-                id="sp-form-email"
-                type="email"
-                required
-                placeholder="john@clinic.com"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className={`${inputClassName} pl-10`}
-              />
-            </div>
+            <Input
+              id="sp-form-email"
+              type="email"
+              required
+              placeholder="john@clinic.com"
+              icon={Mail}
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              className={inputClassName}
+            />
           </div>
 
-          <div className="sm:col-span-3">
+          <div className="sm:col-span-3 space-y-2 text-left">
             <label
               htmlFor="sp-form-phone"
-              className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-[#0F172A]"
+              className="block text-xs sm:text-sm font-medium text-slate-700"
             >
-              Phone Number
+              Phone Number <span className="text-red-500">*</span>
             </label>
-            <div className="relative">
-              <Phone
-                className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
-                aria-hidden="true"
-              />
-              <Input
-                id="sp-form-phone"
-                type="tel"
-                required
-                placeholder="(555) 000-0000"
-                value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className={`${inputClassName} pl-10`}
-              />
-            </div>
+            <Input
+              id="sp-form-phone"
+              type="tel"
+              required
+              placeholder="(555) 000-0000"
+              icon={Phone}
+              value={formData.phone}
+              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+              className={inputClassName}
+            />
           </div>
 
           <div className="sm:col-span-3">

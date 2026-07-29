@@ -117,53 +117,65 @@ export default function RcmHero({ data }: RcmHeroProps) {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   
                   {/* Name Input */}
-                  <div className="space-y-1">
-                    <label className="text-xs font-semibold text-slate-500">Name</label>
+                  <div className="space-y-2 text-left">
+                    <label className="block text-xs sm:text-sm font-medium text-slate-700">
+                      Full Name <span className="text-red-500">*</span>
+                    </label>
                     <Input
                       type="text"
                       required
                       placeholder="Name"
+                      icon={User}
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="h-11 sm:h-12 border-[#D1D5DB] focus:border-[#1D4ED8] focus:ring-2 focus:ring-[#1D4ED8]/20 rounded-xl text-sm text-[#0F172A] placeholder:text-slate-400 bg-white font-medium"
+                      className="bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-lg transition-all"
                     />
                   </div>
 
                   {/* Email Input */}
-                  <div className="space-y-1">
-                    <label className="text-xs font-semibold text-slate-500">Email</label>
+                  <div className="space-y-2 text-left">
+                    <label className="block text-xs sm:text-sm font-medium text-slate-700">
+                      Email Address <span className="text-red-500">*</span>
+                    </label>
                     <Input
                       type="email"
                       required
-                      placeholder="Email"
+                      placeholder="Email Address"
+                      icon={Mail}
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="h-11 sm:h-12 border-[#D1D5DB] focus:border-[#1D4ED8] focus:ring-2 focus:ring-[#1D4ED8]/20 rounded-xl text-sm text-[#0F172A] placeholder:text-slate-400 bg-white font-medium"
+                      className="bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-lg transition-all"
                     />
                   </div>
 
                   {/* Monthly Collections Input */}
-                  <div className="space-y-1">
-                    <label className="text-xs font-semibold text-slate-500">Monthly Collections</label>
+                  <div className="space-y-2 text-left">
+                    <label className="block text-xs sm:text-sm font-medium text-slate-700">
+                      Monthly Collections
+                    </label>
                     <Input
                       type="text"
                       placeholder="Monthly Collections"
+                      icon={DollarSign}
                       value={formData.monthlyCollections}
                       onChange={(e) => setFormData({ ...formData, monthlyCollections: e.target.value })}
-                      className="h-11 sm:h-12 border-[#D1D5DB] focus:border-[#1D4ED8] focus:ring-2 focus:ring-[#1D4ED8]/20 rounded-xl text-sm text-[#0F172A] placeholder:text-slate-400 bg-white font-medium"
+                      className="bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-lg transition-all"
                     />
                   </div>
 
                   {/* Phone Number Input */}
-                  <div className="space-y-1">
-                    <label className="text-xs font-semibold text-slate-500">Phone Number</label>
+                  <div className="space-y-2 text-left">
+                    <label className="block text-xs sm:text-sm font-medium text-slate-700">
+                      Phone Number <span className="text-red-500">*</span>
+                    </label>
                     <Input
                       type="tel"
                       required
                       placeholder="Phone Number"
+                      icon={Phone}
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="h-11 sm:h-12 border-[#D1D5DB] focus:border-[#1D4ED8] focus:ring-2 focus:ring-[#1D4ED8]/20 rounded-xl text-sm text-[#0F172A] placeholder:text-slate-400 bg-white font-medium"
+                      className="bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-lg transition-all"
                     />
                   </div>
 

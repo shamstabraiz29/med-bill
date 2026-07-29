@@ -16,7 +16,7 @@ import {
 } from "./smallPracticeSectionLayout";
 
 const inputClassName =
-  "h-11 border-[#E2E6EC] bg-[#F8FAFC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40";
+  "h-11 border-[#E2E6EC] bg-[#F8FAFC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 text-xs sm:text-sm rounded-lg transition-all";
 
 const SPECIALTY_OPTIONS = defaultMedicalBillingData.specialtySolutions.options.map(
   (option) => option.label
@@ -114,7 +114,10 @@ export default function SmallPracticesSpecialtyFormSection({ data }: SmallPracti
                 onSubmit={handleSubmit}
                 className="grid grid-cols-1 gap-4 lg:grid-cols-12 lg:items-end lg:gap-5"
               >
-                <div className="lg:col-span-3">
+                <div className="lg:col-span-3 space-y-2 text-left">
+                  <label htmlFor="small-practices-specialty" className="block text-xs sm:text-sm font-medium text-slate-700">
+                    Specialty <span className="text-red-500">*</span>
+                  </label>
                   <FormSelect
                     id="small-practices-specialty"
                     name="specialty"
@@ -129,7 +132,10 @@ export default function SmallPracticesSpecialtyFormSection({ data }: SmallPracti
                   />
                 </div>
 
-                <div className="lg:col-span-2">
+                <div className="lg:col-span-3 space-y-2 text-left">
+                  <label htmlFor="small-practices-specialty-name" className="block text-xs sm:text-sm font-medium text-slate-700">
+                    Full Name <span className="text-red-500">*</span>
+                  </label>
                   <Input
                     id="small-practices-specialty-name"
                     type="text"
@@ -145,13 +151,16 @@ export default function SmallPracticesSpecialtyFormSection({ data }: SmallPracti
                   />
                 </div>
 
-                <div className="lg:col-span-3">
+                <div className="lg:col-span-3 space-y-2 text-left">
+                  <label htmlFor="small-practices-specialty-email" className="block text-xs sm:text-sm font-medium text-slate-700">
+                    Email Address <span className="text-red-500">*</span>
+                  </label>
                   <Input
                     id="small-practices-specialty-email"
                     type="email"
                     required
-                    placeholder="Email"
-                    aria-label="Email"
+                    placeholder="Email Address"
+                    aria-label="Email Address"
                     icon={Mail}
                     value={formData.email}
                     onChange={(event) =>
@@ -161,7 +170,10 @@ export default function SmallPracticesSpecialtyFormSection({ data }: SmallPracti
                   />
                 </div>
 
-                <div className="lg:col-span-2">
+                <div className="lg:col-span-3 space-y-2 text-left">
+                  <label htmlFor="small-practices-specialty-phone" className="block text-xs sm:text-sm font-medium text-slate-700">
+                    Phone Number <span className="text-red-500">*</span>
+                  </label>
                   <Input
                     id="small-practices-specialty-phone"
                     type="tel"
@@ -177,13 +189,13 @@ export default function SmallPracticesSpecialtyFormSection({ data }: SmallPracti
                   />
                 </div>
 
-                <div className="lg:col-span-2">
+                <div className="lg:col-span-12 pt-2">
                   <AppButton
                     type="submit"
                     disabled={isSubmitting}
                     variant="primary"
                     size="lg"
-                    className="w-full uppercase tracking-wider"
+                    className="w-full uppercase tracking-wider py-3.5"
                   >
                     {isSubmitting ? "Processing..." : "Submit"}
                   </AppButton>

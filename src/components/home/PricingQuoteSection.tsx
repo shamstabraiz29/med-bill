@@ -11,6 +11,7 @@ import {
   Check
 } from "lucide-react";
 import AppButton from "@/components/ui/AppButton";
+import { Input } from "@/components/ui/input";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { getIcon } from "@/lib/icons";
@@ -227,88 +228,79 @@ export default function PricingQuoteSection({ data }: PricingQuoteSectionProps) 
             {/* STEP 3: Contact Info */}
             {step === 3 && (
               <div className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   
                   {/* Practice Name */}
-                  <div className="space-y-1 relative">
-                    <label htmlFor="practiceName" className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-                      Practice Name *
+                  <div className="space-y-2 text-left">
+                    <label htmlFor="practiceName" className="block text-xs sm:text-sm font-medium text-slate-700">
+                      Practice Name <span className="text-red-500">*</span>
                     </label>
-                    <div className="flex items-center border-b border-slate-200 focus-within:border-blue-600 transition-colors py-1">
-                      <Building2 className="w-4 h-4 text-slate-400 mr-2.5 shrink-0" />
-                      <input
-                        id="practiceName"
-                        name="practiceName"
-                        type="text"
-                        required
-                        value={formData.practiceName}
-                        onChange={handleInputChange}
-                        placeholder="e.g. Metro Medical Center"
-                        className="w-full bg-transparent text-sm text-slate-800 placeholder:text-slate-300 outline-none py-1.5"
-                      />
-                    </div>
+                    <Input
+                      id="practiceName"
+                      name="practiceName"
+                      type="text"
+                      required
+                      icon={Building2}
+                      value={formData.practiceName}
+                      onChange={handleInputChange}
+                      placeholder="e.g. Metro Medical Center"
+                      className="bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-lg transition-all"
+                    />
                   </div>
 
                   {/* Contact Person */}
-                  <div className="space-y-1 relative">
-                    <label htmlFor="contactPerson" className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-                      Contact Person *
+                  <div className="space-y-2 text-left">
+                    <label htmlFor="contactPerson" className="block text-xs sm:text-sm font-medium text-slate-700">
+                      Contact Person <span className="text-red-500">*</span>
                     </label>
-                    <div className="flex items-center border-b border-slate-200 focus-within:border-blue-600 transition-colors py-1">
-                      <User className="w-4 h-4 text-slate-400 mr-2.5 shrink-0" />
-                      <input
-                        id="contactPerson"
-                        name="contactPerson"
-                        type="text"
-                        required
-                        value={formData.contactPerson}
-                        onChange={handleInputChange}
-                        placeholder="e.g. John Doe"
-                        className="w-full bg-transparent text-sm text-slate-800 placeholder:text-slate-300 outline-none py-1.5"
-                      />
-                    </div>
+                    <Input
+                      id="contactPerson"
+                      name="contactPerson"
+                      type="text"
+                      required
+                      icon={User}
+                      value={formData.contactPerson}
+                      onChange={handleInputChange}
+                      placeholder="e.g. John Doe"
+                      className="bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-lg transition-all"
+                    />
                   </div>
 
                   {/* Email Address */}
-                  <div className="space-y-1 relative">
-                    <label htmlFor="email" className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-                      Email Address *
+                  <div className="space-y-2 text-left">
+                    <label htmlFor="email" className="block text-xs sm:text-sm font-medium text-slate-700">
+                      Email Address <span className="text-red-500">*</span>
                     </label>
-                    <div className="flex items-center border-b border-slate-200 focus-within:border-blue-600 transition-colors py-1">
-                      <Mail className="w-4 h-4 text-slate-400 mr-2.5 shrink-0" />
-                      <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        required
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        placeholder="e.g. john@example.com"
-                        className="w-full bg-transparent text-sm text-slate-800 placeholder:text-slate-300 outline-none py-1.5"
-                      />
-                    </div>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      icon={Mail}
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      placeholder="e.g. john@example.com"
+                      className="bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-lg transition-all"
+                    />
                   </div>
 
                   {/* Phone Number */}
-                  <div className="space-y-1 relative">
-                    <label htmlFor="phone" className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-                      Phone Number *
+                  <div className="space-y-2 text-left">
+                    <label htmlFor="phone" className="block text-xs sm:text-sm font-medium text-slate-700">
+                      Phone Number <span className="text-red-500">*</span>
                     </label>
-                    <div className="flex items-center border-b border-slate-200 focus-within:border-blue-600 transition-colors py-1">
-                      <Phone className="w-4 h-4 text-slate-400 mr-2.5 shrink-0" />
-                      <input
-                        id="phone"
-                        name="phone"
-                        type="tel"
-                        required
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        placeholder="e.g. (555) 000-0000"
-                        className="w-full bg-transparent text-sm text-slate-800 placeholder:text-slate-300 outline-none py-1.5"
-                      />
-                    </div>
+                    <Input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      required
+                      icon={Phone}
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      placeholder="e.g. (555) 000-0000"
+                      className="bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-lg transition-all"
+                    />
                   </div>
-
                 </div>
               </div>
             )}

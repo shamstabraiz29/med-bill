@@ -8,7 +8,7 @@ import SectionBadge from "@/components/ui/SectionBadge";
 import { physicianCardClassName } from "./physicianSectionLayout";
 
 const inputClassName =
-  "h-11 border-[#E2E6EC] bg-[#F8FAFC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40";
+  "h-11 border-[#E2E6EC] bg-[#F8FAFC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 text-xs sm:text-sm rounded-lg transition-all";
 
 export default function PhysicianBillingServicesDemoForm() {
   const [formData, setFormData] = useState({
@@ -86,64 +86,84 @@ export default function PhysicianBillingServicesDemoForm() {
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <Input
-            id="physician-billing-demo-name"
-            type="text"
-            required
-            placeholder="Name"
-            aria-label="Name"
-            icon={User}
-            value={formData.name}
-            onChange={(event) =>
-              setFormData((current) => ({ ...current, name: event.target.value }))
-            }
-            className={inputClassName}
-          />
+          <div className="space-y-2 text-left">
+            <label htmlFor="physician-billing-demo-name" className="block text-xs sm:text-sm font-medium text-slate-700">
+              Full Name <span className="text-red-500">*</span>
+            </label>
+            <Input
+              id="physician-billing-demo-name"
+              type="text"
+              required
+              placeholder="Name"
+              aria-label="Name"
+              icon={User}
+              value={formData.name}
+              onChange={(event) =>
+                setFormData((current) => ({ ...current, name: event.target.value }))
+              }
+              className={inputClassName}
+            />
+          </div>
 
-          <Input
-            id="physician-billing-demo-email"
-            type="email"
-            required
-            placeholder="Email Address"
-            aria-label="Email Address"
-            icon={Mail}
-            value={formData.email}
-            onChange={(event) =>
-              setFormData((current) => ({ ...current, email: event.target.value }))
-            }
-            className={inputClassName}
-          />
+          <div className="space-y-2 text-left">
+            <label htmlFor="physician-billing-demo-email" className="block text-xs sm:text-sm font-medium text-slate-700">
+              Email Address <span className="text-red-500">*</span>
+            </label>
+            <Input
+              id="physician-billing-demo-email"
+              type="email"
+              required
+              placeholder="Email Address"
+              aria-label="Email Address"
+              icon={Mail}
+              value={formData.email}
+              onChange={(event) =>
+                setFormData((current) => ({ ...current, email: event.target.value }))
+              }
+              className={inputClassName}
+            />
+          </div>
 
-          <Input
-            id="physician-billing-demo-phone"
-            type="tel"
-            required
-            placeholder="Phone Number"
-            aria-label="Phone Number"
-            icon={Phone}
-            value={formData.phone}
-            onChange={(event) =>
-              setFormData((current) => ({ ...current, phone: event.target.value }))
-            }
-            className={inputClassName}
-          />
+          <div className="space-y-2 text-left">
+            <label htmlFor="physician-billing-demo-phone" className="block text-xs sm:text-sm font-medium text-slate-700">
+              Phone Number <span className="text-red-500">*</span>
+            </label>
+            <Input
+              id="physician-billing-demo-phone"
+              type="tel"
+              required
+              placeholder="Phone Number"
+              aria-label="Phone Number"
+              icon={Phone}
+              value={formData.phone}
+              onChange={(event) =>
+                setFormData((current) => ({ ...current, phone: event.target.value }))
+              }
+              className={inputClassName}
+            />
+          </div>
 
-          <Input
-            id="physician-billing-demo-collections"
-            type="text"
-            required
-            placeholder="Monthly Collections"
-            aria-label="Monthly Collections"
-            icon={DollarSign}
-            value={formData.monthlyCollections}
-            onChange={(event) =>
-              setFormData((current) => ({
-                ...current,
-                monthlyCollections: event.target.value,
-              }))
-            }
-            className={inputClassName}
-          />
+          <div className="space-y-2 text-left">
+            <label htmlFor="physician-billing-demo-collections" className="block text-xs sm:text-sm font-medium text-slate-700">
+              Monthly Collections <span className="text-red-500">*</span>
+            </label>
+            <Input
+              id="physician-billing-demo-collections"
+              type="text"
+              required
+              placeholder="Monthly Collections"
+              aria-label="Monthly Collections"
+              icon={DollarSign}
+              value={formData.monthlyCollections}
+              onChange={(event) =>
+                setFormData((current) => ({
+                  ...current,
+                  monthlyCollections: event.target.value,
+                }))
+              }
+              className={inputClassName}
+            />
+          </div>
 
           <div className="sm:col-span-2">
             <AppButton

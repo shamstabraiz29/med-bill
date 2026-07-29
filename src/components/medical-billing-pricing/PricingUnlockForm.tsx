@@ -23,7 +23,7 @@ import { defaultMedicalBillingPricingData } from "@/lib/defaults/medicalBillingP
 import type { PricingUnlockFormData } from "@/payload/types/medicalBillingPricing";
 
 const inputClassName =
-  "bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-xl transition-all";
+  "bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-lg transition-all";
 
 interface PricingUnlockFormProps {
   data?: PricingUnlockFormData;
@@ -217,10 +217,10 @@ export default function PricingUnlockForm({ data }: PricingUnlockFormProps) {
 
                   {/* Row 1: Role Dropdown & Practice Name */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-1">
+                    <div className="space-y-2">
                       <label
                         htmlFor="pricing-role"
-                        className="text-xs font-semibold text-[#0F172A]"
+                        className="block text-xs sm:text-sm font-medium text-slate-700"
                       >
                         I am a <span className="text-red-500">*</span>
                       </label>
@@ -231,14 +231,14 @@ export default function PricingUnlockForm({ data }: PricingUnlockFormProps) {
                         onValueChange={(val) =>
                           setFormData((prev) => ({ ...prev, role: val || "" }))
                         }
-                        className="w-full bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] focus-visible:bg-white focus-visible:border-[#1D4ED8] h-11 text-xs sm:text-sm rounded-xl"
+                        className="w-full bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] focus-visible:bg-white focus-visible:border-[#1D4ED8] h-11 text-xs sm:text-sm rounded-lg"
                       />
                     </div>
 
-                    <div className="space-y-1">
+                    <div className="space-y-2">
                       <label
                         htmlFor="pricing-org"
-                        className="text-xs font-semibold text-[#0F172A]"
+                        className="block text-xs sm:text-sm font-medium text-slate-700"
                       >
                         Practice / Company Name{" "}
                         <span className="text-red-500">*</span>
@@ -263,10 +263,10 @@ export default function PricingUnlockForm({ data }: PricingUnlockFormProps) {
 
                   {/* Row 2: Full Name & Monthly Collections */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-1">
+                    <div className="space-y-2">
                       <label
                         htmlFor="pricing-name"
-                        className="text-xs font-semibold text-[#0F172A]"
+                        className="block text-xs sm:text-sm font-medium text-slate-700"
                       >
                         Full Name <span className="text-red-500">*</span>
                       </label>
@@ -287,10 +287,10 @@ export default function PricingUnlockForm({ data }: PricingUnlockFormProps) {
                       />
                     </div>
 
-                    <div className="space-y-1">
+                    <div className="space-y-2">
                       <label
                         htmlFor="pricing-collections"
-                        className="text-xs font-semibold text-[#0F172A]"
+                        className="block text-xs sm:text-sm font-medium text-slate-700"
                       >
                         Monthly Collections <span className="text-red-500">*</span>
                       </label>
@@ -304,17 +304,17 @@ export default function PricingUnlockForm({ data }: PricingUnlockFormProps) {
                             collections: val || "",
                           }))
                         }
-                        className="w-full bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] focus-visible:bg-white focus-visible:border-[#1D4ED8] h-11 text-xs sm:text-sm rounded-xl"
+                        className="w-full bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] focus-visible:bg-white focus-visible:border-[#1D4ED8] h-11 text-xs sm:text-sm rounded-lg"
                       />
                     </div>
                   </div>
 
                   {/* Row 3: Email Address & Phone Number */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-1">
+                    <div className="space-y-2">
                       <label
                         htmlFor="pricing-email"
-                        className="text-xs font-semibold text-[#0F172A]"
+                        className="block text-xs sm:text-sm font-medium text-slate-700"
                       >
                         Email Address <span className="text-red-500">*</span>
                       </label>
@@ -335,10 +335,10 @@ export default function PricingUnlockForm({ data }: PricingUnlockFormProps) {
                       />
                     </div>
 
-                    <div className="space-y-1">
+                    <div className="space-y-2">
                       <label
                         htmlFor="pricing-phone"
-                        className="text-xs font-semibold text-[#0F172A]"
+                        className="block text-xs sm:text-sm font-medium text-slate-700"
                       >
                         Phone Number <span className="text-red-500">*</span>
                       </label>
@@ -361,10 +361,10 @@ export default function PricingUnlockForm({ data }: PricingUnlockFormProps) {
                   </div>
 
                   {/* Row 4: Message */}
-                  <div className="space-y-1">
+                  <div className="space-y-2">
                     <label
                       htmlFor="pricing-message"
-                      className="text-xs font-semibold text-[#0F172A]"
+                      className="block text-xs sm:text-sm font-medium text-slate-700"
                     >
                       Message / Special Requirements
                     </label>
@@ -380,7 +380,7 @@ export default function PricingUnlockForm({ data }: PricingUnlockFormProps) {
                             message: e.target.value,
                           }))
                         }
-                        className="w-full rounded-xl bg-[#F8FAFC] border border-[#E2E6EC] p-3 text-xs sm:text-sm text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 outline-none transition-all resize-none"
+                        className="w-full rounded-lg bg-[#F8FAFC] border border-[#E2E6EC] p-3 text-xs sm:text-sm text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 outline-none transition-all resize-none"
                       />
                     </div>
                   </div>

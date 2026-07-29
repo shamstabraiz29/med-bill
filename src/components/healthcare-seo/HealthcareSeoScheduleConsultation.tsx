@@ -85,31 +85,31 @@ export default function HealthcareSeoScheduleConsultation({ data }: HealthcareSe
               <form onSubmit={handleSubmit} className="space-y-5">
                 
                 {/* Name Label & Inputs (First & Last) */}
-                <div className="space-y-1.5">
-                  <label className="text-xs sm:text-[13px] font-semibold text-slate-500 block">
+                <div className="space-y-2">
+                  <label className="block text-xs sm:text-sm font-medium text-slate-700">
                     Name
                   </label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <Input
                       type="text"
-                      placeholder="First"
+                      placeholder="First Name"
                       value={formData.firstName}
                       onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                      className="h-11 sm:h-12 border-[#D1D5DB] focus:border-[#2E2874] focus:ring-2 focus:ring-[#2E2874]/20 rounded-xl text-sm text-[#0F172A] placeholder:text-slate-400 bg-white font-medium"
+                      className="h-11 border-[#E2E6EC] bg-[#F8FAFC] focus:border-[#1D4ED8] focus:bg-white focus:ring-4 focus:ring-blue-100/40 rounded-lg text-sm text-[#0F172A] placeholder:text-slate-400 font-medium transition-all"
                     />
                     <Input
                       type="text"
-                      placeholder="Last"
+                      placeholder="Last Name"
                       value={formData.lastName}
                       onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                      className="h-11 sm:h-12 border-[#D1D5DB] focus:border-[#2E2874] focus:ring-2 focus:ring-[#2E2874]/20 rounded-xl text-sm text-[#0F172A] placeholder:text-slate-400 bg-white font-medium"
+                      className="h-11 border-[#E2E6EC] bg-[#F8FAFC] focus:border-[#1D4ED8] focus:bg-white focus:ring-4 focus:ring-blue-100/40 rounded-lg text-sm text-[#0F172A] placeholder:text-slate-400 font-medium transition-all"
                     />
                   </div>
                 </div>
 
                 {/* Email Input */}
-                <div className="space-y-1.5">
-                  <label className="text-xs sm:text-[13px] font-semibold text-slate-500 block">
+                <div className="space-y-2">
+                  <label className="block text-xs sm:text-sm font-medium text-slate-700">
                     Email <span className="text-red-500 font-bold">*</span>
                   </label>
                   <Input
@@ -118,13 +118,13 @@ export default function HealthcareSeoScheduleConsultation({ data }: HealthcareSe
                     placeholder="Email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="h-11 sm:h-12 border-[#D1D5DB] focus:border-[#2E2874] focus:ring-2 focus:ring-[#2E2874]/20 rounded-xl text-sm text-[#0F172A] placeholder:text-slate-400 bg-white font-medium"
+                    className="h-11 border-[#E2E6EC] bg-[#F8FAFC] focus:border-[#1D4ED8] focus:bg-white focus:ring-4 focus:ring-blue-100/40 rounded-lg text-sm text-[#0F172A] placeholder:text-slate-400 font-medium transition-all"
                   />
                 </div>
 
                 {/* Phone Input */}
-                <div className="space-y-1.5">
-                  <label className="text-xs sm:text-[13px] font-semibold text-slate-500 block">
+                <div className="space-y-2">
+                  <label className="block text-xs sm:text-sm font-medium text-slate-700">
                     Phone <span className="text-red-500 font-bold">*</span>
                   </label>
                   <Input
@@ -133,13 +133,13 @@ export default function HealthcareSeoScheduleConsultation({ data }: HealthcareSe
                     placeholder="Phone Number"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="h-11 sm:h-12 border-[#D1D5DB] focus:border-[#2E2874] focus:ring-2 focus:ring-[#2E2874]/20 rounded-xl text-sm text-[#0F172A] placeholder:text-slate-400 bg-white font-medium"
+                    className="h-11 border-[#E2E6EC] bg-[#F8FAFC] focus:border-[#1D4ED8] focus:bg-white focus:ring-4 focus:ring-blue-100/40 rounded-lg text-sm text-[#0F172A] placeholder:text-slate-400 font-medium transition-all"
                   />
                 </div>
 
                 {/* Comment Textarea */}
-                <div className="space-y-1.5">
-                  <label className="text-xs sm:text-[13px] font-semibold text-slate-500 block">
+                <div className="space-y-2">
+                  <label className="block text-xs sm:text-sm font-medium text-slate-700">
                     Comment
                   </label>
                   <textarea
@@ -147,7 +147,7 @@ export default function HealthcareSeoScheduleConsultation({ data }: HealthcareSe
                     placeholder="Enter your question..."
                     value={formData.comment}
                     onChange={(e) => setFormData({ ...formData, comment: e.target.value })}
-                    className="w-full p-3.5 border border-[#D1D5DB] focus:border-[#2E2874] focus:ring-2 focus:ring-[#2E2874]/20 rounded-xl text-sm text-[#0F172A] placeholder:text-slate-400 bg-white font-medium outline-none resize-none"
+                    className="w-full p-3.5 border border-[#E2E6EC] bg-[#F8FAFC] focus:border-[#1D4ED8] focus:bg-white focus:ring-4 focus:ring-blue-100/40 rounded-lg text-sm text-[#0F172A] placeholder:text-slate-400 font-medium outline-none transition-all resize-none"
                   />
                 </div>
 

@@ -152,74 +152,66 @@ export default function HealthcareSeoHero({ data }: HealthcareSeoHeroProps) {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       
                       {/* Your Name Input */}
-                      <div className="space-y-1.5">
-                        <label className="text-xs font-semibold text-[#0F172A]">
-                          Your Name
+                      <div className="space-y-2">
+                        <label className="block text-xs sm:text-sm font-medium text-slate-700">
+                          Your Name <span className="text-red-500">*</span>
                         </label>
-                        <div className="relative">
-                          <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                          <Input
-                            type="text"
-                            required
-                            placeholder="Your Name"
-                            value={formData.name}
-                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                            className="pl-10 h-11 border-[#E2E6EC] focus:border-[#1D4ED8] focus:ring-[#1D4ED8] rounded-xl text-sm"
-                          />
-                        </div>
+                        <Input
+                          type="text"
+                          required
+                          placeholder="Your Name"
+                          icon={User}
+                          value={formData.name}
+                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                          className="bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-lg transition-all"
+                        />
                       </div>
 
                       {/* Your Website URL Input */}
-                      <div className="space-y-1.5">
-                        <label className="text-xs font-semibold text-[#0F172A]">
+                      <div className="space-y-2">
+                        <label className="block text-xs sm:text-sm font-medium text-slate-700">
                           Your Website URL
                         </label>
-                        <div className="relative">
-                          <Globe className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                          <Input
-                            type="url"
-                            placeholder="https://yourpractice.com"
-                            value={formData.websiteUrl}
-                            onChange={(e) => setFormData({ ...formData, websiteUrl: e.target.value })}
-                            className="pl-10 h-11 border-[#E2E6EC] focus:border-[#1D4ED8] focus:ring-[#1D4ED8] rounded-xl text-sm"
-                          />
-                        </div>
+                        <Input
+                          type="url"
+                          placeholder="https://yourpractice.com"
+                          icon={Globe}
+                          value={formData.websiteUrl}
+                          onChange={(e) => setFormData({ ...formData, websiteUrl: e.target.value })}
+                          className="bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-lg transition-all"
+                        />
                       </div>
 
                       {/* Phone Number Input */}
-                      <div className="space-y-1.5">
-                        <label className="text-xs font-semibold text-[#0F172A]">
-                          Phone Number
+                      <div className="space-y-2">
+                        <label className="block text-xs sm:text-sm font-medium text-slate-700">
+                          Phone Number <span className="text-red-500">*</span>
                         </label>
-                        <div className="relative">
-                          <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                          <Input
-                            type="tel"
-                            required
-                            placeholder="Phone Number"
-                            value={formData.phone}
-                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                            className="pl-10 h-11 border-[#E2E6EC] focus:border-[#1D4ED8] focus:ring-[#1D4ED8] rounded-xl text-sm"
-                          />
-                        </div>
+                        <Input
+                          type="tel"
+                          required
+                          placeholder="Phone Number"
+                          icon={Phone}
+                          value={formData.phone}
+                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                          className="bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-lg transition-all"
+                        />
                       </div>
 
                       {/* Email Address Input */}
-                      <div className="space-y-1.5">
-                        <label className="text-xs font-semibold text-[#0F172A]">
-                          Email Address
+                      <div className="space-y-2">
+                        <label className="block text-xs sm:text-sm font-medium text-slate-700">
+                          Email Address <span className="text-red-500">*</span>
                         </label>
-                        <div className="relative">
-                          <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                          <Input
-                            type="email"
-                            required
-                            placeholder="Email Address"
-                            value={formData.email}
-                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                            className="pl-10 h-11 border-[#E2E6EC] focus:border-[#1D4ED8] focus:ring-[#1D4ED8] rounded-xl text-sm"
-                          />
-                        </div>
+                        <Input
+                          type="email"
+                          required
+                          placeholder="Email Address"
+                          icon={Mail}
+                          value={formData.email}
+                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                          className="bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-lg transition-all"
+                        />
                       </div>
 
                     </div>

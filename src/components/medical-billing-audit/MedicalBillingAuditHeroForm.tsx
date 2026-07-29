@@ -14,9 +14,9 @@ import { Input } from "@/components/ui/input";
 import AppButton from "@/components/ui/AppButton";
 
 const inputClassName =
-  "bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11";
+  "bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-lg transition-all";
 
-const labelClassName = "text-xs font-semibold text-[#0F172A]";
+const labelClassName = "block text-xs sm:text-sm font-medium text-slate-700";
 
 interface FormData {
   firstName: string;
@@ -162,7 +162,7 @@ export default function MedicalBillingAuditHeroForm({
             </div>
           </div>
 
-          <div className="space-y-1.5 text-left">
+          <div className="space-y-2 text-left">
             <label htmlFor="audit-email" className={labelClassName}>
               Email <span className="text-red-500">*</span>
             </label>
@@ -179,7 +179,7 @@ export default function MedicalBillingAuditHeroForm({
             />
           </div>
 
-          <div className="space-y-1.5 text-left">
+          <div className="space-y-2 text-left">
             <label htmlFor="audit-phone" className={labelClassName}>
               Phone Number <span className="text-red-500">*</span>
             </label>
@@ -196,7 +196,7 @@ export default function MedicalBillingAuditHeroForm({
             />
           </div>
 
-          <div className="space-y-1.5 text-left">
+          <div className="space-y-2 text-left">
             <label htmlFor="audit-collections" className={labelClassName}>
               Your Practice&apos;s Monthly Collections <span className="text-red-500">*</span>
             </label>
@@ -213,7 +213,7 @@ export default function MedicalBillingAuditHeroForm({
             />
           </div>
 
-          <div className="space-y-1.5 text-left">
+          <div className="space-y-2 text-left">
             <label htmlFor="audit-message" className={labelClassName}>
               Type Your Message Here
             </label>
@@ -229,7 +229,7 @@ export default function MedicalBillingAuditHeroForm({
                 placeholder="Type Your Message Here"
                 value={formData.message}
                 onChange={handleChange}
-                className="min-h-[112px] w-full resize-y rounded-xl border border-[#E2E6EC] bg-[#F8FAFC] py-3.5 pl-10 pr-3.5 text-sm text-[#0F172A] outline-none transition-all placeholder:text-slate-400 focus:border-[#1D4ED8] focus:bg-white focus:ring-4 focus:ring-blue-100/40"
+                className="min-h-[112px] w-full resize-y rounded-lg border border-[#E2E6EC] bg-[#F8FAFC] py-3.5 pl-10 pr-3.5 text-sm text-[#0F172A] outline-none transition-all placeholder:text-slate-400 focus:border-[#1D4ED8] focus:bg-white focus:ring-4 focus:ring-blue-100/40"
               />
             </div>
           </div>

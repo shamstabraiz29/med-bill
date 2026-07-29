@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, User, Mail, Phone } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import SectionBadge from "@/components/ui/SectionBadge";
@@ -81,33 +81,51 @@ export default function RcmAuditCTA({ data }: RcmAuditCTAProps) {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-                    <Input
-                      type="text"
-                      required
-                      placeholder="Name"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:bg-white/10 focus:border-blue-400/50 focus:ring-blue-400/20"
-                    />
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 text-left">
+                    <div className="space-y-2">
+                      <label className="block text-xs sm:text-sm font-medium text-slate-200">
+                        Full Name <span className="text-red-400">*</span>
+                      </label>
+                      <Input
+                        type="text"
+                        required
+                        placeholder="Name"
+                        icon={User}
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        className="bg-white/10 border-white/20 text-white placeholder:text-slate-400 focus:bg-white/15 focus:border-white/40 focus:ring-4 focus:ring-white/10 rounded-lg text-xs sm:text-sm transition-all"
+                      />
+                    </div>
 
-                    <Input
-                      type="email"
-                      required
-                      placeholder="Email"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:bg-white/10 focus:border-blue-400/50 focus:ring-blue-400/20"
-                    />
+                    <div className="space-y-2">
+                      <label className="block text-xs sm:text-sm font-medium text-slate-200">
+                        Email Address <span className="text-red-400">*</span>
+                      </label>
+                      <Input
+                        type="email"
+                        required
+                        placeholder="Email Address"
+                        icon={Mail}
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        className="bg-white/10 border-white/20 text-white placeholder:text-slate-400 focus:bg-white/15 focus:border-white/40 focus:ring-4 focus:ring-white/10 rounded-lg text-xs sm:text-sm transition-all"
+                      />
+                    </div>
 
-                    <Input
-                      type="tel"
-                      required
-                      placeholder="Phone"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:bg-white/10 focus:border-blue-400/50 focus:ring-blue-400/20"
-                    />
+                    <div className="space-y-2">
+                      <label className="block text-xs sm:text-sm font-medium text-slate-200">
+                        Phone Number <span className="text-red-400">*</span>
+                      </label>
+                      <Input
+                        type="tel"
+                        required
+                        placeholder="Phone Number"
+                        icon={Phone}
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        className="bg-white/10 border-white/20 text-white placeholder:text-slate-400 focus:bg-white/15 focus:border-white/40 focus:ring-4 focus:ring-white/10 rounded-lg text-xs sm:text-sm transition-all"
+                      />
+                    </div>
                   </div>
 
                   <div className="flex justify-center pt-2">

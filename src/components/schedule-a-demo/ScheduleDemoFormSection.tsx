@@ -23,7 +23,7 @@ import { defaultScheduleDemoData } from "@/lib/defaults/scheduleDemo";
 import type { ScheduleDemoFormData } from "@/payload/types/scheduleDemo";
 
 const inputClassName =
-  "bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-xl transition-all";
+  "bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-lg transition-all";
 
 interface ScheduleDemoFormSectionProps {
   data?: ScheduleDemoFormData;
@@ -33,12 +33,11 @@ export default function ScheduleDemoFormSection({
   data,
 }: ScheduleDemoFormSectionProps) {
   const content = data || defaultScheduleDemoData.formSection;
-
   const rawRoles =
     content.roleOptions && content.roleOptions.length > 0
       ? content.roleOptions
       : defaultScheduleDemoData.formSection.roleOptions;
-  const roleList = rawRoles.map((r: any) =>
+  const roleList: string[] = rawRoles.map((r: any) =>
     typeof r === "string" ? r : r.label || ""
   );
 
@@ -46,15 +45,15 @@ export default function ScheduleDemoFormSection({
     content.collectionsOptions && content.collectionsOptions.length > 0
       ? content.collectionsOptions
       : defaultScheduleDemoData.formSection.collectionsOptions;
-  const collectionsList = rawCollections.map((c: any) =>
+  const collectionsList: string[] = rawCollections.map((c: any) =>
     typeof c === "string" ? c : c.label || ""
   );
 
   const [formData, setFormData] = useState({
-    role: roleList[0] || "Solo Practitioner",
+    role: roleList[0] || "Practice Owner / Doctor",
     organization: "",
     name: "",
-    collections: collectionsList[0] || "$50,000 – $100,000 / month",
+    collections: collectionsList[0] || "$50,000 - $100,000",
     email: "",
     phone: "",
     message: "",
@@ -63,98 +62,78 @@ export default function ScheduleDemoFormSection({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    setIsSubmitting(true);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (formData.name && formData.email && formData.phone && formData.organization) {
+      setIsSubmitting(true);
+      try {
+        const res = await fetch("/api/forms/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            formName: "Schedule A Demo Form",
+            sourcePage:
+              typeof window !== "undefined"
+                ? window.location.pathname
+                : "/schedule-a-demo",
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            message: `Role: ${formData.role} | Practice: ${formData.organization} | Collections: ${formData.collections} | Note: ${formData.message}`,
+          }),
+        });
 
-    try {
-      const response = await fetch("/api/forms/submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          formName: "Schedule a Demo Submission",
-          sourcePage:
-            typeof window !== "undefined"
-              ? window.location.pathname
-              : "/schedule-a-demo",
-          role: formData.role,
-          organization: formData.organization,
-          name: formData.name,
-          collections: formData.collections,
-          email: formData.email,
-          phone: formData.phone,
-          message: formData.message,
-        }),
-      });
-
-      if (response.ok) {
-        setIsSubmitted(true);
+        if (res.ok) {
+          setIsSubmitted(true);
+          setFormData({
+            role: roleList[0] || "Practice Owner / Doctor",
+            organization: "",
+            name: "",
+            collections: collectionsList[0] || "$50,000 - $100,000",
+            email: "",
+            phone: "",
+            message: "",
+          });
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setIsSubmitting(false);
       }
-    } catch (error) {
-      console.error("[ScheduleDemoFormSection error]:", error);
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
   return (
-    <section className="relative w-full py-8 sm:py-14 bg-transparent">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="schedule-demo-form-section" className="relative w-full py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-transparent">
+      <div className="max-w-7xl mx-auto">
         <MotionWrapper variant="scaleUp">
-          {/* Main 2-Column Split Card Container (matching PricingUnlockForm) */}
           <div className="bg-white rounded-2xl border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 overflow-hidden grid grid-cols-1 lg:grid-cols-12">
-            {/* Left Column: Solid #0F172A Value Proposition Spotlight */}
-            <div className="lg:col-span-5 bg-[#0F172A] text-white p-8 sm:p-10 lg:p-12 flex flex-col justify-between relative overflow-hidden">
+            
+            {/* Left Column: Spotlight Panel */}
+            <div className="lg:col-span-5 bg-[#0F172A] text-white p-8 sm:p-10 lg:p-12 flex flex-col justify-between relative overflow-hidden text-left">
+              <div
+                className="pointer-events-none absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-[#1D4ED8]/20 blur-3xl"
+                aria-hidden="true"
+              />
+
               <div className="relative space-y-6 sm:space-y-8 z-10">
                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/15 border border-blue-400/20 text-blue-300 text-xs font-semibold">
                   <Calendar className="w-3.5 h-3.5 text-blue-400" />
-                  <span>Interactive Demo Session</span>
+                  <span>{content.badge}</span>
                 </div>
 
                 <div className="space-y-3">
                   <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight text-white">
-                    Schedule Your Personalized Demo
+                    {content.titlePlain}{" "}
+                    <span className="text-blue-400">{content.titleHighlight}</span>
                   </h3>
                   <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-md">
-                    Discover how practices boost net revenue by up to 30% with customized RCM solutions and seamless EHR integration.
+                    {content.description}
                   </p>
-                </div>
-
-                {/* Key Demo Benefits */}
-                <div className="space-y-4 sm:space-y-5 pt-2">
-                  <div className="flex items-start gap-3.5">
-                    <div className="p-2.5 rounded-xl bg-blue-500/15 text-blue-400 shrink-0 mt-0.5 border border-blue-400/20">
-                      <Sparkles className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <h4 className="text-xs sm:text-sm font-bold text-white">1-on-1 Expert Session</h4>
-                      <p className="text-xs text-slate-400">Tailored walkthrough for your specialty.</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3.5">
-                    <div className="p-2.5 rounded-xl bg-blue-500/15 text-blue-400 shrink-0 mt-0.5 border border-blue-400/20">
-                      <TrendingUp className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <h4 className="text-xs sm:text-sm font-bold text-white">Revenue Analysis</h4>
-                      <p className="text-xs text-slate-400">See benchmark analysis against peers.</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3.5">
-                    <div className="p-2.5 rounded-xl bg-blue-500/15 text-blue-400 shrink-0 mt-0.5 border border-blue-400/20">
-                      <Clock className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <h4 className="text-xs sm:text-sm font-bold text-white">Flexible Scheduling</h4>
-                      <p className="text-xs text-slate-400">Pick a time convenient for your clinic.</p>
-                    </div>
-                  </div>
                 </div>
               </div>
 
-              {/* Trust Badge at bottom of left panel */}
+              {/* Trust Guarantee Box at bottom */}
               <div className="relative pt-8 sm:pt-10 z-10">
                 <div className="flex items-center gap-2.5 p-3.5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm text-xs text-slate-300">
                   <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
@@ -164,11 +143,11 @@ export default function ScheduleDemoFormSection({
             </div>
 
             {/* Right Column: Form Container */}
-            <div className="lg:col-span-7 p-7 sm:p-10 lg:p-12 flex flex-col justify-center bg-white">
-              {/* Form Header */}
+            <div className="lg:col-span-7 p-7 sm:p-10 lg:p-12 flex flex-col justify-center bg-white text-left">
+              
               <div className="border-b border-[#E2E6EC] pb-4 mb-5 space-y-1">
                 <div className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-[#1D4ED8]">
-                  <span>{content.badge}</span>
+                  <span>SCHEDULE YOUR LIVE DEMO</span>
                 </div>
                 <h2 className="text-xl sm:text-2xl font-extrabold text-[#0F172A] tracking-tight">
                   {content.titlePlain}{" "}
@@ -186,18 +165,14 @@ export default function ScheduleDemoFormSection({
                   </div>
                   <div className="space-y-2">
                     <h3 className="text-xl font-extrabold text-[#0F172A]">
-                      Demo Request Submitted!
+                      Demo Scheduled!
                     </h3>
                     <p className="mx-auto max-w-md text-xs sm:text-sm leading-relaxed text-[#475569]">
                       Thank you,{" "}
                       <span className="font-semibold text-[#0F172A]">
                         {formData.name}
                       </span>
-                      . A senior medical billing consultant has received your request and will contact you at{" "}
-                      <span className="font-semibold text-[#1D4ED8]">
-                        {formData.phone}
-                      </span>{" "}
-                      within 1 business hour to confirm your demo schedule.
+                      . A billing specialist will connect with you within 1 business hour.
                     </p>
                   </div>
                   <div className="pt-2">
@@ -206,18 +181,19 @@ export default function ScheduleDemoFormSection({
                       onClick={() => setIsSubmitted(false)}
                       className="cursor-pointer text-xs font-semibold text-[#1D4ED8] hover:text-[#1E3A8A] hover:underline inline-flex items-center gap-1.5 transition-colors"
                     >
-                      <span>Submit another demo request</span>
+                      <span>Schedule another demo</span>
                     </button>
                   </div>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
+
                   {/* Row 1: Role Dropdown & Practice Name */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-1">
+                    <div className="space-y-2">
                       <label
                         htmlFor="demo-role"
-                        className="text-xs font-semibold text-[#0F172A]"
+                        className="block text-xs sm:text-sm font-medium text-slate-700"
                       >
                         I am a <span className="text-red-500">*</span>
                       </label>
@@ -228,14 +204,14 @@ export default function ScheduleDemoFormSection({
                         onValueChange={(val) =>
                           setFormData((prev) => ({ ...prev, role: val || "" }))
                         }
-                        className="w-full bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] focus-visible:bg-white focus-visible:border-[#1D4ED8] h-11 text-xs sm:text-sm rounded-xl"
+                        className="w-full bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] focus-visible:bg-white focus-visible:border-[#1D4ED8] h-11 text-xs sm:text-sm rounded-lg"
                       />
                     </div>
 
-                    <div className="space-y-1">
+                    <div className="space-y-2">
                       <label
                         htmlFor="demo-org"
-                        className="text-xs font-semibold text-[#0F172A]"
+                        className="block text-xs sm:text-sm font-medium text-slate-700"
                       >
                         Practice / Company Name{" "}
                         <span className="text-red-500">*</span>
@@ -260,10 +236,10 @@ export default function ScheduleDemoFormSection({
 
                   {/* Row 2: Full Name & Monthly Collections */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-1">
+                    <div className="space-y-2">
                       <label
                         htmlFor="demo-name"
-                        className="text-xs font-semibold text-[#0F172A]"
+                        className="block text-xs sm:text-sm font-medium text-slate-700"
                       >
                         Full Name <span className="text-red-500">*</span>
                       </label>
@@ -284,10 +260,10 @@ export default function ScheduleDemoFormSection({
                       />
                     </div>
 
-                    <div className="space-y-1">
+                    <div className="space-y-2">
                       <label
                         htmlFor="demo-collections"
-                        className="text-xs font-semibold text-[#0F172A]"
+                        className="block text-xs sm:text-sm font-medium text-slate-700"
                       >
                         Monthly Collections <span className="text-red-500">*</span>
                       </label>
@@ -301,17 +277,17 @@ export default function ScheduleDemoFormSection({
                             collections: val || "",
                           }))
                         }
-                        className="w-full bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] focus-visible:bg-white focus-visible:border-[#1D4ED8] h-11 text-xs sm:text-sm rounded-xl"
+                        className="w-full bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] focus-visible:bg-white focus-visible:border-[#1D4ED8] h-11 text-xs sm:text-sm rounded-lg"
                       />
                     </div>
                   </div>
 
                   {/* Row 3: Email Address & Phone Number */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-1">
+                    <div className="space-y-2">
                       <label
                         htmlFor="demo-email"
-                        className="text-xs font-semibold text-[#0F172A]"
+                        className="block text-xs sm:text-sm font-medium text-slate-700"
                       >
                         Email Address <span className="text-red-500">*</span>
                       </label>
@@ -332,10 +308,10 @@ export default function ScheduleDemoFormSection({
                       />
                     </div>
 
-                    <div className="space-y-1">
+                    <div className="space-y-2">
                       <label
                         htmlFor="demo-phone"
-                        className="text-xs font-semibold text-[#0F172A]"
+                        className="block text-xs sm:text-sm font-medium text-slate-700"
                       >
                         Phone Number <span className="text-red-500">*</span>
                       </label>
@@ -358,10 +334,10 @@ export default function ScheduleDemoFormSection({
                   </div>
 
                   {/* Row 4: Message / Preferred Time */}
-                  <div className="space-y-1">
+                  <div className="space-y-2">
                     <label
                       htmlFor="demo-message"
-                      className="text-xs font-semibold text-[#0F172A]"
+                      className="block text-xs sm:text-sm font-medium text-slate-700"
                     >
                       Message / Preferred Time
                     </label>
@@ -377,7 +353,7 @@ export default function ScheduleDemoFormSection({
                             message: e.target.value,
                           }))
                         }
-                        className="w-full rounded-xl bg-[#F8FAFC] border border-[#E2E6EC] p-3 text-xs sm:text-sm text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 outline-none transition-all resize-none"
+                        className="w-full rounded-lg bg-[#F8FAFC] border border-[#E2E6EC] p-3 text-xs sm:text-sm text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 outline-none transition-all resize-none"
                       />
                     </div>
                   </div>

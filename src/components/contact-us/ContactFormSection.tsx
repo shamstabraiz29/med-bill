@@ -31,7 +31,7 @@ const ICON_MAP: Record<string, LucideIcon> = {
 };
 
 const inputClassName =
-  "bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-xl transition-all";
+  "bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-lg transition-all";
 
 interface ContactFormSectionProps {
   data?: ContactFormSectionData;
@@ -44,76 +44,91 @@ export default function ContactFormSection({ data }: ContactFormSectionProps) {
       ? content.channels
       : defaultContactUsData.formSection.channels;
 
-  const rawServices =
-    content.serviceOptions && content.serviceOptions.length > 0
-      ? content.serviceOptions
-      : defaultContactUsData.formSection.serviceOptions;
-  const serviceOptionsList = rawServices.map((s: any) =>
-    typeof s === "string" ? s : s.label || ""
-  );
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     organization: "",
-    serviceInterest: serviceOptionsList[0] || "Revenue Cycle Management (RCM)",
+    serviceInterest: "",
     message: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    setIsSubmitting(true);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (formData.name && formData.email && formData.phone && formData.message) {
+      setIsSubmitting(true);
+      try {
+        const res = await fetch("/api/forms/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            formName: "Contact Us Inquiry Form",
+            sourcePage:
+              typeof window !== "undefined"
+                ? window.location.pathname
+                : "/contact-us",
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            message: `Practice: ${
+              formData.organization || "N/A"
+            } | Service Interest: ${
+              formData.serviceInterest || "General"
+            } | Note: ${formData.message}`,
+          }),
+        });
 
-    try {
-      const response = await fetch("/api/forms/submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          formName: "Contact Us Submission",
-          sourcePage:
-            typeof window !== "undefined"
-              ? window.location.pathname
-              : "/contact-bellmedex",
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          organization: formData.organization,
-          serviceInterest: formData.serviceInterest,
-          message: formData.message,
-        }),
-      });
-
-      if (response.ok) {
-        setIsSubmitted(true);
+        if (res.ok) {
+          setIsSubmitted(true);
+          setFormData({
+            name: "",
+            email: "",
+            phone: "",
+            organization: "",
+            serviceInterest: "",
+            message: "",
+          });
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setIsSubmitting(false);
       }
-    } catch (error) {
-      console.error("[ContactFormSection error]:", error);
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
+  const serviceOptionsList = [
+    "Medical Billing & RCM",
+    "Provider Credentialing",
+    "Medical Coding Audit",
+    "EHR & Practice Management Software",
+    "Healthcare SEO & Marketing",
+    "Other / General Inquiry",
+  ];
+
   return (
-    <section className="relative w-full py-8 sm:py-14 bg-transparent">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact-form-section" className="relative w-full py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-transparent">
+      <div className="max-w-7xl mx-auto">
         <MotionWrapper variant="scaleUp">
-          {/* Main 2-Column Split Card Container (matching PricingUnlockForm) */}
-          <div className="bg-white rounded-2xl border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 overflow-hidden grid grid-cols-1 lg:grid-cols-12">
+          <div className="relative overflow-hidden rounded-2xl border border-[#E2E6EC] shadow-[0_12px_40px_rgba(15,23,42,0.06)] grid grid-cols-1 lg:grid-cols-12 bg-white">
+            
+            {/* Left Column: Contact info & Channels */}
+            <div className="lg:col-span-5 p-7 sm:p-10 lg:p-12 bg-[#0F172A] text-white flex flex-col justify-between relative overflow-hidden text-left">
+              <div
+                className="pointer-events-none absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-[#1D4ED8]/20 blur-3xl"
+                aria-hidden="true"
+              />
 
-            {/* Left Column: Solid #0F172A Direct Channels Spotlight */}
-            <div className="lg:col-span-5 bg-[#0F172A] text-white p-8 sm:p-10 lg:p-12 flex flex-col justify-between relative overflow-hidden">
-              <div className="relative space-y-6 sm:space-y-8 z-10">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/15 border border-blue-400/20 text-blue-300 text-xs font-semibold">
-                  <Headphones className="w-3.5 h-3.5 text-blue-400" />
-                  <span>{content.badge || "Direct Communication"}</span>
-                </div>
-
-                <div className="space-y-3">
-                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight text-white">
+              <div className="relative z-10 space-y-6 sm:space-y-8">
+                {/* Header */}
+                <div className="space-y-2">
+                  <span className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-sky-300 backdrop-blur-md border border-white/10">
+                    {content.badge}
+                  </span>
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight">
                     {content.titlePlain}{" "}
                     <span className="text-blue-400">{content.titleHighlight}</span>
                   </h3>
@@ -225,10 +240,10 @@ export default function ContactFormSection({ data }: ContactFormSectionProps) {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   {/* Row 1: Full Name & Email Address */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-1">
+                    <div className="space-y-2">
                       <label
                         htmlFor="contact-name"
-                        className="text-xs font-semibold text-[#0F172A]"
+                        className="block text-xs sm:text-sm font-medium text-slate-700"
                       >
                         Full Name <span className="text-red-500">*</span>
                       </label>
@@ -249,10 +264,10 @@ export default function ContactFormSection({ data }: ContactFormSectionProps) {
                       />
                     </div>
 
-                    <div className="space-y-1">
+                    <div className="space-y-2">
                       <label
                         htmlFor="contact-email"
-                        className="text-xs font-semibold text-[#0F172A]"
+                        className="block text-xs sm:text-sm font-medium text-slate-700"
                       >
                         Email Address <span className="text-red-500">*</span>
                       </label>
@@ -276,10 +291,10 @@ export default function ContactFormSection({ data }: ContactFormSectionProps) {
 
                   {/* Row 2: Phone Number & Practice / Organization */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-1">
+                    <div className="space-y-2">
                       <label
                         htmlFor="contact-phone"
-                        className="text-xs font-semibold text-[#0F172A]"
+                        className="block text-xs sm:text-sm font-medium text-slate-700"
                       >
                         Phone Number <span className="text-red-500">*</span>
                       </label>
@@ -300,10 +315,10 @@ export default function ContactFormSection({ data }: ContactFormSectionProps) {
                       />
                     </div>
 
-                    <div className="space-y-1">
+                    <div className="space-y-2">
                       <label
                         htmlFor="contact-org"
-                        className="text-xs font-semibold text-[#0F172A]"
+                        className="block text-xs sm:text-sm font-medium text-slate-700"
                       >
                         Practice / Organization
                       </label>
@@ -325,10 +340,10 @@ export default function ContactFormSection({ data }: ContactFormSectionProps) {
                   </div>
 
                   {/* Row 3: Service Interested In Dropdown */}
-                  <div className="space-y-1">
+                  <div className="space-y-2">
                     <label
                       htmlFor="contact-service"
-                      className="text-xs font-semibold text-[#0F172A]"
+                      className="block text-xs sm:text-sm font-medium text-slate-700"
                     >
                       Service Interested In
                     </label>
@@ -342,15 +357,15 @@ export default function ContactFormSection({ data }: ContactFormSectionProps) {
                           serviceInterest: val || "",
                         }))
                       }
-                      className="w-full bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] focus-visible:bg-white focus-visible:border-[#1D4ED8] h-11 text-xs sm:text-sm rounded-xl"
+                      className="w-full bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] focus-visible:bg-white focus-visible:border-[#1D4ED8] h-11 text-xs sm:text-sm rounded-lg"
                     />
                   </div>
 
                   {/* Row 4: Message / Special Requirements */}
-                  <div className="space-y-1">
+                  <div className="space-y-2">
                     <label
                       htmlFor="contact-message"
-                      className="text-xs font-semibold text-[#0F172A]"
+                      className="block text-xs sm:text-sm font-medium text-slate-700"
                     >
                       Message / Notes <span className="text-red-500">*</span>
                     </label>
@@ -367,7 +382,7 @@ export default function ContactFormSection({ data }: ContactFormSectionProps) {
                             message: e.target.value,
                           }))
                         }
-                        className="w-full rounded-xl bg-[#F8FAFC] border border-[#E2E6EC] p-3 text-xs sm:text-sm text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 outline-none transition-all resize-none"
+                        className="w-full rounded-lg bg-[#F8FAFC] border border-[#E2E6EC] p-3 text-xs sm:text-sm text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 outline-none transition-all resize-none"
                       />
                     </div>
                   </div>

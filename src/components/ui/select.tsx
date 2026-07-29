@@ -19,13 +19,13 @@ export interface FormSelectProps {
 }
 
 const triggerClassName =
-  "flex h-11 w-full cursor-pointer items-center justify-between gap-2.5 rounded-xl border border-[#E2E6EC] bg-[#F8FAFC] px-3.5 text-sm text-[#0F172A] outline-none transition-all hover:bg-white hover:border-[#1D4ED8]/40 focus-visible:border-[#1D4ED8] focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-[#1D4ED8]/15 disabled:cursor-not-allowed disabled:opacity-50 shadow-xs font-medium";
+  "flex h-11 w-full cursor-pointer items-center justify-between gap-2.5 rounded-lg border border-[#E2E6EC] bg-[#F8FAFC] px-3.5 text-sm text-[#0F172A] outline-none transition-all hover:border-[#1D4ED8]/40 focus-visible:border-[#1D4ED8] focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-[#1D4ED8]/15 disabled:cursor-not-allowed disabled:opacity-50 shadow-xs font-medium";
 
 const popupClassName =
-  "max-h-64 w-[var(--anchor-width)] min-w-[200px] origin-[var(--transform-origin)] overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white/95 backdrop-blur-lg p-1.5 shadow-[0_12px_40px_rgba(15,23,42,0.12)] transition-[transform,opacity] data-[ending-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:opacity-0 z-50";
+  "max-h-64 w-[var(--anchor-width)] min-w-[200px] origin-[var(--transform-origin)] overflow-hidden rounded-xl border border-[#E2E6EC] bg-white/95 backdrop-blur-lg p-1.5 shadow-[0_12px_40px_rgba(15,23,42,0.12)] transition-[transform,opacity] data-[ending-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:opacity-0 z-50";
 
 const itemClassName =
-  "flex cursor-pointer items-center justify-between gap-2 rounded-xl px-3 py-2.5 text-sm text-[#0F172A] outline-none transition-colors data-[highlighted]:bg-blue-50/80 data-[highlighted]:text-[#1D4ED8] data-[selected]:font-semibold data-[selected]:text-[#1D4ED8] data-[selected]:bg-blue-50";
+  "flex cursor-pointer items-center justify-between gap-2 rounded-lg px-3 py-2.5 text-sm text-[#0F172A] outline-none transition-colors data-[highlighted]:bg-blue-50/80 data-[highlighted]:text-[#1D4ED8] data-[selected]:font-semibold data-[selected]:text-[#1D4ED8] data-[selected]:bg-blue-50";
 
 export function FormSelect({
   id,
