@@ -8,10 +8,7 @@ import {
   TrendingUp,
   Zap,
 } from "lucide-react";
-import IconWrapper from "@/components/common/IconWrapper";
 import MotionWrapper from "@/components/ui/MotionWrapper";
-import { cn } from "@/lib/utils";
-import { denialManagementCardClassName } from "./denialManagementSectionLayout";
 import { defaultDenialManagementServicesData } from "@/lib/defaults/denialManagementServices";
 import type { DenialManagementHeroData } from "@/payload/types/denialManagementServices";
 
@@ -36,22 +33,23 @@ export default function DenialManagementServicesHeroFeatures({
   return (
     <MotionWrapper variant="fadeUp" delay={0.1}>
       <div
-        className={cn(
-          denialManagementCardClassName,
-          "overflow-hidden"
-        )}
+        className="w-full overflow-hidden rounded-3xl border border-[#E2E6EC] bg-white shadow-xs"
         aria-labelledby="denial-management-services-features-heading"
       >
-        <div className="border-b border-[#E2E6EC] bg-slate-50/50 px-6 py-5 sm:px-8 sm:py-6">
+        {/* Header Section matching screenshot */}
+        <div className="border-b border-[#E2E6EC] p-6 sm:p-8 text-left bg-white">
           <h2
             id="denial-management-services-features-heading"
-            className="max-w-4xl text-left text-base font-bold leading-[1.55] tracking-[-0.01em] text-[#0F172A] sm:text-lg"
+            className="text-base sm:text-lg lg:text-xl font-bold leading-snug tracking-tight text-[#0F172A]"
           >
-            {content.featuresTitlePlain}
-            <span className="text-[#1D4ED8]">{content.featuresTitleHighlight}</span>
+            {content.featuresTitlePlain}{" "}
+            <span className="text-[#1D4ED8] font-bold">
+              {content.featuresTitleHighlight}
+            </span>
           </h2>
         </div>
 
+        {/* 2x2 Feature Grid matching screenshot */}
         <MotionWrapper
           variant="stagger"
           staggerDelay={0.06}
@@ -62,22 +60,18 @@ export default function DenialManagementServicesHeroFeatures({
 
             return (
               <MotionWrapper
-                key={bullet}
+                key={bullet || idx}
                 variant="staggerItem"
-                className={cn(
-                  "group flex items-start gap-4 p-5 transition-colors duration-300 hover:bg-blue-50/30 sm:gap-5 sm:p-6",
-                  idx > 0 && "border-t border-[#E2E6EC]",
-                  idx % 2 === 1 && "sm:border-l sm:border-[#E2E6EC]",
-                  idx === 1 && "sm:border-t-0"
-                )}
+                className={`group flex items-center gap-4 p-5 sm:p-7 transition-colors duration-300 hover:bg-slate-50/50 ${
+                  idx > 0 ? "border-t border-[#E2E6EC]" : ""
+                } ${
+                  idx % 2 === 1 ? "sm:border-l sm:border-[#E2E6EC]" : ""
+                } ${idx === 1 ? "sm:border-t-0" : ""}`}
               >
-                <IconWrapper
-                  icon={Icon}
-                  size="md"
-                  variant="surface"
-                  className="shrink-0 transition-transform duration-300 group-hover:scale-105"
-                />
-                <p className="pt-0.5 text-sm font-semibold leading-[1.65] text-[#0F172A] sm:text-[15px]">
+                <div className="flex h-11 w-11 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-full bg-[#EFF6FF] text-[#1D4ED8] transition-transform duration-300 group-hover:scale-105">
+                  <Icon className="h-5.5 w-5.5 stroke-[2]" />
+                </div>
+                <p className="text-left text-xs sm:text-sm font-semibold leading-relaxed text-[#0F172A]">
                   {bullet}
                 </p>
               </MotionWrapper>
@@ -88,3 +82,4 @@ export default function DenialManagementServicesHeroFeatures({
     </MotionWrapper>
   );
 }
+

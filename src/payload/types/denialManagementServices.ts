@@ -54,6 +54,8 @@ export interface DenialManagementHeroData {
   formTitle: string;
   phoneText: string;
   phoneLink: string;
+  buttonText?: string;
+  buttonLink?: string;
   imageSrc?: string;
   imageAlt?: string;
   spinningText?: string;

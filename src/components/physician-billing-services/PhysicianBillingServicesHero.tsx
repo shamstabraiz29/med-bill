@@ -1,11 +1,8 @@
 "use client";
 
 import React from "react";
-import { Play } from "lucide-react";
-import DoctorVisuals from "@/components/home/DoctorVisuals";
 import AppButton from "@/components/ui/AppButton";
 import MotionWrapper from "@/components/ui/MotionWrapper";
-import PhysicianBillingServicesConsultationForm from "./PhysicianBillingServicesConsultationForm";
 import PhysicianBillingServicesHeroAccordion from "./PhysicianBillingServicesHeroAccordion";
 import PhysicianBillingServicesHeroHeader from "./PhysicianBillingServicesHeroHeader";
 import {
@@ -14,6 +11,7 @@ import {
 } from "./physicianSectionLayout";
 import { defaultPhysicianBillingServicesData } from "@/lib/defaults/physicianBillingServices";
 import type { PhysicianBillingServicesPageData } from "@/payload/types/physicianBillingServices";
+import { Award } from "lucide-react";
 
 interface PhysicianBillingServicesHeroProps {
   data?: PhysicianBillingServicesPageData["hero"];
@@ -27,57 +25,38 @@ export default function PhysicianBillingServicesHero({ data }: PhysicianBillingS
       className={physicianSectionClassName}
       aria-labelledby="physician-billing-services-hero-heading"
     >
-      <style>{`
-        @keyframes spin-slow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        .animate-spin-slow {
-          animation: spin-slow 35s linear infinite;
-        }
-      `}</style>
-
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:32px_32px] opacity-40"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-24 -left-24 h-96 w-96 rounded-full bg-blue-500/5 blur-3xl"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute top-1/2 -right-24 h-96 w-96 rounded-full bg-indigo-500/5 blur-3xl"
-      />
-
       <div className={`${physicianContainerClassName} relative z-10`}>
-        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-10">
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12">
+          {/* LEFT COLUMN: Header & Primary CTA Button */}
           <div className="flex flex-col space-y-6 text-left lg:col-span-7">
             <PhysicianBillingServicesHeroHeader headingId="physician-billing-services-hero-heading" data={content} />
 
-            <MotionWrapper variant="fadeUp" className="flex flex-wrap items-center gap-3 sm:gap-4">
-              <AppButton href={content.ctaHref || "/schedule-a-demo"} variant="primary" size="lg" showArrow>
+            <MotionWrapper variant="fadeUp" className="flex flex-wrap items-center gap-3 sm:gap-4 pt-2">
+              <AppButton href={content.ctaHref || "/schedule-a-demo"} variant="primary" size="lg" showArrow className="shadow-lg shadow-blue-600/15">
                 {content.ctaText || "Get A Demo"}
               </AppButton>
-              <AppButton href="https://youtube.com" variant="secondary" size="lg" icon={Play}>
-                Watch Video
-              </AppButton>
-            </MotionWrapper>
-
-            <MotionWrapper variant="fadeUp">
-              <PhysicianBillingServicesHeroAccordion items={content.faqItems} />
             </MotionWrapper>
           </div>
 
-          <MotionWrapper variant="slideRight" delay={0.1} className="lg:col-span-5">
-            <DoctorVisuals />
+          {/* RIGHT COLUMN: Key FAQ & Highlights Card Box */}
+          <MotionWrapper variant="slideRight" delay={0.15} className="lg:col-span-5 w-full">
+            <div className="relative rounded-2xl border border-[#E2E6EC] bg-white/95 p-6 sm:p-8 shadow-[0_8px_30px_rgba(15,23,42,0.06)] backdrop-blur-xs transition-all duration-300 hover:border-[#1D4ED8]/30">
+              <div className="mb-5 flex items-center justify-between border-b border-[#E2E6EC] pb-4">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#1D4ED8]">
+                  Key Physician Billing Insights
+                </span>
+                <span className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2.5 py-1 text-[11px] font-bold text-[#1D4ED8] border border-blue-100">
+                  <Award className="h-3.5 w-3.5" />
+                  Expert Guidance
+                </span>
+              </div>
+
+              <PhysicianBillingServicesHeroAccordion items={content.faqItems} />
+            </div>
           </MotionWrapper>
         </div>
-
-        <MotionWrapper variant="fadeUp" delay={0.15} className="mt-12 sm:mt-14 lg:mt-16">
-          <PhysicianBillingServicesConsultationForm />
-        </MotionWrapper>
       </div>
     </section>
   );
 }
+
