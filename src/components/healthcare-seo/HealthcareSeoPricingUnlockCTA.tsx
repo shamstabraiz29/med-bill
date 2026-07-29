@@ -78,7 +78,7 @@ export default function HealthcareSeoPricingUnlockCTA({ data }: HealthcareSeoPri
                   title={
                     <>
                       {content.titlePlain}{" "}
-                      <span className="text-sky-300 font-bold">{content.titleHighlight}</span> at Market Lowest Prices!
+                      <span className="text-amber-300 font-bold">{content.titleHighlight}</span> at Market Lowest Prices!
                     </>
                   }
                   description={content.description}
@@ -98,7 +98,7 @@ export default function HealthcareSeoPricingUnlockCTA({ data }: HealthcareSeoPri
                         {content.formTitle}
                       </h3>
                     </div>
-                    <p className="text-indigo-200/60 text-xs sm:text-[13px] leading-relaxed">
+                    <p className="text-blue-200 text-xs sm:text-[13px] leading-relaxed">
                       {content.formDescription}
                     </p>
                   </div>
@@ -165,7 +165,7 @@ export default function HealthcareSeoPricingUnlockCTA({ data }: HealthcareSeoPri
                       {/* Submit AppButton */}
                       <AppButton
                         type="submit"
-                        variant="primary"
+                        variant="secondary-dark"
                         size="lg"
                         showArrow
                         className="w-full mt-2 justify-center tracking-wider uppercase font-extrabold"

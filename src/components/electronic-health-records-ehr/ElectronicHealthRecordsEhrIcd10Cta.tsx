@@ -4,8 +4,7 @@ import React from "react";
 import { ShieldCheck, Star } from "lucide-react";
 import AppButton from "@/components/ui/AppButton";
 import MotionWrapper from "@/components/ui/MotionWrapper";
-import { ehrContainerClassName, ehrSectionClassName } from "./ehrSectionLayout";
-
+import SectionBadge from "@/components/ui/SectionBadge";
 import { EhrIcd10CtaData } from "@/payload/types/electronicHealthRecordsEhr";
 import { defaultElectronicHealthRecordsEhrData } from "@/lib/defaults/electronicHealthRecordsEhr";
 
@@ -18,36 +17,31 @@ export default function ElectronicHealthRecordsEhrIcd10Cta({ data }: ElectronicH
 
   return (
     <section
-      className={`${ehrSectionClassName} pb-20 sm:pb-24 lg:pb-28`}
+      className="w-full bg-transparent py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 flex justify-center items-center"
       aria-labelledby="electronic-health-records-ehr-icd10-cta-heading"
     >
-      <div className={ehrContainerClassName}>
+      <div className="w-full max-w-7xl">
         <MotionWrapper variant="scaleUp">
-          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0F172A] p-8 text-white shadow-lg sm:rounded-2xl sm:p-10 lg:p-12">
-            <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12">
-              <div className="lg:col-span-7">
-                <div className="mb-4 flex flex-wrap items-center gap-3">
-                  <span className="inline-flex items-center rounded-md border border-white/20 bg-white px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest text-[#0F172A]">
-                    {content.badgeTag || "New"}
-                  </span>
-                  <span className="text-[11px] font-bold uppercase tracking-widest text-blue-100">
-                    {content.badgeText || "Ehr for Icd-10 Coding."}
-                  </span>
-                </div>
+          <div className="relative overflow-hidden rounded-2xl bg-[#0F172A] border border-white/10 text-white p-8 sm:p-12 shadow-lg">
+            <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12 text-left">
+              <div className="lg:col-span-7 space-y-3.5">
+                <SectionBadge variant="dark">
+                  {content.badgeText || "EHR FOR ICD-10 CODING"}
+                </SectionBadge>
 
                 <h2
                   id="electronic-health-records-ehr-icd10-cta-heading"
-                  className="text-2xl font-bold leading-tight tracking-[-0.02em] sm:text-3xl lg:text-4xl"
+                  className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight leading-tight sm:leading-snug"
                 >
                   {content.titlePlain}{" "}
                   <span className="font-bold text-amber-300">{content.titleHighlight}</span>
                 </h2>
 
-                <p className="mt-4 max-w-2xl text-sm leading-[1.6] text-blue-200 sm:mt-5 sm:text-base">
+                <p className="text-blue-200 text-sm sm:text-base leading-relaxed">
                   {content.subtitle}
                 </p>
 
-                <div className="mt-8">
+                <div className="pt-2">
                   <AppButton
                     href={content.buttonLink || "/schedule-a-demo"}
                     variant="secondary-dark"
@@ -83,3 +77,4 @@ export default function ElectronicHealthRecordsEhrIcd10Cta({ data }: ElectronicH
     </section>
   );
 }
+
