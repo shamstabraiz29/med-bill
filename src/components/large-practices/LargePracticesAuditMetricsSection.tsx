@@ -6,25 +6,30 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import LargePracticesAuditMetricCard from "./LargePracticesAuditMetricCard";
 import {
   largePracticeContainerClassName,
-  largePracticeSectionClassName,
+  largePracticeSectionAltClassName,
 } from "./largePracticeSectionLayout";
 import { defaultLargePracticesData } from "@/lib/defaults/largePractices";
 import type { LargePracticesPageData } from "@/payload/types/largePractices";
-import { CalendarDays, FileCheck, LucideIcon, ShieldCheck, TrendingUp } from "lucide-react";
+import { CalendarDays, FileCheck, LucideIcon, ShieldAlert, TrendingUp } from "lucide-react";
 
-const ICONS: LucideIcon[] = [TrendingUp, FileCheck, ShieldCheck, CalendarDays];
+const ICONS: LucideIcon[] = [CalendarDays, FileCheck, TrendingUp, ShieldAlert];
 
 interface LargePracticesAuditMetricsSectionProps {
   data?: LargePracticesPageData["auditMetrics"];
 }
 
-export default function LargePracticesAuditMetricsSection({ data }: LargePracticesAuditMetricsSectionProps) {
+export default function LargePracticesAuditMetricsSection({
+  data,
+}: LargePracticesAuditMetricsSectionProps) {
   const content = data || defaultLargePracticesData.auditMetrics;
-  const rawMetrics = content.metrics && content.metrics.length > 0 ? content.metrics : defaultLargePracticesData.auditMetrics.metrics;
+  const rawMetrics =
+    content.metrics && content.metrics.length > 0
+      ? content.metrics
+      : defaultLargePracticesData.auditMetrics.metrics;
 
   return (
     <section
-      className={largePracticeSectionClassName}
+      className={largePracticeSectionAltClassName}
       aria-labelledby="large-practices-audit-metrics-heading"
     >
       <div className={largePracticeContainerClassName}>
@@ -33,26 +38,29 @@ export default function LargePracticesAuditMetricsSection({ data }: LargePractic
           badgeVariant="indigo"
           badgePulse
           align="center"
-          className="mx-auto mb-12 max-w-3xl sm:mb-14"
+          className="mx-auto mb-10 max-w-3xl sm:mb-12"
           title={
             <span id="large-practices-audit-metrics-heading">
-              {content.titlePlain}{" "}
-              <span className="text-[#1D4ED8]">{content.titleHighlight}</span>
+              {content.titlePlain}
+              <span className="text-blue-600">{content.titleHighlight}</span>
+              {content.titleSuffix}
             </span>
           }
+          description={content.description}
         />
 
         <MotionWrapper
           variant="stagger"
           staggerDelay={0.08}
-          className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6"
+          className="mx-auto flex max-w-4xl flex-col gap-4 sm:gap-5"
         >
           {rawMetrics.map((metric, idx) => (
-            <MotionWrapper key={metric.label || idx} variant="staggerItem" className="h-full">
+            <MotionWrapper key={metric.title || idx} variant="staggerItem">
               <LargePracticesAuditMetricCard
                 icon={ICONS[idx % ICONS.length]}
-                title={`${metric.value} ${metric.label}`}
-                description={metric.subtitle || metric.label}
+                step={idx + 1}
+                title={metric.title}
+                description={metric.description}
               />
             </MotionWrapper>
           ))}

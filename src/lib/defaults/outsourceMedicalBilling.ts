@@ -206,7 +206,7 @@ export const defaultOutsourceMedicalBillingData: OutsourceMedicalBillingPageData
     ctaTitleHighlight: "Proven Expertise",
     ctaSubtitle:
       "Transform your practice billing performance with cutting-edge tools and dedicated certified billing specialists.",
-    ctaButtonText: "Schedule a Call",
+    ctaButtonText: "Request Demo",
     ctaButtonLink: "/schedule-a-demo",
   },
 };

@@ -7,7 +7,7 @@ import AppButton from "@/components/ui/AppButton";
 import { outsourceCardClassName } from "./outsourceSectionLayout";
 
 const inputClassName =
-  "h-11 border-[#E2E6EC] bg-[#F8FAFC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 text-xs sm:text-sm rounded-lg transition-all";
+  "h-11 border-[#E2E6EC] bg-[#F8FAFC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40";
 
 export default function OutsourceMedicalBillingHeroForm() {
   const [formData, setFormData] = useState({
@@ -50,8 +50,8 @@ export default function OutsourceMedicalBillingHeroForm() {
   };
 
   return (
-    <div className="relative z-10 flex w-full flex-col gap-6 overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white p-6 shadow-[0_8px_30px_rgba(29,78,216,0.08)] sm:p-8 md:p-9">
-      <div className="space-y-1.5 border-b border-[#E2E6EC] pb-2 text-left">
+    <div className={`${outsourceCardClassName} p-6 sm:p-8`}>
+      <div className="mb-6 border-b border-[#E2E6EC] pb-5 text-left">
         <h2 className="text-xl font-bold tracking-[-0.02em] text-[#0F172A] sm:text-2xl">
           Tell Us Where to Send You the{" "}
           <span className="text-[#1D4ED8]">Demo</span>
@@ -77,68 +77,53 @@ export default function OutsourceMedicalBillingHeroForm() {
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <div className="space-y-2 text-left">
-            <label htmlFor="outsource-billing-name" className="block text-xs sm:text-sm font-medium text-slate-700">
-              Full Name <span className="text-red-500">*</span>
-            </label>
-            <Input
-              id="outsource-billing-name"
-              type="text"
-              required
-              placeholder="Full Name"
-              aria-label="Full Name"
-              icon={User}
-              value={formData.name}
-              onChange={(event) =>
-                setFormData((current) => ({ ...current, name: event.target.value }))
-              }
-              className={inputClassName}
-            />
-          </div>
+          <Input
+            id="outsource-billing-name"
+            type="text"
+            required
+            placeholder="Name"
+            aria-label="Name"
+            icon={User}
+            value={formData.name}
+            onChange={(event) =>
+              setFormData((current) => ({ ...current, name: event.target.value }))
+            }
+            className={inputClassName}
+          />
 
-          <div className="space-y-2 text-left">
-            <label htmlFor="outsource-billing-email" className="block text-xs sm:text-sm font-medium text-slate-700">
-              Email Address <span className="text-red-500">*</span>
-            </label>
-            <Input
-              id="outsource-billing-email"
-              type="email"
-              required
-              placeholder="Email Address"
-              aria-label="Email Address"
-              icon={Mail}
-              value={formData.email}
-              onChange={(event) =>
-                setFormData((current) => ({ ...current, email: event.target.value }))
-              }
-              className={inputClassName}
-            />
-          </div>
+          <Input
+            id="outsource-billing-email"
+            type="email"
+            required
+            placeholder="Email"
+            aria-label="Email"
+            icon={Mail}
+            value={formData.email}
+            onChange={(event) =>
+              setFormData((current) => ({ ...current, email: event.target.value }))
+            }
+            className={inputClassName}
+          />
 
-          <div className="space-y-2 text-left">
-            <label htmlFor="outsource-billing-phone" className="block text-xs sm:text-sm font-medium text-slate-700">
-              Phone Number <span className="text-red-500">*</span>
-            </label>
-            <Input
-              id="outsource-billing-phone"
-              type="tel"
-              required
-              placeholder="Phone Number"
-              aria-label="Phone Number"
-              icon={Phone}
-              value={formData.phone}
-              onChange={(event) =>
-                setFormData((current) => ({ ...current, phone: event.target.value }))
-              }
-              className={inputClassName}
-            />
-          </div>
+          <Input
+            id="outsource-billing-phone"
+            type="tel"
+            required
+            placeholder="Phone Number"
+            aria-label="Phone Number"
+            icon={Phone}
+            value={formData.phone}
+            onChange={(event) =>
+              setFormData((current) => ({ ...current, phone: event.target.value }))
+            }
+            className={inputClassName}
+          />
 
           <AppButton
             type="submit"
             disabled={isSubmitting}
             variant="primary"
-            size="lg"
+            size="md"
             className="w-full uppercase tracking-wider"
           >
             {isSubmitting ? "Processing..." : "Submit"}

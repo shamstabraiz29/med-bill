@@ -8,22 +8,14 @@ export interface LargePracticeGoal {
   iconName?: string;
 }
 
-export interface LargePracticeHighlight {
-  title: string;
-  description: string;
-}
-
-export interface LargePracticeKpi {
-  number: string;
-  title: string;
-  description: string;
-  iconName?: string;
-}
-
-export interface LargePracticeMetric {
-  value: string;
+export interface LargePracticeKpiChartItem {
   label: string;
-  subtitle?: string;
+  value: number;
+}
+
+export interface LargePracticeAuditMetricItem {
+  title: string;
+  description: string;
 }
 
 export interface LargePracticeServiceItem {
@@ -33,15 +25,16 @@ export interface LargePracticeServiceItem {
 }
 
 export interface LargePracticeFlowchartStep {
-  stepNumber: string;
   title: string;
   description: string;
+  iconName?: string;
 }
 
 export interface LargePracticeProcessStep {
   stepNumber: string;
   title: string;
   description: string;
+  iconName?: string;
 }
 
 export interface LargePracticesPageData {
@@ -56,40 +49,49 @@ export interface LargePracticesPageData {
     stats: LargePracticeStat[];
   };
   commonGoals: {
-    badge: string;
     titlePlain: string;
     titleHighlight: string;
     goals: LargePracticeGoal[];
   };
   infrastructure: {
-    badge: string;
+    titlePlain: string;
+    titleHighlight?: string;
+    descriptionParagraph1: string;
+    descriptionParagraph2: string;
+    ctaText: string;
+    ctaHref: string;
+  };
+  kpis: {
     titlePlain: string;
     titleHighlight: string;
     description: string;
-    highlights: LargePracticeHighlight[];
-  };
-  kpis: {
-    badge: string;
-    titlePlain: string;
-    titleHighlight: string;
-    cards: LargePracticeKpi[];
+    chartItems: LargePracticeKpiChartItem[];
   };
   auditMetrics: {
     badge: string;
     titlePlain: string;
     titleHighlight: string;
-    metrics: LargePracticeMetric[];
+    titleSuffix: string;
+    description: string;
+    metrics: LargePracticeAuditMetricItem[];
   };
   personalizedServices: {
     badge: string;
     titlePlain: string;
     titleHighlight: string;
-    services: LargePracticeServiceItem[];
+    paragraph1: string;
+    paragraph2: string;
+    paragraph3: string;
+    ctaText: string;
+    ctaHref: string;
+    imageSrc?: string;
+    imageAlt?: string;
   };
   billingFlowchart: {
     badge: string;
     titlePlain: string;
     titleHighlight: string;
+    description: string;
     steps: LargePracticeFlowchartStep[];
   };
   workProcess: {
@@ -102,6 +104,7 @@ export interface LargePracticesPageData {
     badge: string;
     titlePlain: string;
     titleHighlight: string;
+    description: string;
     services: LargePracticeServiceItem[];
   };
 }
