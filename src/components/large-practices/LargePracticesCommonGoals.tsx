@@ -2,21 +2,22 @@
 
 import React from "react";
 import {
+  BarChart3,
   CircleDollarSign,
-  Heart,
+  FileCog,
   LucideIcon,
   PiggyBank,
-  Scale,
   ShieldCheck,
   Target,
 } from "lucide-react";
 import IconWrapper from "@/components/common/IconWrapper";
+import { Card, CardContent } from "@/components/ui/card";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import SectionHeader from "@/components/ui/SectionHeader";
+import { cn } from "@/lib/utils";
 import {
-  largePracticeCardClassName,
   largePracticeContainerClassName,
-  largePracticeSectionAltClassName,
+  largePracticeSectionClassName,
 } from "./largePracticeSectionLayout";
 import { defaultLargePracticesData } from "@/lib/defaults/largePractices";
 import type { LargePracticesPageData } from "@/payload/types/largePractices";
@@ -24,9 +25,9 @@ import type { LargePracticesPageData } from "@/payload/types/largePractices";
 const ICON_MAP: Record<string, LucideIcon> = {
   CircleDollarSign,
   Target,
-  Heart,
+  BarChart3,
+  FileCog,
   ShieldCheck,
-  Scale,
   PiggyBank,
 };
 
@@ -36,23 +37,26 @@ interface LargePracticesCommonGoalsProps {
 
 export default function LargePracticesCommonGoals({ data }: LargePracticesCommonGoalsProps) {
   const content = data || defaultLargePracticesData.commonGoals;
-  const rawGoals = content.goals && content.goals.length > 0 ? content.goals : defaultLargePracticesData.commonGoals.goals;
+  const rawGoals =
+    content.goals && content.goals.length > 0
+      ? content.goals
+      : defaultLargePracticesData.commonGoals.goals;
 
   return (
     <section
-      className={largePracticeSectionAltClassName}
+      className={cn(largePracticeSectionClassName, "border-t border-[#E2E6EC]")}
       aria-labelledby="large-practices-common-goals-heading"
     >
       <div className={largePracticeContainerClassName}>
         <SectionHeader
-          badge={content.badge}
+          badge="Shared Objectives."
           badgeVariant="indigo"
           badgePulse
           align="center"
           className="mx-auto mb-12 max-w-3xl sm:mb-14"
           title={
             <span id="large-practices-common-goals-heading">
-              {content.titlePlain}{" "}
+              {content.titlePlain}
               <span className="text-blue-600">{content.titleHighlight}</span>
             </span>
           }
@@ -61,20 +65,29 @@ export default function LargePracticesCommonGoals({ data }: LargePracticesCommon
         <MotionWrapper
           variant="stagger"
           staggerDelay={0.08}
-          className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-8"
+          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
         >
           {rawGoals.map((goal, idx) => {
             const Icon = (goal.iconName && ICON_MAP[goal.iconName]) || CircleDollarSign;
             return (
               <MotionWrapper key={goal.label || idx} variant="staggerItem" className="h-full">
-                <div
-                  className={`${largePracticeCardClassName} flex h-full flex-col items-center px-5 py-7 text-center transition-all duration-300 hover:border-[#1D4ED8]/30 hover:shadow-lg hover:shadow-blue-900/5 sm:px-6 sm:py-8`}
+                <Card
+                  glass={false}
+                  hoverEffect="both"
+                  className="group flex h-full flex-col items-center justify-start rounded-2xl border border-[#E2E6EC] bg-white p-6 text-center shadow-[0_4px_24px_rgba(29,78,216,0.04)] transition-all duration-300 hover:border-[#1D4ED8]/30 hover:shadow-lg sm:rounded-2xl sm:p-8"
                 >
-                  <IconWrapper icon={Icon} size="md" variant="surface" className="mb-4" />
-                  <p className="text-sm font-bold leading-snug tracking-[-0.02em] text-[#0F172A]">
-                    {goal.label}
-                  </p>
-                </div>
+                  <CardContent className="flex flex-col items-center p-0 text-center">
+                    <IconWrapper
+                      icon={Icon}
+                      size="lg"
+                      variant="surface"
+                      className="mb-5 transition-transform duration-300 group-hover:scale-110"
+                    />
+                    <p className="text-sm font-semibold leading-[1.65] text-[#0F172A] sm:text-[15px]">
+                      {goal.label}
+                    </p>
+                  </CardContent>
+                </Card>
               </MotionWrapper>
             );
           })}

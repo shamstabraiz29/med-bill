@@ -1,12 +1,14 @@
 "use client";
 
 import React from "react";
+import BillingWorkflowStepCard from "@/components/medical-billing/BillingWorkflowStepCard";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import SectionHeader from "@/components/ui/SectionHeader";
-import LargePracticesWorkProcessStep from "./LargePracticesWorkProcessStep";
+import { getIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 import {
   largePracticeContainerClassName,
-  largePracticeSectionAltClassName,
+  largePracticeSectionClassName,
 } from "./largePracticeSectionLayout";
 import { defaultLargePracticesData } from "@/lib/defaults/largePractices";
 import type { LargePracticesPageData } from "@/payload/types/largePractices";
@@ -15,13 +17,18 @@ interface LargePracticesWorkProcessSectionProps {
   data?: LargePracticesPageData["workProcess"];
 }
 
-export default function LargePracticesWorkProcessSection({ data }: LargePracticesWorkProcessSectionProps) {
+export default function LargePracticesWorkProcessSection({
+  data,
+}: LargePracticesWorkProcessSectionProps) {
   const content = data || defaultLargePracticesData.workProcess;
-  const rawSteps = content.steps && content.steps.length > 0 ? content.steps : defaultLargePracticesData.workProcess.steps;
+  const rawSteps =
+    content.steps && content.steps.length > 0
+      ? content.steps
+      : defaultLargePracticesData.workProcess.steps;
 
   return (
     <section
-      className={largePracticeSectionAltClassName}
+      className={cn(largePracticeSectionClassName, "border-t border-[#E2E6EC]")}
       aria-labelledby="large-practices-work-process-heading"
     >
       <div className={largePracticeContainerClassName}>
@@ -30,10 +37,10 @@ export default function LargePracticesWorkProcessSection({ data }: LargePractice
           badgeVariant="indigo"
           badgePulse
           align="center"
-          className="mx-auto mb-12 max-w-3xl sm:mb-14"
+          className="mx-auto mb-12 max-w-4xl sm:mb-16"
           title={
             <span id="large-practices-work-process-heading">
-              {content.titlePlain}{" "}
+              {content.titlePlain}
               <span className="text-blue-600">{content.titleHighlight}</span>
             </span>
           }
@@ -41,18 +48,26 @@ export default function LargePracticesWorkProcessSection({ data }: LargePractice
 
         <MotionWrapper
           variant="stagger"
-          staggerDelay={0.1}
-          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6"
+          staggerDelay={0.06}
+          className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:gap-5"
         >
-          {rawSteps.map((step, idx) => (
-            <MotionWrapper key={step.stepNumber || idx} variant="staggerItem" className="h-full">
-              <LargePracticesWorkProcessStep
-                step={step.stepNumber}
-                title={step.title}
-                description={step.description}
-              />
-            </MotionWrapper>
-          ))}
+          {rawSteps.map((step, index) => {
+            const Icon = getIcon(step.iconName || "CheckCircle2");
+
+            return (
+              <MotionWrapper key={step.title || index} variant="staggerItem" className="h-full">
+                <BillingWorkflowStepCard
+                  step={index + 1}
+                  icon={Icon}
+                  title={step.title}
+                  description={step.description}
+                  className={cn(
+                    "h-full border-[#E2E6EC] bg-white shadow-[0_4px_24px_rgba(29,78,216,0.04)] transition-all duration-300 hover:border-[#1D4ED8]/30 hover:shadow-lg hover:shadow-blue-900/5"
+                  )}
+                />
+              </MotionWrapper>
+            );
+          })}
         </MotionWrapper>
       </div>
     </section>

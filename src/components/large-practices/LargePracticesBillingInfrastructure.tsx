@@ -1,10 +1,11 @@
 "use client";
 
 import React from "react";
+import AppButton from "@/components/ui/AppButton";
 import MotionWrapper from "@/components/ui/MotionWrapper";
-import SectionHeader from "@/components/ui/SectionHeader";
+import SectionBadge from "@/components/ui/SectionBadge";
+import { cn } from "@/lib/utils";
 import {
-  largePracticeCardClassName,
   largePracticeContainerClassName,
   largePracticeSectionClassName,
 } from "./largePracticeSectionLayout";
@@ -15,53 +16,65 @@ interface LargePracticesBillingInfrastructureProps {
   data?: LargePracticesPageData["infrastructure"];
 }
 
-export default function LargePracticesBillingInfrastructure({ data }: LargePracticesBillingInfrastructureProps) {
+export default function LargePracticesBillingInfrastructure({
+  data,
+}: LargePracticesBillingInfrastructureProps) {
   const content = data || defaultLargePracticesData.infrastructure;
-  const rawHighlights = content.highlights && content.highlights.length > 0 ? content.highlights : defaultLargePracticesData.infrastructure.highlights;
 
   return (
     <section
-      className={largePracticeSectionClassName}
-      aria-labelledby="large-practices-[#0F172A]-heading"
+      className={cn(largePracticeSectionClassName, "border-t border-[#E2E6EC]")}
+      aria-labelledby="large-practices-infrastructure-heading"
     >
       <div className={largePracticeContainerClassName}>
-        <SectionHeader
-          badge={content.badge}
-          badgeVariant="indigo"
-          badgePulse
-          align="left"
-          className="mb-10 max-w-3xl sm:mb-12"
-          title={
-            <span id="large-practices-[#0F172A]-heading">
-              {content.titlePlain}{" "}
-              <span className="text-[#1D4ED8]">{content.titleHighlight}</span>
-            </span>
-          }
-          description={content.description}
-        />
+        <MotionWrapper variant="scaleUp">
+          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0F172A] px-6 py-10 text-center text-white shadow-lg sm:rounded-3xl sm:px-10 sm:py-12 lg:px-14 lg:py-16">
+            <div
+              className="pointer-events-none absolute -left-24 top-0 h-72 w-72 rounded-full bg-[#1D4ED8]/20 blur-3xl"
+              aria-hidden="true"
+            />
+            <div
+              className="pointer-events-none absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-[#1D4ED8]/10 blur-3xl"
+              aria-hidden="true"
+            />
 
-        <MotionWrapper
-          variant="stagger"
-          staggerDelay={0.08}
-          className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4 lg:gap-6"
-        >
-          {rawHighlights.map((item, idx) => (
-            <MotionWrapper key={item.title || idx} variant="staggerItem" className="h-full">
-              <div
-                className={`${largePracticeCardClassName} flex h-full flex-col p-6 text-left transition-all duration-300 hover:border-[#1D4ED8]/30 hover:shadow-lg hover:shadow-blue-900/5`}
+            <div className="relative mx-auto flex max-w-3xl flex-col items-center">
+              <SectionBadge variant="dark" pulse>
+                Enterprise Infrastructure.
+              </SectionBadge>
+
+              <h2
+                id="large-practices-infrastructure-heading"
+                className="mt-5 text-2xl font-bold leading-tight tracking-tight sm:mt-6 sm:text-3xl sm:leading-snug lg:text-4xl"
               >
-                <div className="mb-3.5 flex h-7 w-7 items-center justify-center rounded-full bg-blue-50 text-[11px] font-extrabold text-[#1D4ED8]">
-                  0{idx + 1}
-                </div>
-                <h3 className="mb-2 text-base font-bold text-[#0F172A]">
-                  {item.title}
-                </h3>
-                <p className="text-xs leading-relaxed text-[#475569]">
-                  {item.description}
+                {content.titlePlain}
+                {content.titleHighlight ? (
+                  <span className="text-amber-300">{content.titleHighlight}</span>
+                ) : null}
+              </h2>
+
+              <div className="mt-5 space-y-4 sm:mt-6">
+                <p className="text-sm leading-[1.65] text-blue-200 sm:text-base">
+                  {content.descriptionParagraph1}
+                </p>
+                <p className="text-sm leading-[1.65] text-blue-200 sm:text-base">
+                  {content.descriptionParagraph2}
                 </p>
               </div>
-            </MotionWrapper>
-          ))}
+
+              <div className="mt-8 w-full sm:mt-10 sm:w-auto">
+                <AppButton
+                  href={content.ctaHref}
+                  variant="secondary-dark"
+                  size="lg"
+                  showArrow
+                  className="w-full sm:w-auto sm:min-w-[200px]"
+                >
+                  {content.ctaText}
+                </AppButton>
+              </div>
+            </div>
+          </div>
         </MotionWrapper>
       </div>
     </section>

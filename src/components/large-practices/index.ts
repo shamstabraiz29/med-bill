@@ -10,4 +10,3 @@ export { default as LargePracticesKpiCard } from "./LargePracticesKpiCard";
 export { default as LargePracticesKpisSection } from "./LargePracticesKpisSection";
 export { default as LargePracticesPersonalizedServices } from "./LargePracticesPersonalizedServices";
 export { default as LargePracticesWorkProcessSection } from "./LargePracticesWorkProcessSection";
-export { default as LargePracticesWorkProcessStep } from "./LargePracticesWorkProcessStep";

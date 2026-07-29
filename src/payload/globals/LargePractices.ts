@@ -44,7 +44,6 @@ export const LargePractices: GlobalConfig = {
       type: 'group',
       label: 'Common Goals Section',
       fields: [
-        { name: 'badge', type: 'text', defaultValue: 'Shared Objectives.' },
         { name: 'titlePlain', type: 'text', defaultValue: 'BellMedEx and Large Practices Share ' },
         { name: 'titleHighlight', type: 'text', defaultValue: 'Common Goals' },
         {
@@ -66,20 +65,26 @@ export const LargePractices: GlobalConfig = {
       type: 'group',
       label: 'Billing Infrastructure Section',
       fields: [
-        { name: 'badge', type: 'text', defaultValue: 'Enterprise Workflows.' },
-        { name: 'titlePlain', type: 'text', defaultValue: 'Optimized Billing Infrastructure for ' },
-        { name: 'titleHighlight', type: 'text', defaultValue: 'High-Volume Practices' },
-        { name: 'description', type: 'textarea' },
         {
-          name: 'highlights',
-          type: 'array',
-          label: 'Infrastructure Highlights',
-          dbName: 'lp_in_hl',
-          fields: [
-            { name: 'title', type: 'text', required: true },
-            { name: 'description', type: 'textarea', required: true },
-          ],
+          name: 'titlePlain',
+          type: 'text',
+          defaultValue: 'Robust Billing Infrastructure is a Promising Feature of Our ',
         },
+        { name: 'titleHighlight', type: 'text', defaultValue: 'Medical Billing Services' },
+        {
+          name: 'descriptionParagraph1',
+          type: 'textarea',
+          defaultValue:
+            'Large practices face myriad challenges from patient registration to claims submission and follow-up. One of the grand struggles is filing multiple claims above all the other administrative burdens.',
+        },
+        {
+          name: 'descriptionParagraph2',
+          type: 'textarea',
+          defaultValue:
+            'A solid billing infrastructure ensures transparency, affordability, and flexibility that fine-tunes the weak areas of billing processes and this is where BellMedEx comes in. Our billing services are handled by efficient systems — that have up-to-date denial management resources and experienced personnel — who provide solutions and 24/7 assistance.',
+        },
+        { name: 'ctaText', type: 'text', defaultValue: "Let's Hop on a Quick Call" },
+        { name: 'ctaHref', type: 'text', defaultValue: '/schedule-a-demo' },
       ],
     },
 
@@ -89,19 +94,22 @@ export const LargePractices: GlobalConfig = {
       type: 'group',
       label: 'KPIs Section',
       fields: [
-        { name: 'badge', type: 'text', defaultValue: 'Key Performance Indicators.' },
-        { name: 'titlePlain', type: 'text', defaultValue: 'Measuring Performance with ' },
-        { name: 'titleHighlight', type: 'text', defaultValue: 'Actionable KPIs' },
+        { name: 'titlePlain', type: 'text', defaultValue: '8 Important KPIs ' },
+        { name: 'titleHighlight', type: 'text', defaultValue: 'to Ensure Faster and More ROI' },
         {
-          name: 'cards',
+          name: 'description',
+          type: 'textarea',
+          defaultValue:
+            'These metrics make up most of the revenue cycle management flowchart for the billing process and revenue cycle management of your large practice.',
+        },
+        {
+          name: 'chartItems',
           type: 'array',
-          label: 'KPI Cards',
-          dbName: 'lp_kpi_c',
+          label: 'KPI Chart Items',
+          dbName: 'lp_kpi_ci',
           fields: [
-            { name: 'number', type: 'text', required: true },
-            { name: 'title', type: 'text', required: true },
-            { name: 'description', type: 'textarea', required: true },
-            { name: 'iconName', type: 'text' },
+            { name: 'label', type: 'text', required: true },
+            { name: 'value', type: 'number', required: true },
           ],
         },
       ],
@@ -113,18 +121,24 @@ export const LargePractices: GlobalConfig = {
       type: 'group',
       label: 'Audit Metrics Section',
       fields: [
-        { name: 'badge', type: 'text', defaultValue: 'Measurable Outcomes.' },
-        { name: 'titlePlain', type: 'text', defaultValue: 'Proven Audit Metrics & ' },
-        { name: 'titleHighlight', type: 'text', defaultValue: 'Results' },
+        { name: 'badge', type: 'text', defaultValue: 'Billing Audit Metrics.' },
+        { name: 'titlePlain', type: 'text', defaultValue: 'It Takes us ' },
+        { name: 'titleHighlight', type: 'text', defaultValue: '4 Metrics to Audit Billing' },
+        { name: 'titleSuffix', type: 'text', defaultValue: ' and Fix ROI for Your Large Practice' },
+        {
+          name: 'description',
+          type: 'textarea',
+          defaultValue:
+            "These metrics make up 60% of your billing process's efficiency, productivity, and financial performance. The figures are taken from the first-hand experience of our clients.",
+        },
         {
           name: 'metrics',
           type: 'array',
           label: 'Metrics List',
           dbName: 'lp_am_m',
           fields: [
-            { name: 'value', type: 'text', required: true },
-            { name: 'label', type: 'text', required: true },
-            { name: 'subtitle', type: 'text' },
+            { name: 'title', type: 'text', required: true },
+            { name: 'description', type: 'textarea', required: true },
           ],
         },
       ],
@@ -136,19 +150,42 @@ export const LargePractices: GlobalConfig = {
       type: 'group',
       label: 'Personalized Services Section',
       fields: [
-        { name: 'badge', type: 'text', defaultValue: 'Tailored Solutions.' },
-        { name: 'titlePlain', type: 'text', defaultValue: 'Personalized Billing Services for ' },
-        { name: 'titleHighlight', type: 'text', defaultValue: 'Your Practice' },
+        { name: 'badge', type: 'text', defaultValue: 'Personalized Billing.' },
         {
-          name: 'services',
-          type: 'array',
-          label: 'Services List',
-          dbName: 'lp_ps_s',
-          fields: [
-            { name: 'title', type: 'text', required: true },
-            { name: 'description', type: 'textarea', required: true },
-            { name: 'iconName', type: 'text' },
-          ],
+          name: 'titlePlain',
+          type: 'text',
+          defaultValue: 'Get Personalized Medical Billing Services to Refine your ',
+        },
+        {
+          name: 'titleHighlight',
+          type: 'text',
+          defaultValue: 'Billing, Coding, and overall RCM Strengths',
+        },
+        {
+          name: 'paragraph1',
+          type: 'textarea',
+          defaultValue:
+            "We understand one-size doesn't fit all and your large practice needs customized services that are transparent yet error-less. We audit your billing process, identify, and rectify errors and check all unpaid and aging claims.",
+        },
+        {
+          name: 'paragraph2',
+          type: 'textarea',
+          defaultValue:
+            'Your Large Practice is fighting multiple battles from patient registration to claims submission and denial management. We take over all your non-clinical burden to help you focus on delivering patient care.',
+        },
+        {
+          name: 'paragraph3',
+          type: 'textarea',
+          defaultValue:
+            'In fact, we have billing, coding, and RCM systems for your large practice in place. We submit clean claims more than 99% of the time, ensure timely submission of medical claims, follow up on aging A/R daily, and increase reimbursements.',
+        },
+        { name: 'ctaText', type: 'text', defaultValue: 'Book Free Consultation Now' },
+        { name: 'ctaHref', type: 'text', defaultValue: '/schedule-a-demo' },
+        { name: 'imageSrc', type: 'text', defaultValue: '/consultants-laptop.png' },
+        {
+          name: 'imageAlt',
+          type: 'text',
+          defaultValue: 'Healthcare professional reviewing personalized medical billing services on a laptop',
         },
       ],
     },
@@ -159,18 +196,32 @@ export const LargePractices: GlobalConfig = {
       type: 'group',
       label: 'Billing Flowchart Section',
       fields: [
-        { name: 'badge', type: 'text', defaultValue: 'Seamless Process.' },
-        { name: 'titlePlain', type: 'text', defaultValue: 'Our End-to-End Billing ' },
-        { name: 'titleHighlight', type: 'text', defaultValue: 'Flowchart' },
+        { name: 'badge', type: 'text', defaultValue: 'RCM Flowchart.' },
+        {
+          name: 'titlePlain',
+          type: 'text',
+          defaultValue: 'Medical Billing Services to Streamline ',
+        },
+        {
+          name: 'titleHighlight',
+          type: 'text',
+          defaultValue: 'Revenue Cycle Management for Large Practices',
+        },
+        {
+          name: 'description',
+          type: 'textarea',
+          defaultValue:
+            'Simplify the complexities of medical billing and enhance your financial and healthcare productivity by opting the following billing flowchart for your large practice.',
+        },
         {
           name: 'steps',
           type: 'array',
           label: 'Flowchart Steps',
           dbName: 'lp_bf_s',
           fields: [
-            { name: 'stepNumber', type: 'text', required: true },
             { name: 'title', type: 'text', required: true },
             { name: 'description', type: 'textarea', required: true },
+            { name: 'iconName', type: 'text' },
           ],
         },
       ],
@@ -182,9 +233,13 @@ export const LargePractices: GlobalConfig = {
       type: 'group',
       label: 'Work Process Section',
       fields: [
-        { name: 'badge', type: 'text', defaultValue: 'Proven Method.' },
-        { name: 'titlePlain', type: 'text', defaultValue: 'Our Work Process for ' },
-        { name: 'titleHighlight', type: 'text', defaultValue: 'Large Practices' },
+        { name: 'badge', type: 'text', defaultValue: 'Efficient Workflow.' },
+        {
+          name: 'titlePlain',
+          type: 'text',
+          defaultValue: 'Our Efficient Work Process to Achieve ',
+        },
+        { name: 'titleHighlight', type: 'text', defaultValue: 'These Goals Faster' },
         {
           name: 'steps',
           type: 'array',
@@ -194,6 +249,7 @@ export const LargePractices: GlobalConfig = {
             { name: 'stepNumber', type: 'text', required: true },
             { name: 'title', type: 'text', required: true },
             { name: 'description', type: 'textarea', required: true },
+            { name: 'iconName', type: 'text' },
           ],
         },
       ],
@@ -205,9 +261,19 @@ export const LargePractices: GlobalConfig = {
       type: 'group',
       label: 'Add-On Services Section',
       fields: [
-        { name: 'badge', type: 'text', defaultValue: 'Additional Support.' },
-        { name: 'titlePlain', type: 'text', defaultValue: 'Comprehensive Add-On ' },
-        { name: 'titleHighlight', type: 'text', defaultValue: 'Billing Services' },
+        { name: 'badge', type: 'text', defaultValue: 'Add-On Services.' },
+        { name: 'titlePlain', type: 'text', defaultValue: 'Add on Services to Provide a ' },
+        {
+          name: 'titleHighlight',
+          type: 'text',
+          defaultValue: "One-Stop Solution for your Large Practice's Thorough Billing and RCM Needs",
+        },
+        {
+          name: 'description',
+          type: 'textarea',
+          defaultValue:
+            'Unlock your fullest revenue and care potential with these add-on services available individually as well as complete package.',
+        },
         {
           name: 'services',
           type: 'array',
