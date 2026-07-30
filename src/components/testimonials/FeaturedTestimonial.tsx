@@ -3,6 +3,7 @@
 import React from "react";
 import { Star, Quote, ShieldCheck, CheckCircle2 } from "lucide-react";
 import MotionWrapper from "@/components/ui/MotionWrapper";
+import AppImage from "@/components/ui/AppImage";
 
 import { FeaturedTestimonialData } from "@/payload/types/testimonials";
 import { defaultTestimonialsData } from "@/lib/defaults/testimonials";
@@ -85,10 +86,12 @@ export default function FeaturedTestimonial({ data }: FeaturedTestimonialProps) 
                   
                   {/* Photo Container */}
                   <div className="relative w-full h-full rounded-2xl overflow-hidden border-2 border-white/20 shadow-2xl bg-slate-900">
-                    <img
+                    <AppImage
                       src={content.authorImageSrc || "https://images.unsplash.com/photo-1594824813566-88855ce7890b?q=80&w=800&auto=format&fit=crop"}
                       alt={content.authorName}
-                      className="w-full h-full object-cover object-top"
+                      fill
+                      className="object-cover object-top"
+                      sizes="400px"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
                     

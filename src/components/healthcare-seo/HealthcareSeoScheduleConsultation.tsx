@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { CheckCircle2, TrendingUp } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import MotionWrapper from "@/components/ui/MotionWrapper";
+import AppImage from "@/components/ui/AppImage";
 import type { HealthcareSeoScheduleConsultationData } from "@/payload/types/healthcareSeo";
 import { defaultHealthcareSeoData } from "@/lib/defaults/healthcareSeo";
 
@@ -171,10 +172,12 @@ export default function HealthcareSeoScheduleConsultation({ data }: HealthcareSe
             <div className="relative rounded-2xl overflow-hidden border border-[#E2E6EC] shadow-xl group aspect-[4/3] sm:aspect-[16/11] flex items-center justify-center">
               
               {/* Background Medical Consultation Image */}
-              <img
+              <AppImage
                 src={content.imageSrc || "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1000&auto=format&fit=crop"}
                 alt="Healthcare Consultation & Marketing Strategy"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                sizes="(max-width: 1024px) 100vw, 50vw"
               />
 
               {/* Gradient Overlay for Depth & Contrast */}

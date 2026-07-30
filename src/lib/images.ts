@@ -25,7 +25,10 @@ import rcmDoctorImportance from "../../public/rcm-doctor-importance.png";
 import usMap from "../../public/us-map.png";
 
 const LOCALHOST_PATTERN = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?/i;
+const REMOTE_URL_PATTERN = /^https?:\/\//i;
+const NEXT_STATIC_MEDIA_PATTERN = /^\/_next\/static\/media\//;
 
+/** Bundled images — pass these or a `/filename.png` path to AppImage */
 export const staticImages: Record<string, StaticImageData> = {
   "/clearinghouse-nurse-hero.png": clearinghouseNurseHero,
   "/consultants-laptop.png": consultantsLaptop,
@@ -52,49 +55,60 @@ export const staticImages: Record<string, StaticImageData> = {
   "/us-map.png": usMap,
 };
 
-const imageLoaders: Record<string, () => Promise<{ default: StaticImageData }>> = {
-  "/clearinghouse-nurse-hero.png": () => import("../../public/clearinghouse-nurse-hero.png"),
-  "/consultants-laptop.png": () => import("../../public/consultants-laptop.png"),
-  "/doctor-hero.png": () => import("../../public/doctor-hero.png"),
-  "/doctors-team.png": () => import("../../public/doctors-team.png"),
-  "/dr-nicole.png": () => import("../../public/dr-nicole.png"),
-  "/faq-doctor.png": () => import("../../public/faq-doctor.png"),
-  "/fusionedi-dashboard.png": () => import("../../public/fusionedi-dashboard.png"),
-  "/gennaya-matt.png": () => import("../../public/gennaya-matt.png"),
-  "/julia-will.png": () => import("../../public/julia-will.png"),
-  "/medical-billing-software-dashboard.png": () =>
-    import("../../public/medical-billing-software-dashboard.png"),
-  "/mike-lan.png": () => import("../../public/mike-lan.png"),
-  "/pms-billing-rcm-cycle.png": () => import("../../public/pms-billing-rcm-cycle.png"),
-  "/pms-claim-more-worry-less.png": () => import("../../public/pms-claim-more-worry-less.png"),
-  "/pms-connect-care-cure.png": () => import("../../public/pms-connect-care-cure.png"),
-  "/pms-score-billing-rcm-wins.png": () => import("../../public/pms-score-billing-rcm-wins.png"),
-  "/pms-specialty-dashboard.png": () => import("../../public/pms-specialty-dashboard.png"),
-  "/rcm-card-audit.png": () => import("../../public/rcm-card-audit.png"),
-  "/rcm-card-billing.png": () => import("../../public/rcm-card-billing.png"),
-  "/rcm-card-coding.png": () => import("../../public/rcm-card-coding.png"),
-  "/rcm-dashboard-laptop1.png": () => import("../../public/rcm-dashboard-laptop1.png"),
-  "/rcm-dashboard-laptop2.png": () => import("../../public/rcm-dashboard-laptop2.png"),
-  "/rcm-doctor-importance.png": () => import("../../public/rcm-doctor-importance.png"),
-  "/us-map.png": () => import("../../public/us-map.png"),
+export {
+  clearinghouseNurseHero,
+  consultantsLaptop,
+  doctorHero,
+  doctorsTeam,
+  drNicole,
+  faqDoctor,
+  fusionediDashboard,
+  gennayaMatt,
+  juliaWill,
+  medicalBillingSoftwareDashboard,
+  mikeLan,
+  pmsBillingRcmCycle,
+  pmsClaimMoreWorryLess,
+  pmsConnectCareCure,
+  pmsScoreBillingRcmWins,
+  pmsSpecialtyDashboard,
+  rcmCardAudit,
+  rcmCardBilling,
+  rcmCardCoding,
+  rcmDashboardLaptop1,
+  rcmDashboardLaptop2,
+  rcmDoctorImportance,
+  usMap,
 };
 
 function isLikelyImageFieldKey(key: string): boolean {
   return (
-    /image|avatar|photo|thumbnail|picture|poster|banner|logo/i.test(key) &&
+    /image|avatar|photo|thumbnail|picture|poster|banner/i.test(key) &&
     !/Alt|alt|Label|label|Caption|caption|Title|title|Name|name|Text|text|Href|href/i.test(key)
   );
 }
 
-function normalizeLocalPath(src: string): string {
+function isRemoteUrl(src: string): boolean {
+  return (
+    REMOTE_URL_PATTERN.test(src) ||
+    src.startsWith("//") ||
+    src.startsWith("data:") ||
+    src.startsWith("blob:")
+  );
+}
+
+function normalizeLocalPath(src: string): string | undefined {
   const trimmed = src.trim();
+  if (!trimmed) {
+    return undefined;
+  }
 
   if (LOCALHOST_PATTERN.test(trimmed)) {
     try {
       const url = new URL(trimmed);
-      return url.pathname + url.search;
+      return url.pathname + url.search || undefined;
     } catch {
-      return trimmed;
+      return undefined;
     }
   }
 
@@ -102,20 +116,49 @@ function normalizeLocalPath(src: string): string {
     return `https:${trimmed}`;
   }
 
-  if (/^https?:\/\//i.test(trimmed) || trimmed.startsWith("data:") || trimmed.startsWith("blob:")) {
+  if (isRemoteUrl(trimmed)) {
     return trimmed;
   }
 
   return trimmed.startsWith("/") ? trimmed : `/${trimmed}`;
 }
 
+function getFilename(path: string): string {
+  return path.split("/").pop() || path;
+}
+
 function lookupStaticImage(path: string): StaticImageData | undefined {
-  return staticImages[path] || staticImages[`/${path.replace(/^\//, "")}`];
+  const normalized = normalizeLocalPath(path);
+  if (!normalized || isRemoteUrl(normalized)) {
+    return undefined;
+  }
+
+  if (staticImages[normalized]) {
+    return staticImages[normalized];
+  }
+
+  const filename = getFilename(normalized);
+  const byFilename = staticImages[`/${filename}`];
+  if (byFilename) {
+    return byFilename;
+  }
+
+  // Recover from previously-sanitized `/_next/static/media/<name>.<hash>.png` strings
+  if (NEXT_STATIC_MEDIA_PATTERN.test(normalized)) {
+    const mediaFile = getFilename(normalized);
+    const baseName = mediaFile.replace(/\.[a-f0-9]{8,}\.(png|jpe?g|webp|gif)$/i, ".$1");
+    return staticImages[`/${baseName}`];
+  }
+
+  return undefined;
+}
+
+export function isKnownLocalImage(path: string | null | undefined): boolean {
+  return typeof path === "string" && Boolean(lookupStaticImage(path));
 }
 
 /**
- * Normalizes CMS / user-provided image paths for production.
- * Known local assets resolve to bundled `/_next/static/media/...` URLs.
+ * Returns a URL string for <img> or CSS. Prefer AppImage for local assets.
  */
 export function resolveImageSrc(src: string | null | undefined): string | undefined {
   if (typeof src !== "string") {
@@ -132,9 +175,13 @@ export function resolveImageSrc(src: string | null | undefined): string | undefi
     return staticImage.src;
   }
 
-  return normalized || undefined;
+  return normalized;
 }
 
+/**
+ * Returns StaticImageData for known local assets (same as DoctorsTeamSection).
+ * Remote URLs are returned as plain strings.
+ */
 export function resolveImageData(
   src: string | null | undefined,
 ): StaticImageData | string | undefined {
@@ -152,27 +199,11 @@ export function resolveImageData(
     return staticImage;
   }
 
-  return normalized || undefined;
-}
-
-export async function loadImageSrc(src: string | null | undefined): Promise<string | undefined> {
-  const normalized = typeof src === "string" ? normalizeLocalPath(src) : undefined;
-  if (!normalized) {
-    return undefined;
+  if (isRemoteUrl(normalized)) {
+    return normalized;
   }
 
-  const staticImage = lookupStaticImage(normalized);
-  if (staticImage) {
-    return staticImage.src;
-  }
-
-  const loader = imageLoaders[normalized];
-  if (loader) {
-    const mod = await loader();
-    return mod.default.src;
-  }
-
-  return normalized;
+  return undefined;
 }
 
 export function sanitizeImageSources<T>(value: T): T {
@@ -185,12 +216,22 @@ export function sanitizeImageSources<T>(value: T): T {
 
     for (const [key, nestedValue] of Object.entries(record)) {
       if (typeof nestedValue === "string" && isLikelyImageFieldKey(key)) {
-        const resolved = resolveImageSrc(nestedValue);
-        if (resolved) {
-          record[key] = resolved;
+        const normalized = normalizeLocalPath(nestedValue);
+
+        if (!normalized) {
+          delete record[key];
+          continue;
+        }
+
+        // Keep canonical `/file.png` paths — AppImage resolves to StaticImageData at render.
+        // Drop unknown local CMS paths so component fallbacks (e.g. `/doctor-hero.png`) apply.
+        if (isRemoteUrl(normalized) || lookupStaticImage(normalized)) {
+          const canonical = getCanonicalPath(normalized);
+          record[key] = canonical ?? normalized;
         } else {
           delete record[key];
         }
+
         continue;
       }
 
@@ -201,4 +242,23 @@ export function sanitizeImageSources<T>(value: T): T {
   }
 
   return value;
+}
+
+function getCanonicalPath(path: string): string | undefined {
+  const normalized = normalizeLocalPath(path);
+  if (!normalized) {
+    return undefined;
+  }
+
+  if (staticImages[normalized]) {
+    return normalized;
+  }
+
+  const filename = getFilename(normalized);
+  const canonical = `/${filename}`;
+  if (staticImages[canonical]) {
+    return canonical;
+  }
+
+  return undefined;
 }

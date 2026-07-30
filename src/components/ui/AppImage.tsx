@@ -7,7 +7,11 @@ type AppImageProps = Omit<ImageProps, "src"> & {
   src?: ImageProps["src"] | null;
 };
 
-export default function AppImage({ src, alt, ...props }: AppImageProps) {
+export default function AppImage({ src, alt = "", ...props }: AppImageProps) {
+  if (src == null || src === "") {
+    return null;
+  }
+
   const resolvedSrc = typeof src === "string" ? resolveImageData(src) : src;
 
   if (!resolvedSrc) {

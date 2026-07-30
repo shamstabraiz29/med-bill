@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Clock, Calendar, CheckCircle2 } from "lucide-react";
 import { getBlogPostBySlug, getBlogPosts } from "@/lib/payload";
+import { resolveImageSrc } from "@/lib/images";
 import SectionBadge from "@/components/ui/SectionBadge";
 import AppButton from "@/components/ui/AppButton";
 import BlogCard from "@/components/blog/BlogCard";
@@ -63,7 +64,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-[#64748B] pt-2 border-b border-[#E2E6EC] pb-6">
             <div className="flex items-center gap-3">
               <img
-                src={post.author.avatar}
+                src={resolveImageSrc(post.author.avatar) || post.author.avatar}
                 alt={post.author.name}
                 className="w-10 h-10 rounded-full object-cover border border-slate-200"
               />
@@ -92,7 +93,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         {/* Featured Image */}
         <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden shadow-lg border border-[#E2E6EC]">
           <img
-            src={post.imageSrc}
+            src={resolveImageSrc(post.imageSrc) || post.imageSrc}
             alt={post.title}
             className="w-full h-full object-cover"
           />

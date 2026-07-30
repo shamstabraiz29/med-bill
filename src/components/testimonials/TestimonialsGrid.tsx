@@ -3,6 +3,7 @@
 import React, { useState, useMemo } from "react";
 import { Star, ShieldCheck, TrendingUp } from "lucide-react";
 import MotionWrapper from "@/components/ui/MotionWrapper";
+import AppImage from "@/components/ui/AppImage";
 
 export interface TestimonialItem {
   id: string;
@@ -178,10 +179,12 @@ export default function TestimonialsGrid({ items, showFilters = true }: Testimon
                 <div className="pt-4 border-t border-[#E2E6EC] space-y-3">
                   
                   <div className="flex items-center gap-3">
-                    <img
+                    <AppImage
                       src={item.avatar}
                       alt={item.name}
-                      className="w-11 h-11 rounded-full object-cover border border-slate-200 shrink-0"
+                      width={44}
+                      height={44}
+                      className="h-11 w-11 shrink-0 rounded-full border border-slate-200 object-cover"
                     />
                     <div>
                       <div className="flex items-center gap-1.5">

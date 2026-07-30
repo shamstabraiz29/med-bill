@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { ShieldCheck, ArrowRight, Lock, CheckCircle2 } from "lucide-react";
+import AppImage from "@/components/ui/AppImage";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import { Card, CardContent } from "@/components/ui/card";
 import type { HealthcareSeoHipaaAndServicesData } from "@/payload/types/healthcareSeo";
@@ -72,10 +73,12 @@ export default function HealthcareSeoHipaaAndServices({ data }: HealthcareSeoHip
                       href={service.href}
                       className="group/tile relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/20 shadow-sm block"
                     >
-                      <img
+                      <AppImage
                         src={service.image}
                         alt={service.title}
-                        className="w-full h-full object-cover group-hover/tile:scale-108 transition-transform duration-500"
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover/tile:scale-108"
+                        sizes="33vw"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
                       <span className="absolute bottom-3 left-3 right-3 text-xs sm:text-sm font-bold text-white tracking-wide drop-shadow-sm">

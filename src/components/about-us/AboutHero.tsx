@@ -4,6 +4,7 @@ import React from "react";
 import SectionBadge from "@/components/ui/SectionBadge";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import AppButton from "@/components/ui/AppButton";
+import AppImage from "@/components/ui/AppImage";
 import { ShieldCheck, CheckCircle2 } from "lucide-react";
 import { defaultAboutUsData } from "@/lib/defaults/aboutUs";
 import type { AboutHeroData } from "@/payload/types/aboutUs";
@@ -68,10 +69,12 @@ export default function AboutHero({ data }: AboutHeroProps) {
             <div className="relative w-full aspect-[4/5] sm:aspect-[1/1] lg:aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl border border-[#E2E6EC] bg-slate-900 group">
               
               {/* Doctor / Team Image */}
-              <img
+              <AppImage
                 src={content.imageSrc || "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=1000&auto=format&fit=crop"}
                 alt={content.imageAlt || "BellMedEx Healthcare RCM Team"}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-95"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-95"
+                sizes="(max-width: 1024px) 100vw, 40vw"
               />
 
               {/* Gradient Overlay */}
