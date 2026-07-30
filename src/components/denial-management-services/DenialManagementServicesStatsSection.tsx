@@ -2,10 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Star } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import AppButton from "@/components/ui/AppButton";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import SectionHeader from "@/components/ui/SectionHeader";
+import PlatformRatingCards from "@/components/common/PlatformRatingCards";
 import { getIcon } from "@/lib/icons";
 import {
   denialManagementContainerClassName,
@@ -76,16 +77,6 @@ function AnimatedCounter({ value }: { value: string }) {
   return <span ref={ref}>{displayValue}</span>;
 }
 
-function RatingStars({ color }: { color: string }) {
-  return (
-    <div className="mt-2 flex items-center gap-0.5" aria-hidden="true">
-      {Array.from({ length: 5 }).map((_, index) => (
-        <Star key={index} className="h-3 w-3 fill-current" style={{ color }} />
-      ))}
-    </div>
-  );
-}
-
 interface DenialManagementServicesStatsSectionProps {
   data?: DenialManagementStatsSectionData;
 }
@@ -150,34 +141,11 @@ export default function DenialManagementServicesStatsSection({
           })}
         </MotionWrapper>
 
-        <MotionWrapper
-          variant="stagger"
-          staggerDelay={0.06}
-          className="mb-16 grid grid-cols-2 gap-4 md:grid-cols-4 lg:mb-20 lg:gap-6"
-        >
-          {content.ratingBadges.map((badge, idx) => (
-            <MotionWrapper key={badge.platform || idx} variant="staggerItem">
-              <div className="flex h-full items-center justify-between rounded-2xl border border-[#E2E6EC] bg-white p-5 transition-all duration-300 hover:shadow-md hover:shadow-[#1D4ED8]/6">
-                <div className="flex min-w-0 flex-col text-left">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#475569]">
-                    {badge.platform}
-                  </span>
-                  {badge.subLabel ? (
-                    <span className="mt-2 text-xs font-semibold text-[#0F172A]">{badge.subLabel}</span>
-                  ) : (
-                    <RatingStars color={badge.color || "#EAB308"} />
-                  )}
-                </div>
-                <span
-                  className="text-xl font-black"
-                  style={{ color: badge.color || "#0F172A" }}
-                >
-                  {badge.value}
-                </span>
-              </div>
-            </MotionWrapper>
-          ))}
-        </MotionWrapper>
+        <PlatformRatingCards
+          ratings={content.ratingBadges}
+          className="mb-16 lg:mb-20"
+          ariaLabel="BellMedEx denial management platform ratings"
+        />
 
         <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16">
           <MotionWrapper variant="slideLeft" className="lg:col-span-6">

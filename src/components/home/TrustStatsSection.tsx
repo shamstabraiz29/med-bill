@@ -5,6 +5,7 @@ import Link from "next/link";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import SectionHeader from "@/components/ui/SectionHeader";
+import PlatformRatingCards from "@/components/common/PlatformRatingCards";
 import { getIcon } from "@/lib/icons";
 import type { HomepageTrustStats } from "@/payload/types/homepage";
 
@@ -137,28 +138,11 @@ export default function TrustStatsSection({ data }: TrustStatsSectionProps) {
           })}
         </MotionWrapper>
 
-        {/* Partners & Rating Badges Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6 mb-20 md:mb-24 w-full">
-          {data.ratingBadges.map((badge, idx) => (
-            <div key={badge.id || idx} className="bg-white border border-[#E2E6EC] p-5 rounded-2xl flex items-center justify-between hover:shadow-md hover:shadow-[#1D4ED8]/6 transition-all duration-300">
-              <div className="flex flex-col text-left">
-                <span className="text-[10px] font-bold text-[#475569] uppercase tracking-widest">{badge.platform}</span>
-                {badge.subLabel ? (
-                  <span className="text-xs font-semibold text-[#0F172A] mt-2">{badge.subLabel}</span>
-                ) : (
-                  <div className="flex items-center gap-0.5 mt-2">
-                    {[...Array(5)].map((_, i) => (
-                      <span key={i} className="text-[10px]" style={{ color: badge.color || '#EAB308' }}>&#9733;</span>
-                    ))}
-                  </div>
-                )}
-              </div>
-              <span className="text-xl font-black" style={{ color: badge.color || '#0F172A' }}>
-                {badge.value}
-              </span>
-            </div>
-          ))}
-        </div>
+        <PlatformRatingCards
+          ratings={data.ratingBadges}
+          className="mb-20 md:mb-24"
+          ariaLabel="BellMedEx platform and certification ratings"
+        />
 
         {/* Bottom Part: Split Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start mt-12">
