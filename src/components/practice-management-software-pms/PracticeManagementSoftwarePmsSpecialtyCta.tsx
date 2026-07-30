@@ -24,21 +24,7 @@ export default function PracticeManagementSoftwarePmsSpecialtyCta({ data }: Prac
         <MotionWrapper variant="scaleUp">
           <div className="relative overflow-hidden rounded-2xl bg-[#0F172A] border border-white/10 text-white p-8 sm:p-12 shadow-lg">
             <div className="relative grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12 text-left">
-              <div className="flex justify-center lg:col-span-6 lg:justify-start lg:order-1">
-                <div className="relative w-full max-w-xl">
-                  <div className="relative aspect-4/3 w-full overflow-hidden rounded-xl border border-white/10 bg-white/5 sm:rounded-2xl">
-                    <Image
-                      src={content.imageSrc || "/pms-specialty-dashboard.png"}
-                      alt={content.imageAlt || "BellMedEx specialty-specific practice management software dashboard"}
-                      fill
-                      className="object-contain p-3 sm:p-4"
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="lg:col-span-6 lg:order-2 space-y-3.5">
+              <div className="space-y-3.5 lg:col-span-6 lg:order-1">
                 {(content.badgeTag || content.badgeText) && (
                   <SectionBadge variant="dark">
                     {content.badgeText || content.badgeTag || "PMS SPECIALTY SOLUTION"}
@@ -66,6 +52,20 @@ export default function PracticeManagementSoftwarePmsSpecialtyCta({ data }: Prac
                   >
                     {content.buttonText || "Schedule a Demo"}
                   </AppButton>
+                </div>
+              </div>
+
+              <div className="flex justify-center lg:col-span-6 lg:order-2 lg:justify-end">
+                <div className="relative w-full max-w-xl">
+                  <div className="relative aspect-4/3 w-full overflow-hidden rounded-xl border border-white/10 bg-white/5 sm:rounded-2xl">
+                    <Image
+                      src={content.imageSrc || "/pms-specialty-dashboard.png"}
+                      alt={content.imageAlt || "BellMedEx specialty-specific practice management software dashboard"}
+                      fill
+                      className="object-contain p-3 sm:p-4"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
