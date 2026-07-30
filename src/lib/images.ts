@@ -201,6 +201,9 @@ export function resolveImageSrc(src: unknown): string | undefined {
   return typeof resolved === "string" ? resolved : resolved.src;
 }
 
+const LOCALHOST_PATTERN = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?/i;
+const REMOTE_HTTPS_PATTERN = /^https?:\/\//i;
+
 /**
  * Returns StaticImageData for bundled local assets (DoctorsTeamSection pattern).
  * Resolves relative public assets, CMS media objects, and remote URLs (Vercel, S3, Blob, Unsplash, etc.)
@@ -243,19 +246,34 @@ export function resolveImageData(
     return undefined;
   }
 
-  // 1. Try matching against bundled static imports
+  // 1. Try matching against bundled static imports (e.g. /doctor-hero.png or http://localhost:3000/doctor-hero.png)
   const staticImage = lookupStaticImage(trimmed);
   if (staticImage) {
     return staticImage;
   }
 
-  // 2. Allow valid relative paths (e.g. /uploads/image.png or /custom.png)
+  // 2. Reject localhost / 127.0.0.1 URLs if they did not match a bundled static image
+  if (LOCALHOST_PATTERN.test(trimmed)) {
+    return undefined;
+  }
+
+  // 3. Reject unbundled local `/uploads/` paths that do not exist on Vercel deployment
+  if (trimmed.startsWith("/uploads/") || trimmed.includes("/uploads/")) {
+    return undefined;
+  }
+
+  // 4. Allow valid relative public paths (e.g. /custom-public-asset.png)
   if (trimmed.startsWith("/") && !trimmed.startsWith("//")) {
     return trimmed;
   }
 
-  // 3. Allow valid remote URLs (http://, https://, //, data:, blob:)
-  if (isRemoteUrl(trimmed)) {
+  // 5. Allow valid remote HTTPS URLs (e.g. https://images.unsplash.com/..., https://blob..., etc.)
+  if (
+    REMOTE_HTTPS_PATTERN.test(trimmed) ||
+    trimmed.startsWith("//") ||
+    trimmed.startsWith("data:") ||
+    trimmed.startsWith("blob:")
+  ) {
     return trimmed.startsWith("//") ? `https:${trimmed}` : trimmed;
   }
 
