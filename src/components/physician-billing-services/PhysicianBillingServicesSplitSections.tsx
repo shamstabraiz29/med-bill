@@ -40,6 +40,7 @@ export default function PhysicianBillingServicesSplitSections({ data }: Physicia
             paragraphs={parsedParagraphs}
             imageSrc={section.imageSrc}
             imageAlt={section.imageAlt || section.titlePlain}
+            fallbackSrc={defaultPhysicianBillingServicesData.splitSections[idx]?.imageSrc ?? "/consultants-laptop.png"}
             ctaLabel={section.ctaLabel}
             ctaHref={section.ctaHref}
             imagePosition={position}

@@ -20,7 +20,6 @@ export default function LargePracticesPersonalizedServices({
   data,
 }: LargePracticesPersonalizedServicesProps) {
   const content = data || defaultLargePracticesData.personalizedServices;
-  const imageSrc = content.imageSrc || "/consultants-laptop.png";
   const imageAlt =
     content.imageAlt ||
     "Healthcare professional reviewing personalized medical billing services on a laptop";
@@ -68,7 +67,8 @@ export default function LargePracticesPersonalizedServices({
           <MotionWrapper variant="slideRight" className="w-full lg:col-span-6">
             <div className="group relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-[0_8px_30px_rgba(29,78,216,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#1D4ED8]/30 hover:shadow-xl hover:shadow-blue-900/10 sm:aspect-16/11">
               <AppImage
-                src={imageSrc}
+                src={content.imageSrc}
+                fallbackSrc="/consultants-laptop.png"
                 alt={imageAlt}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"

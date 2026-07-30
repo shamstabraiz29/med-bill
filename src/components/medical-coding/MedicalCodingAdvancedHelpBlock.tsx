@@ -11,8 +11,9 @@ export interface MedicalCodingAdvancedHelpBlockProps {
   icon: LucideIcon;
   title: React.ReactNode;
   description: string;
-  imageSrc: string;
+  imageSrc?: string | null;
   imageAlt: string;
+  fallbackSrc?: string;
   imagePosition?: "left" | "right";
 }
 
@@ -22,6 +23,7 @@ export default function MedicalCodingAdvancedHelpBlock({
   description,
   imageSrc,
   imageAlt,
+  fallbackSrc = "/consultants-laptop.png",
   imagePosition = "right",
 }: MedicalCodingAdvancedHelpBlockProps) {
   const isImageLeft = imagePosition === "left";
@@ -58,6 +60,7 @@ export default function MedicalCodingAdvancedHelpBlock({
         >
           <AppImage
             src={imageSrc}
+            fallbackSrc={fallbackSrc}
             alt={imageAlt}
             fill
             sizes="(max-width: 1024px) 100vw, 50vw"

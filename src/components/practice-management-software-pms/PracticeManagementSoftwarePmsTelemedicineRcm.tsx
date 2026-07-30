@@ -41,13 +41,11 @@ export default function PracticeManagementSoftwarePmsTelemedicineRcm({ data }: P
               : [];
 
             const fallbackImg = DEFAULT_IMAGES[idx % DEFAULT_IMAGES.length];
-            const imgSrc = feature.imageSrc || fallbackImg.src;
-            const imgAlt = feature.imageAlt || fallbackImg.alt;
-
             const visual = (
               <PmsAssetVisual
-                src={imgSrc}
-                alt={imgAlt}
+                src={feature.imageSrc}
+                fallbackSrc={fallbackImg.src}
+                alt={feature.imageAlt || fallbackImg.alt}
               />
             );
 

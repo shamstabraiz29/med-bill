@@ -99,6 +99,7 @@ export default function DoctorVisuals({
           <div className="absolute w-[90%] h-[90%] rounded-full overflow-hidden bg-slate-50 border border-[#E2E6EC] flex items-end">
             <AppImage
               src={imageSrc}
+              fallbackSrc="/doctor-hero.png"
               alt={imageAlt}
               width={400}
               height={440}

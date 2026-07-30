@@ -25,7 +25,6 @@ export default function DenialManagementServicesCodeInsightSection({
     content.features && content.features.length > 0
       ? content.features
       : defaultDenialManagementServicesData.codeInsight.features;
-  const imageSrc = content.imageSrc || "/rcm-dashboard-laptop2.png";
   const imageAlt =
     content.imageAlt || "Healthcare professional using BellMedEx denial management software on laptop";
 
@@ -92,7 +91,8 @@ export default function DenialManagementServicesCodeInsightSection({
 
                 <div className="group relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-[0_8px_30px_rgba(29,78,216,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#1D4ED8]/30 hover:shadow-xl hover:shadow-blue-900/10 sm:aspect-16/11">
                   <AppImage
-                    src={imageSrc}
+                    src={content.imageSrc}
+                    fallbackSrc="/rcm-dashboard-laptop2.png"
                     alt={imageAlt}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"

@@ -12,8 +12,9 @@ export interface MedicalCodingExpertBlockProps {
   description: string;
   ctaLabel: string;
   ctaHref: string;
-  imageSrc: string;
+  imageSrc?: string | null;
   imageAlt: string;
+  fallbackSrc?: string;
   imagePosition?: "left" | "right";
   className?: string;
 }
@@ -25,6 +26,7 @@ export default function MedicalCodingExpertBlock({
   ctaHref,
   imageSrc,
   imageAlt,
+  fallbackSrc = "/doctor-hero.png",
   imagePosition = "right",
   className,
 }: MedicalCodingExpertBlockProps) {
@@ -74,6 +76,7 @@ export default function MedicalCodingExpertBlock({
           >
             <AppImage
               src={imageSrc}
+              fallbackSrc={fallbackSrc}
               alt={imageAlt}
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"

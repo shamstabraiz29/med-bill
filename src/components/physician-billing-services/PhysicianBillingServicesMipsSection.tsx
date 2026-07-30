@@ -60,7 +60,8 @@ export default function PhysicianBillingServicesMipsSection({ data }: PhysicianB
 
           <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white sm:aspect-16/11">
             <AppImage
-              src={content.imageSrc || "/faq-doctor.png"}
+              src={content.imageSrc}
+                fallbackSrc="/faq-doctor.png"
               alt={content.imageAlt || "Experienced physician supported by BellMedEx MIPS billing solutions"}
               fill
               className="object-cover object-top"

@@ -21,7 +21,8 @@ function PhysicianTestimonialCard({ item }: { item: DenialManagementPhysicianTes
     <div className="relative flex h-full flex-col items-center rounded-2xl border border-[#E2E6EC] bg-white px-6 pb-8 pt-14 text-center shadow-[0_4px_24px_rgba(29,78,216,0.04)]">
       <div className="absolute -top-10 left-1/2 h-20 w-20 -translate-x-1/2 overflow-hidden rounded-full border-4 border-blue-50 bg-white shadow-sm">
         <AppImage
-          src={item.avatarPath || "/doctor-hero.png"}
+          src={item.avatarPath}
+                fallbackSrc="/doctor-hero.png"
           alt={item.name}
           fill
           className="object-cover object-top"

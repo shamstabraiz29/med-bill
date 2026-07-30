@@ -6,7 +6,7 @@ import { Banknote, ClipboardPlus } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface HospitalBillingServicesAffordableVisualProps {
-  imageSrc: string;
+  imageSrc?: string | null;
   imageAlt: string;
   labels: string[];
 }
@@ -32,7 +32,14 @@ export default function HospitalBillingServicesAffordableVisual({
       />
 
       <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-[0_8px_30px_rgba(29,78,216,0.06)] sm:aspect-[3/4]">
-        <AppImage src={imageSrc} alt={imageAlt} fill className="object-cover object-top" sizes="(max-width: 1024px) 100vw, 40vw" />
+        <AppImage
+          src={imageSrc}
+          fallbackSrc="/faq-doctor.png"
+          alt={imageAlt}
+          fill
+          className="object-cover object-top"
+          sizes="(max-width: 1024px) 100vw, 40vw"
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/20 via-transparent to-transparent" />
       </div>
 

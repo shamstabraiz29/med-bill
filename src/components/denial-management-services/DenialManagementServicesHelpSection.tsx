@@ -27,7 +27,6 @@ export default function DenialManagementServicesHelpSection({
     content.accordionItems && content.accordionItems.length > 0
       ? content.accordionItems
       : defaultDenialManagementServicesData.help.accordionItems;
-  const imageSrc = content.imageSrc || "/consultants-laptop.png";
   const imageAlt =
     content.imageAlt || "Healthcare billing team reviewing claim denial data and charts";
 
@@ -66,7 +65,8 @@ export default function DenialManagementServicesHelpSection({
 
             <div className="group relative mt-2 aspect-[16/10] w-full overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-[0_8px_30px_rgba(29,78,216,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#1D4ED8]/30 hover:shadow-xl hover:shadow-blue-900/10">
               <AppImage
-                src={imageSrc}
+                src={content.imageSrc}
+                fallbackSrc="/consultants-laptop.png"
                 alt={imageAlt}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"

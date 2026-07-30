@@ -87,7 +87,8 @@ export default function FeaturedTestimonial({ data }: FeaturedTestimonialProps) 
                   {/* Photo Container */}
                   <div className="relative w-full h-full rounded-2xl overflow-hidden border-2 border-white/20 shadow-2xl bg-slate-900">
                     <AppImage
-                      src={content.authorImageSrc || "https://images.unsplash.com/photo-1594824813566-88855ce7890b?q=80&w=800&auto=format&fit=crop"}
+                      src={content.authorImageSrc}
+                      fallbackSrc="https://images.unsplash.com/photo-1594824813566-88855ce7890b?q=80&w=800&auto=format&fit=crop"
                       alt={content.authorName}
                       fill
                       className="object-cover object-top"

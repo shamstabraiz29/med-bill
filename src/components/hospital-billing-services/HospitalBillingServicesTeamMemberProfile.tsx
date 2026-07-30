@@ -31,7 +31,6 @@ export default function HospitalBillingServicesTeamMemberProfile({
   quoteClassName = "text-[#1D4ED8]",
   accentClassName = "bg-[#1D4ED8]",
 }: HospitalBillingServicesTeamMemberProfileProps) {
-  const imageSrc = member.imageSrc || "/doctor-hero.png";
   const imageAlt = member.imageAlt || `${member.name} - hospital billing leader at BellMedEx`;
   const alignRight = imageFirst;
 
@@ -62,7 +61,8 @@ export default function HospitalBillingServicesTeamMemberProfile({
           <div className="relative flex h-full w-full items-center justify-center rounded-full bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] p-1.5 shadow-[0_8px_30px_rgba(29,78,216,0.18)]">
             <div className="relative h-full w-full overflow-hidden rounded-full border-4 border-white bg-white">
               <AppImage
-                src={imageSrc}
+                src={member.imageSrc}
+                fallbackSrc="/doctor-hero.png"
                 alt={imageAlt}
                 fill
                 className="object-cover object-top"

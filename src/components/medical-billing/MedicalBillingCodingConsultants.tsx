@@ -83,7 +83,8 @@ export default function MedicalBillingCodingConsultants({ data }: MedicalBilling
               <div className="relative overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-[0_8px_30px_rgba(29,78,216,0.08)]">
                 <div className="relative aspect-[4/3] w-full sm:aspect-[5/4]">
                   <AppImage
-                    src={codingData.imageSrc || "/consultants-laptop.png"}
+                    src={codingData.imageSrc}
+                fallbackSrc="/consultants-laptop.png"
                     alt={codingData.imageAlt || "BellMedEx medical coding dashboard"}
                     fill
                     sizes="(max-width: 1024px) 100vw, 42vw"

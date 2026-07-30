@@ -144,7 +144,8 @@ export default function WhyChooseClearinghouse({ data }: WhyChooseClearinghouseP
                   {/* Compact Image & Metric Frame */}
                   <div className="relative aspect-[16/9] min-h-[150px] w-full rounded-xl overflow-hidden bg-slate-100 border border-[#E2E6EC] mb-3 group">
                     <AppImage
-                      src={currentFeature.imageSrc || "/consultants-laptop.png"}
+                      src={currentFeature.imageSrc}
+                fallbackSrc="/consultants-laptop.png"
                       alt={currentFeature.title}
                       fill
                       className="object-cover object-top transition-transform duration-700 group-hover:scale-105"

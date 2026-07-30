@@ -75,7 +75,8 @@ export default function RcmReportingFeatures({ data }: RcmReportingFeaturesProps
             <MotionWrapper variant="slideRight" className="lg:col-span-6 w-full flex justify-center">
               <div className="relative w-full max-w-lg lg:max-w-none aspect-[16/11] drop-shadow-xl group transition-transform duration-500 hover:scale-[1.02]">
                 <AppImage
-                  src={reportingData.block1ImageSrc || "/rcm-dashboard-laptop1.png"}
+                  src={reportingData.block1ImageSrc}
+                fallbackSrc="/rcm-dashboard-laptop1.png"
                   alt="BellMedEx RCM Analytics Dashboard Mockup"
                   fill
                   className="object-contain"
@@ -94,7 +95,8 @@ export default function RcmReportingFeatures({ data }: RcmReportingFeaturesProps
             <MotionWrapper variant="slideLeft" className="lg:col-span-6 w-full flex justify-center order-2 lg:order-1">
               <div className="relative w-full max-w-lg lg:max-w-none aspect-[16/11] drop-shadow-xl group transition-transform duration-500 hover:scale-[1.02]">
                 <AppImage
-                  src={reportingData.block2ImageSrc || "/rcm-dashboard-laptop2.png"}
+                  src={reportingData.block2ImageSrc}
+                fallbackSrc="/rcm-dashboard-laptop2.png"
                   alt="BellMedEx Practice Reporting Dashboard Mockup"
                   fill
                   className="object-contain"

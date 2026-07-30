@@ -43,6 +43,7 @@ export default function MedicalBillingAuditOverview({ data }: MedicalBillingAudi
                   paragraphs={paragraphStrings}
                   imageSrc={block.imageSrc}
                   imageAlt={block.imageAlt}
+                  fallbackSrc={defaultMedicalBillingAuditData.overview.blocks[index]?.imageSrc ?? "/consultants-laptop.png"}
                   imagePosition={(block.imagePosition as "left" | "right") || "left"}
                 />
               </MotionWrapper>

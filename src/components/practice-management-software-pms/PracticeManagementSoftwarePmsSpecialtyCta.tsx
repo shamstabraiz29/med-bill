@@ -59,7 +59,8 @@ export default function PracticeManagementSoftwarePmsSpecialtyCta({ data }: Prac
                 <div className="relative w-full max-w-xl">
                   <div className="relative aspect-4/3 w-full overflow-hidden rounded-xl border border-white/10 bg-white/5 sm:rounded-2xl">
                     <AppImage
-                      src={content.imageSrc || "/pms-specialty-dashboard.png"}
+                      src={content.imageSrc}
+                fallbackSrc="/pms-specialty-dashboard.png"
                       alt={content.imageAlt || "BellMedEx specialty-specific practice management software dashboard"}
                       fill
                       className="object-contain p-3 sm:p-4"

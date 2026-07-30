@@ -26,7 +26,6 @@ export default function DenialManagementServicesOutsourceSection({
     content.accordionItems && content.accordionItems.length > 0
       ? content.accordionItems
       : defaultDenialManagementServicesData.outsource.accordionItems;
-  const imageSrc = content.imageSrc || "/rcm-dashboard-laptop1.png";
   const imageAlt =
     content.imageAlt ||
     "Healthcare professional managing denial management billing on laptop and mobile";
@@ -68,7 +67,8 @@ export default function DenialManagementServicesOutsourceSection({
           <MotionWrapper variant="slideRight" className="lg:col-span-6">
             <div className="group relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-[0_8px_30px_rgba(29,78,216,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#1D4ED8]/30 hover:shadow-xl hover:shadow-blue-900/10 sm:aspect-[16/11]">
               <AppImage
-                src={imageSrc}
+                src={content.imageSrc}
+                fallbackSrc="/rcm-dashboard-laptop1.png"
                 alt={imageAlt}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"

@@ -64,7 +64,8 @@ export default function MedicalCodingWhyChooseUs({ data }: MedicalCodingWhyChoos
               <div className="relative overflow-hidden rounded-2xl border border-[#E2E6EC] shadow-md">
                 <div className="relative aspect-[4/5] min-h-[360px] sm:min-h-[460px]">
                   <AppImage
-                    src={whyData.imageSrc || "/doctor-hero.png"}
+                    src={whyData.imageSrc}
+                fallbackSrc="/doctor-hero.png"
                     alt={whyData.imageAlt || "BellMedEx certified medical coder reviewing clinical documentation"}
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"

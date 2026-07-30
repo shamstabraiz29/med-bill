@@ -30,7 +30,6 @@ export default function HospitalBillingServicesAffordableSection({
     content.workflowLabels && content.workflowLabels.length > 0
       ? content.workflowLabels
       : defaultHospitalBillingServicesData.affordable.workflowLabels;
-  const imageSrc = content.imageSrc || "/faq-doctor.png";
   const imageAlt =
     content.imageAlt || "Healthcare professional reviewing hospital billing and reimbursement";
 
@@ -68,7 +67,7 @@ export default function HospitalBillingServicesAffordableSection({
 
           <MotionWrapper variant="slideRight" className="w-full lg:col-span-6">
             <HospitalBillingServicesAffordableVisual
-              imageSrc={imageSrc}
+              imageSrc={content.imageSrc}
               imageAlt={imageAlt}
               labels={labels}
             />

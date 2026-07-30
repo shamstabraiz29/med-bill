@@ -29,7 +29,8 @@ export default function PremiumPayerNetworks({ data }: PremiumPayerNetworksProps
             <div className="relative w-full max-w-lg mx-auto aspect-[4/5] rounded-2xl bg-white border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 p-3 overflow-hidden group">
               <div className="relative w-full h-full rounded-2xl overflow-hidden bg-slate-900">
                 <AppImage
-                  src={content.imageSrc || "/consultants-laptop.png"}
+                  src={content.imageSrc}
+                fallbackSrc="/consultants-laptop.png"
                   alt="Medical Provider reviewing Credentialing Payer Enrollment"
                   fill
                   className="object-cover object-center transition-transform duration-700 group-hover:scale-105"

@@ -105,7 +105,8 @@ export default function MedicalBillingAuditSolutionsToDate({ data }: MedicalBill
 
               <div className="relative min-h-[260px] sm:min-h-[320px]">
                 <AppImage
-                  src={stdData.imageSrc || "/doctor-hero.png"}
+                  src={stdData.imageSrc}
+                fallbackSrc="/doctor-hero.png"
                   alt={stdData.imageAlt || "BellMedEx medical coding audit specialist supporting billing compliance"}
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"

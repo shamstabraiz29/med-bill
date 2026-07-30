@@ -83,7 +83,8 @@ export default function ElectronicHealthRecordsEhrFeatures({ data }: ElectronicH
               titleSuffix={feature.titleSuffix}
               endPeriod={feature.endPeriod}
               description={feature.description}
-              imageSrc={feature.imageSrc || "/consultants-laptop.png"}
+              imageSrc={feature.imageSrc}
+              fallbackSrc={EHR_FEATURES[idx]?.imageSrc ?? "/consultants-laptop.png"}
               imageAlt={feature.imageAlt || feature.titleHighlight}
               reverse={feature.reverse}
             />

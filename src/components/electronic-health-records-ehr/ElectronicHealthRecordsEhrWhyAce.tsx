@@ -108,7 +108,8 @@ export default function ElectronicHealthRecordsEhrWhyAce({ data }: ElectronicHea
           <MotionWrapper variant="slideRight">
             <div className="group relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white transition-all duration-300 hover:-translate-y-1.5 hover:border-[#1D4ED8]/30 hover:shadow-lg hover:shadow-blue-900/5 sm:aspect-16/11">
               <AppImage
-                src={content.imageSrc || "/consultants-laptop.png"}
+                src={content.imageSrc}
+                fallbackSrc="/consultants-laptop.png"
                 alt={content.imageAlt || "BellMedEx EHR software on a laptop"}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"

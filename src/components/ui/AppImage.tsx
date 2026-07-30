@@ -1,22 +1,48 @@
 "use client";
 
-import NextImage, { type ImageProps } from "next/image";
-import { resolveImageData } from "@/lib/images";
+import NextImage, { type ImageProps, type StaticImageData } from "next/image";
+import { pickImageSrc, resolveImageData } from "@/lib/images";
 
 type AppImageProps = Omit<ImageProps, "src"> & {
+  /** Primary source (CMS path, full URL, or `/filename.png`) */
   src?: ImageProps["src"] | null;
+  /** Used when primary source is missing or invalid (same pattern as DoctorsTeamSection hardcoded paths) */
+  fallbackSrc?: string | null;
 };
 
-export default function AppImage({ src, alt = "", ...props }: AppImageProps) {
-  if (src == null || src === "") {
+function isStaticImageData(value: AppImageProps["src"]): value is StaticImageData {
+  return typeof value === "object" && value !== null && "src" in value;
+}
+
+export default function AppImage({
+  src,
+  fallbackSrc,
+  alt = "",
+  unoptimized,
+  ...props
+}: AppImageProps) {
+  let resolved: StaticImageData | string | undefined;
+
+  if (isStaticImageData(src)) {
+    resolved = src;
+  } else if (typeof src === "string") {
+    resolved = pickImageSrc(src, fallbackSrc ?? undefined);
+  } else if (typeof fallbackSrc === "string") {
+    resolved = resolveImageData(fallbackSrc);
+  }
+
+  if (!resolved) {
     return null;
   }
 
-  const resolvedSrc = typeof src === "string" ? resolveImageData(src) : src;
+  const isRemoteString = typeof resolved === "string";
 
-  if (!resolvedSrc) {
-    return null;
-  }
-
-  return <NextImage src={resolvedSrc} alt={alt} {...props} />;
+  return (
+    <NextImage
+      src={resolved}
+      alt={alt}
+      unoptimized={unoptimized ?? isRemoteString}
+      {...props}
+    />
+  );
 }

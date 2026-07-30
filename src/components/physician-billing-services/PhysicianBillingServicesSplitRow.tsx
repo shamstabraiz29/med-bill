@@ -14,8 +14,9 @@ export interface PhysicianBillingServicesSplitRowProps {
   heading: React.ReactNode;
   headingId?: string;
   paragraphs: string[];
-  imageSrc: string;
+  imageSrc?: string | null;
   imageAlt: string;
+  fallbackSrc?: string;
   ctaLabel: string;
   ctaHref: string;
   secondaryLink?: { label: string; href: string };
@@ -30,6 +31,7 @@ export default function PhysicianBillingServicesSplitRow({
   paragraphs,
   imageSrc,
   imageAlt,
+  fallbackSrc = "/consultants-laptop.png",
   ctaLabel,
   ctaHref,
   secondaryLink,
@@ -46,6 +48,7 @@ export default function PhysicianBillingServicesSplitRow({
       <div className="group relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-[0_8px_30px_rgba(29,78,216,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#1D4ED8]/30 hover:shadow-xl hover:shadow-blue-900/10 sm:aspect-16/11">
         <AppImage
           src={imageSrc}
+          fallbackSrc={fallbackSrc}
           alt={imageAlt}
           fill
           className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"

@@ -26,6 +26,7 @@ export default function TestimonialCard({
         <div className="relative w-16 h-16 rounded-full overflow-hidden border border-[#E2E6EC] shrink-0">
           <AppImage
             src={avatar}
+            fallbackSrc="/doctor-hero.png"
             alt={`${name} - Client Avatar`}
             fill
             className="object-cover object-top transition-transform duration-300 group-hover/card:scale-105"

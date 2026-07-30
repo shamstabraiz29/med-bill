@@ -22,7 +22,6 @@ export default function SmallPracticesTransparencySection({ data }: SmallPractic
     "We offer high-end services for your small practice. Our team at BellMedEx believes in clear communication and making informed decisions to ensure efficiency in all areas of our billing services.";
   const ctaText = data?.ctaText ?? "Schedule a Demo";
   const ctaHref = data?.ctaHref ?? "/schedule-a-demo";
-  const imageSrc = data?.imageSrc ?? "/rcm-dashboard-laptop1.png";
   const imageAlt =
     data?.imageAlt ??
     "Healthcare professional reviewing transparent medical billing reports on a tablet";
@@ -37,7 +36,8 @@ export default function SmallPracticesTransparencySection({ data }: SmallPractic
           <MotionWrapper variant="slideLeft" className="w-full lg:col-span-6">
             <div className="group relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-[0_8px_30px_rgba(29,78,216,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#1D4ED8]/30 hover:shadow-xl hover:shadow-blue-900/10 sm:aspect-16/11">
               <AppImage
-                src={imageSrc}
+                src={data?.imageSrc}
+                fallbackSrc="/rcm-dashboard-laptop1.png"
                 alt={imageAlt}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"

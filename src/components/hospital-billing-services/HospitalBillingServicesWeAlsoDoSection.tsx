@@ -57,7 +57,8 @@ export default function HospitalBillingServicesWeAlsoDoSection({
                 <div className={cn("w-full", imageFirst ? "lg:order-1" : "lg:order-2")}>
                   <div className="group relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-[0_8px_30px_rgba(29,78,216,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#1D4ED8]/30 sm:aspect-[16/11]">
                     <AppImage
-                      src={item.imageSrc || "/consultants-laptop.png"}
+                      src={item.imageSrc}
+                fallbackSrc="/consultants-laptop.png"
                       alt={item.imageAlt || item.title}
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"

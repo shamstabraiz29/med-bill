@@ -61,7 +61,8 @@ export default function MedicalBillingWhyChooseUs({ data }: MedicalBillingWhyCho
           <MotionWrapper variant="slideLeft" className="lg:col-span-6 relative">
             <div className="relative w-full h-[360px] sm:h-[460px] md:h-[500px] rounded-2xl overflow-hidden border border-[#E2E6EC] shadow-md group">
               <AppImage
-                src={whyData.imageSrc || "/consultants-laptop.png"}
+                src={whyData.imageSrc}
+                fallbackSrc="/consultants-laptop.png"
                 alt="BellMedEx medical billing consultants reviewing practice analytics on laptop"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"

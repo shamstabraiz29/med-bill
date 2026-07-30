@@ -56,7 +56,7 @@ export default function MedicalBillingConsultancyBenefits({ data }: MedicalBilli
           </MotionWrapper>
 
           <BillingConsultancyFeatureBlock
-            imageSrc={benefitsData.blockImageSrc || "/consultants-laptop.png"}
+            imageSrc={benefitsData.blockImageSrc}
             imageAlt={benefitsData.blockImageAlt || "BellMedEx billing consultant reviewing clinic revenue cycle analytics"}
             description={benefitsData.blockDescription}
             ctaLabel={benefitsData.blockCtaLabel}

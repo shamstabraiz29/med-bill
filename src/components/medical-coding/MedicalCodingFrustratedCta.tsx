@@ -53,7 +53,8 @@ export default function MedicalCodingFrustratedCta({ data }: MedicalCodingFrustr
                 <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-3 sm:p-4">
                   <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
                     <AppImage
-                      src={frustratedData.imageSrc || "/consultants-laptop.png"}
+                      src={frustratedData.imageSrc}
+                fallbackSrc="/consultants-laptop.png"
                       alt={frustratedData.imageAlt || "BellMedEx medical coding expert reviewing claims on laptop"}
                       fill
                       sizes="(max-width: 1024px) 100vw, 50vw"

@@ -23,7 +23,8 @@ export default function RcmImportance({ data }: RcmImportanceProps) {
           <MotionWrapper variant="slideLeft" className="lg:col-span-5 w-full flex justify-center">
             <div className="relative w-full max-w-md lg:max-w-none aspect-[4/5] rounded-2xl overflow-hidden shadow-xl border border-slate-200/80 group">
               <AppImage
-                src={importanceData.imageSrc || "/rcm-doctor-importance.png"}
+                src={importanceData.imageSrc}
+                fallbackSrc="/rcm-doctor-importance.png"
                 alt="BellMedEx Revenue Cycle Management Doctor"
                 fill
                 className="object-cover object-top transition-transform duration-500 group-hover:scale-105"

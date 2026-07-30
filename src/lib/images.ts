@@ -27,8 +27,9 @@ import usMap from "../../public/us-map.png";
 const LOCALHOST_PATTERN = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?/i;
 const REMOTE_URL_PATTERN = /^https?:\/\//i;
 const NEXT_STATIC_MEDIA_PATTERN = /^\/_next\/static\/media\//;
+const ALLOWED_REMOTE_HOSTS = ["images.unsplash.com"];
 
-/** Bundled images — pass these or a `/filename.png` path to AppImage */
+/** Bundled images — pass `/filename.png` to AppImage (same as DoctorsTeamSection) */
 export const staticImages: Record<string, StaticImageData> = {
   "/clearinghouse-nurse-hero.png": clearinghouseNurseHero,
   "/consultants-laptop.png": consultantsLaptop,
@@ -97,57 +98,91 @@ function isRemoteUrl(src: string): boolean {
   );
 }
 
-function normalizeLocalPath(src: string): string | undefined {
-  const trimmed = src.trim();
-  if (!trimmed) {
-    return undefined;
+function isAllowedRemoteUrl(src: string): boolean {
+  try {
+    const url = new URL(src.startsWith("//") ? `https:${src}` : src);
+    return ALLOWED_REMOTE_HOSTS.some(
+      (host) => url.hostname === host || url.hostname.endsWith(`.${host}`),
+    );
+  } catch {
+    return false;
   }
-
-  if (LOCALHOST_PATTERN.test(trimmed)) {
-    try {
-      const url = new URL(trimmed);
-      return url.pathname + url.search || undefined;
-    } catch {
-      return undefined;
-    }
-  }
-
-  if (trimmed.startsWith("//")) {
-    return `https:${trimmed}`;
-  }
-
-  if (isRemoteUrl(trimmed)) {
-    return trimmed;
-  }
-
-  return trimmed.startsWith("/") ? trimmed : `/${trimmed}`;
 }
 
 function getFilename(path: string): string {
-  return path.split("/").pop() || path;
+  return path.split("/").pop()?.split("?")[0] || path;
 }
 
-function lookupStaticImage(path: string): StaticImageData | undefined {
-  const normalized = normalizeLocalPath(path);
-  if (!normalized || isRemoteUrl(normalized)) {
+/** Collect path variants: raw path, URL pathname, filename, hashed media recovery */
+function collectPathCandidates(src: string): string[] {
+  const trimmed = src.trim();
+  if (!trimmed) {
+    return [];
+  }
+
+  const candidates = new Set<string>();
+
+  const add = (value?: string) => {
+    if (!value) return;
+    candidates.add(value);
+    if (!value.startsWith("/")) {
+      candidates.add(`/${value}`);
+    }
+  };
+
+  add(trimmed);
+
+  if (LOCALHOST_PATTERN.test(trimmed) || isRemoteUrl(trimmed)) {
+    try {
+      const url = new URL(trimmed.startsWith("//") ? `https:${trimmed}` : trimmed);
+      add(url.pathname);
+      add(`/${getFilename(url.pathname)}`);
+    } catch {
+      // ignore invalid URLs
+    }
+  } else {
+    add(trimmed.startsWith("/") ? trimmed : `/${trimmed}`);
+    add(`/${getFilename(trimmed)}`);
+  }
+
+  if (NEXT_STATIC_MEDIA_PATTERN.test(trimmed)) {
+    const mediaFile = getFilename(trimmed);
+    const baseName = mediaFile.replace(/\.[a-f0-9]{8,}\.(png|jpe?g|webp|gif)$/i, ".$1");
+    add(`/${baseName}`);
+  }
+
+  return [...candidates];
+}
+
+function lookupStaticImage(src: string): StaticImageData | undefined {
+  for (const candidate of collectPathCandidates(src)) {
+    if (isRemoteUrl(candidate)) {
+      continue;
+    }
+
+    if (staticImages[candidate]) {
+      return staticImages[candidate];
+    }
+
+    const byFilename = staticImages[`/${getFilename(candidate)}`];
+    if (byFilename) {
+      return byFilename;
+    }
+  }
+
+  return undefined;
+}
+
+function getCanonicalPath(src: string): string | undefined {
+  const match = lookupStaticImage(src);
+  if (!match) {
     return undefined;
   }
 
-  if (staticImages[normalized]) {
-    return staticImages[normalized];
-  }
-
-  const filename = getFilename(normalized);
-  const byFilename = staticImages[`/${filename}`];
-  if (byFilename) {
-    return byFilename;
-  }
-
-  // Recover from previously-sanitized `/_next/static/media/<name>.<hash>.png` strings
-  if (NEXT_STATIC_MEDIA_PATTERN.test(normalized)) {
-    const mediaFile = getFilename(normalized);
-    const baseName = mediaFile.replace(/\.[a-f0-9]{8,}\.(png|jpe?g|webp|gif)$/i, ".$1");
-    return staticImages[`/${baseName}`];
+  for (const [path, image] of Object.entries(staticImages)) {
+    if (image === match) {
+      return path;
+    }
   }
 
   return undefined;
@@ -158,29 +193,34 @@ export function isKnownLocalImage(path: string | null | undefined): boolean {
 }
 
 /**
- * Returns a URL string for <img> or CSS. Prefer AppImage for local assets.
+ * Pick the first valid image source from a list (CMS value + hardcoded fallbacks).
  */
+export function pickImageSrc(
+  ...candidates: Array<string | null | undefined>
+): StaticImageData | string | undefined {
+  for (const candidate of candidates) {
+    const resolved = resolveImageData(candidate);
+    if (resolved) {
+      return resolved;
+    }
+  }
+
+  return undefined;
+}
+
+/** URL string for plain <img> tags */
 export function resolveImageSrc(src: string | null | undefined): string | undefined {
-  if (typeof src !== "string") {
+  const resolved = resolveImageData(src);
+  if (!resolved) {
     return undefined;
   }
 
-  const normalized = normalizeLocalPath(src);
-  if (!normalized) {
-    return undefined;
-  }
-
-  const staticImage = lookupStaticImage(normalized);
-  if (staticImage) {
-    return staticImage.src;
-  }
-
-  return normalized;
+  return typeof resolved === "string" ? resolved : resolved.src;
 }
 
 /**
- * Returns StaticImageData for known local assets (same as DoctorsTeamSection).
- * Remote URLs are returned as plain strings.
+ * Returns StaticImageData for bundled local assets (DoctorsTeamSection pattern).
+ * Maps CMS full URLs (localhost / vercel.app) back to bundled files by filename.
  */
 export function resolveImageData(
   src: string | null | undefined,
@@ -189,18 +229,18 @@ export function resolveImageData(
     return undefined;
   }
 
-  const normalized = normalizeLocalPath(src);
-  if (!normalized) {
+  const trimmed = src.trim();
+  if (!trimmed) {
     return undefined;
   }
 
-  const staticImage = lookupStaticImage(normalized);
+  const staticImage = lookupStaticImage(trimmed);
   if (staticImage) {
     return staticImage;
   }
 
-  if (isRemoteUrl(normalized)) {
-    return normalized;
+  if (isAllowedRemoteUrl(trimmed)) {
+    return trimmed.startsWith("//") ? `https:${trimmed}` : trimmed;
   }
 
   return undefined;
@@ -216,22 +256,26 @@ export function sanitizeImageSources<T>(value: T): T {
 
     for (const [key, nestedValue] of Object.entries(record)) {
       if (typeof nestedValue === "string" && isLikelyImageFieldKey(key)) {
-        const normalized = normalizeLocalPath(nestedValue);
+        const trimmed = nestedValue.trim();
 
-        if (!normalized) {
+        if (!trimmed) {
           delete record[key];
           continue;
         }
 
-        // Keep canonical `/file.png` paths — AppImage resolves to StaticImageData at render.
-        // Drop unknown local CMS paths so component fallbacks (e.g. `/doctor-hero.png`) apply.
-        if (isRemoteUrl(normalized) || lookupStaticImage(normalized)) {
-          const canonical = getCanonicalPath(normalized);
-          record[key] = canonical ?? normalized;
-        } else {
-          delete record[key];
+        const staticImage = lookupStaticImage(trimmed);
+        if (staticImage) {
+          record[key] = getCanonicalPath(trimmed) ?? trimmed;
+          continue;
         }
 
+        if (isAllowedRemoteUrl(trimmed)) {
+          record[key] = trimmed;
+          continue;
+        }
+
+        // Broken CMS / localhost media URL — drop so component `|| "/fallback.png"` applies
+        delete record[key];
         continue;
       }
 
@@ -242,23 +286,4 @@ export function sanitizeImageSources<T>(value: T): T {
   }
 
   return value;
-}
-
-function getCanonicalPath(path: string): string | undefined {
-  const normalized = normalizeLocalPath(path);
-  if (!normalized) {
-    return undefined;
-  }
-
-  if (staticImages[normalized]) {
-    return normalized;
-  }
-
-  const filename = getFilename(normalized);
-  const canonical = `/${filename}`;
-  if (staticImages[canonical]) {
-    return canonical;
-  }
-
-  return undefined;
 }

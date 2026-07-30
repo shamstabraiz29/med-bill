@@ -19,7 +19,7 @@ export default function MedicalCodingExpertSections({ data }: MedicalCodingExper
     >
       <div className="mx-auto max-w-7xl">
         <MotionWrapper variant="stagger" staggerDelay={0.1} className="space-y-6 sm:space-y-8">
-          {expertData.blocks.map((block) => (
+          {expertData.blocks.map((block, index) => (
             <MotionWrapper key={block.ctaLabel} variant="staggerItem">
               <MedicalCodingExpertBlock
                 title={
@@ -35,6 +35,7 @@ export default function MedicalCodingExpertSections({ data }: MedicalCodingExper
                 ctaHref={block.ctaHref || "/contact-us"}
                 imageSrc={block.imageSrc}
                 imageAlt={block.imageAlt}
+                fallbackSrc={defaultMedicalCodingData.expertSections.blocks[index]?.imageSrc ?? "/doctor-hero.png"}
                 imagePosition={(block.imagePosition as "left" | "right") || "right"}
               />
             </MotionWrapper>

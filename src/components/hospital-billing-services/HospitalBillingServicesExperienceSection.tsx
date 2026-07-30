@@ -26,7 +26,6 @@ export default function HospitalBillingServicesExperienceSection({
     content.checklist && content.checklist.length > 0
       ? content.checklist
       : defaultHospitalBillingServicesData.experience.checklist;
-  const imageSrc = content.imageSrc || "/gennaya-matt.png";
   const imageAlt =
     content.imageAlt || "Healthcare professionals partnering on hospital billing services";
 
@@ -51,7 +50,8 @@ export default function HospitalBillingServicesExperienceSection({
 
               <div className="group relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-[0_8px_30px_rgba(29,78,216,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#1D4ED8]/30 hover:shadow-xl hover:shadow-blue-900/10 sm:aspect-[16/11]">
                 <AppImage
-                  src={imageSrc}
+                  src={content.imageSrc}
+                  fallbackSrc="/gennaya-matt.png"
                   alt={imageAlt}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"

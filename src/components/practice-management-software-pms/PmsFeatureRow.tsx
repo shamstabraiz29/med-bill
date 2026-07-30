@@ -10,16 +10,19 @@ import { pmsCardClassName } from "./pmsSectionLayout";
 function ImageShell({
   src,
   alt,
+  fallbackSrc,
   children,
 }: {
-  src: string;
+  src?: string | null;
   alt: string;
+  fallbackSrc?: string;
   children?: React.ReactNode;
 }) {
   return (
     <div className="group relative h-full min-h-[280px] w-full overflow-hidden rounded-2xl border border-border bg-card shadow-[0_8px_30px_rgba(29,78,216,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 sm:min-h-[320px] lg:min-h-[400px]">
       <AppImage
         src={src}
+        fallbackSrc={fallbackSrc}
         alt={alt}
         fill
         className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
@@ -34,8 +37,16 @@ function ImageShell({
   );
 }
 
-export function PmsAssetVisual({ src, alt }: { src: string; alt: string }) {
-  return <ImageShell src={src} alt={alt} />;
+export function PmsAssetVisual({
+  src,
+  alt,
+  fallbackSrc,
+}: {
+  src?: string | null;
+  alt: string;
+  fallbackSrc?: string;
+}) {
+  return <ImageShell src={src} alt={alt} fallbackSrc={fallbackSrc} />;
 }
 
 export function PmsIcd10Visual() {

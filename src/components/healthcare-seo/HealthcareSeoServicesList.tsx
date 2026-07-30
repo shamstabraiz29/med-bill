@@ -135,7 +135,8 @@ export default function HealthcareSeoServicesList({ data }: HealthcareSeoService
                     {/* Fitted Visual Image Showcase Card */}
                     <div className="relative w-full h-full min-h-[260px] rounded-2xl overflow-hidden shadow-2xl border border-white/20 group">
                       <AppImage
-                        src={item.imageSrc || "/consultants-laptop.png"}
+                        src={item.imageSrc}
+                fallbackSrc="/consultants-laptop.png"
                         alt={item.title}
                         fill
                         className="object-cover object-top transition-transform duration-700 group-hover:scale-105"

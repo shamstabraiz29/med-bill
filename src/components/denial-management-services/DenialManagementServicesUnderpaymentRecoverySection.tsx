@@ -19,7 +19,6 @@ export default function DenialManagementServicesUnderpaymentRecoverySection({
   data,
 }: DenialManagementServicesUnderpaymentRecoverySectionProps) {
   const content = data || defaultDenialManagementServicesData.underpaymentRecovery;
-  const imageSrc = content.imageSrc || "/rcm-card-billing.png";
   const imageAlt =
     content.imageAlt ||
     "Healthcare billing professionals reviewing hospital denial management reports";
@@ -45,7 +44,8 @@ export default function DenialManagementServicesUnderpaymentRecoverySection({
 
               <div className="group relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-[0_8px_30px_rgba(29,78,216,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#1D4ED8]/30 hover:shadow-xl hover:shadow-blue-900/10 sm:aspect-16/11">
                 <AppImage
-                  src={imageSrc}
+                  src={content.imageSrc}
+                  fallbackSrc="/rcm-card-billing.png"
                   alt={imageAlt}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"

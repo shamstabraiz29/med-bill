@@ -12,8 +12,9 @@ export interface EhrFeatureRowProps {
   titleSuffix?: string;
   endPeriod?: boolean;
   description: string;
-  imageSrc: string;
+  imageSrc?: string | null;
   imageAlt: string;
+  fallbackSrc?: string;
   reverse?: boolean;
   className?: string;
 }
@@ -26,6 +27,7 @@ export default function EhrFeatureRow({
   description,
   imageSrc,
   imageAlt,
+  fallbackSrc = "/consultants-laptop.png",
   reverse = false,
   className,
 }: EhrFeatureRowProps) {
@@ -65,6 +67,7 @@ export default function EhrFeatureRow({
         <div className="group relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white transition-all duration-300 hover:-translate-y-1.5 hover:border-[#1D4ED8]/30 hover:shadow-lg hover:shadow-blue-900/5 sm:aspect-16/11">
           <AppImage
             src={imageSrc}
+            fallbackSrc={fallbackSrc}
             alt={imageAlt}
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"

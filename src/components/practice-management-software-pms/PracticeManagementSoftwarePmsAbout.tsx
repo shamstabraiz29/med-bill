@@ -34,7 +34,8 @@ export default function PracticeManagementSoftwarePmsAbout({ data }: PracticeMan
             <CardContent className="grid grid-cols-1 p-0 lg:grid-cols-2 lg:items-stretch">
               <div className="relative min-h-[260px] sm:min-h-[320px] lg:min-h-[420px]">
                 <AppImage
-                  src={content.imageSrc || "/rcm-dashboard-laptop1.png"}
+                  src={content.imageSrc}
+                fallbackSrc="/rcm-dashboard-laptop1.png"
                   alt={content.imageAlt || "Medical professionals reviewing practice management dashboards on a monitor"}
                   fill
                   className="object-cover transition-transform duration-700 hover:scale-[1.02]"

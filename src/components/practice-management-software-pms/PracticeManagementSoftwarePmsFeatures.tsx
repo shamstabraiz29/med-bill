@@ -44,7 +44,11 @@ export default function PracticeManagementSoftwarePmsFeatures({ data }: Practice
               : [];
 
             const visual = feature.imageSrc ? (
-              <PmsAssetVisual src={feature.imageSrc} alt={feature.imageAlt || feature.title} />
+              <PmsAssetVisual
+                src={feature.imageSrc}
+                fallbackSrc="/consultants-laptop.png"
+                alt={feature.imageAlt || feature.title}
+              />
             ) : (
               DEFAULT_VISUALS[idx % DEFAULT_VISUALS.length]
             );

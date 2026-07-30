@@ -11,7 +11,7 @@ import IconWrapper from "@/components/common/IconWrapper";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 
 export interface BillingConsultancyFeatureBlockProps {
-  imageSrc: string;
+  imageSrc?: string | null;
   imageAlt: string;
   description: string;
   ctaLabel: string;
@@ -71,6 +71,7 @@ export default function BillingConsultancyFeatureBlock({
             <div className="relative aspect-[4/3] w-full overflow-hidden sm:aspect-[5/4]">
               <AppImage
                 src={imageSrc}
+                fallbackSrc="/consultants-laptop.png"
                 alt={imageAlt}
                 fill
                 className="object-cover transition-transform duration-700 hover:scale-[1.03]"

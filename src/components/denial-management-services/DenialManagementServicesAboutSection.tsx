@@ -20,7 +20,6 @@ export default function DenialManagementServicesAboutSection({
   data,
 }: DenialManagementServicesAboutSectionProps) {
   const content = data || defaultDenialManagementServicesData.about;
-  const imageSrc = content.imageSrc || "/faq-doctor.png";
   const imageAlt =
     content.imageAlt || "Physician reviewing denial management services on a tablet";
 
@@ -66,7 +65,8 @@ export default function DenialManagementServicesAboutSection({
 
               <div className="group relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-[0_8px_30px_rgba(29,78,216,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#1D4ED8]/30 hover:shadow-xl hover:shadow-blue-900/10 sm:aspect-16/11">
                 <AppImage
-                  src={imageSrc}
+                  src={content.imageSrc}
+                  fallbackSrc="/faq-doctor.png"
                   alt={imageAlt}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"

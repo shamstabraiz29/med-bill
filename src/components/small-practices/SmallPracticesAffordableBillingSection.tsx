@@ -33,7 +33,6 @@ export default function SmallPracticesAffordableBillingSection({ data }: SmallPr
   const mainTitleHighlight = data?.mainTitleHighlight ?? "Affordable for Your Individual Practice";
   const p1 = data?.paragraph1 ?? "At BellMedEx, we have helped over 1,500 small and mid-sized practices with billing & collections + coding assistance for independent practices. These include family medicine offices, low-volume practices, and rural health clinics. Our medical billing solutions increase their revenue by an average of 30% in a cost-effective way.";
   const p2 = data?.paragraph2 ?? "A small-budget clinic faces challenges like accounts management and claim denials. It works hard to provide quality care while managing many tasks and tight budgets. Our accounts management team provides affordable and effective medical billing support. We help small healthcare practices grow from just surviving to thriving.";
-  const imageSrc = data?.imageSrc ?? "/consultants-laptop.png";
   const imageAlt = data?.imageAlt ?? "Healthcare professional reviewing medical billing analytics on a laptop";
 
   const benefits = data?.benefits && data.benefits.length > 0
@@ -89,7 +88,8 @@ export default function SmallPracticesAffordableBillingSection({ data }: SmallPr
           <MotionWrapper variant="slideRight" className="w-full lg:col-span-5">
             <div className="group relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-[0_8px_30px_rgba(29,78,216,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#1D4ED8]/30 hover:shadow-xl hover:shadow-blue-900/10 sm:aspect-16/11">
               <AppImage
-                src={imageSrc}
+                src={data?.imageSrc}
+                fallbackSrc="/consultants-laptop.png"
                 alt={imageAlt}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"

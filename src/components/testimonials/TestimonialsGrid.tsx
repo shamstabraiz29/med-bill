@@ -181,6 +181,7 @@ export default function TestimonialsGrid({ items, showFilters = true }: Testimon
                   <div className="flex items-center gap-3">
                     <AppImage
                       src={item.avatar}
+                      fallbackSrc="/doctor-hero.png"
                       alt={item.name}
                       width={44}
                       height={44}

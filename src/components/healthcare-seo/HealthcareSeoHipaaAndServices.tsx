@@ -75,6 +75,7 @@ export default function HealthcareSeoHipaaAndServices({ data }: HealthcareSeoHip
                     >
                       <AppImage
                         src={service.image}
+                        fallbackSrc="/consultants-laptop.png"
                         alt={service.title}
                         fill
                         className="object-cover transition-transform duration-500 group-hover/tile:scale-108"

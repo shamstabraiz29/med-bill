@@ -67,7 +67,8 @@ export default function ExpeditedCredentialingServices({ data }: ExpeditedCreden
             <div className="relative w-full max-w-lg mx-auto aspect-[4/5] rounded-2xl bg-white border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 p-3 overflow-hidden group">
               <div className="relative w-full h-full rounded-2xl overflow-hidden bg-slate-900">
                 <AppImage
-                  src={content.block1ImageSrc || "/clearinghouse-nurse-hero.png"}
+                  src={content.block1ImageSrc}
+                fallbackSrc="/clearinghouse-nurse-hero.png"
                   alt="Public & Private Program Provider Credentialing"
                   fill
                   className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
@@ -120,7 +121,8 @@ export default function ExpeditedCredentialingServices({ data }: ExpeditedCreden
             <div className="relative w-full max-w-lg mx-auto aspect-[4/5] rounded-2xl bg-white border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 p-3 overflow-hidden group">
               <div className="relative w-full h-full rounded-2xl overflow-hidden bg-slate-900">
                 <AppImage
-                  src={content.block2ImageSrc || "/consultants-laptop.png"}
+                  src={content.block2ImageSrc}
+                fallbackSrc="/consultants-laptop.png"
                   alt="Central Profile Setup and Upkeep"
                   fill
                   className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
@@ -215,7 +217,8 @@ export default function ExpeditedCredentialingServices({ data }: ExpeditedCreden
             <div className="relative w-full max-w-lg mx-auto aspect-[4/5] rounded-2xl bg-white border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 p-3 overflow-hidden group">
               <div className="relative w-full h-full rounded-2xl overflow-hidden bg-slate-900">
                 <AppImage
-                  src={content.block3ImageSrc || "/consultants-laptop.png"}
+                  src={content.block3ImageSrc}
+                fallbackSrc="/consultants-laptop.png"
                   alt="Contract Setup, Terms & Reimbursement Review"
                   fill
                   className="object-cover object-top transition-transform duration-700 group-hover:scale-105"

@@ -54,6 +54,7 @@ export default function MedicalCodingAdvancedHelp({ data }: MedicalCodingAdvance
                   description={block.description}
                   imageSrc={block.imageSrc}
                   imageAlt={block.imageAlt}
+                  fallbackSrc={defaultMedicalCodingData.advancedHelp.blocks[index]?.imageSrc ?? "/consultants-laptop.png"}
                   imagePosition={(block.imagePosition as "left" | "right") || "right"}
                 />
               </MotionWrapper>

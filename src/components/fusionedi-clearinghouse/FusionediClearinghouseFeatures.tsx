@@ -17,7 +17,7 @@ interface FusionediFeature {
   icon: LucideIcon;
   title: string;
   description: string;
-  imageSrc: string;
+  imageSrc?: string | null;
   imageAlt: string;
 }
 
@@ -68,6 +68,7 @@ function FusionediFeatureCard({ feature }: { feature: FusionediFeature }) {
       <div className="relative mt-auto aspect-4/3 w-full overflow-hidden border-t border-[#E2E6EC]">
         <AppImage
           src={feature.imageSrc}
+          fallbackSrc="/clearinghouse-nurse-hero.png"
           alt={feature.imageAlt}
           fill
           className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
@@ -138,7 +139,7 @@ export default function FusionediClearinghouseFeatures({ data }: FusionediCleari
                     icon: IconComponent,
                     title: feature.title,
                     description: feature.description,
-                    imageSrc: feature.imageSrc || "/clearinghouse-nurse-hero.png",
+                    imageSrc: feature.imageSrc,
                     imageAlt: feature.imageAlt || feature.title,
                   }}
                 />

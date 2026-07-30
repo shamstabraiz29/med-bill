@@ -71,6 +71,13 @@ export default function RcmServicesOverview({ data }: RcmServicesOverviewProps) 
                     <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-md border border-white/60 group">
                       <AppImage
                         src={item.imageSrc}
+                        fallbackSrc={
+                          item.id === "coding"
+                            ? "/rcm-card-coding.png"
+                            : item.id === "audit"
+                              ? "/rcm-card-audit.png"
+                              : "/rcm-card-billing.png"
+                        }
                         alt={item.imageAlt || "BellMedEx Service"}
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-105"

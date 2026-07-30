@@ -31,7 +31,8 @@ export default function FusionediClearinghouseDashboard({ data }: FusionediClear
             </h2>
 
             <AppImage
-              src={content.imageSrc || "/fusionedi-dashboard.png"}
+              src={content.imageSrc}
+                fallbackSrc="/fusionedi-dashboard.png"
               alt={content.imageAlt || "FusionEDI clearinghouse dashboard"}
               width={1024}
               height={774}

@@ -11,8 +11,9 @@ export interface MedicalBillingAuditSplitBlockProps {
   icon: LucideIcon;
   title: React.ReactNode;
   paragraphs: string[];
-  imageSrc: string;
+  imageSrc?: string | null;
   imageAlt: string;
+  fallbackSrc?: string;
   imagePosition?: "left" | "right";
 }
 
@@ -22,6 +23,7 @@ export default function MedicalBillingAuditSplitBlock({
   paragraphs,
   imageSrc,
   imageAlt,
+  fallbackSrc = "/consultants-laptop.png",
   imagePosition = "right",
 }: MedicalBillingAuditSplitBlockProps) {
   const isImageLeft = imagePosition === "left";
@@ -65,6 +67,7 @@ export default function MedicalBillingAuditSplitBlock({
         >
           <AppImage
             src={imageSrc}
+            fallbackSrc={fallbackSrc}
             alt={imageAlt}
             fill
             sizes="(max-width: 1024px) 100vw, 50vw"
