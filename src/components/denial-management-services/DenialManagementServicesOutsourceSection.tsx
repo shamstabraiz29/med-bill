@@ -7,7 +7,9 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import DenialManagementServicesOutsourceAccordion from "./DenialManagementServicesOutsourceAccordion";
 import {
   denialManagementContainerClassName,
+  denialManagementSectionBodyClassName,
   denialManagementSectionClassName,
+  denialManagementSectionHighlightClassName,
 } from "./denialManagementSectionLayout";
 import { defaultDenialManagementServicesData } from "@/lib/defaults/denialManagementServices";
 import type { DenialManagementOutsourceSectionData } from "@/payload/types/denialManagementServices";
@@ -44,7 +46,7 @@ export default function DenialManagementServicesOutsourceSection({
             title={
               <span id="denial-management-services-outsource-heading">
                 {content.titlePlain}
-                <span className="text-blue-600">{content.titleHighlight}</span>
+                <span className={denialManagementSectionHighlightClassName}>{content.titleHighlight}</span>
                 {content.titleSuffix}
               </span>
             }
@@ -52,15 +54,9 @@ export default function DenialManagementServicesOutsourceSection({
           />
 
           <div className="mx-auto mt-6 max-w-3xl space-y-4 sm:mt-8">
-            <p className="text-sm leading-[1.6] text-[#475569] sm:text-base">
-              {content.paragraph1}
-            </p>
-            <p className="text-sm leading-[1.6] text-[#475569] sm:text-base">
-              {content.paragraph2}
-            </p>
-            <p className="text-sm leading-[1.6] text-[#475569] sm:text-base">
-              {content.paragraph3}
-            </p>
+            <p className={denialManagementSectionBodyClassName}>{content.paragraph1}</p>
+            <p className={denialManagementSectionBodyClassName}>{content.paragraph2}</p>
+            <p className={denialManagementSectionBodyClassName}>{content.paragraph3}</p>
           </div>
         </div>
 

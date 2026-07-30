@@ -8,6 +8,9 @@ import DenialManagementServicesHelpAccordion from "./DenialManagementServicesHel
 import {
   denialManagementContainerClassName,
   denialManagementSectionAltClassName,
+  denialManagementSectionBodyClassName,
+  denialManagementSectionHighlightClassName,
+  denialManagementSectionTitleClassName,
 } from "./denialManagementSectionLayout";
 import { defaultDenialManagementServicesData } from "@/lib/defaults/denialManagementServices";
 import type { DenialManagementHelpSectionData } from "@/payload/types/denialManagementServices";
@@ -50,19 +53,15 @@ export default function DenialManagementServicesHelpSection({
 
             <h2
               id="denial-management-services-help-heading"
-              className="max-w-2xl text-2xl font-bold leading-[1.18] tracking-[-0.02em] text-[#0F172A] sm:text-3xl lg:text-4xl"
+              className={denialManagementSectionTitleClassName}
             >
               {content.titlePlain}
-              <span className="text-blue-600">{content.titleHighlight}</span>
+              <span className={denialManagementSectionHighlightClassName}>{content.titleHighlight}</span>
             </h2>
 
             <div className="max-w-2xl space-y-4">
-              <p className="text-sm leading-[1.6] text-[#475569] sm:text-base">
-                {content.paragraph1}
-              </p>
-              <p className="text-sm leading-[1.6] text-[#475569] sm:text-base">
-                {content.paragraph2}
-              </p>
+              <p className={denialManagementSectionBodyClassName}>{content.paragraph1}</p>
+              <p className={denialManagementSectionBodyClassName}>{content.paragraph2}</p>
             </div>
 
             <div className="group relative mt-2 aspect-[16/10] w-full overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-[0_8px_30px_rgba(29,78,216,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#1D4ED8]/30 hover:shadow-xl hover:shadow-blue-900/10">

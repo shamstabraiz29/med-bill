@@ -2,7 +2,12 @@
 
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { ChevronDown, Plus, X } from "lucide-react";
+import { Minus, Plus } from "lucide-react";
+import {
+  denialManagementCardClassName,
+  denialManagementSectionBodyClassName,
+  denialManagementSectionLeadClassName,
+} from "./denialManagementSectionLayout";
 import type { DenialManagementHelpAccordionItem } from "@/payload/types/denialManagementServices";
 
 interface DenialManagementServicesHelpAccordionProps {
@@ -18,11 +23,7 @@ export default function DenialManagementServicesHelpAccordion({
 
   return (
     <div className="w-full">
-      <p className="mb-5 flex items-center justify-center gap-2 text-center text-sm font-semibold text-[#0F172A] sm:mb-6 sm:text-base">
-        <ChevronDown className="h-4 w-4 shrink-0 text-[#1D4ED8]" aria-hidden="true" />
-        {heading}
-        <ChevronDown className="h-4 w-4 shrink-0 text-[#1D4ED8]" aria-hidden="true" />
-      </p>
+      <p className={`mb-5 sm:mb-6 ${denialManagementSectionLeadClassName}`}>{heading}</p>
 
       <div className="space-y-3 sm:space-y-4">
         {items.map((item, index) => {
@@ -30,34 +31,25 @@ export default function DenialManagementServicesHelpAccordion({
           const panelId = `denial-management-help-accordion-${index}`;
 
           return (
-            <div
-              key={item.title || index}
-              className="overflow-hidden rounded-xl border border-white/10 bg-[#0F172A] shadow-sm transition-shadow duration-300 hover:shadow-md"
-            >
+            <div key={item.title || index} className={`overflow-hidden ${denialManagementCardClassName}`}>
               <button
                 type="button"
                 id={`${panelId}-trigger`}
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => setOpenIndex(isOpen ? null : index)}
-                className="flex w-full items-center justify-between gap-4 px-4 py-4 text-left transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/40 sm:px-5 sm:py-5"
+                className={`flex w-full items-center justify-between gap-4 px-4 py-4 text-left transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1D4ED8]/40 sm:px-5 sm:py-5 ${
+                  isOpen ? "bg-blue-50/40 hover:bg-blue-50/40" : "bg-slate-50 hover:bg-blue-50/40"
+                }`}
               >
-                <span className="text-sm font-semibold leading-snug text-white sm:text-base">
+                <span className="text-sm font-semibold leading-snug text-[#0F172A] sm:text-base">
                   {item.title}
                 </span>
                 <span
-                  className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-colors duration-300 ${
-                    isOpen
-                      ? "border-white/30 bg-white/15 text-white"
-                      : "border-white/20 bg-white/10 text-white/90"
-                  }`}
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#1D4ED8]/20 bg-white text-[#1D4ED8] shadow-sm"
                   aria-hidden="true"
                 >
-                  {isOpen ? (
-                    <X className="h-4 w-4" />
-                  ) : (
-                    <Plus className="h-4 w-4" />
-                  )}
+                  {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
                 </span>
               </button>
 
@@ -73,15 +65,11 @@ export default function DenialManagementServicesHelpAccordion({
                     transition={{ duration: 0.25, ease: "easeOut" }}
                     className="overflow-hidden"
                   >
-                    <div className="space-y-3 border-t border-white/10 px-4 pb-5 pt-4 sm:px-5 sm:pb-6">
-                      <p className="text-xs leading-[1.65] text-blue-100 sm:text-sm">
-                        {item.problem}
-                      </p>
+                    <div className="space-y-3 border-t border-[#E2E6EC] bg-white px-4 py-4 sm:px-5 sm:py-5">
+                      <p className={denialManagementSectionBodyClassName}>{item.problem}</p>
                       <div>
-                        <p className="text-xs font-bold text-white sm:text-sm">The solution:</p>
-                        <p className="mt-1.5 text-xs leading-[1.65] text-blue-100 sm:text-sm">
-                          {item.solution}
-                        </p>
+                        <p className="text-sm font-bold text-[#0F172A] sm:text-base">The solution:</p>
+                        <p className={`mt-1.5 ${denialManagementSectionBodyClassName}`}>{item.solution}</p>
                       </div>
                     </div>
                   </motion.div>
