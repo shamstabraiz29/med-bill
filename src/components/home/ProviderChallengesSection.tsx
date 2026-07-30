@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 import type { HomepageProviderChallenges } from "@/payload/types/homepage";
 
 const inputClassName =
-  "h-11 rounded-xl border-[#E2E6EC] bg-[#F8FAFC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 text-xs sm:text-sm transition-all shadow-none";
+  "h-11 rounded-xl border-white/20 bg-white/10 text-white placeholder:text-slate-400 focus:bg-white/15 focus:border-white/40 focus:ring-4 focus:ring-white/10 text-xs sm:text-sm transition-all shadow-none";
 
 interface ProviderChallengesSectionProps {
   data: HomepageProviderChallenges;
@@ -119,19 +119,19 @@ export default function ProviderChallengesSection({ data }: ProviderChallengesSe
               </div>
 
               <div className="w-full lg:col-span-5">
-                <div className="rounded-2xl border border-[#E2E6EC] bg-white p-6 shadow-lg shadow-blue-900/10 sm:p-8">
+                <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 shadow-xl backdrop-blur-md sm:p-8 text-left">
                   <div className="mb-6 space-y-1.5 text-left">
-                    <h3 className="text-lg font-bold tracking-tight text-[#0F172A]">{data.formTitle}</h3>
-                    <p className="text-xs leading-relaxed text-[#475569] sm:text-sm">
+                    <h3 className="text-lg font-bold tracking-tight text-white">{data.formTitle}</h3>
+                    <p className="text-xs leading-relaxed text-blue-200 sm:text-sm">
                       {data.formDescription}
                     </p>
                   </div>
 
                   {isSubmitted ? (
-                    <div className="space-y-2 rounded-2xl border border-emerald-200 bg-emerald-50 p-6 text-center">
-                      <Check className="mx-auto h-8 w-8 text-emerald-600 stroke-[3]" />
-                      <h4 className="text-base font-bold text-[#0F172A]">Assessment Request Submitted!</h4>
-                      <p className="text-xs text-emerald-700 sm:text-sm">
+                    <div className="space-y-2 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-6 text-center text-emerald-300">
+                      <Check className="mx-auto h-8 w-8 text-emerald-400 stroke-[3]" />
+                      <h4 className="text-base font-bold text-white">Assessment Request Submitted!</h4>
+                      <p className="text-xs text-emerald-200 sm:text-sm">
                         Thank you {formData.name}. Our billing specialists will review your selections and
                         contact you shortly.
                       </p>

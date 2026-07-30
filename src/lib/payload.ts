@@ -52,6 +52,8 @@ import type { SmallPracticesPageData } from '@/payload/types/smallPractices'
 import { defaultSmallPracticesData } from '@/lib/defaults/smallPractices'
 import type { DenialManagementServicesPageData } from '@/payload/types/denialManagementServices'
 import { defaultDenialManagementServicesData } from '@/lib/defaults/denialManagementServices'
+import type { HospitalBillingServicesPageData } from '@/payload/types/hospitalBillingServices'
+import { defaultHospitalBillingServicesData } from '@/lib/defaults/hospitalBillingServices'
 
 /**
  * Fetches the Homepage global data from Payload CMS using the Local API.
@@ -640,6 +642,39 @@ export async function getDenialManagementServicesData(): Promise<DenialManagemen
   } catch (error) {
     console.error('[Payload] Failed to fetch Denial Management Services data, using defaults:', error)
     return defaultDenialManagementServicesData
+  }
+}
+
+/**
+ * Fetches the Hospital Billing Services global data from Payload CMS.
+ */
+export async function getHospitalBillingServicesData(): Promise<HospitalBillingServicesPageData> {
+  try {
+    const payload = await getPayload({ config })
+    const data = await payload.findGlobal({ slug: 'hospital-billing-services' as any })
+    const merged = deepMerge(defaultHospitalBillingServicesData, data as unknown as Partial<HospitalBillingServicesPageData>)
+
+    // Normalize array fields to ensure frontend components receive expected string / object formats
+    if (merged?.experience?.checklist) {
+      merged.experience.checklist = merged.experience.checklist.map((c: any) =>
+        typeof c === 'string' ? c : c.text || c.label || '',
+      )
+    }
+    if (merged?.whatAre?.goalPills) {
+      merged.whatAre.goalPills = merged.whatAre.goalPills.map((p: any) =>
+        typeof p === 'string' ? p : p.text || p.label || '',
+      )
+    }
+    if (merged?.why?.questions) {
+      merged.why.questions = merged.why.questions.map((q: any) =>
+        typeof q === 'string' ? q : q.text || q.label || '',
+      )
+    }
+
+    return merged
+  } catch (error) {
+    console.error('[Payload] Failed to fetch Hospital Billing Services data, using defaults:', error)
+    return defaultHospitalBillingServicesData
   }
 }
 

@@ -1,3 +1,5 @@
+import type { HomepageTestimonials } from "./homepage";
+
 export interface HospitalBillingWhatAreService {
   title: string;
   description: string;
@@ -309,7 +311,7 @@ export interface HospitalBillingServicesPageData {
   coding: HospitalBillingCodingSectionData;
   complianceChecklist: HospitalBillingComplianceChecklistSectionData;
   patientManagement: HospitalBillingPatientManagementSectionData;
-  testimonials: HospitalBillingTestimonialsSectionData;
+  testimonials: HomepageTestimonials | HospitalBillingTestimonialsSectionData;
   transform: HospitalBillingTransformSectionData;
   software: HospitalBillingSoftwareSectionData;
   why: HospitalBillingWhySectionData;

@@ -35,6 +35,7 @@ import { OutsourceMedicalBilling } from '@/payload/globals/OutsourceMedicalBilli
 import { LargePractices } from '@/payload/globals/LargePractices'
 import { SmallPractices } from '@/payload/globals/SmallPractices'
 import { DenialManagementServices } from '@/payload/globals/DenialManagementServices'
+import { HospitalBillingServices } from '@/payload/globals/HospitalBillingServices'
 import { AboutUs } from '@/payload/globals/AboutUs'
 import { ContactUs } from '@/payload/globals/ContactUs'
 import { MedicalBillingPricing } from '@/payload/globals/MedicalBillingPricing'
@@ -91,6 +92,7 @@ export default buildConfig({
     SmallPractices,
     PhysicianBillingServices,
     DenialManagementServices,
+    HospitalBillingServices,
 
     // 5. Resources & Company Pages
     Careers,

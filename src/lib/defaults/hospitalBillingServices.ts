@@ -1,4 +1,5 @@
 import type { HospitalBillingServicesPageData } from "@/payload/types/hospitalBillingServices";
+import { defaultHomepageData } from "./homepage";
 
 export const defaultHospitalBillingServicesData: HospitalBillingServicesPageData = {
   hero: {
@@ -315,49 +316,7 @@ export const defaultHospitalBillingServicesData: HospitalBillingServicesPageData
       "All thanks to the best hospital billing management and collection service. Effective behind-the-scenes cooperation guarantees the hospital's success and improves the patient engagement.",
     ],
   },
-  testimonials: {
-    titlePlain: "What clients are ",
-    titleHighlight: "saying about Us",
-    trustpilotRating: "4.7",
-    trustpilotReviewCount: "179",
-    items: [
-      {
-        reviewTitle: "Thank you BME!!",
-        name: "Lisa",
-        text: "We have been using BellMedEx for a while now and are very pleased. They are prompt and conscientious keeping our billing in order. We speak so often that we consider them friends! I highly recommend their services. You won't regret it.",
-        date: "15 January, 2025",
-        rating: 5,
-      },
-      {
-        reviewTitle: "Billing department worked hard",
-        name: "PCP",
-        text: "Billing department worked hard to help me to clean up my AR and claim resubmissions. We happily extended our contract with BellMedEx to further reconcile payments and working with coding department to recover potential revenues.",
-        date: "09 January, 2025",
-        rating: 5,
-      },
-      {
-        reviewTitle: "BellMedEx is amazing!",
-        name: "Topher",
-        text: "Been with Bellmedex for a few months now. So far, they have been wonderful. Our rep is extremely responsive, they're very transparent, helpful, and have the most patience with us. Billing is tough, having the right team on board is crucial for success.",
-        date: "1 August, 2024",
-        rating: 5,
-      },
-      {
-        reviewTitle: "Days in AR dropped fast",
-        name: "Dr. S Davis",
-        text: "After switching to BellMedEx's Hospital Billing Experts, our days in AR dropped by almost 20%! Their team is responsive and really knows how to optimize our revenue cycle. We're collecting more than ever.",
-        date: "22 March, 2025",
-        rating: 5,
-      },
-      {
-        reviewTitle: "Highly recommend for hospitals",
-        name: "Dr. Gennaya Matt",
-        text: "We are more than satisfied with BellMedEx and would highly recommend them to any hospital searching for an efficient billing partner. Working with BellMedEx has felt effortless from onboarding through monthly reporting.",
-        date: "14 November, 2024",
-        rating: 5,
-      },
-    ],
-  },
+  testimonials: defaultHomepageData.testimonials,
   transform: {
     titlePlain: "Transform Your Hospital Billing with ",
     titleHighlight: "BellMedEx",

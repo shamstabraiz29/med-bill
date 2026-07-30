@@ -26,36 +26,29 @@ export default function DenialManagementServicesCodeInsightCtaSection({
     >
       <div className={denialManagementContainerClassName}>
         <MotionWrapper variant="scaleUp">
-          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0F172A] px-6 py-10 text-center text-white shadow-lg sm:rounded-3xl sm:px-10 sm:py-12 lg:px-14 lg:py-16">
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute -left-24 top-0 h-72 w-72 rounded-full bg-[#1D4ED8]/20 blur-3xl"
-            />
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-[#1D4ED8]/10 blur-3xl"
-            />
+          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0F172A] p-8 text-white shadow-lg sm:p-12">
+            <div className="flex flex-col gap-6 md:gap-8 lg:flex-row lg:items-center lg:justify-between">
+              <div className="max-w-3xl space-y-3.5 text-left">
+                <h2
+                  id="denial-management-services-code-insight-cta-heading"
+                  className="text-2xl font-bold leading-tight tracking-tight sm:text-3xl sm:leading-snug lg:text-4xl"
+                >
+                  {content.titlePlain}{" "}
+                  <span className="font-bold text-amber-300">{content.titleHighlight}</span>
+                </h2>
 
-            <div className="relative mx-auto flex max-w-3xl flex-col items-center">
-              <h2
-                id="denial-management-services-code-insight-cta-heading"
-                className="text-2xl font-bold leading-tight tracking-tight sm:text-3xl sm:leading-snug lg:text-4xl"
-              >
-                {content.titlePlain}
-                <span className="text-amber-300">{content.titleHighlight}</span>
-              </h2>
+                <p className="text-sm leading-relaxed text-blue-200 sm:text-base">
+                  {content.description}
+                </p>
+              </div>
 
-              <p className="mt-5 max-w-2xl text-sm leading-[1.65] text-blue-200 sm:mt-6 sm:text-base">
-                {content.description}
-              </p>
-
-              <div className="mt-8 w-full sm:mt-10 sm:w-auto">
+              <div className="flex shrink-0 items-start justify-start lg:items-center lg:justify-end">
                 <AppButton
                   href={content.buttonHref || "/schedule-a-demo"}
                   variant="secondary-dark"
                   size="lg"
                   showArrow
-                  className="w-full sm:w-auto sm:min-w-[200px]"
+                  className="w-full sm:w-auto"
                 >
                   {content.buttonText}
                 </AppButton>

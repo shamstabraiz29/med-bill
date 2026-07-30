@@ -295,8 +295,8 @@ export const defaultHomepageData: HomepageData = {
     preHeader: 'Trusted by Leading Clinics Nationwide',
     badge: 'Client Reviews',
     titlePlain: 'Trusted by',
-    titleHighlight: '300+ Verified',
-    titleSuffix: 'Practices',
+    titleHighlight: ' 300+ Verified',
+    titleSuffix: ' Practices',
     description:
       'Hear directly from physicians, clinical directors, and practice administrators across the country about how BellMedEx transformed their billing outcomes.',
     items: [

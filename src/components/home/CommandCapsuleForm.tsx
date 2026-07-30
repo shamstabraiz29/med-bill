@@ -164,24 +164,22 @@ export default function CommandCapsuleForm({
 
             <motion.form
               onSubmit={handleSubmit}
-              className={`relative flex flex-col md:flex-row items-center gap-2 p-1.5 bg-white border rounded-2xl md:rounded-full transition-all duration-300 ${
-                activeInput
+              className={`relative flex flex-col md:flex-row items-center gap-2 p-1.5 bg-white border rounded-2xl md:rounded-full transition-all duration-300 ${activeInput
                   ? "border-[#1D4ED8] shadow-[0_12px_36px_rgba(29,78,216,0.12)] ring-2 ring-[#1D4ED8]/15"
                   : Object.keys(errors).length > 0
-                  ? "border-[#EF4444] shadow-[0_8px_24px_rgba(239,68,68,0.10)]"
-                  : "border-[#E2E6EC] shadow-[0_8px_30px_rgba(15,23,42,0.05)] hover:border-[#1D4ED8]/40"
-              }`}
+                    ? "border-[#EF4444] shadow-[0_8px_24px_rgba(239,68,68,0.10)]"
+                    : "border-[#E2E6EC] shadow-[0_8px_30px_rgba(15,23,42,0.05)] hover:border-[#1D4ED8]/40"
+                }`}
             >
               {/* Full Name Input */}
               <motion.div variants={inputItemVariants} className="relative flex-1 w-full px-2">
                 <User
-                  className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-all duration-200 ${
-                    activeInput === "name"
+                  className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-all duration-200 ${activeInput === "name"
                       ? "text-[#1D4ED8] scale-110"
                       : errors.name
-                      ? "text-[#EF4444]"
-                      : "text-[#475569]"
-                  }`}
+                        ? "text-[#EF4444]"
+                        : "text-[#475569]"
+                    }`}
                 />
                 <input
                   type="text"
@@ -191,9 +189,8 @@ export default function CommandCapsuleForm({
                   onBlur={() => setActiveInput(null)}
                   onChange={handleChange}
                   placeholder={namePlaceholder}
-                  className={`w-full pl-9 pr-3 py-3 text-xs bg-transparent border-0 focus:ring-0 outline-none text-[#0F172A] font-medium transition-colors placeholder:text-[#475569]/60 ${
-                    errors.name ? "placeholder:text-[#EF4444]/80 text-[#EF4444]" : ""
-                  }`}
+                  className={`w-full pl-9 pr-3 py-3 text-xs bg-transparent border-0 focus:ring-0 outline-none text-[#0F172A] font-medium transition-colors placeholder:text-[#475569]/60 ${errors.name ? "placeholder:text-[#EF4444]/80 text-[#EF4444]" : ""
+                    }`}
                 />
               </motion.div>
 
@@ -202,13 +199,12 @@ export default function CommandCapsuleForm({
               {/* Email Input */}
               <motion.div variants={inputItemVariants} className="relative flex-1 w-full px-2">
                 <Mail
-                  className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-all duration-200 ${
-                    activeInput === "email"
+                  className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-all duration-200 ${activeInput === "email"
                       ? "text-[#1D4ED8] scale-110"
                       : errors.email
-                      ? "text-[#EF4444]"
-                      : "text-[#475569]"
-                  }`}
+                        ? "text-[#EF4444]"
+                        : "text-[#475569]"
+                    }`}
                 />
                 <input
                   type="email"
@@ -218,9 +214,8 @@ export default function CommandCapsuleForm({
                   onBlur={() => setActiveInput(null)}
                   onChange={handleChange}
                   placeholder={emailPlaceholder}
-                  className={`w-full pl-9 pr-3 py-3 text-xs bg-transparent border-0 focus:ring-0 outline-none text-[#0F172A] font-medium transition-colors placeholder:text-[#475569]/60 ${
-                    errors.email ? "placeholder:text-[#EF4444]/80 text-[#EF4444]" : ""
-                  }`}
+                  className={`w-full pl-9 pr-3 py-3 text-xs bg-transparent border-0 focus:ring-0 outline-none text-[#0F172A] font-medium transition-colors placeholder:text-[#475569]/60 ${errors.email ? "placeholder:text-[#EF4444]/80 text-[#EF4444]" : ""
+                    }`}
                 />
               </motion.div>
 
@@ -229,13 +224,12 @@ export default function CommandCapsuleForm({
               {/* Phone Input */}
               <motion.div variants={inputItemVariants} className="relative flex-1 w-full px-2">
                 <Phone
-                  className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-all duration-200 ${
-                    activeInput === "phone"
+                  className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-all duration-200 ${activeInput === "phone"
                       ? "text-[#1D4ED8] scale-110"
                       : errors.phone
-                      ? "text-[#EF4444]"
-                      : "text-[#475569]"
-                  }`}
+                        ? "text-[#EF4444]"
+                        : "text-[#475569]"
+                    }`}
                 />
                 <input
                   type="tel"
@@ -245,9 +239,8 @@ export default function CommandCapsuleForm({
                   onBlur={() => setActiveInput(null)}
                   onChange={handleChange}
                   placeholder={phonePlaceholder}
-                  className={`w-full pl-9 pr-3 py-3 text-xs bg-transparent border-0 focus:ring-0 outline-none text-[#0F172A] font-medium transition-colors placeholder:text-[#475569]/60 ${
-                    errors.phone ? "placeholder:text-[#EF4444]/80 text-[#EF4444]" : ""
-                  }`}
+                  className={`w-full pl-9 pr-3 py-3 text-xs bg-transparent border-0 focus:ring-0 outline-none text-[#0F172A] font-medium transition-colors placeholder:text-[#475569]/60 ${errors.phone ? "placeholder:text-[#EF4444]/80 text-[#EF4444]" : ""
+                    }`}
                 />
               </motion.div>
 

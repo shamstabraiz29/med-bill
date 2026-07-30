@@ -22,7 +22,7 @@ import {
   HospitalBillingServicesWhatAreSection,
   HospitalBillingServicesWhySection,
 } from "@/components/hospital-billing-services";
-import { defaultHospitalBillingServicesData } from "@/lib/defaults/hospitalBillingServices";
+import { getHospitalBillingServicesData, getHomepageData } from "@/lib/payload";
 
 export const metadata: Metadata = {
   title: "Hospital Billing Services | BellMedEx",
@@ -30,8 +30,9 @@ export const metadata: Metadata = {
     "Outsource hospital billing, coding, and RCM to BellMedEx. Customized financial solutions for hospitals as low as 2.49% of monthly collections with 10+ years of experience.",
 };
 
-export default function HospitalBillingServicesPage() {
-  const data = defaultHospitalBillingServicesData;
+export default async function HospitalBillingServicesPage() {
+  const data = await getHospitalBillingServicesData();
+  const homepageData = await getHomepageData();
 
   return (
     <div className="relative min-h-screen">
@@ -54,7 +55,7 @@ export default function HospitalBillingServicesPage() {
       <HospitalBillingServicesWhySection data={data.why} />
       <HospitalBillingServicesScheduleCallSection data={data.scheduleCall} />
       <HospitalBillingServicesPromiseSection data={data.promise} />
-      <HospitalBillingServicesTestimonialsSection data={data.testimonials} />
+      <HospitalBillingServicesTestimonialsSection data={homepageData.testimonials || data.testimonials} />
       <HospitalBillingServicesFaqSection data={data.faq} />
     </div>
   );
