@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import MotionWrapper from "@/components/ui/MotionWrapper";
@@ -69,7 +69,7 @@ export default function RcmServicesOverview({ data }: RcmServicesOverviewProps) 
                     }`}
                   >
                     <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-md border border-white/60 group">
-                      <Image
+                      <AppImage
                         src={item.imageSrc}
                         alt={item.imageAlt || "BellMedEx Service"}
                         fill

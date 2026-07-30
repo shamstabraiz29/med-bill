@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import { BarChart3 } from "lucide-react";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import SectionBadge from "@/components/ui/SectionBadge";
@@ -74,7 +74,7 @@ export default function RcmReportingFeatures({ data }: RcmReportingFeaturesProps
             {/* Right Column: Laptop Mockup 1 */}
             <MotionWrapper variant="slideRight" className="lg:col-span-6 w-full flex justify-center">
               <div className="relative w-full max-w-lg lg:max-w-none aspect-[16/11] drop-shadow-xl group transition-transform duration-500 hover:scale-[1.02]">
-                <Image
+                <AppImage
                   src={reportingData.block1ImageSrc || "/rcm-dashboard-laptop1.png"}
                   alt="BellMedEx RCM Analytics Dashboard Mockup"
                   fill
@@ -93,7 +93,7 @@ export default function RcmReportingFeatures({ data }: RcmReportingFeaturesProps
             {/* Left Column: Laptop Mockup 2 */}
             <MotionWrapper variant="slideLeft" className="lg:col-span-6 w-full flex justify-center order-2 lg:order-1">
               <div className="relative w-full max-w-lg lg:max-w-none aspect-[16/11] drop-shadow-xl group transition-transform duration-500 hover:scale-[1.02]">
-                <Image
+                <AppImage
                   src={reportingData.block2ImageSrc || "/rcm-dashboard-laptop2.png"}
                   alt="BellMedEx Practice Reporting Dashboard Mockup"
                   fill

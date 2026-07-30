@@ -1,4 +1,4 @@
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import { Star, Quote, CheckCircle2 } from "lucide-react";
 
 interface TestimonialCardProps {
@@ -24,7 +24,7 @@ export default function TestimonialCard({
       {/* Profile Area */}
       <div className="flex flex-col items-center space-y-3">
         <div className="relative w-16 h-16 rounded-full overflow-hidden border border-[#E2E6EC] shrink-0">
-          <Image
+          <AppImage
             src={avatar}
             alt={`${name} - Client Avatar`}
             fill

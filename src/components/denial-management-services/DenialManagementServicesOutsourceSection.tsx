@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import SectionHeader from "@/components/ui/SectionHeader";
 import DenialManagementServicesOutsourceAccordion from "./DenialManagementServicesOutsourceAccordion";
@@ -67,7 +67,7 @@ export default function DenialManagementServicesOutsourceSection({
 
           <MotionWrapper variant="slideRight" className="lg:col-span-6">
             <div className="group relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white shadow-[0_8px_30px_rgba(29,78,216,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#1D4ED8]/30 hover:shadow-xl hover:shadow-blue-900/10 sm:aspect-[16/11]">
-              <Image
+              <AppImage
                 src={imageSrc}
                 alt={imageAlt}
                 fill

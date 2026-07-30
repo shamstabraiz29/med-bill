@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import { cn } from "@/lib/utils";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import { ehrCardClassName } from "./ehrSectionLayout";
@@ -63,7 +63,7 @@ export default function EhrFeatureRow({
         className={cn("flex", reverse ? "lg:order-1" : "lg:order-2")}
       >
         <div className="group relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white transition-all duration-300 hover:-translate-y-1.5 hover:border-[#1D4ED8]/30 hover:shadow-lg hover:shadow-blue-900/5 sm:aspect-16/11">
-          <Image
+          <AppImage
             src={imageSrc}
             alt={imageAlt}
             fill

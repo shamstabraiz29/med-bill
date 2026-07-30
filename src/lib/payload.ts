@@ -1,5 +1,6 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
+import { sanitizeImageSources } from '@/lib/images'
 import type { HomepageData } from '@/payload/types/homepage'
 import { defaultHomepageData } from '@/lib/defaults/homepage'
 import type { ClearinghouseData } from '@/payload/types/clearinghouse'
@@ -69,10 +70,10 @@ export async function getHomepageData(): Promise<HomepageData> {
     })
 
     // Merge with defaults: CMS data takes priority, defaults fill gaps
-    return deepMerge(defaultHomepageData, data as unknown as Partial<HomepageData>)
+    return mergePageData(defaultHomepageData, data as unknown as Partial<HomepageData>)
   } catch (error) {
     console.error('[Payload] Failed to fetch homepage data, using defaults:', error)
-    return defaultHomepageData
+    return sanitizeImageSources(defaultHomepageData)
   }
 }
 
@@ -90,10 +91,10 @@ export async function getClearinghouseData(): Promise<ClearinghouseData> {
     })
 
     // Merge with defaults: CMS data takes priority, defaults fill gaps
-    return deepMerge(defaultClearinghouseData, data as unknown as Partial<ClearinghouseData>)
+    return mergePageData(defaultClearinghouseData, data as unknown as Partial<ClearinghouseData>)
   } catch (error) {
     console.error('[Payload] Failed to fetch clearinghouse data, using defaults:', error)
-    return defaultClearinghouseData
+    return sanitizeImageSources(defaultClearinghouseData)
   }
 }
 
@@ -111,10 +112,10 @@ export async function getProviderCredentialingData(): Promise<ProviderCredential
     })
 
     // Merge with defaults: CMS data takes priority, defaults fill gaps
-    return deepMerge(defaultProviderCredentialingData, data as unknown as Partial<ProviderCredentialingData>)
+    return mergePageData(defaultProviderCredentialingData, data as unknown as Partial<ProviderCredentialingData>)
   } catch (error) {
     console.error('[Payload] Failed to fetch provider credentialing data, using defaults:', error)
-    return defaultProviderCredentialingData
+    return sanitizeImageSources(defaultProviderCredentialingData)
   }
 }
 
@@ -132,10 +133,10 @@ export async function getHealthcareSeoData(): Promise<HealthcareSeoData> {
     })
 
     // Merge with defaults: CMS data takes priority, defaults fill gaps
-    return deepMerge(defaultHealthcareSeoData, data as unknown as Partial<HealthcareSeoData>)
+    return mergePageData(defaultHealthcareSeoData, data as unknown as Partial<HealthcareSeoData>)
   } catch (error) {
     console.error('[Payload] Failed to fetch healthcare seo data, using defaults:', error)
-    return defaultHealthcareSeoData
+    return sanitizeImageSources(defaultHealthcareSeoData)
   }
 }
 
@@ -153,10 +154,10 @@ export async function getRevenueCycleManagementData(): Promise<RevenueCycleManag
     })
 
     // Merge with defaults: CMS data takes priority, defaults fill gaps
-    return deepMerge(defaultRevenueCycleManagementData, data as unknown as Partial<RevenueCycleManagementData>)
+    return mergePageData(defaultRevenueCycleManagementData, data as unknown as Partial<RevenueCycleManagementData>)
   } catch (error) {
     console.error('[Payload] Failed to fetch revenue cycle management data, using defaults:', error)
-    return defaultRevenueCycleManagementData
+    return sanitizeImageSources(defaultRevenueCycleManagementData)
   }
 }
 
@@ -174,10 +175,10 @@ export async function getMedicalBillingData(): Promise<MedicalBillingData> {
     })
 
     // Merge with defaults: CMS data takes priority, defaults fill gaps
-    return deepMerge(defaultMedicalBillingData, data as unknown as Partial<MedicalBillingData>)
+    return mergePageData(defaultMedicalBillingData, data as unknown as Partial<MedicalBillingData>)
   } catch (error) {
     console.error('[Payload] Failed to fetch medical billing data, using defaults:', error)
-    return defaultMedicalBillingData
+    return sanitizeImageSources(defaultMedicalBillingData)
   }
 }
 
@@ -195,10 +196,10 @@ export async function getMedicalCodingData(): Promise<MedicalCodingData> {
     })
 
     // Merge with defaults: CMS data takes priority, defaults fill gaps
-    return deepMerge(defaultMedicalCodingData, data as unknown as Partial<MedicalCodingData>)
+    return mergePageData(defaultMedicalCodingData, data as unknown as Partial<MedicalCodingData>)
   } catch (error) {
     console.error('[Payload] Failed to fetch medical coding data, using defaults:', error)
-    return defaultMedicalCodingData
+    return sanitizeImageSources(defaultMedicalCodingData)
   }
 }
 
@@ -216,10 +217,10 @@ export async function getMedicalBillingAuditData(): Promise<MedicalBillingAuditD
     })
 
     // Merge with defaults: CMS data takes priority, defaults fill gaps
-    return deepMerge(defaultMedicalBillingAuditData, data as unknown as Partial<MedicalBillingAuditData>)
+    return mergePageData(defaultMedicalBillingAuditData, data as unknown as Partial<MedicalBillingAuditData>)
   } catch (error) {
     console.error('[Payload] Failed to fetch medical billing audit data, using defaults:', error)
-    return defaultMedicalBillingAuditData
+    return sanitizeImageSources(defaultMedicalBillingAuditData)
   }
 }
 
@@ -255,10 +256,10 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
       }))
     }
 
-    return defaultBlogPosts
+    return sanitizeImageSources(defaultBlogPosts)
   } catch (error) {
     console.error('[Payload] Failed to fetch blog posts, using default sample posts:', error)
-    return defaultBlogPosts
+    return sanitizeImageSources(defaultBlogPosts)
   }
 }
 
@@ -320,10 +321,10 @@ export async function getCareersData(): Promise<CareersData> {
       slug: 'careers',
     })
 
-    return deepMerge(defaultCareersData, data as unknown as Partial<CareersData>)
+    return mergePageData(defaultCareersData, data as unknown as Partial<CareersData>)
   } catch (error) {
     console.error('[Payload] Failed to fetch careers data, using defaults:', error)
-    return defaultCareersData
+    return sanitizeImageSources(defaultCareersData)
   }
 }
 
@@ -342,10 +343,10 @@ export async function getTestimonialsData(): Promise<TestimonialsPageData> {
       slug: 'testimonials-page',
     })
 
-    return deepMerge(defaultTestimonialsData, data as unknown as Partial<TestimonialsPageData>)
+    return mergePageData(defaultTestimonialsData, data as unknown as Partial<TestimonialsPageData>)
   } catch (error) {
     console.error('[Payload] Failed to fetch testimonials data, using defaults:', error)
-    return defaultTestimonialsData
+    return sanitizeImageSources(defaultTestimonialsData)
   }
 }
 
@@ -361,10 +362,10 @@ export async function getMedicalBillingSoftwareData(): Promise<MedicalBillingSof
       slug: 'medical-billing-software',
     })
 
-    return deepMerge(defaultMedicalBillingSoftwareData, data as unknown as Partial<MedicalBillingSoftwarePageData>)
+    return mergePageData(defaultMedicalBillingSoftwareData, data as unknown as Partial<MedicalBillingSoftwarePageData>)
   } catch (error) {
     console.error('[Payload] Failed to fetch medical billing software data, using defaults:', error)
-    return defaultMedicalBillingSoftwareData
+    return sanitizeImageSources(defaultMedicalBillingSoftwareData)
   }
 }
 
@@ -380,10 +381,10 @@ export async function getFusionediClearinghouseData(): Promise<FusionediClearing
       slug: 'fusionedi-clearinghouse',
     })
 
-    return deepMerge(defaultFusionediClearinghouseData, data as unknown as Partial<FusionediClearinghousePageData>)
+    return mergePageData(defaultFusionediClearinghouseData, data as unknown as Partial<FusionediClearinghousePageData>)
   } catch (error) {
     console.error('[Payload] Failed to fetch fusionedi clearinghouse data, using defaults:', error)
-    return defaultFusionediClearinghouseData
+    return sanitizeImageSources(defaultFusionediClearinghouseData)
   }
 }
 
@@ -399,10 +400,10 @@ export async function getElectronicHealthRecordsEhrData(): Promise<ElectronicHea
       slug: 'electronic-health-records-ehr',
     })
 
-    return deepMerge(defaultElectronicHealthRecordsEhrData, data as unknown as Partial<ElectronicHealthRecordsEhrPageData>)
+    return mergePageData(defaultElectronicHealthRecordsEhrData, data as unknown as Partial<ElectronicHealthRecordsEhrPageData>)
   } catch (error) {
     console.error('[Payload] Failed to fetch EHR data, using defaults:', error)
-    return defaultElectronicHealthRecordsEhrData
+    return sanitizeImageSources(defaultElectronicHealthRecordsEhrData)
   }
 }
 
@@ -418,10 +419,10 @@ export async function getPracticeManagementSoftwarePmsData(): Promise<PracticeMa
       slug: 'practice-management-software-pms',
     })
 
-    return deepMerge(defaultPracticeManagementSoftwarePmsData, data as unknown as Partial<PracticeManagementSoftwarePmsPageData>)
+    return mergePageData(defaultPracticeManagementSoftwarePmsData, data as unknown as Partial<PracticeManagementSoftwarePmsPageData>)
   } catch (error) {
     console.error('[Payload] Failed to fetch PMS data, using defaults:', error)
-    return defaultPracticeManagementSoftwarePmsData
+    return sanitizeImageSources(defaultPracticeManagementSoftwarePmsData)
   }
 }
 
@@ -437,10 +438,10 @@ export async function getOutsourceMedicalBillingData(): Promise<OutsourceMedical
       slug: 'outsource-medical-billing',
     })
 
-    return deepMerge(defaultOutsourceMedicalBillingData, data as unknown as Partial<OutsourceMedicalBillingPageData>)
+    return mergePageData(defaultOutsourceMedicalBillingData, data as unknown as Partial<OutsourceMedicalBillingPageData>)
   } catch (error) {
     console.error('[Payload] Failed to fetch Outsource Medical Billing data, using defaults:', error)
-    return defaultOutsourceMedicalBillingData
+    return sanitizeImageSources(defaultOutsourceMedicalBillingData)
   }
 }
 
@@ -456,10 +457,10 @@ export async function getAboutUsData(): Promise<AboutUsPageData> {
       slug: 'about-us',
     })
 
-    return deepMerge(defaultAboutUsData, data as unknown as Partial<AboutUsPageData>)
+    return mergePageData(defaultAboutUsData, data as unknown as Partial<AboutUsPageData>)
   } catch (error) {
     console.error('[Payload] Failed to fetch About Us data, using defaults:', error)
-    return defaultAboutUsData
+    return sanitizeImageSources(defaultAboutUsData)
   }
 }
 
@@ -475,10 +476,10 @@ export async function getContactUsData(): Promise<ContactUsPageData> {
       slug: 'contact-us',
     })
 
-    return deepMerge(defaultContactUsData, data as unknown as Partial<ContactUsPageData>)
+    return mergePageData(defaultContactUsData, data as unknown as Partial<ContactUsPageData>)
   } catch (error) {
     console.error('[Payload] Failed to fetch Contact Us data, using defaults:', error)
-    return defaultContactUsData
+    return sanitizeImageSources(defaultContactUsData)
   }
 }
 
@@ -494,10 +495,10 @@ export async function getMedicalBillingPricingData(): Promise<MedicalBillingPric
       slug: 'medical-billing-pricing' as any,
     })
 
-    return deepMerge(defaultMedicalBillingPricingData, data as unknown as Partial<MedicalBillingPricingPageData>)
+    return mergePageData(defaultMedicalBillingPricingData, data as unknown as Partial<MedicalBillingPricingPageData>)
   } catch (error) {
     console.error('[Payload] Failed to fetch Medical Billing Pricing data, using defaults:', error)
-    return defaultMedicalBillingPricingData
+    return sanitizeImageSources(defaultMedicalBillingPricingData)
   }
 }
 
@@ -513,10 +514,10 @@ export async function getScheduleDemoData(): Promise<ScheduleDemoPageData> {
       slug: 'schedule-demo' as any,
     })
 
-    return deepMerge(defaultScheduleDemoData, data as unknown as Partial<ScheduleDemoPageData>)
+    return mergePageData(defaultScheduleDemoData, data as unknown as Partial<ScheduleDemoPageData>)
   } catch (error) {
     console.error('[Payload] Failed to fetch Schedule a Demo data, using defaults:', error)
-    return defaultScheduleDemoData
+    return sanitizeImageSources(defaultScheduleDemoData)
   }
 }
 
@@ -527,10 +528,10 @@ export async function getPrivacyPolicyData(): Promise<PrivacyPolicyData> {
   try {
     const payload = await getPayload({ config })
     const data = await payload.findGlobal({ slug: 'privacy-policy' as any })
-    return deepMerge(defaultPrivacyPolicyData, data as unknown as Partial<PrivacyPolicyData>)
+    return mergePageData(defaultPrivacyPolicyData, data as unknown as Partial<PrivacyPolicyData>)
   } catch (error) {
     console.error('[Payload] Failed to fetch Privacy Policy data, using defaults:', error)
-    return defaultPrivacyPolicyData
+    return sanitizeImageSources(defaultPrivacyPolicyData)
   }
 }
 
@@ -541,10 +542,10 @@ export async function getTermsAndConditionsData(): Promise<TermsAndConditionsDat
   try {
     const payload = await getPayload({ config })
     const data = await payload.findGlobal({ slug: 'terms-and-conditions' as any })
-    return deepMerge(defaultTermsAndConditionsData, data as unknown as Partial<TermsAndConditionsData>)
+    return mergePageData(defaultTermsAndConditionsData, data as unknown as Partial<TermsAndConditionsData>)
   } catch (error) {
     console.error('[Payload] Failed to fetch Terms & Conditions data, using defaults:', error)
-    return defaultTermsAndConditionsData
+    return sanitizeImageSources(defaultTermsAndConditionsData)
   }
 }
 
@@ -555,10 +556,10 @@ export async function getCookiesPolicyData(): Promise<CookiesPolicyData> {
   try {
     const payload = await getPayload({ config })
     const data = await payload.findGlobal({ slug: 'cookies-policy' as any })
-    return deepMerge(defaultCookiesPolicyData, data as unknown as Partial<CookiesPolicyData>)
+    return mergePageData(defaultCookiesPolicyData, data as unknown as Partial<CookiesPolicyData>)
   } catch (error) {
     console.error('[Payload] Failed to fetch Cookies Policy data, using defaults:', error)
-    return defaultCookiesPolicyData
+    return sanitizeImageSources(defaultCookiesPolicyData)
   }
 }
 
@@ -569,10 +570,10 @@ export async function getLargePracticesData(): Promise<LargePracticesPageData> {
   try {
     const payload = await getPayload({ config })
     const data = await payload.findGlobal({ slug: 'large-practices' as any })
-    return deepMerge(defaultLargePracticesData, data as unknown as Partial<LargePracticesPageData>)
+    return mergePageData(defaultLargePracticesData, data as unknown as Partial<LargePracticesPageData>)
   } catch (error) {
     console.error('[Payload] Failed to fetch Large Practices data, using defaults:', error)
-    return defaultLargePracticesData
+    return sanitizeImageSources(defaultLargePracticesData)
   }
 }
 
@@ -583,10 +584,10 @@ export async function getPhysicianBillingServicesData(): Promise<PhysicianBillin
   try {
     const payload = await getPayload({ config })
     const data = await payload.findGlobal({ slug: 'physician-billing-services' as any })
-    return deepMerge(defaultPhysicianBillingServicesData, data as unknown as Partial<PhysicianBillingServicesPageData>)
+    return mergePageData(defaultPhysicianBillingServicesData, data as unknown as Partial<PhysicianBillingServicesPageData>)
   } catch (error) {
     console.error('[Payload] Failed to fetch Physician Billing Services data, using defaults:', error)
-    return defaultPhysicianBillingServicesData
+    return sanitizeImageSources(defaultPhysicianBillingServicesData)
   }
 }
 
@@ -597,10 +598,10 @@ export async function getSmallPracticesData(): Promise<SmallPracticesPageData> {
   try {
     const payload = await getPayload({ config })
     const data = await payload.findGlobal({ slug: 'small-practices' as any })
-    return deepMerge(defaultSmallPracticesData, data as unknown as Partial<SmallPracticesPageData>)
+    return mergePageData(defaultSmallPracticesData, data as unknown as Partial<SmallPracticesPageData>)
   } catch (error) {
     console.error('[Payload] Failed to fetch Small Practices data, using defaults:', error)
-    return defaultSmallPracticesData
+    return sanitizeImageSources(defaultSmallPracticesData)
   }
 }
 
@@ -641,7 +642,7 @@ export async function getDenialManagementServicesData(): Promise<DenialManagemen
     return merged
   } catch (error) {
     console.error('[Payload] Failed to fetch Denial Management Services data, using defaults:', error)
-    return defaultDenialManagementServicesData
+    return sanitizeImageSources(defaultDenialManagementServicesData)
   }
 }
 
@@ -674,7 +675,7 @@ export async function getHospitalBillingServicesData(): Promise<HospitalBillingS
     return merged
   } catch (error) {
     console.error('[Payload] Failed to fetch Hospital Billing Services data, using defaults:', error)
-    return defaultHospitalBillingServicesData
+    return sanitizeImageSources(defaultHospitalBillingServicesData)
   }
 }
 
@@ -683,6 +684,10 @@ export async function getHospitalBillingServicesData(): Promise<HospitalBillingS
  * values, but only when defined (non-null, non-undefined). Arrays from source
  * replace target arrays entirely (CMS arrays should be treated as complete).
  */
+function mergePageData<T>(defaults: T, source: Partial<T>): T {
+  return sanitizeImageSources(deepMerge(defaults, source))
+}
+
 function deepMerge<T>(
   target: T,
   source: Partial<T>,

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import { CheckCircle2, CreditCard } from "lucide-react";
 import SectionHeader from "@/components/ui/SectionHeader";
 import MotionWrapper from "@/components/ui/MotionWrapper";
@@ -46,7 +46,7 @@ export default function ClearinghouseEFTERA({ data }: ClearinghouseEFTERAProps) 
               
               <div className="relative w-full h-full rounded-2xl overflow-hidden bg-[#0F172A]">
                 {/* Laptop / Software Screen Image */}
-                <Image
+                <AppImage
                   src="/consultants-laptop.png"
                   alt="BellMedEx EFT and ERA Electronic Payment Clearinghouse Software"
                   fill

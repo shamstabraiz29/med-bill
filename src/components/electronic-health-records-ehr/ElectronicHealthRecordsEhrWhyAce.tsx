@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import { Cloud, Headphones, LucideIcon, RefreshCw } from "lucide-react";
 import { cn } from "@/lib/utils";
 import IconWrapper from "@/components/common/IconWrapper";
@@ -107,7 +107,7 @@ export default function ElectronicHealthRecordsEhrWhyAce({ data }: ElectronicHea
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-16">
           <MotionWrapper variant="slideRight">
             <div className="group relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white transition-all duration-300 hover:-translate-y-1.5 hover:border-[#1D4ED8]/30 hover:shadow-lg hover:shadow-blue-900/5 sm:aspect-16/11">
-              <Image
+              <AppImage
                 src={content.imageSrc || "/consultants-laptop.png"}
                 alt={content.imageAlt || "BellMedEx EHR software on a laptop"}
                 fill

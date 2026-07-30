@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -72,7 +72,7 @@ export default function MedicalCodingExpertBlock({
               isImageLeft ? "lg:order-1" : "lg:order-2"
             )}
           >
-            <Image
+            <AppImage
               src={imageSrc}
               alt={imageAlt}
               fill

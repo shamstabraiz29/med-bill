@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import AppButton from "@/components/ui/AppButton";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import { defaultMedicalCodingData } from "@/lib/defaults/medicalCoding";
@@ -52,7 +52,7 @@ export default function MedicalCodingFrustratedCta({ data }: MedicalCodingFrustr
               <MotionWrapper variant="slideLeft" className="relative mx-auto w-full max-w-md lg:max-w-none">
                 <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-3 sm:p-4">
                   <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
-                    <Image
+                    <AppImage
                       src={frustratedData.imageSrc || "/consultants-laptop.png"}
                       alt={frustratedData.imageAlt || "BellMedEx medical coding expert reviewing claims on laptop"}
                       fill

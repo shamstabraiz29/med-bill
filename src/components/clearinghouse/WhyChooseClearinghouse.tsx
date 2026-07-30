@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import {
   CheckCircle2,
   ChevronRight,
@@ -143,7 +143,7 @@ export default function WhyChooseClearinghouse({ data }: WhyChooseClearinghouseP
 
                   {/* Compact Image & Metric Frame */}
                   <div className="relative aspect-[16/9] min-h-[150px] w-full rounded-xl overflow-hidden bg-slate-100 border border-[#E2E6EC] mb-3 group">
-                    <Image
+                    <AppImage
                       src={currentFeature.imageSrc || "/consultants-laptop.png"}
                       alt={currentFeature.title}
                       fill

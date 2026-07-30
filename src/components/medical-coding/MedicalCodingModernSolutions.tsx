@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import AppButton from "@/components/ui/AppButton";
 import SectionHeader from "@/components/ui/SectionHeader";
 import MotionWrapper from "@/components/ui/MotionWrapper";
@@ -53,7 +53,7 @@ export default function MedicalCodingModernSolutions({ data }: MedicalCodingMode
 
               <div className="relative overflow-hidden rounded-2xl border border-border shadow-md">
                 <div className="relative aspect-[5/4] min-h-[280px] sm:min-h-[340px]">
-                  <Image
+                  <AppImage
                     src={modernData.imageSrc || "/doctor-hero.png"}
                     alt={modernData.imageAlt || "BellMedEx medical coding specialist supporting American healthcare providers"}
                     fill

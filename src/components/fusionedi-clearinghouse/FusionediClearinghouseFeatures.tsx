@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import { FileText, LucideIcon, Send, ShieldCheck } from "lucide-react";
 import IconWrapper from "@/components/common/IconWrapper";
 import MotionWrapper from "@/components/ui/MotionWrapper";
@@ -66,7 +66,7 @@ function FusionediFeatureCard({ feature }: { feature: FusionediFeature }) {
       </div>
 
       <div className="relative mt-auto aspect-4/3 w-full overflow-hidden border-t border-[#E2E6EC]">
-        <Image
+        <AppImage
           src={feature.imageSrc}
           alt={feature.imageAlt}
           fill

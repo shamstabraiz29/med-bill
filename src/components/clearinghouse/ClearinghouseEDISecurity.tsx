@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import { CheckCircle2, Lock, Cpu } from "lucide-react";
 import SectionBadge from "@/components/ui/SectionBadge";
 import MotionWrapper from "@/components/ui/MotionWrapper";
@@ -54,7 +54,7 @@ export default function ClearinghouseEDISecurity({ data }: ClearinghouseEDISecur
           <MotionWrapper variant="slideRight" className="lg:col-span-5 w-full">
             <div className="relative w-full max-w-lg mx-auto lg:ml-auto aspect-[4/3] rounded-2xl bg-white border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 p-3 sm:p-3.5 overflow-hidden group">
               <div className="relative w-full h-full rounded-2xl overflow-hidden bg-[#0F172A]">
-                <Image
+                <AppImage
                   src="/consultants-laptop.png"
                   alt="Standardized Electronic Data Interchange EDI Clearinghouse"
                   fill
@@ -90,7 +90,7 @@ export default function ClearinghouseEDISecurity({ data }: ClearinghouseEDISecur
           <MotionWrapper variant="slideLeft" className="lg:col-span-5 w-full order-2 lg:order-1">
             <div className="relative w-full max-w-lg mx-auto lg:mr-auto aspect-[4/3] rounded-2xl bg-white border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 p-3 sm:p-3.5 overflow-hidden group">
               <div className="relative w-full h-full rounded-2xl overflow-hidden bg-[#0F172A]">
-                <Image
+                <AppImage
                   src="/consultants-laptop.png"
                   alt="Protecting Patient Privacy and HIPAA Data Compliance"
                   fill

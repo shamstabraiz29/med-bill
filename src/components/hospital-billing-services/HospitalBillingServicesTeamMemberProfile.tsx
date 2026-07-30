@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import { cn } from "@/lib/utils";
 import type { HospitalBillingTeamMember } from "@/payload/types/hospitalBillingServices";
 
@@ -61,7 +61,7 @@ export default function HospitalBillingServicesTeamMemberProfile({
 
           <div className="relative flex h-full w-full items-center justify-center rounded-full bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] p-1.5 shadow-[0_8px_30px_rgba(29,78,216,0.18)]">
             <div className="relative h-full w-full overflow-hidden rounded-full border-4 border-white bg-white">
-              <Image
+              <AppImage
                 src={imageSrc}
                 alt={imageAlt}
                 fill

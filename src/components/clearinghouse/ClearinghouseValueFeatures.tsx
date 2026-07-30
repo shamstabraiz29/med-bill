@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import {
   ShieldCheck,
   CheckCircle2,
@@ -75,7 +75,7 @@ export default function ClearinghouseValueFeatures({ data }: ClearinghouseValueF
               
               <div className="relative w-full h-full rounded-2xl overflow-hidden bg-[#0F172A]">
                 {/* Laptop / Software Screen Image */}
-                <Image
+                <AppImage
                   src="/consultants-laptop.png"
                   alt="BellMedEx Clearinghouse Value-Added Features Dashboard"
                   fill

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
@@ -56,7 +56,7 @@ export default function MedicalCodingAdvancedHelpBlock({
             isImageLeft ? "lg:order-1" : "lg:order-2"
           )}
         >
-          <Image
+          <AppImage
             src={imageSrc}
             alt={imageAlt}
             fill

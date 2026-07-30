@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import { ShieldCheck } from "lucide-react";
 import AppButton from "@/components/ui/AppButton";
 import IconWrapper from "@/components/common/IconWrapper";
@@ -104,7 +104,7 @@ export default function MedicalBillingAuditSolutionsToDate({ data }: MedicalBill
               </div>
 
               <div className="relative min-h-[260px] sm:min-h-[320px]">
-                <Image
+                <AppImage
                   src={stdData.imageSrc || "/doctor-hero.png"}
                   alt={stdData.imageAlt || "BellMedEx medical coding audit specialist supporting billing compliance"}
                   fill

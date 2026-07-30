@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import { defaultRevenueCycleManagementData } from "@/lib/defaults/revenueCycleManagement";
 
@@ -22,7 +22,7 @@ export default function RcmImportance({ data }: RcmImportanceProps) {
           {/* Left Column: Doctor Image */}
           <MotionWrapper variant="slideLeft" className="lg:col-span-5 w-full flex justify-center">
             <div className="relative w-full max-w-md lg:max-w-none aspect-[4/5] rounded-2xl overflow-hidden shadow-xl border border-slate-200/80 group">
-              <Image
+              <AppImage
                 src={importanceData.imageSrc || "/rcm-doctor-importance.png"}
                 alt="BellMedEx Revenue Cycle Management Doctor"
                 fill

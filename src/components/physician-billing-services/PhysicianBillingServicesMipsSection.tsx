@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import AppButton from "@/components/ui/AppButton";
 import SectionHeader from "@/components/ui/SectionHeader";
 import {
@@ -59,7 +59,7 @@ export default function PhysicianBillingServicesMipsSection({ data }: PhysicianB
           </div>
 
           <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-[#E2E6EC] bg-white sm:aspect-16/11">
-            <Image
+            <AppImage
               src={content.imageSrc || "/faq-doctor.png"}
               alt={content.imageAlt || "Experienced physician supported by BellMedEx MIPS billing solutions"}
               fill

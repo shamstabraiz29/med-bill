@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import { ChevronRight } from "lucide-react";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import { defaultRevenueCycleManagementData } from "@/lib/defaults/revenueCycleManagement";
@@ -36,7 +36,7 @@ export default function RcmFeaturesGrid({ data }: RcmFeaturesGridProps) {
         
         {/* Ambient Doctor Team Background Image with Low Opacity Overlay */}
         <div className="absolute inset-0 pointer-events-none opacity-20 mix-blend-luminosity">
-          <Image
+          <AppImage
             src="/doctors-team.png"
             alt="Medical Team Background"
             fill

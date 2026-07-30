@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import { Plus, Minus, CheckCircle2 } from "lucide-react";
 import AppButton from "@/components/ui/AppButton";
 import MotionWrapper from "@/components/ui/MotionWrapper";
@@ -134,7 +134,7 @@ export default function HealthcareSeoServicesList({ data }: HealthcareSeoService
 
                     {/* Fitted Visual Image Showcase Card */}
                     <div className="relative w-full h-full min-h-[260px] rounded-2xl overflow-hidden shadow-2xl border border-white/20 group">
-                      <Image
+                      <AppImage
                         src={item.imageSrc || "/consultants-laptop.png"}
                         alt={item.title}
                         fill

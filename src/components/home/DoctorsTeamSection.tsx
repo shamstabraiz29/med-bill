@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import { X, Check, Star, Activity } from "lucide-react";
 import AppButton from "@/components/ui/AppButton";
 import MotionWrapper from "@/components/ui/MotionWrapper";
@@ -58,7 +58,7 @@ export default function DoctorsTeamSection({ data }: DoctorsTeamSectionProps) {
                 <div className="absolute top-0 right-0 w-1/2 h-full bg-[#1D4ED8]" />
                 
                 {/* Doctors Team Image */}
-                <Image
+                <AppImage
                   src="/doctors-team.png"
                   alt="Dedicated accounts managers and medical billing team"
                   fill

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import { ShieldCheck } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import SectionHeader from "@/components/ui/SectionHeader";
@@ -93,7 +93,7 @@ export default function MedicalCodingSecurityCompliance({ data }: MedicalCodingS
               </div>
 
               <div className="relative min-h-70 border-b border-border sm:min-h-80 lg:min-h-full">
-                <Image
+                <AppImage
                   src="/consultants-laptop.png"
                   alt="BellMedEx secure medical coding environment protecting patient data"
                   fill

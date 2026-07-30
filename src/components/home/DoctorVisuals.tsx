@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import { Zap, Stethoscope, Shield } from "lucide-react";
 import { motion } from "motion/react";
 import { easeOutExpo } from "@/lib/motion";
@@ -97,7 +97,7 @@ export default function DoctorVisuals({
 
           {/* Central Doctor / Specialist Portrait */}
           <div className="absolute w-[90%] h-[90%] rounded-full overflow-hidden bg-slate-50 border border-[#E2E6EC] flex items-end">
-            <Image
+            <AppImage
               src={imageSrc}
               alt={imageAlt}
               width={400}

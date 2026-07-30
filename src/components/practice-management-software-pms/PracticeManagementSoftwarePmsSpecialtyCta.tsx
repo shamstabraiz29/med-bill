@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import AppButton from "@/components/ui/AppButton";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import SectionBadge from "@/components/ui/SectionBadge";
@@ -58,7 +58,7 @@ export default function PracticeManagementSoftwarePmsSpecialtyCta({ data }: Prac
               <div className="flex justify-center lg:col-span-6 lg:order-2 lg:justify-end">
                 <div className="relative w-full max-w-xl">
                   <div className="relative aspect-4/3 w-full overflow-hidden rounded-xl border border-white/10 bg-white/5 sm:rounded-2xl">
-                    <Image
+                    <AppImage
                       src={content.imageSrc || "/pms-specialty-dashboard.png"}
                       alt={content.imageAlt || "BellMedEx specialty-specific practice management software dashboard"}
                       fill

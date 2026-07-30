@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import { BarChart3, Search, TrendingUp, UserCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 import MotionWrapper from "@/components/ui/MotionWrapper";
@@ -18,7 +18,7 @@ function ImageShell({
 }) {
   return (
     <div className="group relative h-full min-h-[280px] w-full overflow-hidden rounded-2xl border border-border bg-card shadow-[0_8px_30px_rgba(29,78,216,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 sm:min-h-[320px] lg:min-h-[400px]">
-      <Image
+      <AppImage
         src={src}
         alt={alt}
         fill

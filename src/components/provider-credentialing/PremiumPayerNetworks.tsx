@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import { ShieldCheck } from "lucide-react";
 import SectionBadge from "@/components/ui/SectionBadge";
 import AppButton from "@/components/ui/AppButton";
@@ -28,7 +28,7 @@ export default function PremiumPayerNetworks({ data }: PremiumPayerNetworksProps
           <MotionWrapper variant="slideLeft" className="lg:col-span-5 w-full">
             <div className="relative w-full max-w-lg mx-auto aspect-[4/5] rounded-2xl bg-white border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 p-3 overflow-hidden group">
               <div className="relative w-full h-full rounded-2xl overflow-hidden bg-slate-900">
-                <Image
+                <AppImage
                   src={content.imageSrc || "/consultants-laptop.png"}
                   alt="Medical Provider reviewing Credentialing Payer Enrollment"
                   fill

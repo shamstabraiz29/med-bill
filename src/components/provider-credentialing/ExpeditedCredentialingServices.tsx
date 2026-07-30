@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import { CheckCircle2, ShieldCheck, Award, Zap } from "lucide-react";
 import SectionHeader from "@/components/ui/SectionHeader";
 import AppButton from "@/components/ui/AppButton";
@@ -66,7 +66,7 @@ export default function ExpeditedCredentialingServices({ data }: ExpeditedCreden
           <MotionWrapper variant="slideRight" className="lg:col-span-5 w-full">
             <div className="relative w-full max-w-lg mx-auto aspect-[4/5] rounded-2xl bg-white border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 p-3 overflow-hidden group">
               <div className="relative w-full h-full rounded-2xl overflow-hidden bg-slate-900">
-                <Image
+                <AppImage
                   src={content.block1ImageSrc || "/clearinghouse-nurse-hero.png"}
                   alt="Public & Private Program Provider Credentialing"
                   fill
@@ -119,7 +119,7 @@ export default function ExpeditedCredentialingServices({ data }: ExpeditedCreden
           <MotionWrapper variant="slideLeft" className="lg:col-span-5 w-full order-2 lg:order-1">
             <div className="relative w-full max-w-lg mx-auto aspect-[4/5] rounded-2xl bg-white border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 p-3 overflow-hidden group">
               <div className="relative w-full h-full rounded-2xl overflow-hidden bg-slate-900">
-                <Image
+                <AppImage
                   src={content.block2ImageSrc || "/consultants-laptop.png"}
                   alt="Central Profile Setup and Upkeep"
                   fill
@@ -214,7 +214,7 @@ export default function ExpeditedCredentialingServices({ data }: ExpeditedCreden
           <MotionWrapper variant="slideRight" className="lg:col-span-5 w-full">
             <div className="relative w-full max-w-lg mx-auto aspect-[4/5] rounded-2xl bg-white border border-[#E2E6EC] shadow-2xl shadow-blue-900/10 p-3 overflow-hidden group">
               <div className="relative w-full h-full rounded-2xl overflow-hidden bg-slate-900">
-                <Image
+                <AppImage
                   src={content.block3ImageSrc || "/consultants-laptop.png"}
                   alt="Contract Setup, Terms & Reimbursement Review"
                   fill

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import SectionHeader from "@/components/ui/SectionHeader";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import { defaultMedicalCodingData } from "@/lib/defaults/medicalCoding";
@@ -63,7 +63,7 @@ export default function MedicalCodingWhyChooseUs({ data }: MedicalCodingWhyChoos
             <div className="relative mx-auto w-full max-w-xl lg:max-w-none">
               <div className="relative overflow-hidden rounded-2xl border border-[#E2E6EC] shadow-md">
                 <div className="relative aspect-[4/5] min-h-[360px] sm:min-h-[460px]">
-                  <Image
+                  <AppImage
                     src={whyData.imageSrc || "/doctor-hero.png"}
                     alt={whyData.imageAlt || "BellMedEx certified medical coder reviewing clinical documentation"}
                     fill

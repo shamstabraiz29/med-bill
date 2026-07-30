@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import Link from "next/link";
 import { ArrowRight, Headphones } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -69,7 +69,7 @@ export default function BillingConsultancyFeatureBlock({
         >
           <CardContent className="relative p-0">
             <div className="relative aspect-[4/3] w-full overflow-hidden sm:aspect-[5/4]">
-              <Image
+              <AppImage
                 src={imageSrc}
                 alt={imageAlt}
                 fill

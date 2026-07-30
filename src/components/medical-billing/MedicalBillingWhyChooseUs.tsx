@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import { ChevronRight, ShieldCheck } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import SectionHeader from "@/components/ui/SectionHeader";
@@ -60,7 +60,7 @@ export default function MedicalBillingWhyChooseUs({ data }: MedicalBillingWhyCho
           {/* Left Column: Consultants Laptop Image */}
           <MotionWrapper variant="slideLeft" className="lg:col-span-6 relative">
             <div className="relative w-full h-[360px] sm:h-[460px] md:h-[500px] rounded-2xl overflow-hidden border border-[#E2E6EC] shadow-md group">
-              <Image
+              <AppImage
                 src={whyData.imageSrc || "/consultants-laptop.png"}
                 alt="BellMedEx medical billing consultants reviewing practice analytics on laptop"
                 fill

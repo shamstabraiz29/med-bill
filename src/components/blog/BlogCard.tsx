@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { resolveImageSrc } from "@/lib/images";
 import { ArrowRight, Clock, Calendar } from "lucide-react";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 
@@ -53,7 +54,7 @@ export function BlogStyleCard({
       >
         <div className="relative w-full h-52 sm:h-56 overflow-hidden rounded-t-2xl bg-slate-900">
           <img
-            src={imageSrc}
+            src={resolveImageSrc(imageSrc) || imageSrc}
             alt={imageAlt}
             className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 opacity-90"
           />
@@ -115,7 +116,7 @@ export default function BlogCard({ post }: BlogCardProps) {
       overlay={
         <div className="w-14 h-14 rounded-full border-4 border-white shadow-md overflow-hidden bg-white shrink-0">
           <img
-            src={post.author.avatar}
+            src={resolveImageSrc(post.author.avatar) || post.author.avatar}
             alt={post.author.name}
             className="w-full h-full object-cover"
           />

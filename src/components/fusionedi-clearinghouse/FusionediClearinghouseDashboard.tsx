@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import {
   fusionediContainerClassName,
@@ -30,7 +30,7 @@ export default function FusionediClearinghouseDashboard({ data }: FusionediClear
               FusionEDI clearinghouse dashboard overview
             </h2>
 
-            <Image
+            <AppImage
               src={content.imageSrc || "/fusionedi-dashboard.png"}
               alt={content.imageAlt || "FusionEDI clearinghouse dashboard"}
               width={1024}
