@@ -24,10 +24,8 @@ import rcmDashboardLaptop2 from "../../public/rcm-dashboard-laptop2.png";
 import rcmDoctorImportance from "../../public/rcm-doctor-importance.png";
 import usMap from "../../public/us-map.png";
 
-const LOCALHOST_PATTERN = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?/i;
 const REMOTE_URL_PATTERN = /^https?:\/\//i;
 const NEXT_STATIC_MEDIA_PATTERN = /^\/_next\/static\/media\//;
-const ALLOWED_REMOTE_HOSTS = ["images.unsplash.com"];
 
 /** Bundled images — pass `/filename.png` to AppImage (same as DoctorsTeamSection) */
 export const staticImages: Record<string, StaticImageData> = {
@@ -84,7 +82,7 @@ export {
 
 function isLikelyImageFieldKey(key: string): boolean {
   return (
-    /image|avatar|photo|thumbnail|picture|poster|banner/i.test(key) &&
+    /image|avatar|photo|thumbnail|picture|poster|banner|logo|url/i.test(key) &&
     !/Alt|alt|Label|label|Caption|caption|Title|title|Name|name|Text|text|Href|href/i.test(key)
   );
 }
@@ -98,22 +96,11 @@ function isRemoteUrl(src: string): boolean {
   );
 }
 
-function isAllowedRemoteUrl(src: string): boolean {
-  try {
-    const url = new URL(src.startsWith("//") ? `https:${src}` : src);
-    return ALLOWED_REMOTE_HOSTS.some(
-      (host) => url.hostname === host || url.hostname.endsWith(`.${host}`),
-    );
-  } catch {
-    return false;
-  }
-}
-
 function getFilename(path: string): string {
   return path.split("/").pop()?.split("?")[0] || path;
 }
 
-/** Collect path variants: raw path, URL pathname, filename, hashed media recovery */
+/** Collect path candidates for static image matching */
 function collectPathCandidates(src: string): string[] {
   const trimmed = src.trim();
   if (!trimmed) {
@@ -132,7 +119,7 @@ function collectPathCandidates(src: string): string[] {
 
   add(trimmed);
 
-  if (LOCALHOST_PATTERN.test(trimmed) || isRemoteUrl(trimmed)) {
+  if (isRemoteUrl(trimmed)) {
     try {
       const url = new URL(trimmed.startsWith("//") ? `https:${trimmed}` : trimmed);
       add(url.pathname);
@@ -156,10 +143,6 @@ function collectPathCandidates(src: string): string[] {
 
 function lookupStaticImage(src: string): StaticImageData | undefined {
   for (const candidate of collectPathCandidates(src)) {
-    if (isRemoteUrl(candidate)) {
-      continue;
-    }
-
     if (staticImages[candidate]) {
       return staticImages[candidate];
     }
@@ -220,7 +203,7 @@ export function resolveImageSrc(src: string | null | undefined): string | undefi
 
 /**
  * Returns StaticImageData for bundled local assets (DoctorsTeamSection pattern).
- * Maps CMS full URLs (localhost / vercel.app) back to bundled files by filename.
+ * Resolves relative public assets and remote URLs (Vercel, S3, Blob, Unsplash, etc.)
  */
 export function resolveImageData(
   src: string | null | undefined,
@@ -234,12 +217,19 @@ export function resolveImageData(
     return undefined;
   }
 
+  // 1. Try matching against bundled static imports
   const staticImage = lookupStaticImage(trimmed);
   if (staticImage) {
     return staticImage;
   }
 
-  if (isAllowedRemoteUrl(trimmed)) {
+  // 2. Allow valid relative paths (e.g. /uploads/image.png or /custom.png)
+  if (trimmed.startsWith("/") && !trimmed.startsWith("//")) {
+    return trimmed;
+  }
+
+  // 3. Allow valid remote URLs (http://, https://, //, data:, blob:)
+  if (isRemoteUrl(trimmed)) {
     return trimmed.startsWith("//") ? `https:${trimmed}` : trimmed;
   }
 
@@ -269,12 +259,13 @@ export function sanitizeImageSources<T>(value: T): T {
           continue;
         }
 
-        if (isAllowedRemoteUrl(trimmed)) {
-          record[key] = trimmed;
+        const resolved = resolveImageData(trimmed);
+        if (resolved) {
+          record[key] = typeof resolved === "string" ? resolved : (getCanonicalPath(trimmed) ?? trimmed);
           continue;
         }
 
-        // Broken CMS / localhost media URL — drop so component `|| "/fallback.png"` applies
+        // Broken or empty media URL — drop so component fallback applies
         delete record[key];
         continue;
       }

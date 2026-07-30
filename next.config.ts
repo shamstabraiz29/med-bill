@@ -23,6 +23,26 @@ const nextConfig: NextConfig = {
         hostname: "**.vercel.app",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "**.vercel-storage.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "**.amazonaws.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "http",
+        hostname: "localhost",
+        pathname: "/**",
+      },
+      {
+        protocol: "http",
+        hostname: "127.0.0.1",
+        pathname: "/**",
+      },
     ],
   },
 };
