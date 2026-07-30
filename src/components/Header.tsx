@@ -7,7 +7,7 @@ import {
   FileText, Binary, TrendingUp, ClipboardCheck, Network, Award, Search,
   Laptop, Zap, Activity, Calendar,
   Building2, Stethoscope, Building, ShieldAlert, UserCheck, HeartPulse,
-  BookOpen, Briefcase, Download, Star, ChevronDown, Menu, X, ArrowRight, LucideIcon
+  BookOpen, Briefcase, Star, ChevronDown, Menu, X, ArrowRight, LucideIcon
 } from "lucide-react";
 import AppButton from "@/components/ui/AppButton";
 

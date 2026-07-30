@@ -17,7 +17,6 @@ import {
   Percent,
   Sparkles,
   Clock,
-  MessageSquare,
 } from "lucide-react";
 import { defaultMedicalBillingPricingData } from "@/lib/defaults/medicalBillingPricing";
 import type { PricingUnlockFormData } from "@/payload/types/medicalBillingPricing";

@@ -1,17 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import {
-  CalendarDays,
-  CheckCircle2,
-  Clock,
-  FileCheck,
-  LucideIcon,
-  Scale,
-  ShieldAlert,
-  TrendingUp,
-  Wallet,
-} from "lucide-react";
+import { LucideIcon } from "lucide-react";
 import IconWrapper from "@/components/common/IconWrapper";
 import { cn } from "@/lib/utils";
 import { largePracticeCardClassName } from "./largePracticeSectionLayout";

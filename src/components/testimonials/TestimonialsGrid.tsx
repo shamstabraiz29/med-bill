@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { Star, ShieldCheck, TrendingUp, CheckCircle2 } from "lucide-react";
+import { Star, ShieldCheck, TrendingUp } from "lucide-react";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 
 export interface TestimonialItem {

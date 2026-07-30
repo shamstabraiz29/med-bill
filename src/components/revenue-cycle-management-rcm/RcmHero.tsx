@@ -1,7 +1,5 @@
 "use client";
 
-import React from "react";
-import MotionWrapper from "@/components/ui/MotionWrapper";
 import HeroHeader from "@/components/home/HeroHeader";
 import CommandCapsuleForm from "@/components/home/CommandCapsuleForm";
 import DoctorVisuals from "@/components/home/DoctorVisuals";

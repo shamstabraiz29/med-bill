@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useSyncExternalStore } from "react";
 import { motion, useReducedMotion, Variants } from "motion/react";
 import {
   fadeUpVariants,
@@ -13,6 +13,8 @@ import {
   staggerContainerVariants,
   staggerItemVariants,
 } from "@/lib/motion";
+
+const emptySubscribe = () => () => {};
 
 export interface MotionWrapperProps {
   children: React.ReactNode;
@@ -45,12 +47,8 @@ export default function MotionWrapper({
   once = true,
 }: MotionWrapperProps) {
 
-  const [isMounted, setIsMounted] = useState(false);
+  const isMounted = useSyncExternalStore(emptySubscribe, () => true, () => false);
   const shouldReduceMotion = useReducedMotion();
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   const getVariants = (): Variants => {
     if (isMounted && shouldReduceMotion) {

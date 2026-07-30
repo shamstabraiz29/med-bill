@@ -4,7 +4,7 @@ import React, { useState, useMemo } from "react";
 import BlogCard, { BlogPost } from "@/components/blog/BlogCard";
 import BlogFilterBar from "@/components/blog/BlogFilterBar";
 import MotionWrapper from "@/components/ui/MotionWrapper";
-import { SearchX, ArrowRight } from "lucide-react";
+import { SearchX } from "lucide-react";
 import AppButton from "@/components/ui/AppButton";
 
 interface BlogFeedProps {

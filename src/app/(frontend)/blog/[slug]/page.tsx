@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Clock, Calendar, Share2, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, Clock, Calendar, CheckCircle2 } from "lucide-react";
 import { getBlogPostBySlug, getBlogPosts } from "@/lib/payload";
 import SectionBadge from "@/components/ui/SectionBadge";
 import AppButton from "@/components/ui/AppButton";

@@ -14,9 +14,6 @@ import {
   CheckCircle2,
   Send,
   ShieldCheck,
-  Sparkles,
-  TrendingUp,
-  Clock,
   LockKeyhole,
 } from "lucide-react";
 import { defaultScheduleDemoData } from "@/lib/defaults/scheduleDemo";
