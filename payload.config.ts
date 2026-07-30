@@ -104,16 +104,28 @@ export default buildConfig({
     CookiesPolicy,
   ],
 
+  serverURL: process.env.NEXT_PUBLIC_SERVER_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : ''),
+
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI || '',
+      ssl:
+        !process.env.DATABASE_URI?.includes('localhost') &&
+        !process.env.DATABASE_URI?.includes('127.0.0.1') &&
+        (process.env.DATABASE_URI?.includes('sslmode=require') ||
+          process.env.DATABASE_URI?.includes('neon.tech') ||
+          process.env.DATABASE_URI?.includes('supabase') ||
+          process.env.DATABASE_URI?.includes('pooler') ||
+          Boolean(process.env.VERCEL))
+          ? { rejectUnauthorized: false }
+          : false,
     },
-    push: process.env.NODE_ENV !== 'production',
+    push: process.env.NODE_ENV !== 'production' && !process.env.VERCEL,
   }),
 
   editor: lexicalEditor(),
 
-  secret: process.env.PAYLOAD_SECRET || '',
+  secret: process.env.PAYLOAD_SECRET || 'b3llm3d3x-s3cr3t-k3y-ch4ng3-m3-1n-pr0duct10n-2026',
 
   typescript: {
     outputFile: path.resolve(dirname, 'src/payload/payload-types.ts'),

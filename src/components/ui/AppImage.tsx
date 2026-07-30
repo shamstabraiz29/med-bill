@@ -17,7 +17,7 @@ export default function AppImage({
   src,
   fallbackSrc,
   alt = "",
-  unoptimized,
+  unoptimized = true,
   ...props
 }: AppImageProps) {
   const resolved = pickImageSrc(src, fallbackSrc);
@@ -26,17 +26,11 @@ export default function AppImage({
     return null;
   }
 
-  const isRemoteString =
-    typeof resolved === "string" &&
-    (resolved.startsWith("http://") ||
-      resolved.startsWith("https://") ||
-      resolved.startsWith("//"));
-
   return (
     <NextImage
       src={resolved}
       alt={alt}
-      unoptimized={unoptimized ?? isRemoteString}
+      unoptimized={unoptimized}
       {...props}
     />
   );
