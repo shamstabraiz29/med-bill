@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { resolveImageSrc } from "@/lib/images";
+import AppImage from "@/components/ui/AppImage";
 import { ArrowRight, Clock, Calendar } from "lucide-react";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 
@@ -25,8 +25,9 @@ export interface BlogPost {
 
 export interface BlogStyleCardProps {
   href: string;
-  imageSrc: string;
+  imageSrc?: string | null;
   imageAlt: string;
+  fallbackSrc?: string;
   category?: string;
   title: string;
   excerpt: string;
@@ -39,6 +40,7 @@ export function BlogStyleCard({
   href,
   imageSrc,
   imageAlt,
+  fallbackSrc = "/consultants-laptop.png",
   category,
   title,
   excerpt,
@@ -53,10 +55,13 @@ export function BlogStyleCard({
         className="group relative flex flex-col w-full bg-white border border-[#E2E6EC] rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 h-full text-left"
       >
         <div className="relative w-full h-52 sm:h-56 overflow-hidden rounded-t-2xl bg-slate-900">
-          <img
-            src={resolveImageSrc(imageSrc) || imageSrc}
+          <AppImage
+            src={imageSrc}
+            fallbackSrc={fallbackSrc}
             alt={imageAlt}
-            className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 opacity-90"
+            fill
+            className="object-cover opacity-90 transition-transform duration-700 group-hover:scale-108"
+            sizes="(max-width: 768px) 100vw, 33vw"
           />
 
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent" />
@@ -109,16 +114,20 @@ export default function BlogCard({ post }: BlogCardProps) {
     <BlogStyleCard
       href={`/blog/${post.slug}`}
       imageSrc={post.imageSrc}
+      fallbackSrc="/consultants-laptop.png"
       imageAlt={post.title}
       category={post.category}
       title={post.title}
       excerpt={post.excerpt}
       overlay={
-        <div className="w-14 h-14 rounded-full border-4 border-white shadow-md overflow-hidden bg-white shrink-0">
-          <img
-            src={resolveImageSrc(post.author.avatar) || post.author.avatar}
+        <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full border-4 border-white bg-white shadow-md">
+          <AppImage
+            src={post.author.avatar}
+            fallbackSrc="/doctor-hero.png"
             alt={post.author.name}
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
+            sizes="56px"
           />
         </div>
       }

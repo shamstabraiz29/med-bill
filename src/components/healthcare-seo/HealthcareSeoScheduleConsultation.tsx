@@ -174,7 +174,7 @@ export default function HealthcareSeoScheduleConsultation({ data }: HealthcareSe
               {/* Background Medical Consultation Image */}
               <AppImage
                 src={content.imageSrc}
-                fallbackSrc="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1000&auto=format&fit=crop"
+                fallbackSrc="/consultants-laptop.png"
                 alt="Healthcare Consultation & Marketing Strategy"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"

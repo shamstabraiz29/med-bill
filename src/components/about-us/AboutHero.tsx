@@ -71,7 +71,7 @@ export default function AboutHero({ data }: AboutHeroProps) {
               {/* Doctor / Team Image */}
               <AppImage
                 src={content.imageSrc}
-                fallbackSrc="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=1000&auto=format&fit=crop"
+                fallbackSrc="/doctors-team.png"
                 alt={content.imageAlt || "BellMedEx Healthcare RCM Team"}
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-95"

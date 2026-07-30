@@ -1,7 +1,10 @@
 "use client";
 
 import NextImage, { type ImageProps, type StaticImageData } from "next/image";
-import { pickImageSrc, resolveImageData } from "@/lib/images";
+import { pickImageSrc, resolveImageData, staticImages } from "@/lib/images";
+
+// Retain all static imports in the client bundle (DoctorsTeamSection pattern)
+void staticImages;
 
 type AppImageProps = Omit<ImageProps, "src"> & {
   /** Primary source (CMS path, full URL, or `/filename.png`) */
@@ -33,6 +36,18 @@ export default function AppImage({
 
   if (!resolved) {
     return null;
+  }
+
+  // Local `/filename.png` paths must resolve to bundled StaticImageData — never raw public URLs
+  if (
+    typeof resolved === "string" &&
+    resolved.startsWith("/") &&
+    !resolved.startsWith("//")
+  ) {
+    const bundled = resolveImageData(resolved);
+    if (bundled && typeof bundled !== "string") {
+      resolved = bundled;
+    }
   }
 
   const isRemoteString = typeof resolved === "string";

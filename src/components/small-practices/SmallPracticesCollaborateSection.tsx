@@ -65,11 +65,12 @@ export default function SmallPracticesCollaborateSection({ data }: SmallPractice
         />
 
         <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-10">
-          {services.map((service) => (
+          {services.map((service, idx) => (
             <BlogStyleCard
               key={service.title}
               href={service.href}
               imageSrc={service.imageSrc}
+              fallbackSrc={DEFAULT_SERVICES[idx]?.imageSrc ?? "/consultants-laptop.png"}
               imageAlt={service.title}
               title={service.title}
               excerpt={service.description}
