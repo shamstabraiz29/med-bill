@@ -179,7 +179,7 @@ export function isKnownLocalImage(path: string | null | undefined): boolean {
  * Pick the first valid image source from a list (CMS value + hardcoded fallbacks).
  */
 export function pickImageSrc(
-  ...candidates: Array<string | null | undefined>
+  ...candidates: Array<unknown>
 ): StaticImageData | string | undefined {
   for (const candidate of candidates) {
     const resolved = resolveImageData(candidate);
@@ -192,7 +192,7 @@ export function pickImageSrc(
 }
 
 /** URL string for plain <img> tags */
-export function resolveImageSrc(src: string | null | undefined): string | undefined {
+export function resolveImageSrc(src: unknown): string | undefined {
   const resolved = resolveImageData(src);
   if (!resolved) {
     return undefined;
@@ -203,16 +203,42 @@ export function resolveImageSrc(src: string | null | undefined): string | undefi
 
 /**
  * Returns StaticImageData for bundled local assets (DoctorsTeamSection pattern).
- * Resolves relative public assets and remote URLs (Vercel, S3, Blob, Unsplash, etc.)
+ * Resolves relative public assets, CMS media objects, and remote URLs (Vercel, S3, Blob, Unsplash, etc.)
  */
 export function resolveImageData(
-  src: string | null | undefined,
+  src: unknown,
 ): StaticImageData | string | undefined {
-  if (typeof src !== "string") {
+  if (!src) {
     return undefined;
   }
 
-  const trimmed = src.trim();
+  // Handle StaticImageData directly (Next.js imported object: { src: '/_next/static/...', height: ..., width: ... })
+  if (
+    typeof src === "object" &&
+    src !== null &&
+    "src" in src &&
+    typeof (src as { src: unknown }).src !== "string"
+  ) {
+    return src as StaticImageData;
+  }
+
+  let strSrc: string | undefined;
+
+  if (typeof src === "string") {
+    strSrc = src;
+  } else if (typeof src === "object" && src !== null) {
+    if ("url" in src && typeof (src as { url: unknown }).url === "string") {
+      strSrc = (src as { url: string }).url;
+    } else if ("src" in src && typeof (src as { src: unknown }).src === "string") {
+      strSrc = (src as { src: string }).src;
+    }
+  }
+
+  if (!strSrc) {
+    return undefined;
+  }
+
+  const trimmed = strSrc.trim();
   if (!trimmed) {
     return undefined;
   }
@@ -245,23 +271,19 @@ export function sanitizeImageSources<T>(value: T): T {
     const record = { ...(value as Record<string, unknown>) };
 
     for (const [key, nestedValue] of Object.entries(record)) {
-      if (typeof nestedValue === "string" && isLikelyImageFieldKey(key)) {
-        const trimmed = nestedValue.trim();
-
-        if (!trimmed) {
+      if (isLikelyImageFieldKey(key)) {
+        if (!nestedValue) {
           delete record[key];
           continue;
         }
 
-        const staticImage = lookupStaticImage(trimmed);
-        if (staticImage) {
-          record[key] = getCanonicalPath(trimmed) ?? trimmed;
-          continue;
-        }
-
-        const resolved = resolveImageData(trimmed);
+        const resolved = resolveImageData(nestedValue);
         if (resolved) {
-          record[key] = typeof resolved === "string" ? resolved : (getCanonicalPath(trimmed) ?? trimmed);
+          if (typeof resolved === "string") {
+            record[key] = resolved;
+          } else if (typeof nestedValue === "string") {
+            record[key] = getCanonicalPath(nestedValue) ?? resolved.src;
+          }
           continue;
         }
 
