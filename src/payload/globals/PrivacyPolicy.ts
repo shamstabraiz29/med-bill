@@ -1,4 +1,5 @@
 import type { GlobalConfig } from 'payload'
+import { seoFields } from '../fields/seo'
 
 export const PrivacyPolicy: GlobalConfig = {
   slug: 'privacy-policy',
@@ -12,6 +13,7 @@ export const PrivacyPolicy: GlobalConfig = {
     update: ({ req }) => Boolean(req.user),
   },
   fields: [
+    seoFields,
     // Hero Group
     {
       name: 'hero',

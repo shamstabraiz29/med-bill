@@ -9,7 +9,10 @@ export interface CookiesPolicySection {
   types?: CookieTypeItem[];
 }
 
+import type { PageSeo } from './seo';
+
 export interface CookiesPolicyData {
+  seo?: PageSeo;
   hero: {
     badge: string;
     titlePlain: string;

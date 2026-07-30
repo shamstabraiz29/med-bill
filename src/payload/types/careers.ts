@@ -44,17 +44,13 @@ export interface CareersCtaData {
   secondaryBtnLink?: string;
 }
 
+import type { PageSeo } from './seo';
+
 export interface CareersData {
   hero: CareersHeroData;
   formSection: CareersFormSectionData;
   faq?: CareersFaqData;
   cta?: CareersCtaData;
-  seo: {
-    metaTitle: string;
-    metaDescription: string;
-    keywords: string;
-    robots: string;
-    canonicalUrl: string;
-  };
+  seo?: PageSeo;
 }
 

@@ -115,7 +115,10 @@ export interface OutsourceTechnologyExpertiseData {
   ctaButtonLink: string;
 }
 
+import type { PageSeo } from './seo';
+
 export interface OutsourceMedicalBillingPageData {
+  seo?: PageSeo;
   hero: OutsourceHeroData;
   intro: OutsourceIntroData;
   comparison: OutsourceComparisonData;

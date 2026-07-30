@@ -1,6 +1,19 @@
 import { ContactUsPageData } from "@/payload/types/contactUs";
 
 export const defaultContactUsData: ContactUsPageData = {
+  seo: {
+    metaTitle: "Contact Us | BellMedEx Medical Billing & RCM Support",
+    metaDescription: "Get in touch with BellMedEx healthcare billing experts. Schedule a free consultation, request an audit, or call our support team.",
+    keywords: "contact bellmedex, medical billing consultation, RCM support, healthcare billing helpline",
+    canonicalUrl: "https://bellmedex.com/contact-us",
+    robots: "index, follow",
+    openGraph: {
+      ogTitle: "Contact Us | BellMedEx Medical Billing & RCM Support",
+      ogDescription: "Get in touch with BellMedEx healthcare billing experts. Schedule a free consultation, request an audit, or call our support team.",
+      ogType: "website",
+      ogUrl: "https://bellmedex.com/contact-us",
+    },
+  },
   hero: {
     badge: "Get In Touch With BellMedEx",
     titlePlain: "We're Here to Help Your Practice ",

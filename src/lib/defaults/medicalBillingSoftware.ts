@@ -1,6 +1,19 @@
 import { MedicalBillingSoftwarePageData } from "@/payload/types/medicalBillingSoftware";
 
 export const defaultMedicalBillingSoftwareData: MedicalBillingSoftwarePageData = {
+  seo: {
+    metaTitle: "Medical Billing Software Solutions | BellMedEx",
+    metaDescription: "Cloud-based medical billing software designed for claims scrubbing, electronic submission, and real-time revenue tracking.",
+    keywords: "medical billing software, billing management system, cloud RCM software, claims scrubbing software",
+    canonicalUrl: "https://bellmedex.com/medical-billing-software",
+    robots: "index, follow",
+    openGraph: {
+      ogTitle: "Medical Billing Software Solutions | BellMedEx",
+      ogDescription: "Cloud-based medical billing software designed for claims scrubbing, electronic submission, and real-time revenue tracking.",
+      ogType: "website",
+      ogUrl: "https://bellmedex.com/medical-billing-software",
+    },
+  },
   hero: {
     badge: "Medical Billing Software",
     eyebrow: "Medical Billing Software",

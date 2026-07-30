@@ -1,4 +1,5 @@
 import type { GlobalConfig } from 'payload'
+import { seoFields } from '../fields/seo'
 
 export const Careers: GlobalConfig = {
   slug: 'careers',
@@ -11,6 +12,7 @@ export const Careers: GlobalConfig = {
     group: 'Resources',
   },
   fields: [
+    seoFields,
     {
       name: 'hero',
       type: 'group',
@@ -40,18 +42,6 @@ export const Careers: GlobalConfig = {
         { name: 'subtitle', type: 'text', label: 'Form Subtitle', required: true },
         { name: 'successTitle', type: 'text', label: 'Submission Success Title', required: true },
         { name: 'successDescription', type: 'textarea', label: 'Submission Success Description', required: true },
-      ],
-    },
-    {
-      name: 'seo',
-      type: 'group',
-      label: 'SEO Metadata',
-      fields: [
-        { name: 'metaTitle', type: 'text', label: 'Meta Title', required: true },
-        { name: 'metaDescription', type: 'textarea', label: 'Meta Description', required: true },
-        { name: 'keywords', type: 'text', label: 'Keywords' },
-        { name: 'robots', type: 'text', label: 'Robots Tag', defaultValue: 'index, follow' },
-        { name: 'canonicalUrl', type: 'text', label: 'Canonical URL' },
       ],
     },
   ],

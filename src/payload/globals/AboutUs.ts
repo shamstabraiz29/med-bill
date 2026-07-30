@@ -1,4 +1,5 @@
 import type { GlobalConfig } from 'payload'
+import { seoFields } from '../fields/seo'
 
 export const AboutUs: GlobalConfig = {
   slug: 'about-us',
@@ -12,6 +13,7 @@ export const AboutUs: GlobalConfig = {
     update: ({ req }) => Boolean(req.user),
   },
   fields: [
+    seoFields,
     // Hero Group
     {
       name: 'hero',

@@ -59,7 +59,10 @@ export interface ContactCtaData {
   phoneLink: string;
 }
 
+import type { PageSeo } from './seo';
+
 export interface ContactUsPageData {
+  seo?: PageSeo;
   hero: ContactHeroData;
   formSection: ContactFormSectionData;
   faq: ContactFaqData;

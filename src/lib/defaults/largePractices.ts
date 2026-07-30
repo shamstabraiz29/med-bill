@@ -1,6 +1,19 @@
 import { LargePracticesPageData } from "@/payload/types/largePractices";
 
 export const defaultLargePracticesData: LargePracticesPageData = {
+  seo: {
+    metaTitle: "Large Practice Billing Solutions | BellMedEx",
+    metaDescription: "Scalable revenue cycle management and enterprise billing services tailored for large medical groups and multi-specialty practices.",
+    keywords: "large practice billing, enterprise RCM, multi specialty billing, group practice medical billing",
+    canonicalUrl: "https://bellmedex.com/large-practices",
+    robots: "index, follow",
+    openGraph: {
+      ogTitle: "Large Practice Billing Solutions | BellMedEx",
+      ogDescription: "Scalable revenue cycle management and enterprise billing services tailored for large medical groups and multi-specialty practices.",
+      ogType: "website",
+      ogUrl: "https://bellmedex.com/large-practices",
+    },
+  },
   hero: {
     badge: "Large Practice Billing.",
     titlePlain: "Billing Services for your ",

@@ -1,6 +1,19 @@
 import type { SmallPracticesPageData } from "@/payload/types/smallPractices";
 
 export const defaultSmallPracticesData: SmallPracticesPageData = {
+  seo: {
+    metaTitle: "Small Practice Billing Services | BellMedEx",
+    metaDescription: "Affordable, dedicated medical billing services for solo practitioners and small medical clinics nationwide.",
+    keywords: "small practice billing, solo provider billing, small clinic RCM, affordable medical billing",
+    canonicalUrl: "https://bellmedex.com/small-practices",
+    robots: "index, follow",
+    openGraph: {
+      ogTitle: "Small Practice Billing Services | BellMedEx",
+      ogDescription: "Affordable, dedicated medical billing services for solo practitioners and small medical clinics nationwide.",
+      ogType: "website",
+      ogUrl: "https://bellmedex.com/small-practices",
+    },
+  },
   hero: {
     badge: "Small Practice Billing.",
     titlePlain: "Medical Billing Services for ",

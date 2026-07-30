@@ -1,6 +1,19 @@
 import { PhysicianBillingServicesPageData } from "@/payload/types/physicianBillingServices";
 
 export const defaultPhysicianBillingServicesData: PhysicianBillingServicesPageData = {
+  seo: {
+    metaTitle: "Physician Billing Services | BellMedEx",
+    metaDescription: "Expert physician billing and coding services tailored for individual doctors, specialists, and group practices.",
+    keywords: "physician billing services, doctor billing company, physician RCM, physician coding",
+    canonicalUrl: "https://bellmedex.com/physician-billing-services",
+    robots: "index, follow",
+    openGraph: {
+      ogTitle: "Physician Billing Services | BellMedEx",
+      ogDescription: "Expert physician billing and coding services tailored for individual doctors, specialists, and group practices.",
+      ogType: "website",
+      ogUrl: "https://bellmedex.com/physician-billing-services",
+    },
+  },
   hero: {
     badge: "Physician Billing Services.",
     titlePlain: "Physician ",

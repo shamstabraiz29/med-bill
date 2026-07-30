@@ -293,7 +293,10 @@ export interface DenialManagementUnderpaymentRecoverySectionData {
   imageAlt?: string;
 }
 
+import type { PageSeo } from './seo';
+
 export interface DenialManagementServicesPageData {
+  seo?: PageSeo;
   hero: DenialManagementHeroData;
   stats: DenialManagementStatsSectionData;
   about: DenialManagementAboutSectionData;

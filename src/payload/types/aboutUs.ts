@@ -93,7 +93,10 @@ export interface AboutCtaData {
   buttonLink: string;
 }
 
+import type { PageSeo } from './seo';
+
 export interface AboutUsPageData {
+  seo?: PageSeo;
   hero: AboutHeroData;
   missionVision: AboutMissionVisionData;
   capabilities: AboutCapabilitiesData;

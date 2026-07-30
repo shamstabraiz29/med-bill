@@ -1,6 +1,19 @@
 import { ScheduleDemoPageData } from "@/payload/types/scheduleDemo";
 
 export const defaultScheduleDemoData: ScheduleDemoPageData = {
+  seo: {
+    metaTitle: "Schedule a Free Demo & RCM Audit | BellMedEx",
+    metaDescription: "Book a live product demo and free medical billing audit with BellMedEx billing specialists today.",
+    keywords: "schedule demo, medical billing audit, free RCM consultation, book demo",
+    canonicalUrl: "https://bellmedex.com/schedule-a-demo",
+    robots: "index, follow",
+    openGraph: {
+      ogTitle: "Schedule a Free Demo & RCM Audit | BellMedEx",
+      ogDescription: "Book a live product demo and free medical billing audit with BellMedEx billing specialists today.",
+      ogType: "website",
+      ogUrl: "https://bellmedex.com/schedule-a-demo",
+    },
+  },
   hero: {
     badge: "Claim Your Free Demo",
     titlePlain: "Claim Your ",

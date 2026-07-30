@@ -1,6 +1,19 @@
 import { AboutUsPageData } from "@/payload/types/aboutUs";
 
 export const defaultAboutUsData: AboutUsPageData = {
+  seo: {
+    metaTitle: "About Us | BellMedEx Healthcare Revenue Cycle Management",
+    metaDescription: "Discover BellMedEx, America's leading healthcare revenue cycle management partner offering AAPC-certified medical coding, billing, and provider credentialing.",
+    keywords: "about bellmedex, medical billing company, AAPC certified coders, RCM partner, healthcare billing team",
+    canonicalUrl: "https://bellmedex.com/about-us",
+    robots: "index, follow",
+    openGraph: {
+      ogTitle: "About Us | BellMedEx Healthcare Revenue Cycle Management",
+      ogDescription: "Discover BellMedEx, America's leading healthcare revenue cycle management partner offering AAPC-certified medical coding, billing, and provider credentialing.",
+      ogType: "website",
+      ogUrl: "https://bellmedex.com/about-us",
+    },
+  },
   hero: {
     badge: "About BellMedEx Healthcare RCM",
     titlePlain: "Pioneering the Future of ",

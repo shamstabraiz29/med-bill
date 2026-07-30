@@ -1,6 +1,19 @@
 import { CookiesPolicyData } from "@/payload/types/cookiesPolicy";
 
 export const defaultCookiesPolicyData: CookiesPolicyData = {
+  seo: {
+    metaTitle: "Cookies Policy | BellMedEx Healthcare RCM",
+    metaDescription: "Information about how BellMedEx uses cookies and web tracking technologies to improve user experience.",
+    keywords: "cookies policy, web cookies, bellmedex cookies",
+    canonicalUrl: "https://bellmedex.com/cookies-policy",
+    robots: "index, follow",
+    openGraph: {
+      ogTitle: "Cookies Policy | BellMedEx Healthcare RCM",
+      ogDescription: "Information about how BellMedEx uses cookies and web tracking technologies to improve user experience.",
+      ogType: "website",
+      ogUrl: "https://bellmedex.com/cookies-policy",
+    },
+  },
   hero: {
     badge: "Web Technology & Security",
     titlePlain: "BellMedEx ",

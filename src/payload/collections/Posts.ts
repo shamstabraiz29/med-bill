@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { seoFields } from '../fields/seo'
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
@@ -18,6 +19,7 @@ export const Posts: CollectionConfig = {
     delete: ({ req }) => Boolean(req.user),
   },
   fields: [
+    seoFields,
     {
       name: 'title',
       type: 'text',

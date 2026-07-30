@@ -3,7 +3,10 @@ export interface TermsAndConditionsSection {
   content: string;
 }
 
+import type { PageSeo } from './seo';
+
 export interface TermsAndConditionsData {
+  seo?: PageSeo;
   hero: {
     badge: string;
     titlePlain: string;

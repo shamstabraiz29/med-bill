@@ -1,4 +1,5 @@
 import type { GlobalConfig } from 'payload'
+import { seoFields } from '../fields/seo'
 
 /** Reusable CTA (call-to-action) field group */
 const ctaFields = (prefix: string) => [
@@ -21,32 +22,8 @@ export const Homepage: GlobalConfig = {
     group: 'Core Pages',
   },
   fields: [
-    // ─────────────────────────────────────
-    // SEO
-    // ─────────────────────────────────────
-    {
-      name: 'seo',
-      type: 'group',
-      label: 'SEO & Meta',
-      fields: [
-        { name: 'metaTitle', type: 'text', label: 'Meta Title', required: true },
-        { name: 'metaDescription', type: 'textarea', label: 'Meta Description', required: true },
-        { name: 'keywords', type: 'text', label: 'Keywords (comma-separated)' },
-        { name: 'canonicalUrl', type: 'text', label: 'Canonical URL' },
-        { name: 'robots', type: 'text', label: 'Robots', defaultValue: 'index, follow' },
-        {
-          name: 'openGraph',
-          type: 'group',
-          label: 'Open Graph',
-          fields: [
-            { name: 'ogTitle', type: 'text', label: 'OG Title' },
-            { name: 'ogDescription', type: 'textarea', label: 'OG Description' },
-            { name: 'ogType', type: 'text', label: 'OG Type', defaultValue: 'website' },
-            { name: 'ogUrl', type: 'text', label: 'OG URL' },
-          ],
-        },
-      ],
-    },
+    seoFields,
+
 
     // ─────────────────────────────────────
     // HERO SECTION

@@ -110,7 +110,10 @@ export interface PmsGetStartedCtaData {
   buttonLink: string;
 }
 
+import type { PageSeo } from './seo';
+
 export interface PracticeManagementSoftwarePmsPageData {
+  seo?: PageSeo;
   hero: PmsHeroData;
   about: PmsAboutData;
   balance: PmsBalanceData;

@@ -88,7 +88,10 @@ export interface MedicalBillingSoftwareSignUpCtaData {
   features: SignUpFeatureItem[];
 }
 
+import type { PageSeo } from './seo';
+
 export interface MedicalBillingSoftwarePageData {
+  seo?: PageSeo;
   hero: MedicalBillingSoftwareHeroData;
   delivers: MedicalBillingSoftwareDeliversData;
   inAction: MedicalBillingSoftwareInActionData;

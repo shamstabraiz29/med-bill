@@ -2,6 +2,19 @@ import type { HospitalBillingServicesPageData } from "@/payload/types/hospitalBi
 import { defaultHomepageData } from "./homepage";
 
 export const defaultHospitalBillingServicesData: HospitalBillingServicesPageData = {
+  seo: {
+    metaTitle: "Hospital & Inpatient Billing Services | BellMedEx",
+    metaDescription: "Comprehensive hospital revenue cycle management, inpatient coding, UB-04 claim filing, and complex billing solutions.",
+    keywords: "hospital billing services, inpatient billing, UB 04 billing, hospital RCM, health system billing",
+    canonicalUrl: "https://bellmedex.com/hospital-billing-services",
+    robots: "index, follow",
+    openGraph: {
+      ogTitle: "Hospital & Inpatient Billing Services | BellMedEx",
+      ogDescription: "Comprehensive hospital revenue cycle management, inpatient coding, UB-04 claim filing, and complex billing solutions.",
+      ogType: "website",
+      ogUrl: "https://bellmedex.com/hospital-billing-services",
+    },
+  },
   hero: {
     badge: "Hospital Billing Services.",
     titlePlain: "Best ",

@@ -1,6 +1,19 @@
 import { PracticeManagementSoftwarePmsPageData } from "@/payload/types/practiceManagementSoftwarePms";
 
 export const defaultPracticeManagementSoftwarePmsData: PracticeManagementSoftwarePmsPageData = {
+  seo: {
+    metaTitle: "Practice Management Software (PMS) | BellMedEx",
+    metaDescription: "All-in-one Practice Management Software (PMS) for patient scheduling, eligibility verification, and financial reporting.",
+    keywords: "practice management software, PMS software, patient scheduling software, medical practice management",
+    canonicalUrl: "https://bellmedex.com/practice-management-software-pms",
+    robots: "index, follow",
+    openGraph: {
+      ogTitle: "Practice Management Software (PMS) | BellMedEx",
+      ogDescription: "All-in-one Practice Management Software (PMS) for patient scheduling, eligibility verification, and financial reporting.",
+      ogType: "website",
+      ogUrl: "https://bellmedex.com/practice-management-software-pms",
+    },
+  },
   hero: {
     badge: "Practice Management Software.",
     titlePlain: "Practice Management Software x EHR = a ",

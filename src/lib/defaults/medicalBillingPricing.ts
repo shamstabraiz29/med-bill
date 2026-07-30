@@ -1,6 +1,19 @@
 import { MedicalBillingPricingPageData } from "@/payload/types/medicalBillingPricing";
 
 export const defaultMedicalBillingPricingData: MedicalBillingPricingPageData = {
+  seo: {
+    metaTitle: "Medical Billing Pricing & Cost Models | BellMedEx",
+    metaDescription: "Transparent medical billing service pricing with zero hidden fees. Simple percentage-based pricing for practices of all sizes.",
+    keywords: "medical billing pricing, medical billing cost, RCM service rates, billing company pricing",
+    canonicalUrl: "https://bellmedex.com/medical-billing-pricing-bellmedex",
+    robots: "index, follow",
+    openGraph: {
+      ogTitle: "Medical Billing Pricing & Cost Models | BellMedEx",
+      ogDescription: "Transparent medical billing service pricing with zero hidden fees. Simple percentage-based pricing for practices of all sizes.",
+      ogType: "website",
+      ogUrl: "https://bellmedex.com/medical-billing-pricing-bellmedex",
+    },
+  },
   hero: {
     badge: "Unlock Pricing Details",
     titlePlain: "Drop Your Details to ",

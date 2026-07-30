@@ -1,6 +1,19 @@
 import { FusionediClearinghousePageData } from "@/payload/types/fusionediClearinghouse";
 
 export const defaultFusionediClearinghouseData: FusionediClearinghousePageData = {
+  seo: {
+    metaTitle: "FusionEDI Clearinghouse Software | BellMedEx",
+    metaDescription: "High-speed electronic claims clearinghouse software for seamless EDI 837 claim submission and 835 ERA processing.",
+    keywords: "FusionEDI clearinghouse, medical clearinghouse software, EDI 837, ERA processing, electronic claim submission",
+    canonicalUrl: "https://bellmedex.com/fusionedi-clearinghouse",
+    robots: "index, follow",
+    openGraph: {
+      ogTitle: "FusionEDI Clearinghouse Software | BellMedEx",
+      ogDescription: "High-speed electronic claims clearinghouse software for seamless EDI 837 claim submission and 835 ERA processing.",
+      ogType: "website",
+      ogUrl: "https://bellmedex.com/fusionedi-clearinghouse",
+    },
+  },
   hero: {
     badge: "Healthcare Fusion EDI Software.",
     titlePlain: "A fusion of EDI and Healthcare Billing for practices that want ",

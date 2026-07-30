@@ -16,7 +16,10 @@ export interface ScheduleDemoFormData {
   submitBtnText: string;
 }
 
+import type { PageSeo } from './seo';
+
 export interface ScheduleDemoPageData {
+  seo?: PageSeo;
   hero: ScheduleDemoHeroData;
   formSection: ScheduleDemoFormData;
 }

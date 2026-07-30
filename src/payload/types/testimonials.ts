@@ -43,7 +43,10 @@ export interface TestimonialsCTAData {
   buttonLink: string;
 }
 
+import type { PageSeo } from './seo';
+
 export interface TestimonialsPageData {
+  seo?: PageSeo;
   hero: TestimonialsHeroData;
   featuredTestimonial: FeaturedTestimonialData;
   testimonialsList: TestimonialItemData[];

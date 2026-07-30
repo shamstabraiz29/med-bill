@@ -3,7 +3,10 @@ export interface PrivacyPolicySection {
   content: string;
 }
 
+import type { PageSeo } from './seo';
+
 export interface PrivacyPolicyData {
+  seo?: PageSeo;
   hero: {
     badge: string;
     titlePlain: string;

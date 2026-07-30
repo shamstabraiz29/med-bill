@@ -7,15 +7,21 @@ import { getCareersData } from "@/lib/payload";
 
 export async function generateMetadata(): Promise<Metadata> {
   const data = await getCareersData();
-  const { seo } = data;
+  const seo = data.seo;
 
   return {
-    title: seo.metaTitle,
-    description: seo.metaDescription,
-    keywords: seo.keywords,
-    robots: seo.robots,
+    title: seo?.metaTitle || 'Careers & Job Opportunities | BellMedEx Healthcare RCM',
+    description: seo?.metaDescription || 'Join the BellMedEx team. Explore career opportunities in medical billing, coding, credentialing, IT, sales, and healthcare revenue cycle management.',
+    keywords: seo?.keywords,
+    robots: seo?.robots || 'index, follow',
     alternates: {
-      canonical: seo.canonicalUrl,
+      canonical: seo?.canonicalUrl || 'https://bellmedex.com/careers',
+    },
+    openGraph: {
+      title: seo?.openGraph?.ogTitle || seo?.metaTitle || 'Careers & Job Opportunities | BellMedEx Healthcare RCM',
+      description: seo?.openGraph?.ogDescription || seo?.metaDescription,
+      type: (seo?.openGraph?.ogType as 'website') || 'website',
+      url: seo?.openGraph?.ogUrl || seo?.canonicalUrl,
     },
   };
 }

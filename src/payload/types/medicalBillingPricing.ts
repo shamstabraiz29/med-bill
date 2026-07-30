@@ -16,7 +16,10 @@ export interface PricingUnlockFormData {
   submitBtnText: string;
 }
 
+import type { PageSeo } from './seo';
+
 export interface MedicalBillingPricingPageData {
+  seo?: PageSeo;
   hero: PricingHeroData;
   unlockForm: PricingUnlockFormData;
 }

@@ -37,7 +37,10 @@ export interface LargePracticeProcessStep {
   iconName?: string;
 }
 
+import type { PageSeo } from './seo';
+
 export interface LargePracticesPageData {
+  seo?: PageSeo;
   hero: {
     badge: string;
     titlePlain: string;

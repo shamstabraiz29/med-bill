@@ -1,6 +1,19 @@
 import type { DenialManagementServicesPageData } from "@/payload/types/denialManagementServices";
 
 export const defaultDenialManagementServicesData: DenialManagementServicesPageData = {
+  seo: {
+    metaTitle: "Denial Management & Claim Appeals Services | BellMedEx",
+    metaDescription: "Recover lost revenue with proactive claim denial management, root-cause analysis, and systematic appeal submissions.",
+    keywords: "denial management services, claim appeal service, rejected claims recovery, medical claim denial",
+    canonicalUrl: "https://bellmedex.com/denial-management-services",
+    robots: "index, follow",
+    openGraph: {
+      ogTitle: "Denial Management & Claim Appeals Services | BellMedEx",
+      ogDescription: "Recover lost revenue with proactive claim denial management, root-cause analysis, and systematic appeal submissions.",
+      ogType: "website",
+      ogUrl: "https://bellmedex.com/denial-management-services",
+    },
+  },
   hero: {
     badge: "Denial Management Services.",
     titlePlain: "Denial Management",

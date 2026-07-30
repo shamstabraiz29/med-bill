@@ -1,4 +1,5 @@
 import type { GlobalConfig } from 'payload'
+import { seoFields } from '../fields/seo'
 
 export const ElectronicHealthRecordsEhr: GlobalConfig = {
   slug: 'electronic-health-records-ehr',
@@ -11,6 +12,7 @@ export const ElectronicHealthRecordsEhr: GlobalConfig = {
     update: ({ req }) => Boolean(req.user),
   },
   fields: [
+    seoFields,
     // Hero Group
     {
       name: 'hero',

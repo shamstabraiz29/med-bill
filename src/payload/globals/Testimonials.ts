@@ -1,4 +1,5 @@
 import type { GlobalConfig } from 'payload'
+import { seoFields } from '../fields/seo'
 
 export const Testimonials: GlobalConfig = {
   slug: 'testimonials-page',
@@ -11,6 +12,7 @@ export const Testimonials: GlobalConfig = {
     update: ({ req }) => Boolean(req.user),
   },
   fields: [
+    seoFields,
     // Hero Section Group
     {
       name: 'hero',

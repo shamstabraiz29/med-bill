@@ -1,4 +1,5 @@
 import type { GlobalConfig } from 'payload'
+import { seoFields } from '../fields/seo'
 
 export const CookiesPolicy: GlobalConfig = {
   slug: 'cookies-policy',
@@ -12,6 +13,7 @@ export const CookiesPolicy: GlobalConfig = {
     update: ({ req }) => Boolean(req.user),
   },
   fields: [
+    seoFields,
     // Hero Group
     {
       name: 'hero',

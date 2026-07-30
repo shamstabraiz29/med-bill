@@ -298,7 +298,10 @@ export interface HospitalBillingResultsSectionData {
   metrics: HospitalBillingResultsMetric[];
 }
 
+import type { PageSeo } from './seo';
+
 export interface HospitalBillingServicesPageData {
+  seo?: PageSeo;
   hero: HospitalBillingServicesHeroData;
   results: HospitalBillingResultsSectionData;
   overview: HospitalBillingOverviewSectionData;

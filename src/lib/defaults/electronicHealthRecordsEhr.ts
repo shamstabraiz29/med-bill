@@ -1,6 +1,19 @@
 import { ElectronicHealthRecordsEhrPageData } from "@/payload/types/electronicHealthRecordsEhr";
 
 export const defaultElectronicHealthRecordsEhrData: ElectronicHealthRecordsEhrPageData = {
+  seo: {
+    metaTitle: "Electronic Health Records (EHR) Software | BellMedEx",
+    metaDescription: "HIPAA-compliant Electronic Health Records (EHR) software built for seamless clinical documentation and integrated billing.",
+    keywords: "electronic health records, EHR software, EMR software, clinical documentation, HIPAA EHR",
+    canonicalUrl: "https://bellmedex.com/electronic-health-records-ehr",
+    robots: "index, follow",
+    openGraph: {
+      ogTitle: "Electronic Health Records (EHR) Software | BellMedEx",
+      ogDescription: "HIPAA-compliant Electronic Health Records (EHR) software built for seamless clinical documentation and integrated billing.",
+      ogType: "website",
+      ogUrl: "https://bellmedex.com/electronic-health-records-ehr",
+    },
+  },
   hero: {
     badge: "Electronic Health Records Software.",
     titlePlain: "The 21st Century Antidote to ",

@@ -1,6 +1,19 @@
 import { TestimonialsPageData } from "@/payload/types/testimonials";
 
 export const defaultTestimonialsData: TestimonialsPageData = {
+  seo: {
+    metaTitle: "Client Testimonials & Success Stories | BellMedEx",
+    metaDescription: "Read reviews and success stories from healthcare providers and practice managers who trust BellMedEx for their revenue cycle management.",
+    keywords: "bellmedex reviews, client testimonials, medical billing reviews, RCM success stories",
+    canonicalUrl: "https://bellmedex.com/testimonials",
+    robots: "index, follow",
+    openGraph: {
+      ogTitle: "Client Testimonials & Success Stories | BellMedEx",
+      ogDescription: "Read reviews and success stories from healthcare providers and practice managers who trust BellMedEx for their revenue cycle management.",
+      ogType: "website",
+      ogUrl: "https://bellmedex.com/testimonials",
+    },
+  },
   hero: {
     badge: "Client Success Stories",
     title: "Trusted By Over 500+ Healthcare Practices",

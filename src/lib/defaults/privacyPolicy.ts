@@ -1,6 +1,19 @@
 import { PrivacyPolicyData } from "@/payload/types/privacyPolicy";
 
 export const defaultPrivacyPolicyData: PrivacyPolicyData = {
+  seo: {
+    metaTitle: "Privacy Policy | BellMedEx Healthcare RCM",
+    metaDescription: "BellMedEx Privacy Policy detailing how we collect, protect, and process user information and healthcare data.",
+    keywords: "bellmedex privacy policy, data privacy, HIPAA compliance",
+    canonicalUrl: "https://bellmedex.com/privacy-policy",
+    robots: "index, follow",
+    openGraph: {
+      ogTitle: "Privacy Policy | BellMedEx Healthcare RCM",
+      ogDescription: "BellMedEx Privacy Policy detailing how we collect, protect, and process user information and healthcare data.",
+      ogType: "website",
+      ogUrl: "https://bellmedex.com/privacy-policy",
+    },
+  },
   hero: {
     badge: "HIPAA & Data Protection",
     titlePlain: "BellMedEx ",

@@ -22,7 +22,10 @@ export interface PhysicianExploreFeature {
   iconName?: string;
 }
 
+import type { PageSeo } from './seo';
+
 export interface PhysicianBillingServicesPageData {
+  seo?: PageSeo;
   hero: {
     badge: string;
     titlePlain: string;

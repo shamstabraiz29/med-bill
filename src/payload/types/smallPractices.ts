@@ -39,7 +39,10 @@ export interface SmallPracticeEaseFeature {
   description: string;
 }
 
+import type { PageSeo } from './seo';
+
 export interface SmallPracticesPageData {
+  seo?: PageSeo;
   hero: {
     badge: string;
     titlePlain: string;

@@ -1,6 +1,19 @@
 import { OutsourceMedicalBillingPageData } from "@/payload/types/outsourceMedicalBilling";
 
 export const defaultOutsourceMedicalBillingData: OutsourceMedicalBillingPageData = {
+  seo: {
+    metaTitle: "Outsource Medical Billing Services | BellMedEx",
+    metaDescription: "Outsource your practice medical billing to BellMedEx to increase clean claims rates, eliminate overhead, and boost revenue by 30%.",
+    keywords: "outsource medical billing, medical billing outsourcing, outsourced RCM, billing company USA",
+    canonicalUrl: "https://bellmedex.com/outsource-medical-billing",
+    robots: "index, follow",
+    openGraph: {
+      ogTitle: "Outsource Medical Billing Services | BellMedEx",
+      ogDescription: "Outsource your practice medical billing to BellMedEx to increase clean claims rates, eliminate overhead, and boost revenue by 30%.",
+      ogType: "website",
+      ogUrl: "https://bellmedex.com/outsource-medical-billing",
+    },
+  },
   hero: {
     badge: "Outsource Medical Billing.",
     titlePlain: "Outsource Medical Billing Services at Just ",

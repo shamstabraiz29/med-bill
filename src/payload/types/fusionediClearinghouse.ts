@@ -95,7 +95,10 @@ export interface FusionediGetStartedCtaData {
   buttonLink: string;
 }
 
+import type { PageSeo } from './seo';
+
 export interface FusionediClearinghousePageData {
+  seo?: PageSeo;
   hero: FusionediHeroData;
   dashboard: FusionediDashboardData;
   features: FusionediFeaturesData;

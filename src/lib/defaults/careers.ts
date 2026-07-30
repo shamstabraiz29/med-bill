@@ -74,6 +74,12 @@ export const defaultCareersData: CareersData = {
     keywords: "BellMedEx careers, medical billing jobs, RCM careers, healthcare billing jobs",
     robots: "index, follow",
     canonicalUrl: "https://bellmedex.com/careers",
+    openGraph: {
+      ogTitle: "Careers & Job Opportunities | BellMedEx Healthcare RCM",
+      ogDescription: "Join the BellMedEx team. Explore career opportunities in medical billing, coding, credentialing, IT, sales, and healthcare revenue cycle management.",
+      ogType: "website",
+      ogUrl: "https://bellmedex.com/careers",
+    },
   },
 };
 

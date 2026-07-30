@@ -90,7 +90,10 @@ export interface EhrGetStartedCtaData {
   buttonLink: string;
 }
 
+import type { PageSeo } from './seo';
+
 export interface ElectronicHealthRecordsEhrPageData {
+  seo?: PageSeo;
   hero: EhrHeroData;
   features: EhrFeaturesData;
   icd10Cta: EhrIcd10CtaData;

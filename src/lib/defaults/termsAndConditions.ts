@@ -1,6 +1,19 @@
 import { TermsAndConditionsData } from "@/payload/types/termsAndConditions";
 
 export const defaultTermsAndConditionsData: TermsAndConditionsData = {
+  seo: {
+    metaTitle: "Terms & Conditions | BellMedEx Healthcare RCM",
+    metaDescription: "Terms and conditions governing the use of BellMedEx website, services, and software applications.",
+    keywords: "bellmedex terms, terms of service, legal conditions",
+    canonicalUrl: "https://bellmedex.com/terms-and-conditions",
+    robots: "index, follow",
+    openGraph: {
+      ogTitle: "Terms & Conditions | BellMedEx Healthcare RCM",
+      ogDescription: "Terms and conditions governing the use of BellMedEx website, services, and software applications.",
+      ogType: "website",
+      ogUrl: "https://bellmedex.com/terms-and-conditions",
+    },
+  },
   hero: {
     badge: "Legal Agreement",
     titlePlain: "Terms & ",
