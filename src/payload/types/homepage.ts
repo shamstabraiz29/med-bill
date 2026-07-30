@@ -245,22 +245,26 @@ export interface HomepagePricingQuote {
 /** Testimonial item */
 export interface TestimonialItem {
   name: string
-  specialty: string
+  specialty?: string
   clinicName?: string
   text: string
   avatarPath?: string
   rating?: number
+  reviewTitle?: string
+  date?: string
   id?: string
 }
 
 /** Testimonials Section */
 export interface HomepageTestimonials {
   preHeader?: string
-  badge: string
+  badge?: string
   titlePlain: string
   titleHighlight: string
   titleSuffix?: string
-  description: string
+  description?: string
+  trustpilotRating?: string
+  trustpilotReviewCount?: string
   items: TestimonialItem[]
 }
 

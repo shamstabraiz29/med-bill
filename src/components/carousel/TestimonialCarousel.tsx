@@ -2,22 +2,55 @@
 
 import { useState, useEffect, useRef } from "react";
 import TestimonialCard from "./TestimonialCard";
+import TrustpilotReviewCard from "./TrustpilotReviewCard";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import SectionHeader from "@/components/ui/SectionHeader";
 import type { HomepageTestimonials } from "@/payload/types/homepage";
 
 interface TestimonialCarouselProps {
   data: HomepageTestimonials;
+  variant?: "default" | "trustpilot";
 }
 
-export default function TestimonialCarousel({ data }: TestimonialCarouselProps) {
+function TrustpilotMark() {
+  return (
+    <svg className="h-4 w-4 shrink-0 fill-[#00B67A]" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 0l3.692 7.478 8.308 1.207-6.008 5.856 1.419 8.273-7.411-3.897-7.412 3.897 1.419-8.273-6.008-5.856 8.308-1.207z" />
+    </svg>
+  );
+}
+
+function TrustpilotSummary({
+  rating,
+  reviewCount,
+}: {
+  rating: string;
+  reviewCount: string;
+}) {
+  return (
+    <p className="text-sm text-[#475569] sm:text-base">
+      Rated {rating} based on{" "}
+      <span className="underline decoration-[#475569]/40 underline-offset-2">{reviewCount}</span>{" "}
+      reviews on{" "}
+      <span className="inline-flex items-center gap-1 font-semibold text-[#0F172A]">
+        <TrustpilotMark />
+        Trustpilot
+      </span>
+    </p>
+  );
+}
+
+export default function TestimonialCarousel({
+  data,
+  variant = "default",
+}: TestimonialCarouselProps) {
+  const isTrustpilot = variant === "trustpilot";
   const [visibleCount, setVisibleCount] = useState(3);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
-  
-  // Drag/Swipe State
+
   const dragStartX = useRef(0);
   const isDragging = useRef(false);
   const [dragOffset, setDragOffset] = useState(0);
@@ -42,14 +75,12 @@ export default function TestimonialCarousel({ data }: TestimonialCarouselProps) 
 
   const maxIndex = testimonials.length - visibleCount;
 
-  // Safe checks to avoid activeIndex out of bounds after resize
   useEffect(() => {
     if (activeIndex > maxIndex) {
       setActiveIndex(maxIndex >= 0 ? maxIndex : 0);
     }
   }, [visibleCount, activeIndex, maxIndex]);
 
-  // Autoplay Logic
   useEffect(() => {
     if (!isMounted || isPaused || isDragging.current) return;
     const interval = setInterval(() => {
@@ -66,13 +97,11 @@ export default function TestimonialCarousel({ data }: TestimonialCarouselProps) 
     setActiveIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
   };
 
-  // Keyboard navigation support
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowLeft") handlePrev();
     if (e.key === "ArrowRight") handleNext();
   };
 
-  // Touch Swipe Handlers
   const handleTouchStart = (e: React.TouchEvent) => {
     dragStartX.current = e.touches[0].clientX;
     isDragging.current = true;
@@ -80,8 +109,7 @@ export default function TestimonialCarousel({ data }: TestimonialCarouselProps) 
 
   const handleTouchMove = (e: React.TouchEvent) => {
     if (!isDragging.current) return;
-    const currentX = e.touches[0].clientX;
-    setDragOffset(currentX - dragStartX.current);
+    setDragOffset(e.touches[0].clientX - dragStartX.current);
   };
 
   const handleTouchEnd = () => {
@@ -96,7 +124,6 @@ export default function TestimonialCarousel({ data }: TestimonialCarouselProps) 
     setDragOffset(0);
   };
 
-  // Mouse Drag Handlers (Desktop)
   const handleMouseDown = (e: React.MouseEvent) => {
     dragStartX.current = e.clientX;
     isDragging.current = true;
@@ -119,127 +146,167 @@ export default function TestimonialCarousel({ data }: TestimonialCarouselProps) 
     setDragOffset(0);
   };
 
+  const navButtonClassName =
+    "flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#E2E6EC] bg-white text-[#475569] transition-all hover:border-blue-100 hover:text-[#1D4ED8] hover:shadow-sm active:scale-95 outline-none focus:ring-2 focus:ring-blue-100 sm:h-11 sm:w-11";
+
+  const description =
+    isTrustpilot && data.trustpilotRating && data.trustpilotReviewCount ? (
+      <TrustpilotSummary
+        rating={data.trustpilotRating}
+        reviewCount={data.trustpilotReviewCount}
+      />
+    ) : (
+      data.description
+    );
+
+  const sliderViewport = (
+    <div
+      ref={trackRef}
+      className="relative w-full overflow-hidden cursor-grab active:cursor-grabbing"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+    >
+      <div
+        className="flex transition-transform duration-500 ease-out"
+        style={{
+          transform: `translateX(calc(-${activeIndex * (100 / (isMounted ? visibleCount : 3))}% + ${dragOffset}px))`,
+        }}
+      >
+        {testimonials.map((test, idx) => (
+          <div
+            key={test.id || idx}
+            className="w-full flex-shrink-0 px-3 flex flex-col"
+            style={{ width: `${100 / (isMounted ? visibleCount : 3)}%` }}
+          >
+            {isTrustpilot ? (
+              <TrustpilotReviewCard
+                reviewTitle={test.reviewTitle || test.name}
+                name={test.name}
+                text={test.text}
+                date={test.date || ""}
+                rating={test.rating}
+              />
+            ) : (
+              <TestimonialCard
+                avatar={test.avatarPath || "/doctor-hero.png"}
+                name={test.name}
+                specialty={test.specialty || ""}
+                clinicName={test.clinicName}
+                text={test.text}
+                rating={test.rating}
+              />
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
   return (
-    <section 
-      className="relative w-full py-20 sm:py-24 bg-[#F5F7FA] border-y border-[#E2E6EC] overflow-hidden"
+    <section
+      className="relative w-full overflow-hidden border-y border-[#E2E6EC] bg-[#F5F7FA] py-16 sm:py-20"
       onKeyDown={handleKeyDown}
       tabIndex={0}
       aria-label="Client Testimonials Section"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Pre-header trust message */}
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {data.preHeader && (
-          <div className="text-center mb-3">
-            <span className="text-[11px] font-bold text-[#1D4ED8] uppercase tracking-widest leading-none">
+          <div className="mb-3 text-center">
+            <span className="text-[11px] font-bold uppercase leading-none tracking-widest text-[#1D4ED8]">
               {data.preHeader}
             </span>
           </div>
         )}
 
-        {/* Section Header */}
         <SectionHeader
-          badge={data.badge}
+          badge={isTrustpilot ? undefined : data.badge}
           badgeVariant="indigo"
           align="center"
           title={
             <>
-              {data.titlePlain}{" "}
-              <span className="text-blue-600 font-bold">
-                {data.titleHighlight}
-              </span>{" "}
+              {data.titlePlain}
+              <span className="font-bold text-blue-600">{data.titleHighlight}</span>
               {data.titleSuffix}
             </>
           }
-          description={data.description}
-          className="mb-14 sm:mb-16"
+          description={description}
+          className="mb-10 sm:mb-12"
         />
 
-        {/* Carousel Container */}
-        <div 
-          className="relative w-full flex flex-col items-center"
+        <div
+          className="relative w-full"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          {/* Slider Viewport */}
-          <div 
-            ref={trackRef}
-            className="relative w-full overflow-hidden pb-4 cursor-grab active:cursor-grabbing"
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseUp}
-          >
-            <div 
-              className="flex transition-transform duration-500 ease-out"
-              style={{ 
-                transform: `translateX(calc(-${activeIndex * (100 / (isMounted ? visibleCount : 3))}% + ${dragOffset}px))` 
-              }}
-            >
-              {testimonials.map((test, idx) => (
-                <div 
-                  key={test.id || idx} 
-                  className="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 px-3 flex flex-col"
-                  style={{ width: `${100 / (isMounted ? visibleCount : 3)}%` }}
-                >
-                  <TestimonialCard
-                    avatar={test.avatarPath || "/doctor-hero.png"}
-                    name={test.name}
-                    specialty={test.specialty}
-                    clinicName={test.clinicName}
-                    text={test.text}
-                    rating={test.rating}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Controls & Pagination row */}
-          <div className="flex flex-col sm:flex-row items-center justify-between w-full mt-10 gap-6">
-            
-            {/* Dots indicators */}
-            <div className="flex gap-2.5 items-center order-2 sm:order-1">
-              {Array.from({ length: isMounted ? (maxIndex >= 0 ? maxIndex + 1 : 1) : 3 }).map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setActiveIndex(idx)}
-                  className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                    idx === activeIndex 
-                      ? "w-6 bg-[#1D4ED8]" 
-                      : "w-2 bg-[#E2E6EC] hover:bg-[#475569]"
-                  }`}
-                  aria-label={`Go to slide ${idx + 1}`}
-                />
-              ))}
-            </div>
-
-            {/* Navigation buttons */}
-            <div className="flex items-center gap-3 order-1 sm:order-2">
-              <button 
+          {isTrustpilot ? (
+            <div className="flex items-center gap-2 sm:gap-4">
+              <button
+                type="button"
                 onClick={handlePrev}
-                className="w-11 h-11 rounded-full bg-white border border-[#E2E6EC] flex items-center justify-center text-[#475569] hover:text-[#1D4ED8] hover:border-blue-100 hover:shadow-sm transition-all cursor-pointer active:scale-95 outline-none focus:ring-2 focus:ring-blue-100"
+                className={navButtonClassName}
                 aria-label="Previous slide"
               >
-                <ChevronLeft className="w-5 h-5 stroke-[2]" />
+                <ChevronLeft className="h-5 w-5 stroke-[2]" />
               </button>
-              
-              <button 
+              {sliderViewport}
+              <button
+                type="button"
                 onClick={handleNext}
-                className="w-11 h-11 rounded-full bg-white border border-[#E2E6EC] flex items-center justify-center text-[#475569] hover:text-[#1D4ED8] hover:border-blue-100 hover:shadow-sm transition-all cursor-pointer active:scale-95 outline-none focus:ring-2 focus:ring-blue-100"
+                className={navButtonClassName}
                 aria-label="Next slide"
               >
-                <ChevronRight className="w-5 h-5 stroke-[2]" />
+                <ChevronRight className="h-5 w-5 stroke-[2]" />
               </button>
             </div>
+          ) : (
+            <>
+              {sliderViewport}
+              <div className="mt-10 flex w-full flex-col items-center justify-between gap-6 sm:flex-row">
+                <div className="order-2 flex items-center gap-2.5 sm:order-1">
+                  {Array.from({ length: isMounted ? (maxIndex >= 0 ? maxIndex + 1 : 1) : 3 }).map(
+                    (_, idx) => (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => setActiveIndex(idx)}
+                        className={`h-2 cursor-pointer rounded-full transition-all duration-300 ${
+                          idx === activeIndex
+                            ? "w-6 bg-[#1D4ED8]"
+                            : "w-2 bg-[#E2E6EC] hover:bg-[#475569]"
+                        }`}
+                        aria-label={`Go to slide ${idx + 1}`}
+                      />
+                    )
+                  )}
+                </div>
 
-          </div>
-
+                <div className="order-1 flex items-center gap-3 sm:order-2">
+                  <button
+                    type="button"
+                    onClick={handlePrev}
+                    className={navButtonClassName}
+                    aria-label="Previous slide"
+                  >
+                    <ChevronLeft className="h-5 w-5 stroke-[2]" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleNext}
+                    className={navButtonClassName}
+                    aria-label="Next slide"
+                  >
+                    <ChevronRight className="h-5 w-5 stroke-[2]" />
+                  </button>
+                </div>
+              </div>
+            </>
+          )}
         </div>
-
       </div>
     </section>
   );
