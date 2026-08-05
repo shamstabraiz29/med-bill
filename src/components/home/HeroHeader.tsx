@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "motion/react";
-import SectionBadge from "@/components/ui/SectionBadge";
-import { blurRevealVariants, springPopVariants, staggerContainerVariants } from "@/lib/motion";
+import { HomeAccent } from "@/components/home/shared/HomeSectionHeader";
+import { blurRevealVariants, staggerContainerVariants } from "@/lib/motion";
 
 interface HeroHeaderProps {
   eyebrow: string;
@@ -27,36 +27,25 @@ export default function HeroHeader({
     <motion.div
       initial="hidden"
       animate="visible"
-      variants={staggerContainerVariants(0.12, 0.05)}
-      className="flex flex-col space-y-6 text-left"
+      variants={staggerContainerVariants(0.08, 0.04)}
+      className="flex flex-col gap-5"
     >
-      {/* Eyebrow Badge */}
-      <motion.div variants={springPopVariants}>
-        <SectionBadge variant="blue" pulse>
-          {eyebrow}
-        </SectionBadge>
-      </motion.div>
+      <motion.span variants={blurRevealVariants} className="hp-badge">
+        {eyebrow}
+      </motion.span>
 
-      {/* Headline */}
       <motion.h1
         id={headingId}
         variants={blurRevealVariants}
-        className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F172A] tracking-[-0.02em] leading-[1.18] lg:max-w-2xl"
+        className="text-[2rem] font-bold leading-[1.12] tracking-tight text-slate-900 sm:text-4xl lg:text-[2.85rem]"
       >
-        {titlePrefix}{" "}
-        <span className="text-[#1D4ED8]">
-          {titleHighlight}
-        </span>
+        {titlePrefix} <HomeAccent accent>{titleHighlight}</HomeAccent>
         {titleSuffix && ` ${titleSuffix}`}
       </motion.h1>
 
-      {/* Copy paragraphs */}
-      <motion.div
-        variants={blurRevealVariants}
-        className="space-y-4 text-[#475569] text-sm sm:text-base leading-[1.6] max-w-2xl"
-      >
+      <motion.div variants={blurRevealVariants} className="max-w-lg space-y-3 text-base leading-relaxed text-slate-600">
         <p>{description1}</p>
-        <p>{description2}</p>
+        <p className="text-slate-500">{description2}</p>
       </motion.div>
     </motion.div>
   );
