@@ -21,6 +21,24 @@ import { PhysicianBillingServices } from '@/payload/globals/PhysicianBillingServ
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+const isLocalDatabaseUri =
+  process.env.DATABASE_URI?.includes('localhost') ||
+  process.env.DATABASE_URI?.includes('127.0.0.1')
+
+// Neon via Vercel Storage uses DATABASE_URL; ignore localhost DATABASE_URI on Vercel.
+const databaseUri =
+  process.env.DATABASE_URL ||
+  process.env.POSTGRES_URL ||
+  process.env.POSTGRES_PRISMA_URL ||
+  (!isLocalDatabaseUri ? process.env.DATABASE_URI : undefined) ||
+  ''
+
+if (!databaseUri && (process.env.VERCEL || process.env.NODE_ENV === 'production')) {
+  throw new Error(
+    'No database connection string found. Connect Neon/Postgres in Vercel Storage, or set DATABASE_URL / DATABASE_URI.',
+  )
+}
+
 import { RevenueCycleManagement } from '@/payload/globals/RevenueCycleManagement'
 import { MedicalBilling } from '@/payload/globals/MedicalBilling'
 import { MedicalCoding } from '@/payload/globals/MedicalCoding'
@@ -104,18 +122,21 @@ export default buildConfig({
     CookiesPolicy,
   ],
 
-  serverURL: process.env.NEXT_PUBLIC_SERVER_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : ''),
+  serverURL:
+    process.env.NEXT_PUBLIC_SERVER_URL ||
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : ''),
 
   db: postgresAdapter({
     pool: {
-      connectionString: process.env.DATABASE_URI || '',
+      connectionString: databaseUri,
       ssl:
-        !process.env.DATABASE_URI?.includes('localhost') &&
-        !process.env.DATABASE_URI?.includes('127.0.0.1') &&
-        (process.env.DATABASE_URI?.includes('sslmode=require') ||
-          process.env.DATABASE_URI?.includes('neon.tech') ||
-          process.env.DATABASE_URI?.includes('supabase') ||
-          process.env.DATABASE_URI?.includes('pooler') ||
+        !databaseUri.includes('localhost') &&
+        !databaseUri.includes('127.0.0.1') &&
+        (databaseUri.includes('sslmode=require') ||
+          databaseUri.includes('neon.tech') ||
+          databaseUri.includes('supabase') ||
+          databaseUri.includes('pooler') ||
           Boolean(process.env.VERCEL))
           ? { rejectUnauthorized: false }
           : false,
