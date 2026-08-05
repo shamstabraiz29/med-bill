@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 import type { HomepageProviderChallenges } from "@/payload/types/homepage";
 
 const inputClassName =
-  "h-11 rounded-xl border-white/20 bg-white/10 text-white placeholder:text-slate-400 focus:bg-white/15 focus:border-white/40 focus:ring-4 focus:ring-white/10 text-xs sm:text-sm transition-all shadow-none";
+  "h-11 rounded-lg border-white/20 bg-white/10 text-white placeholder:text-white/50 focus:bg-white/15 focus:border-white/40 focus:ring-4 focus:ring-white/10 text-xs sm:text-sm transition-all shadow-none";
 
 interface ProviderChallengesSectionProps {
   data: HomepageProviderChallenges;
@@ -65,21 +65,21 @@ export default function ProviderChallengesSection({ data }: ProviderChallengesSe
   };
 
   return (
-    <section className="flex w-full items-center justify-center bg-transparent px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
-      <div className="w-full max-w-7xl">
+    <section className="hp-section px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-7xl mx-auto">
         <MotionWrapper variant="scaleUp">
-          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0F172A] p-8 text-white shadow-lg sm:p-12">
+          <div className="hp-dark-panel overflow-hidden p-8 sm:p-12 lg:p-14">
             <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-16">
               <div className="space-y-6 text-left lg:col-span-7">
-                <div className="max-w-xl space-y-3.5">
+                <div className="max-w-xl space-y-4">
                   <SectionBadge variant="dark">{data.badge}</SectionBadge>
 
-                  <h2 className="text-2xl font-bold leading-tight tracking-tight sm:text-3xl sm:leading-snug lg:text-4xl">
+                  <h2 className="font-display text-2xl font-semibold leading-[1.15] tracking-[-0.025em] sm:text-3xl lg:text-4xl">
                     {data.titlePlain}{" "}
-                    <span className="font-bold text-amber-300">{data.titleHighlight}</span>
+                    <span className="font-semibold text-[var(--hp-accent-warm)]">{data.titleHighlight}</span>
                   </h2>
 
-                  <p className="text-sm leading-relaxed text-blue-200 sm:text-base">{data.description}</p>
+                  <p className="text-sm leading-relaxed text-white/75 sm:text-base">{data.description}</p>
                 </div>
 
                 <div className="space-y-3 pt-2">
@@ -92,24 +92,24 @@ export default function ProviderChallengesSection({ data }: ProviderChallengesSe
                         type="button"
                         onClick={() => handleToggle(idx)}
                         className={cn(
-                          "flex w-full items-center gap-4 rounded-xl border p-4 text-left transition-all duration-200",
+                          "flex w-full items-center gap-4 rounded-lg border p-4 text-left transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30",
                           isSelected
-                            ? "border-[#1D4ED8]/40 bg-[#1D4ED8]/10 text-white"
-                            : "border-white/[0.08] bg-white/[0.04] text-slate-300 hover:border-white/20 hover:bg-white/[0.08] hover:text-white"
+                            ? "border-primary/50 bg-primary/15 text-white"
+                            : "border-white/[0.08] bg-white/[0.04] text-white/70 hover:border-white/20 hover:bg-white/[0.08] hover:text-white"
                         )}
                       >
                         <span
                           className={cn(
-                            "flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border transition-all duration-200",
+                            "flex h-6 w-6 shrink-0 items-center justify-center rounded-md border transition-all duration-200",
                             isSelected
-                              ? "border-[#1D4ED8] bg-[#1D4ED8] text-white"
+                              ? "border-primary bg-primary text-primary-foreground"
                               : "border-white/20 bg-white/5"
                           )}
                           aria-hidden="true"
                         >
                           {isSelected ? <Check className="h-3.5 w-3.5 stroke-[3]" /> : null}
                         </span>
-                        <span className="text-xs font-medium leading-relaxed sm:text-sm">
+                        <span className="text-sm font-medium leading-relaxed">
                           {challenge.label}
                         </span>
                       </button>
@@ -119,16 +119,16 @@ export default function ProviderChallengesSection({ data }: ProviderChallengesSe
               </div>
 
               <div className="w-full lg:col-span-5">
-                <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 shadow-xl backdrop-blur-md sm:p-8 text-left">
-                  <div className="mb-6 space-y-1.5 text-left">
-                    <h3 className="text-lg font-bold tracking-tight text-white">{data.formTitle}</h3>
-                    <p className="text-xs leading-relaxed text-blue-200 sm:text-sm">
+                <div className="relative overflow-hidden rounded-xl border border-white/10 bg-white/[0.04] p-6 sm:p-8 text-left">
+                  <div className="mb-6 space-y-2 text-left">
+                    <h3 className="font-display text-lg font-semibold tracking-tight text-white">{data.formTitle}</h3>
+                    <p className="text-xs leading-relaxed text-white/70 sm:text-sm">
                       {data.formDescription}
                     </p>
                   </div>
 
                   {isSubmitted ? (
-                    <div className="space-y-2 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-6 text-center text-emerald-300">
+                    <div className="space-y-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-6 text-center text-emerald-300">
                       <Check className="mx-auto h-8 w-8 text-emerald-400 stroke-[3]" />
                       <h4 className="text-base font-bold text-white">Assessment Request Submitted!</h4>
                       <p className="text-xs text-emerald-200 sm:text-sm">

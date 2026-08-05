@@ -309,6 +309,99 @@ body {
   to   { transform: rotate(-360deg); }
 }
 
+/* ─── Homepage Theme — typography & utilities only (inherits :root bg/colors) ─── */
+.homepage-theme {
+  --font-sans: var(--font-home-body), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-home-display), Georgia, "Times New Roman", serif;
+
+  --hp-ink: oklch(0.158 0.027 265);
+  --hp-accent-warm: oklch(0.86 0.15 85);
+
+  font-family: var(--font-sans);
+}
+
+.homepage-theme h1,
+.homepage-theme h2,
+.homepage-theme h3,
+.homepage-theme .font-display {
+  font-family: var(--font-heading);
+  letter-spacing: -0.025em;
+}
+
+.homepage-theme .hp-section {
+  @apply relative w-full py-20 sm:py-24 lg:py-28;
+}
+
+.homepage-theme .hp-section-alt {
+  @apply bg-slate-50/30 border-y border-slate-200/40;
+}
+
+.homepage-theme .hp-card {
+  @apply bg-card border border-border rounded-2xl transition-all duration-200;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+
+.homepage-theme .hp-card:hover {
+  @apply border-primary/15;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+.homepage-theme .hp-icon {
+  @apply inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/8 text-primary;
+}
+
+.homepage-theme .hp-stat-value {
+  @apply text-4xl sm:text-5xl font-bold text-foreground tabular-nums;
+  font-family: var(--font-heading);
+  letter-spacing: -0.03em;
+}
+
+.homepage-theme .hp-dark-panel {
+  background: var(--hp-ink);
+  @apply text-white border border-white/10 rounded-2xl;
+  box-shadow: 0 16px 48px rgba(15, 23, 42, 0.15);
+}
+
+/* Hero */
+.homepage-theme .hp-hero {
+  @apply border-b border-border/60;
+}
+
+.homepage-theme .hp-hero-form-panel {
+  @apply rounded-2xl border border-border/80 bg-card/80 backdrop-blur-md p-4 sm:p-5;
+  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.06);
+}
+
+/* Doctors team comparison rows */
+.homepage-theme .hp-compare-negative {
+  @apply border-red-200/70 bg-red-50/50;
+}
+
+.homepage-theme .hp-compare-positive {
+  @apply border-emerald-200/70 bg-emerald-50/40;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-orb {
+    animation: none !important;
+  }
+  .animate-spin-slow {
+    animation: none !important;
+  }
+}
+
+.hero-orb {
+  animation: orb-drift-1 28s ease-in-out infinite alternate;
+}
+
+.hero-orb-delayed {
+  animation: orb-drift-2 32s ease-in-out infinite alternate;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 40s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-\[pulse_10s_ease-in-out_infinite\],
   .animate-\[pulse_14s_ease-in-out_infinite_alternate\],

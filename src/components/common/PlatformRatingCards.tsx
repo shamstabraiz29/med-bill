@@ -209,7 +209,7 @@ function RatingStars({ color }: { color: string }) {
 }
 
 const cardClassName =
-  "group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/80 bg-white/90 p-4 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.04)] backdrop-blur-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#1D4ED8]/30 hover:shadow-xl hover:shadow-blue-500/10 sm:p-5";
+  "flex h-full flex-col justify-between rounded-2xl border border-border bg-card p-4 shadow-sm transition-shadow hover:border-primary/15 hover:shadow-md sm:p-5";
 
 interface TrustIndicatorCardProps {
   icon: React.ReactNode;
@@ -221,23 +221,23 @@ interface TrustIndicatorCardProps {
 export function TrustIndicatorCard({ icon, title, subtitle, badge }: TrustIndicatorCardProps) {
   return (
     <article className={cardClassName}>
-      <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
-        <div className="flex h-7 w-7 items-center justify-center rounded-lg border border-slate-200/60 bg-slate-50 shadow-2xs transition-transform group-hover:scale-105">
+        <div className="flex items-center justify-between gap-2 border-b border-border pb-3">
+          <div className="flex h-7 w-7 items-center justify-center rounded-lg border border-border bg-muted transition-transform group-hover:scale-105">
           {icon}
         </div>
         {badge ? (
-          <span className="inline-flex items-center gap-1 rounded-full bg-slate-100/80 px-2 py-0.5 text-[10px] font-semibold text-[#475569]">
-            <CheckCircle2 className="h-2.5 w-2.5 text-[#1D4ED8]" aria-hidden="true" />
+          <span className="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-0.5 text-[10px] font-semibold text-muted-foreground">
+            <CheckCircle2 className="h-2.5 w-2.5 text-primary" aria-hidden="true" />
             {badge}
           </span>
         ) : null}
       </div>
 
       <div className="my-3">
-        <span className="block text-2xl font-black tracking-tight text-[#0F172A] sm:text-3xl">{title}</span>
+        <span className="block text-2xl font-bold tracking-tight text-foreground sm:text-3xl">{title}</span>
       </div>
 
-      <div className="text-[11px] font-medium text-[#64748B]">{subtitle}</div>
+      <div className="text-[11px] font-medium text-muted-foreground">{subtitle}</div>
     </article>
   );
 }
@@ -247,26 +247,26 @@ export function PlatformRatingCard({ rating }: { rating: PlatformRating }) {
 
   return (
     <article className={cardClassName}>
-      <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
+      <div className="flex items-center justify-between gap-2 border-b border-border pb-3">
         <div className="flex items-center gap-2">
-          <div className="flex h-7 w-7 items-center justify-center rounded-lg border border-slate-200/60 bg-slate-50 shadow-2xs transition-transform group-hover:scale-105">
+          <div className="flex h-7 w-7 items-center justify-center rounded-lg border border-border bg-muted transition-transform group-hover:scale-105">
             {rating.icon}
           </div>
-          <span className="text-xs font-bold tracking-tight text-[#0F172A]">{rating.platform}</span>
+          <span className="text-xs font-bold tracking-tight text-foreground">{rating.platform}</span>
         </div>
-        <span className="inline-flex items-center gap-1 rounded-full bg-slate-100/80 px-2 py-0.5 text-[10px] font-semibold text-[#475569]">
-          <CheckCircle2 className="h-2.5 w-2.5 text-[#1D4ED8]" aria-hidden="true" />
+        <span className="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-0.5 text-[10px] font-semibold text-muted-foreground">
+          <CheckCircle2 className="h-2.5 w-2.5 text-primary" aria-hidden="true" />
           {rating.badge}
         </span>
       </div>
 
       <div className="my-3 flex items-baseline justify-between gap-2">
         <div className="flex items-baseline gap-1">
-          <span className="text-2xl font-black tracking-tight text-[#0F172A] sm:text-3xl">
+          <span className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
             {rating.value}
           </span>
           {rating.maxScore ? (
-            <span className="text-xs font-medium text-slate-400">{rating.maxScore}</span>
+            <span className="text-xs font-medium text-muted-foreground">{rating.maxScore}</span>
           ) : null}
         </div>
         {showStars && rating.starColor ? <RatingStars color={rating.starColor} /> : null}

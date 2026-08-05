@@ -20,10 +20,8 @@ export default function FAQSection({ data }: FAQSectionProps) {
   };
 
   return (
-    <section className="relative w-full py-20 sm:py-24 bg-transparent overflow-hidden">
+    <section className="hp-section overflow-hidden bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Header Block - Centered */}
         <div className="max-w-3xl mx-auto text-center mb-16 sm:mb-20">
           <SectionHeader
             badge={data.badge}
@@ -32,7 +30,7 @@ export default function FAQSection({ data }: FAQSectionProps) {
             title={
               <>
                 {data.titlePlain}{" "}
-                <span className="text-blue-600">{data.titleHighlight}</span>
+                <span className="text-primary">{data.titleHighlight}</span>
               </>
             }
             description={data.description}
@@ -40,12 +38,11 @@ export default function FAQSection({ data }: FAQSectionProps) {
           />
         </div>
 
-        {/* Full-Width FAQ Accordion List */}
-        <div className="w-full">
+        <div className="w-full max-w-4xl mx-auto">
           <MotionWrapper
             variant="stagger"
             staggerDelay={0.05}
-            className="divide-y divide-[#E2E6EC]"
+            className="divide-y divide-border border-y border-border"
           >
             {data.faqs.map((faq, idx) => {
               const isOpen = openIndex === idx;
@@ -56,29 +53,26 @@ export default function FAQSection({ data }: FAQSectionProps) {
                 <MotionWrapper
                   key={faq.id || idx}
                   variant="staggerItem"
-                  className="py-5 sm:py-6 first:pt-0 last:pb-0"
+                  className="py-1 first:pt-0 last:pb-0"
                 >
-                  {/* Accordion Container with Hover Highlight */}
-                  <div className="hover:bg-[#F5F7FA] rounded-2xl px-4 -mx-4 transition-colors duration-300">
-                    {/* Accordion Trigger */}
+                  <div className="hover:bg-muted/50 rounded-lg px-4 -mx-4 transition-colors duration-200">
                     <button
                       id={headerId}
                       onClick={() => toggleFAQ(idx)}
                       aria-expanded={isOpen}
                       aria-controls={controlsId}
-                      className="w-full flex items-center justify-between text-left py-4 group select-none cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-100 rounded-lg"
+                      className="w-full flex items-center justify-between text-left py-5 group select-none cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-lg"
                     >
-                      <span className="text-base sm:text-lg font-bold text-[#0F172A] group-hover:text-[#1D4ED8] transition-colors duration-200 pr-4 leading-[1.18]">
+                      <span className="font-display text-base sm:text-lg font-semibold text-foreground group-hover:text-primary transition-colors duration-200 pr-4 leading-snug">
                         {faq.question}
                       </span>
                       <ChevronDown
-                        className={`w-5 h-5 text-[#475569] shrink-0 group-hover:text-[#1D4ED8] transition-transform duration-300 ${
-                          isOpen ? "rotate-180 text-[#1D4ED8]" : ""
+                        className={`w-5 h-5 text-muted-foreground shrink-0 group-hover:text-primary transition-transform duration-300 ${
+                          isOpen ? "rotate-180 text-primary" : ""
                         }`}
                       />
                     </button>
 
-                    {/* Accordion Content with Custom easeOutExpo Curve */}
                     <AnimatePresence initial={false}>
                       {isOpen && (
                         <motion.div
@@ -91,7 +85,7 @@ export default function FAQSection({ data }: FAQSectionProps) {
                           transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                           className="overflow-hidden"
                         >
-                          <div className="text-[#475569] text-sm sm:text-base leading-[1.6] pb-5 pr-4 pl-0.5 text-left">
+                          <div className="text-muted-foreground text-sm sm:text-base leading-relaxed pb-5 pr-4 text-left">
                             {faq.answer}
                           </div>
                         </motion.div>
@@ -104,17 +98,16 @@ export default function FAQSection({ data }: FAQSectionProps) {
           </MotionWrapper>
         </div>
 
-        {/* Centered Help Panel at the Bottom */}
-        <div className="mt-16 sm:mt-24 text-center border-t border-[#E2E6EC] pt-16 max-w-xl mx-auto flex flex-col items-center justify-center space-y-6">
+        <div className="mt-16 sm:mt-24 text-center border-t border-border pt-16 max-w-xl mx-auto flex flex-col items-center justify-center space-y-6">
           <div className="flex items-center gap-3">
-            <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-blue-50 text-[#1D4ED8]">
+            <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-accent text-primary">
               <MessageSquare className="w-5 h-5" />
             </div>
-            <h4 className="text-lg font-bold text-[#0F172A] tracking-[-0.02em]">
+            <h4 className="font-display text-lg font-semibold text-foreground">
               {data.helpTitle}
             </h4>
           </div>
-          <p className="text-[#475569] text-sm sm:text-base leading-[1.6]">
+          <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
             {data.helpDescription}
           </p>
           <div className="pt-2 flex flex-col sm:flex-row gap-4 w-full justify-center">
@@ -136,12 +129,11 @@ export default function FAQSection({ data }: FAQSectionProps) {
             </AppButton>
           </div>
           {data.footerNote && (
-            <p className="text-[10px] text-slate-400 font-semibold tracking-wider uppercase">
+            <p className="text-[10px] text-muted-foreground font-semibold tracking-[0.12em] uppercase">
               {data.footerNote}
             </p>
           )}
         </div>
-
       </div>
     </section>
   );

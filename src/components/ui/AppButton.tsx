@@ -28,18 +28,18 @@ export default function AppButton({
   onClick,
 }: AppButtonProps) {
   const sizeStyles = {
-    sm: "px-4 py-2 text-xs rounded-2xl",
-    md: "px-6 py-3 text-sm rounded-2xl",
-    lg: "px-8 py-3.5 sm:py-4 text-sm sm:text-base rounded-2xl",
+    sm: "px-4 py-2 text-xs rounded-lg",
+    md: "px-6 py-3 text-sm rounded-lg",
+    lg: "px-8 py-3.5 sm:py-4 text-sm sm:text-base rounded-xl",
   };
 
   const variantStyles = {
     primary:
-      "bg-[#1D4ED8] hover:bg-[#1E3A8A] text-white font-semibold shadow-sm hover:shadow-md hover:shadow-blue-900/10 border border-[#1D4ED8] hover:border-[#1E3A8A] tracking-wide transition-all duration-300 ease-out",
+      "bg-primary hover:bg-secondary text-primary-foreground font-semibold shadow-sm hover:shadow-md border border-primary hover:border-secondary transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
     secondary:
-      "bg-blue-50 hover:bg-blue-100 text-[#1D4ED8] font-semibold border border-blue-100 hover:border-blue-200 shadow-sm hover:shadow-sm tracking-wide transition-all duration-300 ease-out",
+      "bg-accent hover:bg-accent/80 text-accent-foreground font-semibold border border-border hover:border-primary/30 shadow-sm transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
     "secondary-dark":
-      "bg-white/15 hover:bg-white/25 text-white font-semibold border border-white/30 hover:border-white/50 shadow-sm tracking-wide transition-all duration-300 ease-out",
+      "bg-white/12 hover:bg-white/20 text-white font-semibold border border-white/25 hover:border-white/40 shadow-sm transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent",
   };
 
   const baseClasses = `group/btn inline-flex items-center justify-center gap-2 whitespace-nowrap select-none overflow-hidden active:scale-[0.98] disabled:opacity-60 disabled:pointer-events-none cursor-pointer outline-none ${sizeStyles[size]} ${variantStyles[variant]} ${className}`;
@@ -53,7 +53,6 @@ export default function AppButton({
       )}
     </>
   );
-
 
   if (href) {
     return (

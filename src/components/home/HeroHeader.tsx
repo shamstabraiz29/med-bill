@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import SectionBadge from "@/components/ui/SectionBadge";
-import { blurRevealVariants, springPopVariants, staggerContainerVariants } from "@/lib/motion";
+import { blurRevealVariants, staggerContainerVariants } from "@/lib/motion";
 
 interface HeroHeaderProps {
   eyebrow: string;
@@ -27,36 +27,28 @@ export default function HeroHeader({
     <motion.div
       initial="hidden"
       animate="visible"
-      variants={staggerContainerVariants(0.12, 0.05)}
-      className="flex flex-col space-y-6 text-left"
+      variants={staggerContainerVariants(0.08, 0.04)}
+      className="space-y-5 text-left"
     >
-      {/* Eyebrow Badge */}
-      <motion.div variants={springPopVariants}>
-        <SectionBadge variant="blue" pulse>
+      <motion.div variants={blurRevealVariants}>
+        <SectionBadge variant="blue" pulse={false}>
           {eyebrow}
         </SectionBadge>
       </motion.div>
 
-      {/* Headline */}
       <motion.h1
         id={headingId}
         variants={blurRevealVariants}
-        className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F172A] tracking-[-0.02em] leading-[1.18] lg:max-w-2xl"
+        className="font-display text-3xl sm:text-4xl lg:text-[2.85rem] xl:text-[3.15rem] font-semibold text-foreground tracking-tight leading-[1.1] max-w-2xl"
       >
         {titlePrefix}{" "}
-        <span className="text-[#1D4ED8]">
-          {titleHighlight}
-        </span>
+        <span className="text-primary">{titleHighlight}</span>
         {titleSuffix && ` ${titleSuffix}`}
       </motion.h1>
 
-      {/* Copy paragraphs */}
-      <motion.div
-        variants={blurRevealVariants}
-        className="space-y-4 text-[#475569] text-sm sm:text-base leading-[1.6] max-w-2xl"
-      >
-        <p>{description1}</p>
-        <p>{description2}</p>
+      <motion.div variants={blurRevealVariants} className="space-y-3 max-w-xl">
+        <p className="text-base sm:text-lg leading-relaxed text-muted-foreground">{description1}</p>
+        <p className="text-sm sm:text-base leading-relaxed text-muted-foreground">{description2}</p>
       </motion.div>
     </motion.div>
   );

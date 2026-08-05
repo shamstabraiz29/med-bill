@@ -19,55 +19,46 @@ export default function TestimonialCard({
   rating = 5,
 }: TestimonialCardProps) {
   return (
-    <div className="group/card relative w-full h-full bg-white border border-[#E2E6EC] rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.06)] p-8 flex flex-col justify-between items-center text-center transition-all duration-300 hover:shadow-[0_8px_32px_rgba(29,78,216,0.10)] hover:border-[#1D4ED8]/20 select-none">
-      
-      {/* Profile Area */}
+    <div className="hp-card flex h-full w-full flex-col items-center justify-between p-7 text-center">
       <div className="flex flex-col items-center space-y-3">
-        <div className="relative w-16 h-16 rounded-full overflow-hidden border border-[#E2E6EC] shrink-0">
+        <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full border border-border">
           <AppImage
             src={avatar}
             fallbackSrc="/doctor-hero.png"
             alt={`${name} - Client Avatar`}
             fill
-            className="object-cover object-top transition-transform duration-300 group-hover/card:scale-105"
+            className="object-cover object-top"
           />
         </div>
         <div>
-          <h4 className="text-[#0F172A] text-base font-bold tracking-[-0.02em]">
-            {name}
-          </h4>
-          <p className="text-[#475569] text-xs font-medium mt-0.5">
-            {specialty}
-          </p>
+          <h4 className="font-display text-base font-semibold text-foreground">{name}</h4>
+          <p className="mt-0.5 text-xs font-medium text-muted-foreground">{specialty}</p>
         </div>
       </div>
 
-      {/* Review Text */}
-      <div className="my-6 relative flex flex-col items-center">
-        <Quote className="w-8 h-8 text-[#1D4ED8]/5 absolute -top-4 pointer-events-none" />
-        <p className="text-[#475569] text-sm leading-[1.6] font-medium italic relative z-10">
+      <div className="relative my-6 px-1">
+        <Quote className="pointer-events-none absolute -top-4 left-1/2 h-7 w-7 -translate-x-1/2 text-primary/10" />
+        <p className="relative text-sm font-medium italic leading-relaxed text-muted-foreground">
           &ldquo;{text}&rdquo;
         </p>
       </div>
 
-      {/* Footer: Rating & Verification Status */}
-      <div className="w-full pt-5 border-t border-[#E2E6EC] flex flex-col items-center gap-2">
-        <div className="flex items-center gap-0.5 text-[#EAB308]">
+      <div className="flex w-full flex-col items-center gap-2 border-t border-border pt-5">
+        <div className="flex items-center gap-0.5 text-amber-500">
           {Array.from({ length: 5 }).map((_, i) => (
             <Star
               key={i}
-              className={`w-3.5 h-3.5 ${
-                i < Math.floor(rating) ? "fill-[#EAB308] text-[#EAB308]" : "text-[#E2E6EC]"
+              className={`h-3.5 w-3.5 ${
+                i < Math.floor(rating) ? "fill-amber-500 text-amber-500" : "text-border"
               }`}
             />
           ))}
         </div>
-        <div className="flex items-center gap-1.5 text-[#22C55E] text-[10px] font-bold uppercase tracking-wider">
-          <CheckCircle2 className="w-3.5 h-3.5 stroke-[2.5]" />
+        <div className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-emerald-600">
+          <CheckCircle2 className="h-3.5 w-3.5 stroke-[2.5]" />
           <span>{clinicName}</span>
         </div>
       </div>
-      
     </div>
   );
 }

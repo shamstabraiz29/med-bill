@@ -33,7 +33,7 @@ export default function SectionHeader({
 
   return (
     <div
-      className={`flex flex-col space-y-3.5 sm:space-y-4 ${
+      className={`flex flex-col space-y-4 sm:space-y-5 ${
         isCenter ? "items-center text-center mx-auto" : "items-start text-left"
       } ${className}`}
     >
@@ -48,8 +48,8 @@ export default function SectionHeader({
       )}
 
       <h2
-        className={`text-2xl sm:text-3xl lg:text-4xl font-bold tracking-[-0.02em] leading-[1.2] ${
-          isDark ? "text-white" : "text-[#0F172A]"
+        className={`font-display text-2xl sm:text-3xl lg:text-[2.5rem] font-semibold tracking-[-0.025em] leading-[1.15] ${
+          isDark ? "text-white" : "text-foreground"
         } ${titleClassName}`}
       >
         {title}
@@ -57,12 +57,10 @@ export default function SectionHeader({
 
       {description && (
         <div
-          className={`text-sm sm:text-base leading-[1.6] ${
+          className={`text-sm sm:text-base leading-relaxed ${
             isCenter ? "max-w-2xl" : "max-w-3xl"
           } ${
-            isDark
-              ? "text-blue-200"
-              : "text-[#475569]"
+            isDark ? "text-white/75" : "text-muted-foreground"
           } ${descriptionClassName}`}
         >
           {typeof description === "string" ? <p>{description}</p> : description}

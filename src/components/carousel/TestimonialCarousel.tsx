@@ -28,11 +28,11 @@ function TrustpilotSummary({
   reviewCount: string;
 }) {
   return (
-    <p className="text-sm text-[#475569] sm:text-base">
+    <p className="text-sm text-muted-foreground sm:text-base">
       Rated {rating} based on{" "}
-      <span className="underline decoration-[#475569]/40 underline-offset-2">{reviewCount}</span>{" "}
+      <span className="underline decoration-muted-foreground/40 underline-offset-2">{reviewCount}</span>{" "}
       reviews on{" "}
-      <span className="inline-flex items-center gap-1 font-semibold text-[#0F172A]">
+      <span className="inline-flex items-center gap-1 font-semibold text-foreground">
         <TrustpilotMark />
         Trustpilot
       </span>
@@ -147,7 +147,7 @@ export default function TestimonialCarousel({
   };
 
   const navButtonClassName =
-    "flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#E2E6EC] bg-white text-[#475569] transition-all hover:border-blue-100 hover:text-[#1D4ED8] hover:shadow-sm active:scale-95 outline-none focus:ring-2 focus:ring-blue-100 sm:h-11 sm:w-11";
+    "flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border bg-card text-muted-foreground transition-all hover:border-primary/30 hover:text-primary hover:shadow-sm active:scale-95 outline-none focus-visible:ring-2 focus-visible:ring-ring sm:h-11 sm:w-11";
 
   const description =
     isTrustpilot && data.trustpilotRating && data.trustpilotReviewCount ? (
@@ -209,7 +209,7 @@ export default function TestimonialCarousel({
 
   return (
     <section
-      className="relative w-full overflow-hidden border-y border-[#E2E6EC] bg-[#F5F7FA] py-16 sm:py-20"
+      className="hp-section bg-background border-y border-border overflow-hidden"
       onKeyDown={handleKeyDown}
       tabIndex={0}
       aria-label="Client Testimonials Section"
@@ -217,7 +217,7 @@ export default function TestimonialCarousel({
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {data.preHeader && (
           <div className="mb-3 text-center">
-            <span className="text-[11px] font-bold uppercase leading-none tracking-widest text-[#1D4ED8]">
+            <span className="text-[11px] font-bold uppercase leading-none tracking-[0.12em] text-primary">
               {data.preHeader}
             </span>
           </div>
@@ -230,7 +230,7 @@ export default function TestimonialCarousel({
           title={
             <>
               {data.titlePlain}
-              <span className="font-bold text-blue-600">{data.titleHighlight}</span>
+              <span className="font-semibold text-primary">{data.titleHighlight}</span>
               {data.titleSuffix}
             </>
           }
@@ -276,8 +276,8 @@ export default function TestimonialCarousel({
                         onClick={() => setActiveIndex(idx)}
                         className={`h-2 cursor-pointer rounded-full transition-all duration-300 ${
                           idx === activeIndex
-                            ? "w-6 bg-[#1D4ED8]"
-                            : "w-2 bg-[#E2E6EC] hover:bg-[#475569]"
+                            ? "w-6 bg-primary"
+                            : "w-2 bg-border hover:bg-muted-foreground"
                         }`}
                         aria-label={`Go to slide ${idx + 1}`}
                       />

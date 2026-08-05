@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { getHomepageData } from '@/lib/payload'
+import HomeTheme from '@/components/home/HomeTheme'
 import Hero from '@/components/Hero'
 import StatsCards from '@/components/home/StatsCards'
 import ServicesOverview from '@/components/home/ServicesOverview'
@@ -46,7 +47,7 @@ export default async function Home() {
   const data = await getHomepageData()
 
   return (
-    <div className="relative min-h-screen">
+    <HomeTheme>
       <Hero data={data.hero} />
       <StatsCards data={data.statsCards} />
       <ServicesOverview data={data.servicesOverview} />
@@ -60,6 +61,6 @@ export default async function Home() {
       <PricingQuoteSection data={data.pricingQuote} />
       <TestimonialCarousel data={data.testimonials} />
       <FAQSection data={data.faq} />
-    </div>
+    </HomeTheme>
   )
 }

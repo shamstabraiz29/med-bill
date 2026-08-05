@@ -88,7 +88,7 @@ export default function PricingQuoteSection({ data }: PricingQuoteSectionProps) 
   };
 
   return (
-    <section className="relative w-full py-20 sm:py-24 bg-transparent overflow-hidden">
+    <section className="hp-section overflow-hidden bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header Block - Centered */}
@@ -100,7 +100,7 @@ export default function PricingQuoteSection({ data }: PricingQuoteSectionProps) 
             title={
               <>
                 {data.titlePlain}{" "}
-                <span className="text-blue-600">{data.titleHighlight}</span>
+                <span className="text-primary">{data.titleHighlight}</span>
               </>
             }
             description={data.description}
@@ -113,13 +113,13 @@ export default function PricingQuoteSection({ data }: PricingQuoteSectionProps) 
           
           {/* Step Progress Bar */}
           <div className="w-full space-y-2 mb-8">
-            <div className="flex justify-between items-center text-xs font-bold text-slate-400 uppercase tracking-wider">
+            <div className="flex justify-between items-center text-xs font-bold text-muted-foreground uppercase tracking-[0.1em]">
               <span>Step {step} of 3</span>
               <span>{step === 1 ? "Practice Profile" : step === 2 ? "Volume & Services" : "Contact Details"}</span>
             </div>
-            <div className="w-full h-1 bg-slate-100 rounded-full overflow-hidden">
+            <div className="w-full h-1 bg-muted rounded-full overflow-hidden">
               <div 
-                className="h-full bg-blue-600 transition-all duration-300 ease-out" 
+                className="h-full bg-primary transition-all duration-300 ease-out" 
                 style={{ width: `${(step / 3) * 100}%` }}
               />
             </div>
@@ -131,7 +131,7 @@ export default function PricingQuoteSection({ data }: PricingQuoteSectionProps) 
             {step === 1 && (
               <div className="space-y-6">
                 <div className="space-y-3">
-                  <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider">
+                  <label className="block text-xs font-bold text-foreground uppercase tracking-[0.1em]">
                     Medical Specialty *
                   </label>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -142,8 +142,8 @@ export default function PricingQuoteSection({ data }: PricingQuoteSectionProps) 
                         onClick={() => handleSelect("specialty", spec)}
                         className={`px-3 py-3 text-xs font-medium rounded-xl border text-center transition-all ${
                           formData.specialty === spec
-                            ? "bg-blue-600 text-white border-blue-600 shadow-sm"
-                            : "bg-white/40 dark:bg-slate-900/40 backdrop-blur-[2px] text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700"
+                            ? "bg-primary text-primary-foreground border-primary shadow-sm"
+                            : "bg-card text-muted-foreground border-border hover:border-primary/30"
                         }`}
                       >
                         {spec}
@@ -153,7 +153,7 @@ export default function PricingQuoteSection({ data }: PricingQuoteSectionProps) 
                 </div>
 
                 <div className="space-y-3 pt-2">
-                  <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider">
+                  <label className="block text-xs font-bold text-foreground uppercase tracking-[0.1em]">
                     Number of Providers *
                   </label>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -164,8 +164,8 @@ export default function PricingQuoteSection({ data }: PricingQuoteSectionProps) 
                         onClick={() => handleSelect("providersCount", count)}
                         className={`px-3 py-3 text-xs font-medium rounded-xl border text-center transition-all ${
                           formData.providersCount === count
-                            ? "bg-blue-600 text-white border-blue-600 shadow-sm"
-                            : "bg-white/40 dark:bg-slate-900/40 backdrop-blur-[2px] text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700"
+                            ? "bg-primary text-primary-foreground border-primary shadow-sm"
+                            : "bg-card text-muted-foreground border-border hover:border-primary/30"
                         }`}
                       >
                         {count}
@@ -180,7 +180,7 @@ export default function PricingQuoteSection({ data }: PricingQuoteSectionProps) 
             {step === 2 && (
               <div className="space-y-6">
                 <div className="space-y-3">
-                  <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider">
+                  <label className="block text-xs font-bold text-foreground uppercase tracking-[0.1em]">
                     Monthly Claim Volume *
                   </label>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -191,8 +191,8 @@ export default function PricingQuoteSection({ data }: PricingQuoteSectionProps) 
                         onClick={() => handleSelect("claimVolume", vol)}
                         className={`px-3 py-3 text-xs font-medium rounded-xl border text-center transition-all ${
                           formData.claimVolume === vol
-                            ? "bg-blue-600 text-white border-blue-600 shadow-sm"
-                            : "bg-white/40 dark:bg-slate-900/40 backdrop-blur-[2px] text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700"
+                            ? "bg-primary text-primary-foreground border-primary shadow-sm"
+                            : "bg-card text-muted-foreground border-border hover:border-primary/30"
                         }`}
                       >
                         {vol}
@@ -202,7 +202,7 @@ export default function PricingQuoteSection({ data }: PricingQuoteSectionProps) 
                 </div>
 
                 <div className="space-y-3 pt-2">
-                  <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider">
+                  <label className="block text-xs font-bold text-foreground uppercase tracking-[0.1em]">
                     Services Required *
                   </label>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -213,8 +213,8 @@ export default function PricingQuoteSection({ data }: PricingQuoteSectionProps) 
                         onClick={() => handleSelect("serviceRequired", srv)}
                         className={`px-3 py-3 text-xs font-medium rounded-xl border text-center transition-all ${
                           formData.serviceRequired === srv
-                            ? "bg-blue-600 text-white border-blue-600 shadow-sm"
-                            : "bg-white/40 dark:bg-slate-900/40 backdrop-blur-[2px] text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700"
+                            ? "bg-primary text-primary-foreground border-primary shadow-sm"
+                            : "bg-card text-muted-foreground border-border hover:border-primary/30"
                         }`}
                       >
                         {srv}
@@ -232,7 +232,7 @@ export default function PricingQuoteSection({ data }: PricingQuoteSectionProps) 
                   
                   {/* Practice Name */}
                   <div className="space-y-2 text-left">
-                    <label htmlFor="practiceName" className="block text-xs sm:text-sm font-medium text-slate-700">
+                    <label htmlFor="practiceName" className="block text-xs sm:text-sm font-medium text-foreground">
                       Practice Name <span className="text-red-500">*</span>
                     </label>
                     <Input
@@ -244,13 +244,13 @@ export default function PricingQuoteSection({ data }: PricingQuoteSectionProps) 
                       value={formData.practiceName}
                       onChange={handleInputChange}
                       placeholder="e.g. Metro Medical Center"
-                      className="bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-lg transition-all"
+                      className="bg-muted border-border text-foreground placeholder:text-muted-foreground focus:bg-card focus:border-primary focus:ring-4 focus:ring-primary/10 h-11 text-xs sm:text-sm rounded-lg transition-all"
                     />
                   </div>
 
                   {/* Contact Person */}
                   <div className="space-y-2 text-left">
-                    <label htmlFor="contactPerson" className="block text-xs sm:text-sm font-medium text-slate-700">
+                    <label htmlFor="contactPerson" className="block text-xs sm:text-sm font-medium text-foreground">
                       Contact Person <span className="text-red-500">*</span>
                     </label>
                     <Input
@@ -262,13 +262,13 @@ export default function PricingQuoteSection({ data }: PricingQuoteSectionProps) 
                       value={formData.contactPerson}
                       onChange={handleInputChange}
                       placeholder="e.g. John Doe"
-                      className="bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-lg transition-all"
+                      className="bg-muted border-border text-foreground placeholder:text-muted-foreground focus:bg-card focus:border-primary focus:ring-4 focus:ring-primary/10 h-11 text-xs sm:text-sm rounded-lg transition-all"
                     />
                   </div>
 
                   {/* Email Address */}
                   <div className="space-y-2 text-left">
-                    <label htmlFor="email" className="block text-xs sm:text-sm font-medium text-slate-700">
+                    <label htmlFor="email" className="block text-xs sm:text-sm font-medium text-foreground">
                       Email Address <span className="text-red-500">*</span>
                     </label>
                     <Input
@@ -280,13 +280,13 @@ export default function PricingQuoteSection({ data }: PricingQuoteSectionProps) 
                       value={formData.email}
                       onChange={handleInputChange}
                       placeholder="e.g. john@example.com"
-                      className="bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-lg transition-all"
+                      className="bg-muted border-border text-foreground placeholder:text-muted-foreground focus:bg-card focus:border-primary focus:ring-4 focus:ring-primary/10 h-11 text-xs sm:text-sm rounded-lg transition-all"
                     />
                   </div>
 
                   {/* Phone Number */}
                   <div className="space-y-2 text-left">
-                    <label htmlFor="phone" className="block text-xs sm:text-sm font-medium text-slate-700">
+                    <label htmlFor="phone" className="block text-xs sm:text-sm font-medium text-foreground">
                       Phone Number <span className="text-red-500">*</span>
                     </label>
                     <Input
@@ -298,7 +298,7 @@ export default function PricingQuoteSection({ data }: PricingQuoteSectionProps) 
                       value={formData.phone}
                       onChange={handleInputChange}
                       placeholder="e.g. (555) 000-0000"
-                      className="bg-[#F8FAFC] border-[#E2E6EC] text-[#0F172A] placeholder:text-slate-400 focus:bg-white focus:border-[#1D4ED8] focus:ring-4 focus:ring-blue-100/40 h-11 text-xs sm:text-sm rounded-lg transition-all"
+                      className="bg-muted border-border text-foreground placeholder:text-muted-foreground focus:bg-card focus:border-primary focus:ring-4 focus:ring-primary/10 h-11 text-xs sm:text-sm rounded-lg transition-all"
                     />
                   </div>
                 </div>
@@ -306,13 +306,13 @@ export default function PricingQuoteSection({ data }: PricingQuoteSectionProps) 
             )}
 
             {/* Progress Navigation Buttons */}
-            <div className="pt-4 flex flex-col space-y-4 border-t border-slate-100">
+            <div className="pt-4 flex flex-col space-y-4 border-t border-border">
               <div className="flex justify-between items-center gap-4 w-full">
                 {step > 1 ? (
                   <button
                     type="button"
                     onClick={prevStep}
-                    className="px-6 py-3 border border-slate-200 text-slate-600 font-semibold rounded-xl text-sm flex items-center gap-2 hover:bg-slate-50 transition-colors"
+                    className="px-6 py-3 border border-border text-muted-foreground font-semibold rounded-lg text-sm flex items-center gap-2 hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     <ChevronLeft className="w-4 h-4" />
                     <span>Back</span>
@@ -329,7 +329,7 @@ export default function PricingQuoteSection({ data }: PricingQuoteSectionProps) 
                       (step === 1 && (!formData.specialty || !formData.providersCount)) ||
                       (step === 2 && (!formData.claimVolume || !formData.serviceRequired))
                     }
-                    className="px-6 py-3 bg-[#1D4ED8] text-white font-semibold rounded-xl text-sm flex items-center gap-2 hover:bg-[#1E3A8A] transition-colors disabled:opacity-50 disabled:pointer-events-none ml-auto"
+                    className="px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-lg text-sm flex items-center gap-2 hover:bg-secondary transition-colors disabled:opacity-50 disabled:pointer-events-none ml-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     <span>Continue</span>
                     <ChevronRight className="w-4 h-4" />
@@ -347,7 +347,7 @@ export default function PricingQuoteSection({ data }: PricingQuoteSectionProps) 
                 )}
               </div>
               
-              <p className="text-center text-xs text-slate-400 font-semibold tracking-wide pt-2">
+              <p className="text-center text-xs text-muted-foreground font-semibold tracking-wide pt-2">
                 🔒 Secure &amp; confidential • No obligation
               </p>
             </div>
@@ -356,20 +356,20 @@ export default function PricingQuoteSection({ data }: PricingQuoteSectionProps) 
         </div>
 
         {/* Highlights Row at the Bottom */}
-        <div className="mt-20 pt-16 border-t border-slate-100">
+        <div className="mt-20 pt-16 border-t border-border">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {data.highlights.slice(0, 3).map((item, idx) => {
               const Icon = getIcon(item.iconName);
               return (
                 <div key={item.id || idx} className="flex items-start gap-4">
-                  <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-blue-50 text-blue-600 shrink-0">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-accent text-primary shrink-0">
                     <Icon className="w-5 h-5 stroke-[2]" />
                   </div>
                   <div className="space-y-1">
-                    <h4 className="text-base font-bold text-[#0F172A] tracking-tight">
+                    <h4 className="font-display text-base font-semibold text-foreground">
                       {item.title}
                     </h4>
-                    <p className="text-slate-500 text-sm leading-relaxed">
+                    <p className="text-muted-foreground text-sm leading-relaxed">
                       {item.description}
                     </p>
                   </div>
@@ -378,14 +378,13 @@ export default function PricingQuoteSection({ data }: PricingQuoteSectionProps) 
             })}
           </div>
           
-          {/* Trust badges footer */}
-          <div className="mt-12 flex flex-wrap justify-center gap-3 pt-8 border-t border-slate-100/60">
+          <div className="mt-12 flex flex-wrap justify-center gap-3 pt-8 border-t border-border">
             {data.trustBadges.map((badge, idx) => (
               <div
                 key={badge.id || idx}
-                className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-slate-50 border border-slate-100 text-xs font-semibold text-slate-500"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-muted border border-border text-xs font-semibold text-muted-foreground"
               >
-              <Check className="w-3.5 h-3.5 text-blue-600" />
+              <Check className="w-3.5 h-3.5 text-primary" />
               <span>{badge.label}</span>
             </div>
             ))}

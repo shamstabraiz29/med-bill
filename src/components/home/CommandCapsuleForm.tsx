@@ -16,6 +16,7 @@ interface CommandCapsuleFormProps {
   emailPlaceholder?: string;
   phonePlaceholder?: string;
   showFooter?: boolean;
+  embedded?: boolean;
 }
 
 export default function CommandCapsuleForm({
@@ -28,6 +29,7 @@ export default function CommandCapsuleForm({
   emailPlaceholder = "Email Address",
   phonePlaceholder = "Phone Number",
   showFooter = true,
+  embedded = false,
 }: CommandCapsuleFormProps) {
   const [formData, setFormData] = useState({ name: "", email: "", phone: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -128,7 +130,7 @@ export default function CommandCapsuleForm({
       initial="hidden"
       animate="visible"
       variants={formContainerVariants}
-      className="w-full max-w-3xl pt-2"
+      className="w-full max-w-3xl"
     >
       <AnimatePresence mode="wait">
         {isSuccess ? (
@@ -138,18 +140,18 @@ export default function CommandCapsuleForm({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -10 }}
             transition={{ duration: 0.4, ease: easeOutExpo }}
-            className="bg-white border border-[#E2E6EC] rounded-2xl p-6 shadow-[0_8px_30px_rgba(29,78,216,0.08)] flex items-center gap-4"
+            className="hp-card p-6 flex items-center gap-4"
           >
-            <div className="w-12 h-12 bg-emerald-50 text-[#22C55E] rounded-full flex items-center justify-center shrink-0 border border-emerald-100">
+            <div className="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center shrink-0 border border-emerald-200/80">
               <Check className="w-6 h-6 stroke-[3]" />
             </div>
             <div className="flex-1 text-left">
-              <h3 className="text-base font-bold text-[#0F172A]">{successTitle}</h3>
-              <p className="text-xs text-[#475569] mt-0.5">{successDescription}</p>
+              <h3 className="text-base font-bold text-foreground">{successTitle}</h3>
+              <p className="text-xs text-muted-foreground mt-0.5">{successDescription}</p>
             </div>
             <button
               onClick={() => setIsSuccess(false)}
-              className="text-xs text-[#1D4ED8] hover:underline font-bold transition-all cursor-pointer"
+              className="text-xs text-primary hover:underline font-semibold transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
             >
               Reset Form
             </button>
@@ -157,28 +159,29 @@ export default function CommandCapsuleForm({
         ) : (
           <motion.div key="form-container" className="space-y-4">
             {formTitle && (
-              <p className="px-2 text-sm font-bold text-[#0F172A] sm:text-base">
+              <p className="px-2 text-sm font-semibold text-foreground sm:text-base">
                 {formTitle}
               </p>
             )}
 
             <motion.form
               onSubmit={handleSubmit}
-              className={`relative flex flex-col md:flex-row items-center gap-2 p-1.5 bg-white border rounded-2xl md:rounded-full transition-all duration-300 ${activeInput
-                  ? "border-[#1D4ED8] shadow-[0_12px_36px_rgba(29,78,216,0.12)] ring-2 ring-[#1D4ED8]/15"
+              className={`relative flex flex-col md:flex-row items-center gap-2 p-1.5 bg-card border rounded-xl md:rounded-full transition-all duration-200 ${
+                activeInput
+                  ? "border-primary ring-2 ring-primary/10"
                   : Object.keys(errors).length > 0
-                    ? "border-[#EF4444] shadow-[0_8px_24px_rgba(239,68,68,0.10)]"
-                    : "border-[#E2E6EC] shadow-[0_8px_30px_rgba(15,23,42,0.05)] hover:border-[#1D4ED8]/40"
-                }`}
+                    ? "border-destructive"
+                    : "border-border hover:border-primary/30"
+              }`}
             >
               {/* Full Name Input */}
               <motion.div variants={inputItemVariants} className="relative flex-1 w-full px-2">
                 <User
                   className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-all duration-200 ${activeInput === "name"
-                      ? "text-[#1D4ED8] scale-110"
+                      ? "text-primary scale-110"
                       : errors.name
-                        ? "text-[#EF4444]"
-                        : "text-[#475569]"
+                        ? "text-destructive"
+                        : "text-muted-foreground"
                     }`}
                 />
                 <input
@@ -189,21 +192,21 @@ export default function CommandCapsuleForm({
                   onBlur={() => setActiveInput(null)}
                   onChange={handleChange}
                   placeholder={namePlaceholder}
-                  className={`w-full pl-9 pr-3 py-3 text-xs bg-transparent border-0 focus:ring-0 outline-none text-[#0F172A] font-medium transition-colors placeholder:text-[#475569]/60 ${errors.name ? "placeholder:text-[#EF4444]/80 text-[#EF4444]" : ""
+                  className={`w-full pl-9 pr-3 py-3 text-xs bg-transparent border-0 focus:ring-0 outline-none text-foreground font-medium transition-colors placeholder:text-muted-foreground/70 focus-visible:ring-0 ${errors.name ? "placeholder:text-destructive/80 text-destructive" : ""
                     }`}
                 />
               </motion.div>
 
-              <div className="hidden md:block w-[1px] h-6 bg-[#E2E6EC]" />
+              <div className="hidden md:block w-px h-6 bg-border" />
 
               {/* Email Input */}
               <motion.div variants={inputItemVariants} className="relative flex-1 w-full px-2">
                 <Mail
                   className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-all duration-200 ${activeInput === "email"
-                      ? "text-[#1D4ED8] scale-110"
+                      ? "text-primary scale-110"
                       : errors.email
-                        ? "text-[#EF4444]"
-                        : "text-[#475569]"
+                        ? "text-destructive"
+                        : "text-muted-foreground"
                     }`}
                 />
                 <input
@@ -214,21 +217,21 @@ export default function CommandCapsuleForm({
                   onBlur={() => setActiveInput(null)}
                   onChange={handleChange}
                   placeholder={emailPlaceholder}
-                  className={`w-full pl-9 pr-3 py-3 text-xs bg-transparent border-0 focus:ring-0 outline-none text-[#0F172A] font-medium transition-colors placeholder:text-[#475569]/60 ${errors.email ? "placeholder:text-[#EF4444]/80 text-[#EF4444]" : ""
+                  className={`w-full pl-9 pr-3 py-3 text-xs bg-transparent border-0 focus:ring-0 outline-none text-foreground font-medium transition-colors placeholder:text-muted-foreground/70 ${errors.email ? "placeholder:text-destructive/80 text-destructive" : ""
                     }`}
                 />
               </motion.div>
 
-              <div className="hidden md:block w-[1px] h-6 bg-[#E2E6EC]" />
+              <div className="hidden md:block w-px h-6 bg-border" />
 
               {/* Phone Input */}
               <motion.div variants={inputItemVariants} className="relative flex-1 w-full px-2">
                 <Phone
                   className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-all duration-200 ${activeInput === "phone"
-                      ? "text-[#1D4ED8] scale-110"
+                      ? "text-primary scale-110"
                       : errors.phone
-                        ? "text-[#EF4444]"
-                        : "text-[#475569]"
+                        ? "text-destructive"
+                        : "text-muted-foreground"
                     }`}
                 />
                 <input
@@ -239,7 +242,7 @@ export default function CommandCapsuleForm({
                   onBlur={() => setActiveInput(null)}
                   onChange={handleChange}
                   placeholder={phonePlaceholder}
-                  className={`w-full pl-9 pr-3 py-3 text-xs bg-transparent border-0 focus:ring-0 outline-none text-[#0F172A] font-medium transition-colors placeholder:text-[#475569]/60 ${errors.phone ? "placeholder:text-[#EF4444]/80 text-[#EF4444]" : ""
+                  className={`w-full pl-9 pr-3 py-3 text-xs bg-transparent border-0 focus:ring-0 outline-none text-foreground font-medium transition-colors placeholder:text-muted-foreground/70 ${errors.phone ? "placeholder:text-destructive/80 text-destructive" : ""
                     }`}
                 />
               </motion.div>
@@ -293,7 +296,7 @@ export default function CommandCapsuleForm({
                   transition={{ duration: 0.25, ease: easeOutExpo }}
                   className="overflow-hidden"
                 >
-                  <div className="flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-[#EF4444] font-semibold px-4 pt-1">
+                  <div className="flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-destructive font-semibold px-4 pt-1">
                     {errors.name && <span>* {errors.name}</span>}
                     {errors.email && <span>* {errors.email}</span>}
                     {errors.phone && <span>* {errors.phone}</span>}
@@ -307,22 +310,22 @@ export default function CommandCapsuleForm({
                 variants={inputItemVariants}
                 className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-2 pt-1"
               >
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[10px] font-bold text-[#475569]">
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[10px] font-semibold text-muted-foreground">
                   {trustBadges.map((badge, i) => (
-                    <span key={i} className="flex items-center gap-1 hover:text-[#0F172A] transition-colors">
-                      <Check className="w-3 h-3 text-[#22C55E] stroke-[3.5]" /> {badge}
+                    <span key={i} className="flex items-center gap-1 hover:text-foreground transition-colors">
+                      <Check className="w-3 h-3 text-emerald-600 stroke-[3.5]" /> {badge}
                     </span>
                   ))}
                 </div>
 
-                <div className="flex items-center gap-2 self-start sm:self-auto bg-white border border-[#E2E6EC] rounded-full px-3 py-1 shadow-sm hover:border-[#1D4ED8]/30 transition-colors">
+                <div className="flex items-center gap-2 self-start sm:self-auto bg-card border border-border rounded-full px-3 py-1 shadow-sm hover:border-primary/30 transition-colors">
                   <div className="flex items-center gap-1">
-                    <span className="text-[10px] font-extrabold text-[#0F172A]">Google Rating</span>
-                    <span className="text-[10px] font-black text-[#1D4ED8] bg-blue-50 px-1 py-0.2 rounded">4.8</span>
+                    <span className="text-[10px] font-bold text-foreground">Google Rating</span>
+                    <span className="text-[10px] font-bold text-primary bg-accent px-1 py-0.5 rounded">4.8</span>
                   </div>
                   <div className="flex items-center gap-0.5">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-2.5 h-2.5 fill-[#EAB308] text-[#EAB308]" />
+                      <Star key={i} className="w-2.5 h-2.5 fill-amber-500 text-amber-500" />
                     ))}
                   </div>
                 </div>
