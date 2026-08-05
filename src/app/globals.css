@@ -309,6 +309,141 @@ body {
   to   { transform: rotate(-360deg); }
 }
 
+/* ─── Homepage design system — Ocean Sky + Coral ───────────── */
+.homepage {
+  --hp-primary: #0284c7;
+  --hp-primary-dark: #0369a1;
+  --hp-primary-light: #e0f2fe;
+  --hp-accent: #f43f5e;
+  --hp-accent-light: #fff1f2;
+  --hp-cyan: #06b6d4;
+}
+
+.homepage .hp-hero-bg {
+  background:
+    radial-gradient(ellipse 60% 50% at 10% 20%, rgba(6, 182, 212, 0.15), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 90% 10%, rgba(244, 63, 94, 0.08), transparent 50%),
+    radial-gradient(ellipse 70% 60% at 50% 100%, rgba(2, 132, 199, 0.06), transparent 55%),
+    linear-gradient(180deg, #f0f9ff 0%, #ffffff 55%);
+}
+
+.homepage .hp-hero-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 1px 1px, rgba(2, 132, 199, 0.05) 1px, transparent 0);
+  background-size: 24px 24px;
+  mask-image: linear-gradient(to bottom, black 0%, transparent 75%);
+  pointer-events: none;
+}
+
+.homepage .hp-card {
+  @apply rounded-3xl border border-slate-100 bg-white shadow-sm shadow-slate-200/60;
+}
+
+.homepage .hp-card-interactive {
+  @apply rounded-3xl border border-slate-100 bg-white shadow-sm shadow-slate-200/60 transition-all duration-300 hover:-translate-y-1 hover:border-sky-200 hover:shadow-xl hover:shadow-sky-100/80;
+}
+
+.homepage .hp-card-glass {
+  @apply rounded-3xl border border-white/20 bg-white/10 backdrop-blur-md;
+}
+
+.homepage .hp-input {
+  @apply w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 pl-11 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-all focus:border-sky-500 focus:ring-4 focus:ring-sky-500/10;
+}
+
+.homepage .hp-accent-bar {
+  @apply absolute left-0 top-0 h-full w-1 rounded-l-3xl bg-gradient-to-b from-sky-400 to-cyan-400;
+}
+
+.homepage .hp-step-num {
+  @apply flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-sky-500 to-cyan-500 text-xs font-bold text-white shadow-md shadow-sky-500/30;
+}
+
+.homepage .hp-metric-pill {
+  @apply rounded-3xl bg-gradient-to-br from-sky-500 via-sky-600 to-cyan-600 px-5 py-6 text-center text-white shadow-lg shadow-sky-500/20;
+}
+
+.homepage .hp-floating-badge {
+  @apply rounded-2xl border border-sky-100 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 shadow-lg shadow-sky-100/80;
+}
+
+.homepage .hp-badge {
+  @apply inline-flex w-fit items-center rounded-full bg-sky-50 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-sky-700;
+}
+
+.homepage .hp-badge-inverted {
+  @apply inline-flex w-fit items-center rounded-full bg-sky-100/80 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-sky-800;
+}
+
+.homepage .hp-icon-box {
+  @apply flex items-center justify-center rounded-2xl bg-sky-50 text-sky-600;
+}
+
+.homepage .hp-icon-box-inverted {
+  @apply flex items-center justify-center rounded-2xl bg-white/15 text-sky-100;
+}
+
+.homepage .hp-gradient-text {
+  @apply bg-gradient-to-r from-sky-600 via-cyan-500 to-sky-600 bg-clip-text font-bold text-transparent;
+}
+
+.homepage .hp-gradient-text-accent {
+  @apply bg-gradient-to-r from-rose-500 to-orange-400 bg-clip-text font-bold text-transparent;
+}
+
+.homepage .hp-text-accent {
+  @apply text-sky-600;
+}
+
+.homepage .hp-link {
+  @apply inline-flex items-center gap-1 text-sm font-semibold text-sky-600 transition-colors hover:text-sky-700;
+}
+
+.homepage .hp-selected {
+  @apply border-sky-400 bg-sky-50 text-slate-900 shadow-sm shadow-sky-100;
+}
+
+.homepage .hp-container {
+  @apply relative mx-auto w-full max-w-6xl px-5 sm:px-8;
+}
+
+.homepage .hp-success-bg {
+  @apply rounded-2xl bg-sky-50;
+}
+
+.homepage .hp-stat-tile {
+  @apply relative overflow-hidden rounded-3xl border border-slate-100 bg-white p-6 shadow-sm shadow-slate-200/50 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-sky-100/60;
+}
+
+.homepage .hp-stat-tile::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #0ea5e9, #06b6d4, #f43f5e);
+  opacity: 0.85;
+}
+
+.homepage .hp-metrics-bar {
+  @apply overflow-hidden rounded-3xl bg-slate-900 shadow-xl shadow-slate-900/20;
+}
+
+.homepage .hp-spotlight-card {
+  @apply relative overflow-hidden rounded-3xl p-7 text-white shadow-xl;
+}
+
+.homepage .hp-spotlight-card-dark {
+  background: linear-gradient(145deg, #0f172a 0%, #1e293b 45%, #0c4a6e 100%);
+}
+
+.homepage .hp-spotlight-card-light {
+  @apply border border-slate-200/80 bg-white text-slate-900 shadow-lg shadow-slate-200/60;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-\[pulse_10s_ease-in-out_infinite\],
   .animate-\[pulse_14s_ease-in-out_infinite_alternate\],

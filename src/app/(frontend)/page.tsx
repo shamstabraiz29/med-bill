@@ -4,13 +4,13 @@ import Hero from '@/components/Hero'
 import StatsCards from '@/components/home/StatsCards'
 import ServicesOverview from '@/components/home/ServicesOverview'
 import MedicalClaimsService from '@/components/home/MedicalClaimsService'
-import SpecialtyBillingSection from '@/components/home/SpecialtyBillingSection'
 import TrustStatsSection from '@/components/home/TrustStatsSection'
 import BillingCTASection from '@/components/home/BillingCTASection'
 import DoctorsTeamSection from '@/components/home/DoctorsTeamSection'
 import NationwidePricingSection from '@/components/home/NationwidePricingSection'
 import PricingQuoteSection from '@/components/home/PricingQuoteSection'
 import ProviderChallengesSection from '@/components/home/ProviderChallengesSection'
+import SpecialtyBillingSection from '@/components/home/SpecialtyBillingSection'
 import TestimonialCarousel from '@/components/carousel/TestimonialCarousel'
 import FAQSection from '@/components/home/FAQSection'
 
@@ -46,7 +46,7 @@ export default async function Home() {
   const data = await getHomepageData()
 
   return (
-    <div className="relative min-h-screen">
+    <div className="homepage relative min-h-screen overflow-x-hidden bg-white">
       <Hero data={data.hero} />
       <StatsCards data={data.statsCards} />
       <ServicesOverview data={data.servicesOverview} />

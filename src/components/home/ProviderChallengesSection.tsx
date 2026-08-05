@@ -2,15 +2,11 @@
 
 import { useState } from "react";
 import { Check, Mail, Phone, User } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import AppButton from "@/components/ui/AppButton";
-import MotionWrapper from "@/components/ui/MotionWrapper";
-import SectionBadge from "@/components/ui/SectionBadge";
+import HomeSection from "@/components/home/shared/HomeSection";
+import HomeSectionHeader, { HomeAccent } from "@/components/home/shared/HomeSectionHeader";
+import HomeButton from "@/components/home/shared/HomeButton";
 import { cn } from "@/lib/utils";
 import type { HomepageProviderChallenges } from "@/payload/types/homepage";
-
-const inputClassName =
-  "h-11 rounded-xl border-white/20 bg-white/10 text-white placeholder:text-slate-400 focus:bg-white/15 focus:border-white/40 focus:ring-4 focus:ring-white/10 text-xs sm:text-sm transition-all shadow-none";
 
 interface ProviderChallengesSectionProps {
   data: HomepageProviderChallenges;
@@ -32,158 +28,124 @@ export default function ProviderChallengesSection({ data }: ProviderChallengesSe
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (formData.name && formData.email && formData.phone) {
-      setIsSubmitting(true);
-      try {
-        const selectedChallenges = data.challenges
-          .filter((_, idx) => selected[idx])
-          .map((c) => c.label)
-          .join(", ");
+    if (!formData.name || !formData.email || !formData.phone) return;
 
-        const res = await fetch("/api/forms/submit", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            formName: "Home Provider Challenges Assessment Form",
-            sourcePage: typeof window !== "undefined" ? window.location.pathname : "/",
-            name: formData.name,
-            email: formData.email,
-            phone: formData.phone,
-            message: selectedChallenges ? `Selected Challenges: ${selectedChallenges}` : "",
-          }),
-        });
+    setIsSubmitting(true);
+    try {
+      const selectedChallenges = data.challenges
+        .filter((_, idx) => selected[idx])
+        .map((c) => c.label)
+        .join(", ");
 
-        if (res.ok) {
-          setIsSubmitted(true);
-        }
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setIsSubmitting(false);
-      }
+      const res = await fetch("/api/forms/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          formName: "Home Provider Challenges Assessment Form",
+          sourcePage: typeof window !== "undefined" ? window.location.pathname : "/",
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: selectedChallenges ? `Selected Challenges: ${selectedChallenges}` : "",
+        }),
+      });
+
+      if (res.ok) setIsSubmitted(true);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
+  const selectedCount = selected.filter(Boolean).length;
+
   return (
-    <section className="flex w-full items-center justify-center bg-transparent px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
-      <div className="w-full max-w-7xl">
-        <MotionWrapper variant="scaleUp">
-          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0F172A] p-8 text-white shadow-lg sm:p-12">
-            <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-16">
-              <div className="space-y-6 text-left lg:col-span-7">
-                <div className="max-w-xl space-y-3.5">
-                  <SectionBadge variant="dark">{data.badge}</SectionBadge>
+    <HomeSection tone="white">
+      <div className="grid gap-12 lg:grid-cols-5 lg:gap-14">
+        <div className="lg:col-span-3">
+          <HomeSectionHeader
+            label={data.badge}
+            title={
+              <>
+                {data.titlePlain} <HomeAccent>{data.titleHighlight}</HomeAccent>
+              </>
+            }
+            description={data.description}
+            className="mb-8"
+          />
 
-                  <h2 className="text-2xl font-bold leading-tight tracking-tight sm:text-3xl sm:leading-snug lg:text-4xl">
-                    {data.titlePlain}{" "}
-                    <span className="font-bold text-amber-300">{data.titleHighlight}</span>
-                  </h2>
+          {selectedCount > 0 && (
+            <p className="mb-4 text-sm font-medium text-sky-700">
+              {selectedCount} challenge{selectedCount !== 1 ? "s" : ""} selected
+            </p>
+          )}
 
-                  <p className="text-sm leading-relaxed text-blue-200 sm:text-base">{data.description}</p>
-                </div>
-
-                <div className="space-y-3 pt-2">
-                  {data.challenges.map((challenge, idx) => {
-                    const isSelected = selected[idx];
-
-                    return (
-                      <button
-                        key={challenge.id || idx}
-                        type="button"
-                        onClick={() => handleToggle(idx)}
-                        className={cn(
-                          "flex w-full items-center gap-4 rounded-xl border p-4 text-left transition-all duration-200",
-                          isSelected
-                            ? "border-[#1D4ED8]/40 bg-[#1D4ED8]/10 text-white"
-                            : "border-white/[0.08] bg-white/[0.04] text-slate-300 hover:border-white/20 hover:bg-white/[0.08] hover:text-white"
-                        )}
-                      >
-                        <span
-                          className={cn(
-                            "flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border transition-all duration-200",
-                            isSelected
-                              ? "border-[#1D4ED8] bg-[#1D4ED8] text-white"
-                              : "border-white/20 bg-white/5"
-                          )}
-                          aria-hidden="true"
-                        >
-                          {isSelected ? <Check className="h-3.5 w-3.5 stroke-[3]" /> : null}
-                        </span>
-                        <span className="text-xs font-medium leading-relaxed sm:text-sm">
-                          {challenge.label}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <div className="w-full lg:col-span-5">
-                <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 shadow-xl backdrop-blur-md sm:p-8 text-left">
-                  <div className="mb-6 space-y-1.5 text-left">
-                    <h3 className="text-lg font-bold tracking-tight text-white">{data.formTitle}</h3>
-                    <p className="text-xs leading-relaxed text-blue-200 sm:text-sm">
-                      {data.formDescription}
-                    </p>
-                  </div>
-
-                  {isSubmitted ? (
-                    <div className="space-y-2 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-6 text-center text-emerald-300">
-                      <Check className="mx-auto h-8 w-8 text-emerald-400 stroke-[3]" />
-                      <h4 className="text-base font-bold text-white">Assessment Request Submitted!</h4>
-                      <p className="text-xs text-emerald-200 sm:text-sm">
-                        Thank you {formData.name}. Our billing specialists will review your selections and
-                        contact you shortly.
-                      </p>
-                    </div>
-                  ) : (
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                      <Input
-                        type="text"
-                        placeholder="Name"
-                        icon={User}
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        required
-                        className={inputClassName}
-                      />
-                      <Input
-                        type="email"
-                        placeholder="Email"
-                        icon={Mail}
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        required
-                        className={inputClassName}
-                      />
-                      <Input
-                        type="tel"
-                        placeholder="Phone Number"
-                        icon={Phone}
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        required
-                        className={inputClassName}
-                      />
-
-                      <AppButton
-                        type="submit"
-                        disabled={isSubmitting}
-                        variant="primary"
-                        size="lg"
-                        showArrow
-                        className="w-full justify-center"
-                      >
-                        {isSubmitting ? "Submitting..." : data.formCtaLabel}
-                      </AppButton>
-                    </form>
+          <div className="space-y-2.5">
+            {data.challenges.map((challenge, idx) => {
+              const isSelected = selected[idx];
+              return (
+                <button
+                  key={challenge.id || idx}
+                  type="button"
+                  onClick={() => handleToggle(idx)}
+                  className={cn(
+                    "flex w-full items-center gap-3.5 rounded-xl border px-4 py-3.5 text-left text-sm transition-all duration-200",
+                    isSelected
+                      ? "hp-selected"
+                      : "border-slate-200/80 bg-white text-slate-700 hover:border-sky-200 hover:shadow-sm"
                   )}
-                </div>
-              </div>
-            </div>
+                >
+                  <span
+                    className={cn(
+                      "flex h-5 w-5 shrink-0 items-center justify-center rounded-md border transition-colors",
+                      isSelected ? "border-sky-600 bg-sky-600 text-white" : "border-slate-300 bg-white"
+                    )}
+                  >
+                    {isSelected && <Check className="h-3 w-3 stroke-[3]" />}
+                  </span>
+                  {challenge.label}
+                </button>
+              );
+            })}
           </div>
-        </MotionWrapper>
+        </div>
+
+        <div className="hp-card sticky top-24 lg:col-span-2 p-6 sm:p-7">
+          <h3 className="text-lg font-semibold text-slate-900">{data.formTitle}</h3>
+          <p className="mt-2 text-sm leading-relaxed text-slate-600">{data.formDescription}</p>
+
+          {isSubmitted ? (
+            <div className="hp-success-bg mt-8 p-6 text-center">
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-sky-100">
+                <Check className="h-6 w-6 text-sky-600 stroke-[3]" />
+              </div>
+              <p className="mt-4 font-semibold text-slate-900">Assessment Request Submitted!</p>
+              <p className="mt-1 text-sm text-slate-600">
+                Thank you {formData.name}. Our team will contact you shortly.
+              </p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="mt-6 space-y-3">
+              <div className="relative">
+                <User className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                <input type="text" placeholder="Name" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} required className="hp-input" />
+              </div>
+              <div className="relative">
+                <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                <input type="email" placeholder="Email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} required className="hp-input" />
+              </div>
+              <div className="relative">
+                <Phone className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                <input type="tel" placeholder="Phone Number" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} required className="hp-input" />
+              </div>
+              <HomeButton type="submit" disabled={isSubmitting} size="lg" showArrow className="w-full">
+                {isSubmitting ? "Submitting..." : data.formCtaLabel}
+              </HomeButton>
+            </form>
+          )}
+        </div>
       </div>
-    </section>
+    </HomeSection>
   );
 }
