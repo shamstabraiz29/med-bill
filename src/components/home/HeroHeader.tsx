@@ -12,6 +12,8 @@ interface HeroHeaderProps {
   description1: string;
   description2: string;
   headingId?: string;
+  align?: "left" | "center";
+  className?: string;
 }
 
 export default function HeroHeader({
@@ -22,13 +24,19 @@ export default function HeroHeader({
   description1,
   description2,
   headingId,
+  align = "left",
+  className = "",
 }: HeroHeaderProps) {
+  const isCenter = align === "center";
+
   return (
     <motion.div
       initial="hidden"
       animate="visible"
       variants={staggerContainerVariants(0.08, 0.04)}
-      className="space-y-5 text-left"
+      className={`flex flex-col space-y-4 sm:space-y-5 ${
+        isCenter ? "items-center text-center mx-auto" : "items-start text-left"
+      } ${className}`}
     >
       <motion.div variants={blurRevealVariants}>
         <SectionBadge variant="blue" pulse={false}>
@@ -39,16 +47,21 @@ export default function HeroHeader({
       <motion.h1
         id={headingId}
         variants={blurRevealVariants}
-        className="font-display text-3xl sm:text-4xl lg:text-[2.85rem] xl:text-[3.15rem] font-semibold text-foreground tracking-tight leading-[1.1] max-w-2xl"
+        className="font-display text-[2rem] sm:text-4xl lg:text-[2.85rem] xl:text-[3.15rem] font-semibold text-foreground tracking-[-0.025em] leading-[1.15]"
       >
         {titlePrefix}{" "}
         <span className="text-primary">{titleHighlight}</span>
         {titleSuffix && ` ${titleSuffix}`}
       </motion.h1>
 
-      <motion.div variants={blurRevealVariants} className="space-y-3 max-w-xl">
-        <p className="text-base sm:text-lg leading-relaxed text-muted-foreground">{description1}</p>
-        <p className="text-sm sm:text-base leading-relaxed text-muted-foreground">{description2}</p>
+      <motion.div
+        variants={blurRevealVariants}
+        className={`space-y-3 text-sm sm:text-base leading-relaxed text-muted-foreground ${
+          isCenter ? "max-w-2xl" : "max-w-xl"
+        }`}
+      >
+        <p>{description1}</p>
+        <p>{description2}</p>
       </motion.div>
     </motion.div>
   );
