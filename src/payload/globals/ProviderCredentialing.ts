@@ -1,4 +1,4 @@
-import type { GlobalConfig } from 'payload'
+import type { Field, GlobalConfig } from 'payload'
 import { seoFields } from '../fields/seo'
 
 export const ProviderCredentialing: GlobalConfig = {
@@ -265,6 +265,7 @@ export const ProviderCredentialing: GlobalConfig = {
     {
       name: 'pricingPackages',
       type: 'group',
+      dbName: 'pricing',
       label: 'Credentialing Pricing Packages Section',
       fields: [
         { name: 'badge', type: 'text', label: 'Section Badge', required: true },
@@ -274,6 +275,7 @@ export const ProviderCredentialing: GlobalConfig = {
         {
           name: 'tiers',
           type: 'array',
+          dbName: 'tier',
           label: 'Pricing Tiers',
           fields: [
             { name: 'name', type: 'text', required: true },
@@ -281,6 +283,7 @@ export const ProviderCredentialing: GlobalConfig = {
             {
               name: 'coreFeatures',
               type: 'array',
+              dbName: 'core',
               label: 'Core Features',
               fields: [
                 { name: 'label', type: 'text', required: true },
@@ -290,13 +293,14 @@ export const ProviderCredentialing: GlobalConfig = {
             {
               name: 'detailChecklist',
               type: 'array',
+              dbName: 'checklist',
               label: 'Detail Checklist',
               fields: [{ name: 'label', type: 'textarea', required: true }],
             },
           ],
         },
       ],
-    },
+    } as Field,
 
     // ── RED TAPE CTA ──
     {

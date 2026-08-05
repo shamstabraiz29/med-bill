@@ -61,6 +61,10 @@ import { ScheduleDemo } from '@/payload/globals/ScheduleDemo'
 import { PrivacyPolicy } from '@/payload/globals/PrivacyPolicy'
 import { TermsAndConditions } from '@/payload/globals/TermsAndConditions'
 import { CookiesPolicy } from '@/payload/globals/CookiesPolicy'
+import {
+  withCollectionRevalidation,
+  withGlobalRevalidation,
+} from '@/payload/utils/withRevalidation'
 
 export default buildConfig({
   admin: {
@@ -77,49 +81,49 @@ export default buildConfig({
     ConsultationSubmissions,
     AuditSubmissions,
     ContactSubmissions,
-    Posts,
+    withCollectionRevalidation(Posts),
     Media,
   ],
 
   globals: [
     // 1. Core Pages
-    Homepage,
-    AboutUs,
-    ContactUs,
-    MedicalBillingPricing,
-    ScheduleDemo,
+    withGlobalRevalidation(Homepage),
+    withGlobalRevalidation(AboutUs),
+    withGlobalRevalidation(ContactUs),
+    withGlobalRevalidation(MedicalBillingPricing),
+    withGlobalRevalidation(ScheduleDemo),
 
     // 2. Services Pages
-    MedicalBilling,
-    MedicalCoding,
-    RevenueCycleManagement,
-    MedicalBillingAudit,
-    Clearinghouse,
-    ProviderCredentialing,
-    HealthcareSeo,
+    withGlobalRevalidation(MedicalBilling),
+    withGlobalRevalidation(MedicalCoding),
+    withGlobalRevalidation(RevenueCycleManagement),
+    withGlobalRevalidation(MedicalBillingAudit),
+    withGlobalRevalidation(Clearinghouse),
+    withGlobalRevalidation(ProviderCredentialing),
+    withGlobalRevalidation(HealthcareSeo),
 
     // 3. Software Pages
-    MedicalBillingSoftware,
-    FusionediClearinghouse,
-    ElectronicHealthRecordsEhr,
-    PracticeManagementSoftwarePms,
+    withGlobalRevalidation(MedicalBillingSoftware),
+    withGlobalRevalidation(FusionediClearinghouse),
+    withGlobalRevalidation(ElectronicHealthRecordsEhr),
+    withGlobalRevalidation(PracticeManagementSoftwarePms),
 
     // 4. Solutions Pages
-    OutsourceMedicalBilling,
-    LargePractices,
-    SmallPractices,
-    PhysicianBillingServices,
-    DenialManagementServices,
-    HospitalBillingServices,
+    withGlobalRevalidation(OutsourceMedicalBilling),
+    withGlobalRevalidation(LargePractices),
+    withGlobalRevalidation(SmallPractices),
+    withGlobalRevalidation(PhysicianBillingServices),
+    withGlobalRevalidation(DenialManagementServices),
+    withGlobalRevalidation(HospitalBillingServices),
 
     // 5. Resources & Company Pages
-    Careers,
-    Testimonials,
+    withGlobalRevalidation(Careers),
+    withGlobalRevalidation(Testimonials),
 
     // 6. Legal Pages
-    PrivacyPolicy,
-    TermsAndConditions,
-    CookiesPolicy,
+    withGlobalRevalidation(PrivacyPolicy),
+    withGlobalRevalidation(TermsAndConditions),
+    withGlobalRevalidation(CookiesPolicy),
   ],
 
   serverURL:

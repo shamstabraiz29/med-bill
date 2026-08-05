@@ -20,6 +20,23 @@ export async function GET() {
   try {
     const payload = await getPayload({ config })
 
+    const existingUsers = await payload.find({
+      collection: 'users',
+      limit: 1,
+    })
+
+    if (existingUsers.totalDocs === 0) {
+      await payload.create({
+        collection: 'users',
+        data: {
+          email: 'admin@bellmedex.com',
+          password: 'changeme123',
+          name: 'Admin',
+          role: 'admin',
+        },
+      })
+    }
+
     await payload.updateGlobal({
       slug: 'homepage',
       data: defaultHomepageData as any,
@@ -96,6 +113,10 @@ export async function GET() {
         await payload.create({
           collection: 'posts',
           data: {
+            seo: {
+              metaTitle: post.title,
+              metaDescription: post.excerpt,
+            },
             title: post.title,
             slug: post.slug,
             excerpt: post.excerpt,
@@ -108,7 +129,7 @@ export async function GET() {
             publishedAt: post.publishedAt,
             readTime: post.readTime,
             imageSrc: post.imageSrc,
-          },
+          } as any,
         })
       }
     }

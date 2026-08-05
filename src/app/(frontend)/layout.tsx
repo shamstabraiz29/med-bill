@@ -4,6 +4,9 @@ import "@/app/globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
+/** Re-fetch CMS content periodically; admin saves also trigger on-demand revalidation. */
+export const revalidate = 60;
+
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-sans",
   subsets: ["latin"],
