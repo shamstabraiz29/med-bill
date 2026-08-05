@@ -8,6 +8,7 @@ import drNicole from "../../public/dr-nicole.png";
 import faqDoctor from "../../public/faq-doctor.png";
 import fusionediDashboard from "../../public/fusionedi-dashboard.png";
 import gennayaMatt from "../../public/gennaya-matt.png";
+import heroStethoscope from "../../public/hero-stethoscope.png";
 import juliaWill from "../../public/julia-will.png";
 import medicalBillingSoftwareDashboard from "../../public/medical-billing-software-dashboard.png";
 import mikeLan from "../../public/mike-lan.png";
@@ -37,6 +38,7 @@ export const staticImages: Record<string, StaticImageData> = {
   "/faq-doctor.png": faqDoctor,
   "/fusionedi-dashboard.png": fusionediDashboard,
   "/gennaya-matt.png": gennayaMatt,
+  "/hero-stethoscope.png": heroStethoscope,
   "/julia-will.png": juliaWill,
   "/medical-billing-software-dashboard.png": medicalBillingSoftwareDashboard,
   "/mike-lan.png": mikeLan,
@@ -63,6 +65,7 @@ export {
   faqDoctor,
   fusionediDashboard,
   gennayaMatt,
+  heroStethoscope,
   juliaWill,
   medicalBillingSoftwareDashboard,
   mikeLan,

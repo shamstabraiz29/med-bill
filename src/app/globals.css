@@ -364,12 +364,7 @@ body {
 
 /* Hero */
 .homepage-theme .hp-hero {
-  @apply border-b border-border/60;
-}
-
-.homepage-theme .hp-hero-form-panel {
-  @apply rounded-2xl border border-border/80 bg-card/80 backdrop-blur-md p-4 sm:p-5;
-  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.06);
+  @apply border-b border-border/50;
 }
 
 /* Doctors team comparison rows */
