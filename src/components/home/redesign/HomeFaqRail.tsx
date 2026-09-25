@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
 import AppButton from "@/components/ui/AppButton";
+import { Reveal } from "@/components/home/animations";
 import { shell } from "./shell";
 import type { HomepageFaq } from "@/payload/types/homepage";
 
@@ -17,6 +18,7 @@ export default function HomeFaqRail({ data }: Props) {
     <section className={`border-y ${shell.border} bg-white ${shell.pad} ${shell.sectionY}`}>
       <div className={`${shell.maxWide} grid gap-12 lg:grid-cols-[0.8fr_1.2fr]`}>
         <div className="lg:sticky lg:top-32 lg:self-start">
+          <Reveal variant="left">
           <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#1D4ED8]">
             {data.badge}
           </p>
@@ -53,6 +55,7 @@ export default function HomeFaqRail({ data }: Props) {
               </p>
             ) : null}
           </div>
+          </Reveal>
         </div>
 
         <div className="divide-y divide-[#E2E6EC] border-y border-[#E2E6EC]">
@@ -63,6 +66,7 @@ export default function HomeFaqRail({ data }: Props) {
 
             return (
               <div key={faq.id || idx} className="py-1">
+                <Reveal variant="lift" delay={idx * 0.08}>
                 <button
                   id={buttonId}
                   type="button"
@@ -91,6 +95,7 @@ export default function HomeFaqRail({ data }: Props) {
                 >
                   {isOpen ? faq.answer : null}
                 </div>
+                </Reveal>
               </div>
             );
           })}

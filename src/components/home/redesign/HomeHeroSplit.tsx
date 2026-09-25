@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Check, Loader2 } from "lucide-react";
 import AppButton from "@/components/ui/AppButton";
+import { Parallax, Reveal } from "@/components/home/animations";
 import { shell } from "./shell";
 import type { HomepageHero } from "@/payload/types/homepage";
 
@@ -60,6 +61,7 @@ export default function HomeHeroSplit({ data }: Props) {
       <div className={`${shell.maxWide} grid items-start gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-20`}>
         {/* Editorial copy column */}
         <div className="pt-2 lg:pt-8">
+          <Reveal mode="mount" variant="mask" delay={0}>
           <p className="mb-6 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#1D4ED8]">
             {data.eyebrow}
           </p>
@@ -68,13 +70,17 @@ export default function HomeHeroSplit({ data }: Props) {
             <span className="text-[#1D4ED8]">{data.titleHighlight}</span>
             {data.titleSuffix ? ` ${data.titleSuffix}` : null}
           </h1>
+          </Reveal>
+          <Reveal mode="mount" variant="rise" delay={0.1}>
           <p className="mt-8 max-w-xl text-base leading-[1.7] text-[#475569] sm:text-lg">
             {data.description1}
           </p>
           <p className="mt-4 max-w-xl text-base leading-[1.7] text-[#475569] sm:text-lg">
             {data.description2}
           </p>
+          </Reveal>
 
+          <Reveal mode="mount" variant="lift" delay={0.2}>
           <div className="mt-10 flex flex-wrap items-center gap-3">
             <AppButton href="#home-lead" variant="primary" size="md" showArrow>
               {data.formButtonLabel || "Free Audit"}
@@ -95,10 +101,12 @@ export default function HomeHeroSplit({ data }: Props) {
               </li>
             ))}
           </ul>
+          </Reveal>
         </div>
 
         {/* Lead panel with corner metrics that hang outside the card */}
-        <div id="home-lead" className="relative w-full lg:mt-6">
+        <Parallax id="home-lead" factor={0.06} className="relative w-full lg:mt-6">
+          <Reveal variant="scale" mode="mount" delay={0.3}>
           <div
             className={`relative z-10 border ${shell.border} ${shell.surface} ${shell.radiusLg} ${shell.shadowFloat} p-6 sm:p-8`}
           >
@@ -211,7 +219,8 @@ export default function HomeHeroSplit({ data }: Props) {
               </div>
             </div>
           </div>
-        </div>
+          </Reveal>
+        </Parallax>
       </div>
     </section>
   );

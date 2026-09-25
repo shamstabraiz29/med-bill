@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import AppButton from "@/components/ui/AppButton";
+import { Reveal } from "@/components/home/animations";
 import { shell } from "./shell";
 import type {
   HomepageDoctorsTeam,
@@ -27,6 +28,7 @@ export default function HomeOpsDashboard({ claims, trust, team }: Props) {
     <section className={`border-y ${shell.border} bg-white ${shell.pad} ${shell.sectionY}`}>
       <div className={shell.maxWide}>
         <div className="mb-12 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <Reveal variant="mask">
           <div className="max-w-2xl">
             <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#1D4ED8]">
               Live operations
@@ -39,7 +41,9 @@ export default function HomeOpsDashboard({ claims, trust, team }: Props) {
               {claims.description}
             </p>
           </div>
+          </Reveal>
 
+          <Reveal variant="lift" delay={0.12}>
           <div
             className="inline-flex rounded-[14px] border border-[#E2E6EC] bg-[#F5F7FA] p-1"
             role="tablist"
@@ -62,8 +66,10 @@ export default function HomeOpsDashboard({ claims, trust, team }: Props) {
               </button>
             ))}
           </div>
+          </Reveal>
         </div>
 
+        <Reveal variant="scale">
         <div
           className={`relative overflow-hidden border ${shell.border} ${shell.radiusLg} ${shell.shadowFloat} bg-[#F5F7FA] p-4 sm:p-6`}
           role="tabpanel"
@@ -80,9 +86,9 @@ export default function HomeOpsDashboard({ claims, trust, team }: Props) {
           <div className="rounded-[16px] border border-[#E2E6EC] bg-white p-5 sm:p-8">
             {active === "claims" && (
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                {claims.metrics.map((metric) => (
+                {claims.metrics.map((metric, idx) => (
+                  <Reveal key={metric.id || metric.label} variant="lift" delay={idx * 0.08}>
                   <div
-                    key={metric.id || metric.label}
                     className="rounded-[14px] border border-[#E2E6EC] bg-[#F5F7FA] p-5 transition-transform hover:-translate-y-0.5"
                   >
                     <p className="text-3xl font-semibold tracking-[-0.03em] text-[#0F172A]">
@@ -92,15 +98,16 @@ export default function HomeOpsDashboard({ claims, trust, team }: Props) {
                       {metric.label}
                     </p>
                   </div>
+                  </Reveal>
                 ))}
               </div>
             )}
 
             {active === "performance" && (
               <div className="grid gap-4 sm:grid-cols-3">
-                {trust.mainStats.map((stat) => (
+                {trust.mainStats.map((stat, idx) => (
+                  <Reveal key={stat.id || stat.label} variant="lift" delay={idx * 0.08}>
                   <div
-                    key={stat.id || stat.label}
                     className="rounded-[14px] border border-[#E2E6EC] p-6"
                   >
                     <p className="text-4xl font-semibold tracking-[-0.04em] text-[#1D4ED8]">
@@ -109,6 +116,7 @@ export default function HomeOpsDashboard({ claims, trust, team }: Props) {
                     <p className="mt-3 text-sm font-semibold text-[#0F172A]">{stat.label}</p>
                     <p className="mt-2 text-sm leading-relaxed text-[#475569]">{stat.subLabel}</p>
                   </div>
+                  </Reveal>
                 ))}
               </div>
             )}
@@ -158,6 +166,7 @@ export default function HomeOpsDashboard({ claims, trust, team }: Props) {
             </AppButton>
           </div>
         </div>
+        </Reveal>
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import AppButton from "@/components/ui/AppButton";
+import { Reveal } from "@/components/home/animations";
 import { getIcon } from "@/lib/icons";
 import { shell } from "./shell";
 import type { HomepageBillingCta, HomepageTrustStats } from "@/payload/types/homepage";
@@ -14,6 +15,7 @@ export default function HomeFinalCta({ data, trust }: Props) {
   return (
     <section className={`${shell.pad} py-14 sm:py-16 lg:py-20`}>
       <div className={shell.maxWide}>
+        <Reveal variant="scale">
         <div
           className={`overflow-hidden border border-[#0F172A] ${shell.dark} ${shell.radiusLg}`}
         >
@@ -66,6 +68,7 @@ export default function HomeFinalCta({ data, trust }: Props) {
                       .filter(Boolean)
                       .join(" ")}
                   >
+                    <Reveal variant="lift" delay={idx * 0.08}>
                     <Icon className="h-5 w-5 stroke-[1.5] text-[#60A5FA]" aria-hidden="true" />
                     <h3 className="mt-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-white">
                       {feature.title}
@@ -73,12 +76,14 @@ export default function HomeFinalCta({ data, trust }: Props) {
                     <p className="mt-2 text-xs leading-[1.6] text-slate-400">
                       {feature.description}
                     </p>
+                    </Reveal>
                   </div>
                 );
               })}
             </div>
           </div>
         </div>
+        </Reveal>
       </div>
     </section>
   );

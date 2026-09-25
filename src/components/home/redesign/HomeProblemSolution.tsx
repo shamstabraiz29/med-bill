@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Check, Loader2 } from "lucide-react";
 import AppButton from "@/components/ui/AppButton";
+import { Reveal } from "@/components/home/animations";
 import { shell } from "./shell";
 import type { HomepageProviderChallenges, HomepageTrustStats } from "@/payload/types/homepage";
 
@@ -59,6 +60,7 @@ export default function HomeProblemSolution({ data, checklist = [] }: Props) {
     <section className={`${shell.dark} ${shell.pad} ${shell.sectionY}`}>
       <div className={shell.maxWide}>
         <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+          <Reveal variant="left">
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#60A5FA]">
               {data.badge}
@@ -88,14 +90,15 @@ export default function HomeProblemSolution({ data, checklist = [] }: Props) {
               </ul>
             </div>
           </div>
+          </Reveal>
 
           <div className="grid items-start gap-4 lg:grid-cols-[1.1fr_0.9fr]">
             <div className="space-y-2">
               {data.challenges.map((challenge, idx) => {
                 const active = selected[idx];
                 return (
+                  <Reveal key={challenge.id || idx} variant="lift" delay={idx * 0.08}>
                   <button
-                    key={challenge.id || idx}
                     type="button"
                     aria-pressed={active}
                     onClick={() => handleToggle(idx)}
@@ -115,10 +118,12 @@ export default function HomeProblemSolution({ data, checklist = [] }: Props) {
                     </span>
                     <span className="text-sm leading-relaxed">{challenge.label}</span>
                   </button>
+                  </Reveal>
                 );
               })}
             </div>
 
+            <Reveal variant="scale">
             <div
               className={`self-start border border-white/10 bg-white p-5 text-[#0F172A] shadow-[0_16px_40px_rgba(0,0,0,0.2)] ${shell.radius} sm:p-6`}
             >
@@ -173,6 +178,7 @@ export default function HomeProblemSolution({ data, checklist = [] }: Props) {
                 </form>
               )}
             </div>
+            </Reveal>
           </div>
         </div>
       </div>

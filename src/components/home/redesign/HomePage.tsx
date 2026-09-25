@@ -9,6 +9,7 @@ import HomeQuoteWall from "./HomeQuoteWall";
 import HomeProposalWizard from "./HomeProposalWizard";
 import HomeFaqRail from "./HomeFaqRail";
 import HomeFinalCta from "./HomeFinalCta";
+import HomeSmoothScroll from "@/components/home/animations/HomeSmoothScroll";
 import { shell } from "./shell";
 import type { HomepageData } from "@/payload/types/homepage";
 
@@ -22,6 +23,7 @@ interface Props {
 export default function HomePage({ data }: Props) {
   return (
     <div className={shell.page}>
+      <HomeSmoothScroll />
       <HomeHeroSplit data={data.hero} />
       <HomeTrustStrip stats={data.statsCards} trust={data.trustStats} />
       <HomeProblemSolution
