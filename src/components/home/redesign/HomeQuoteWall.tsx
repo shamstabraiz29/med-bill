@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Star } from "lucide-react";
 import AppImage from "@/components/ui/AppImage";
+import { Reveal } from "@/components/home/animations";
 import { shell } from "./shell";
 import type { HomepageTestimonials } from "@/payload/types/homepage";
 
@@ -20,6 +21,7 @@ export default function HomeQuoteWall({ data }: Props) {
     <section className={`${shell.pad} ${shell.sectionY}`}>
       <div className={shell.maxWide}>
         <div className="mb-12 grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end">
+          <Reveal>
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#1D4ED8]">
               {data.badge || data.preHeader}
@@ -30,18 +32,21 @@ export default function HomeQuoteWall({ data }: Props) {
               {data.titleSuffix}
             </h2>
           </div>
+          </Reveal>
           {data.description ? (
+            <Reveal delay={0.1} className="lg:justify-self-end">
             <p className="max-w-lg text-base leading-[1.7] text-[#475569] lg:justify-self-end">
               {data.description}
             </p>
+            </Reveal>
           ) : null}
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
           <div className="flex flex-col gap-2">
             {data.items.map((item, idx) => (
+              <Reveal key={item.id || idx} variant="lift" delay={idx * 0.08}>
               <button
-                key={item.id || idx}
                 type="button"
                 onClick={() => setActive(idx)}
                 aria-pressed={active === idx}
@@ -57,9 +62,11 @@ export default function HomeQuoteWall({ data }: Props) {
                   {item.clinicName ? ` · ${item.clinicName}` : ""}
                 </p>
               </button>
+              </Reveal>
             ))}
           </div>
 
+          <Reveal variant="scale" delay={0.12}>
           <figure
             className={`relative border ${shell.border} bg-white p-8 sm:p-10 ${shell.radiusLg} ${shell.shadowFloat}`}
           >
@@ -91,6 +98,7 @@ export default function HomeQuoteWall({ data }: Props) {
               </div>
             </figcaption>
           </figure>
+          </Reveal>
         </div>
       </div>
     </section>

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { getIcon } from "@/lib/icons";
+import { Reveal } from "@/components/home/animations";
 import { shell } from "./shell";
 import type { HomepageServicesOverview } from "@/payload/types/homepage";
 
@@ -15,6 +16,7 @@ export default function HomeFeatureZigzag({ data }: Props) {
     <section className={`${shell.pad} ${shell.sectionY}`}>
       <div className={shell.maxWide}>
         <div className="mb-16 grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end">
+          <Reveal>
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#1D4ED8]">
               {data.badge}
@@ -25,9 +27,12 @@ export default function HomeFeatureZigzag({ data }: Props) {
               {data.titleSuffix}
             </h2>
           </div>
+          </Reveal>
+          <Reveal delay={0.1} className="lg:justify-self-end">
           <p className="max-w-lg text-base leading-[1.7] text-[#475569] lg:justify-self-end">
             {data.description}
           </p>
+          </Reveal>
         </div>
 
         <div className="space-y-6">
@@ -36,8 +41,8 @@ export default function HomeFeatureZigzag({ data }: Props) {
             const reverse = idx % 2 === 1;
 
             return (
+              <Reveal key={service.id || idx} variant="scale" delay={idx * 0.08}>
               <article
-                key={service.id || idx}
                 className={`grid overflow-hidden border ${shell.border} bg-white ${shell.radiusLg} ${shell.shadow} lg:grid-cols-2`}
               >
                 <div
@@ -102,6 +107,7 @@ export default function HomeFeatureZigzag({ data }: Props) {
                   </div>
                 </div>
               </article>
+              </Reveal>
             );
           })}
         </div>

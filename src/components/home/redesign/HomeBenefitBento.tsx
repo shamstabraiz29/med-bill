@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import AppButton from '@/components/ui/AppButton';
+import { Reveal } from '@/components/home/animations';
 import { getIcon } from '@/lib/icons';
 import { shell } from './shell';
 import type {
@@ -21,6 +22,7 @@ export default function HomeBenefitBento({ pricing, specialties }: Props) {
       <div className={shell.maxWide}>
         {/* Pricing only — left-aligned like other sections */}
         <div className="mb-12 grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end">
+          <Reveal variant="mask">
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#1D4ED8]">
               {pricing.badge}
@@ -30,9 +32,12 @@ export default function HomeBenefitBento({ pricing, specialties }: Props) {
               <span className="text-[#1D4ED8]">{pricing.titleHighlight}</span>
             </h2>
           </div>
+          </Reveal>
+          <Reveal variant="right" className="lg:justify-self-end">
           <p className="max-w-lg text-base leading-[1.7] text-[#475569] lg:justify-self-end">
             {pricing.description}
           </p>
+          </Reveal>
         </div>
 
         <div className="border-y border-[#E2E6EC]">
@@ -57,6 +62,7 @@ export default function HomeBenefitBento({ pricing, specialties }: Props) {
                   <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#E2E6EC] text-[#1D4ED8]">
                     <Icon className="h-4 w-4" aria-hidden="true" />
                   </div>
+                  <Reveal variant="lift" delay={idx * 0.08} className="min-w-0 text-left">
                   <div className="min-w-0 text-left">
                     <h3 className="text-sm font-semibold tracking-[-0.02em] text-[#0F172A] sm:text-base">
                       {benefit.title}
@@ -65,12 +71,14 @@ export default function HomeBenefitBento({ pricing, specialties }: Props) {
                       {benefit.description}
                     </p>
                   </div>
+                  </Reveal>
                 </li>
               );
             })}
           </ul>
         </div>
 
+        <Reveal variant="lift">
         <div className="mt-10 flex flex-col items-start gap-3">
           <div className="flex flex-wrap gap-3">
             <AppButton
@@ -93,10 +101,12 @@ export default function HomeBenefitBento({ pricing, specialties }: Props) {
             <p className="text-xs text-[#475569]">{pricing.footerNote}</p>
           ) : null}
         </div>
+        </Reveal>
 
         {/* Specialty lane */}
         <div className="mt-16 border-t border-[#E2E6EC] pt-14">
           <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <Reveal variant="left">
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#1D4ED8]">
                 {specialties.badge}
@@ -108,6 +118,8 @@ export default function HomeBenefitBento({ pricing, specialties }: Props) {
                 </span>
               </h3>
             </div>
+            </Reveal>
+            <Reveal variant="lift" delay={0.12}>
             <Link
               href={specialties.ctaHref}
               className="inline-flex items-center gap-2 text-sm font-semibold text-[#1D4ED8]"
@@ -115,10 +127,11 @@ export default function HomeBenefitBento({ pricing, specialties }: Props) {
               {specialties.ctaLabel}
               <ArrowUpRight className="h-4 w-4" />
             </Link>
+            </Reveal>
           </div>
 
           <div className="flex gap-3 overflow-x-auto pb-2">
-            {specialties.specialties.map((item) => {
+            {specialties.specialties.map((item, idx) => {
               const Icon = getIcon(item.iconName);
               return (
                 <Link
@@ -126,6 +139,7 @@ export default function HomeBenefitBento({ pricing, specialties }: Props) {
                   href={item.link}
                   className="min-w-[220px] flex-1 rounded-[16px] border border-[#E2E6EC] bg-white p-5 transition-colors hover:border-[#1D4ED8]/40"
                 >
+                  <Reveal variant="lift" delay={idx * 0.08}>
                   <Icon className="h-5 w-5 text-[#1D4ED8]" aria-hidden="true" />
                   <p className="mt-4 text-sm font-semibold text-[#0F172A]">
                     {item.title}
@@ -134,6 +148,7 @@ export default function HomeBenefitBento({ pricing, specialties }: Props) {
                     <span className="text-[#1D4ED8]">Test Test Test </span>
                     {item.description}
                   </p>
+                  </Reveal>
                 </Link>
               );
             })}

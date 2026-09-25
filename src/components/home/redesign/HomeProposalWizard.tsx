@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ChevronLeft, Check, Loader2 } from "lucide-react";
 import AppButton from "@/components/ui/AppButton";
+import { Reveal } from "@/components/home/animations";
 import { shell } from "./shell";
 import type { HomepagePricingQuote } from "@/payload/types/homepage";
 
@@ -66,6 +67,7 @@ export default function HomeProposalWizard({ data }: Props) {
   return (
     <section className={`${shell.pad} ${shell.sectionYTight}`}>
       <div className={shell.maxWide}>
+        <Reveal variant="scale">
         <div
           className={`grid overflow-hidden border ${shell.border} bg-white ${shell.radiusLg} ${shell.shadow} lg:grid-cols-[0.9fr_1.1fr]`}
         >
@@ -267,6 +269,7 @@ export default function HomeProposalWizard({ data }: Props) {
             </div>
           </div>
         </div>
+        </Reveal>
       </div>
     </section>
   );

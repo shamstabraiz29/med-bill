@@ -1,6 +1,7 @@
 "use client";
 
 import { getIcon } from "@/lib/icons";
+import { Reveal } from "@/components/home/animations";
 import { shell } from "./shell";
 import type { HomepageMedicalClaims } from "@/payload/types/homepage";
 
@@ -12,6 +13,7 @@ export default function HomeProcessRail({ data }: Props) {
   return (
     <section className={`${shell.dark} ${shell.pad} ${shell.sectionY}`}>
       <div className={shell.maxWide}>
+        <Reveal variant="mask">
         <div className="mb-14 max-w-2xl">
           <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#60A5FA]">
             {data.badge}
@@ -21,6 +23,7 @@ export default function HomeProcessRail({ data }: Props) {
             <span className="text-[#60A5FA]">{data.titleHighlight}</span>
           </h2>
         </div>
+        </Reveal>
 
         <ol className="relative grid gap-0 lg:grid-cols-4">
           {data.steps.map((step, idx) => {
@@ -30,6 +33,7 @@ export default function HomeProcessRail({ data }: Props) {
                 key={step.id || idx}
                 className="relative border-t border-white/15 pt-8 lg:border-t-0 lg:border-l lg:px-6 lg:pt-0 lg:first:border-l-0 lg:first:pl-0"
               >
+                <Reveal variant="lift" delay={idx * 0.08}>
                 <div className="mb-6 flex items-center gap-3">
                   <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-[#60A5FA]">
                     <Icon className="h-4 w-4" aria-hidden="true" />
@@ -44,6 +48,7 @@ export default function HomeProcessRail({ data }: Props) {
                 <p className="mt-3 text-sm leading-[1.7] text-blue-100/75">
                   {step.description}
                 </p>
+                </Reveal>
               </li>
             );
           })}
