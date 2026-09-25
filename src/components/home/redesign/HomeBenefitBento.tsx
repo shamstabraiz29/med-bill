@@ -131,6 +131,7 @@ export default function HomeBenefitBento({ pricing, specialties }: Props) {
                     {item.title}
                   </p>
                   <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-[#475569]">
+                    <span className="text-[#1D4ED8]">Test Test Test </span>
                     {item.description}
                   </p>
                 </Link>
